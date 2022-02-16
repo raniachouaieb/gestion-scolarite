@@ -17,11 +17,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/level/add', function () {
-    return view('create');
-});
+
+
+//Route::get('/level', function () {
+  //  return view('classroom/create');
+//});
 
 
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('admin', 'Dashboard\LoginController@showLoginForm')->name('admin.login');
+Route::post('admin', 'Dashboard\LoginController@login');
+
+Route::get('admin/home', 'Dashboard\AdminController@index');

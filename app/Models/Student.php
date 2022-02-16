@@ -13,4 +13,8 @@ class Student extends Model
     public function parent(){
         return $this->hasOne(Parent::class, 'parent_id', 'id');
     }
+
+    public function class(){
+        return $this->hasOne(Classroom::class, 'classroom_id', 'id');
+    }
 }
