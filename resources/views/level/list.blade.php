@@ -21,19 +21,19 @@
     <thead>
         <tr>
           <td>ID</td>
-          <td>Classroom</td>
+          <td>Level</td>
           <td colspan="2">Action</td>
         </tr>
     </thead>
     <tbody>
-        @foreach($class as $classroom)
+        @foreach($levelName as $niveau)
         <tr>
-            <td>{{$classroom->id}}</td>
-            <td>{{$classroom->name}}</td>
+            <td>{{$niveau->id}}</td>
+            <td>{{$niveau->level}}</td>
             
-            <td><a href="{{ route('classes.edit', $classroom->id)}}" class="btn btn-primary">Edit</a></td>
+            <td><a href="{{ route('levels.edit', $niveau->id)}}" class="btn btn-primary">Edit</a></td>
             <td>
-                <form action="{{ route('classes.destroy', $classroom->id)}}" method="post">
+                <form action="{{ route('levels.destroy', $niveau->id)}}" method="post">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit">Delete</button>

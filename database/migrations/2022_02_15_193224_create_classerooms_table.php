@@ -16,6 +16,8 @@ class CreateClasseroomsTable extends Migration
         Schema::create('classerooms', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('level_id')->unsigned(); 
+            $table->foreignId('level_id')->references('id')->on('levels'); 
             $table->timestamps();
             $table->softDeletes(); 
         });

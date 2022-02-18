@@ -8,7 +8,7 @@
 </style>
 <div class="card uper">
   <div class="card-header">
-    Edit Classroom Data
+    Edit Level Data
   </div>
   <div class="card-body">
     @if ($errors->any())
@@ -20,12 +20,12 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('classes.update', $class->id ) }}">
+      <form method="post" action="{{ route('levels.update', $level->id ) }}">
           <div class="form-group">
               @csrf
               @method('PATCH')
-              <label for="name">Classroom:</label>
-              <input type="text" class="form-control" name="name" value="{{ $class->name }}"/>
+              <label for="level">Level:</label>
+              <input type="text" class="form-control" name="level" value="{{ $level->level }}"/>
           </div>
           
           

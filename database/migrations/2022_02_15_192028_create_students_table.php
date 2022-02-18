@@ -20,7 +20,7 @@ class CreateStudentsTable extends Migration
             $table->string('classe');
             $table->string('niveau');
             $table->binary('gender'); /** '0' == garcon '1' == fille */
-            $table->foreignId('parent_id')->constrained();
+            //$table->foreignId('parent_id')->references('id')->on('pareents'); 
             $table->timestamps();
         });
     }

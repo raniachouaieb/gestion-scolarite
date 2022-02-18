@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostRequest extends FormRequest
+class LevelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,18 @@ class PostRequest extends FormRequest
      */
     public function rules()
     {
-        
+        return [
+            'level' => 'required'|'max:10',
+            
+
+        ];
     }
 
     public function messages()
     {
-        
+        return [
+            'level.reuired' => 'Level cannot be empty.',
+            'level.max' => 'You have reached your maximum limit of characters allowed which is 10.'
+        ];
     }
 }

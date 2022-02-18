@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Level;
+use Illuminate\Support\Facades\Validator;
 
 class LevelController extends Controller
 {
@@ -17,12 +18,12 @@ class LevelController extends Controller
         
         $levelName = Level::all();
         //return $levelName;
-        return view ('classroom.list', compact('levelName'));
+        return view ('level.list', compact('levelName'));
     }
 
     public function addLevel(Request $request){
         //$levelName = Level::all();
-        return view('classroom.create');
+        return view('level.create');
        
         }
        
@@ -31,10 +32,12 @@ class LevelController extends Controller
     public function store(Request $request)
     {
         $levelName = new Level();
-        $levelName->level= $request->input('level');
+        $levelName->level= $request->level;
       
         $levelName->save();
-        return response()->json($levelName);
+        
+        return redirect('admin/levels')->with('success','Level has been added');
+        //return response()->json($levelName);
 
     
     }
@@ -45,17 +48,28 @@ class LevelController extends Controller
 
     }
 
+    public function edit(Request $request, $id){
+        $level = Level::find($id);
+        if(!$level){
+            return redirect()->route('levels.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
+        }
+        return view('level.edit',compact('level'));
+    }
+
     public function update(Request $request, $id){
-        $levelName = Level::find($id);
-        $levelName->level= $request->input('level');
-        $levelName->save();
-        return redirect('/');
+        $level = Level::find($id);
+        if(!$level){
+            return redirect()->route('levels.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
+        }
+        $level->level= $request->level;
+        $level->save();
+        return redirect('/admin/levels');
 
     }
     
     public function destroy($id){
         $levelName = Level::find($id);
-        $levelName.delete();
-        return redirect('/');
+        $levelName->delete();
+        return redirect('/admin/levels')->with('success','Level has been deleted');
     }
 }

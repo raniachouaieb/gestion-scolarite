@@ -6,15 +6,17 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class Parent extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
+    protected $table='pareents';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+
     protected $fillable = [
         'nomPere', 'prenomPere', 'telPere',
         'professionPere','nomMere','prenomMere','telMere',
@@ -43,4 +45,15 @@ class User extends Authenticatable
     public function student(){
         return $this->hasMany(Student::class, 'student_id', 'id');
     }
+
+        /**
+ * Send the email verification notification.
+ *
+ * @return void
+ */
+public function sendEmailVerificationNotification()
+{
+    $this->notify(new VerifyEmail); // my notification
+}
+
 }

@@ -1,14 +1,21 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Classroom extends Model
 {
-    use HasFactory;
+    protected $table='classerooms';
     
-    protected $guarded =[];
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+    ];
 
     public function student(){
         return $this->hasMany(Student::class, 'student_id', 'id');
