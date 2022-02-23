@@ -40,7 +40,7 @@ class LoginController extends Controller
     }
 
     public function showLoginForm(){
-        return view('admin.login');
+        return view('dashboard.admin.login');
     }
 
     public function guard(){
@@ -48,6 +48,5 @@ class LoginController extends Controller
     }
 
     public function getLogin(){
-        
     }
 }

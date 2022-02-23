@@ -32,7 +32,15 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['namespace'=>'Auth'],function(){
+  Route::get('getRegister','RegisterController@getRegister')->name('getRegister');
+
+  Route::post('register', 'RegisterController@register')->name('register');
+
+  });
+
 Route::get('admin', 'Dashboard\LoginController@showLoginForm')->name('admin.login');
-Route::post('admin', 'Dashboard\LoginController@login');
+Route::post('admin', 'Dashboard\LoginController@login')->name('admin.getLogin');
 
 Route::get('admin/home', 'Dashboard\AdminController@index');

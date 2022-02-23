@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-Route::group(['namespace'=>"Dashboard"],function(){
+Route::group(['namespace'=>'Dashboard'],function(){
 Route::get('admin', 'LoginController@showLoginForm')->name('admin.login');
 Route::post('admin', 'LoginController@login')->name('admin.getLogin');
 
-Route::get('admin/home', 'AdminController@index');
+Route::get('admin/home', 'AdminController@index')->name('admin.home');
 });
 
 
@@ -17,9 +17,6 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'levels/'],function(){
     Route::get('edit/{id}', 'LevelController@edit')->name('levels.edit');
     Route::patch('update/{id}', 'LevelController@update')->name('levels.update');
     Route::delete('delete/{id}', 'LevelController@destroy')->name('levels.destroy');
-
-
-
 });
 
 Route::group(['namespace'=>'Dashboard','prefix' => 'classes/'],function(){
@@ -30,9 +27,13 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'classes/'],function(){
     Route::get('edit/{id}', 'ClassroomController@edit')->name('classes.edit');
     Route::patch('update/{id}', 'ClassroomController@update')->name('classes.update');
     Route::delete('delete/{id}', 'ClassroomController@destroy')->name('classes.destroy');
+});
 
-
-
+Route::group(['namespace'=>'Dashboard','prefix' => 'inscri/'],function(){
+    Route::get('/', 'ParentController@index')->name('inscri.index');
+    Route::get('edit/{id}', 'ParentController@edit')->name('isncri.edit');
+    Route::patch('update/{id}', 'ParentController@update')->name('inscri.update');
+   
 });
 
 

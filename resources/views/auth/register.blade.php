@@ -6,12 +6,13 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
+                @livewire('multi-step-form')
 
-                <div class="card-body">
+               <!-- <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        <!--<div class="form-group row">
+                        <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
@@ -23,7 +24,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>-->
+                        </div>
                       <div class="input-group">
                           <div>
                               <p>Information Pere</p>
@@ -159,6 +160,19 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="adresse" class="col-md-4 col-form-label text-md-right">{{ __('Adresse ') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="adresse" type="text" class="form-control @error('adresse') is-invalid @enderror" name="adresse" value="{{ old('adresse') }}" required autocomplete="adresse">
+
+                                @error('adresse')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -205,7 +219,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

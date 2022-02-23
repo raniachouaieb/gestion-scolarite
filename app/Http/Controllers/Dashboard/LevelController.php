@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Requests\LevelRequest;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Level;
@@ -18,18 +19,18 @@ class LevelController extends Controller
         
         $levelName = Level::all();
         //return $levelName;
-        return view ('level.list', compact('levelName'));
+        return view ('dashboard.level.list', compact('levelName'));
     }
 
     public function addLevel(Request $request){
         //$levelName = Level::all();
-        return view('level.create');
+        return view('dashboard.level.create');
        
         }
        
 
 
-    public function store(Request $request)
+    public function store(LevelRequest $request)
     {
         $levelName = new Level();
         $levelName->level= $request->level;
@@ -53,7 +54,7 @@ class LevelController extends Controller
         if(!$level){
             return redirect()->route('levels.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
         }
-        return view('level.edit',compact('level'));
+        return view('dashboard.level.edit',compact('level'));
     }
 
     public function update(Request $request, $id){
