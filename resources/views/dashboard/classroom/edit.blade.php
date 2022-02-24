@@ -1,29 +1,21 @@
-@extends('layout')
-
+@extends('layouts.app-admin')
+@section('title', $title)
 @section('content')
 <style>
   .uper {
     margin-top: 40px;
   }
 </style>
-<div class="card uper">
+<div class="container">
   <div class="card-header">
     Edit Classroom Data
   </div>
   <div class="card-body">
-    @if ($errors->any())
-      <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-      </div><br />
-    @endif
-      <form method="post" action="{{ route('classes.update', $class->id ) }}">
+   
+      <form method="POST" action="{{ route('classes.update', $class->id ) }}">
+      @csrf
           <div class="form-group">
-              @csrf
-              @method('PATCH')
+              
               <label for="name">Classroom:</label>
               <input type="text" class="form-control" name="name" value="{{ $class->name }}"/>
           </div>

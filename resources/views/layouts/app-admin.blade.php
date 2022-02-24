@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>SB Admin 2 - Dashboard</title>
+    
+    <title> @yield('title') SB  Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('admin-template/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -26,17 +26,14 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-
         <!-- Sidebar -->
        @include('includes.sidebar')
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
             <!-- Main Content -->
             <div id="content">
-
                 <!-- Topbar -->
                @include('includes.header')
                 <!-- End of Topbar -->
@@ -49,9 +46,8 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-@include('includes.footer')
+             @include('includes.footer')
             <!-- End of Footer -->
-
         </div>
         <!-- End of Content Wrapper -->
 
@@ -62,7 +58,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">

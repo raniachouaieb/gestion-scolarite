@@ -41,6 +41,18 @@
         </div>
     </div>
 </li>
+<!-- Nav Item - Classes-->
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('classes.index')}}">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>Classrooms</span></a>
+</li>
+<!-- Nav Item - Levels -->
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('levels.index')}}">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>Levels</span></a>
+</li>
 
 <!-- Nav Item - Utilities Collapse Menu -->
 <li class="nav-item">

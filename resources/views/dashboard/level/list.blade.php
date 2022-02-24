@@ -6,17 +6,8 @@
   }
 </style>
 <div class="container">
-@if(session()->get('error'))
-    <div class="alert alert-danger">
-      {{ session()->get('error') }}  
-    </div><br />
-  @endif
-  @if(session()->get('success'))
-    <div class="alert alert-success">
-      {{ session()->get('success') }}  
-    </div><br />
-  @endif
-  <table class="table table-striped">
+@include('includes.alerts.flash')  
+<table class="table table-striped">
     <thead>
         <tr>
           <td>ID</td>

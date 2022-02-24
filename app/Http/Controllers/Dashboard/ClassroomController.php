@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Classroom;
+use App\Models\Level;
 
 class ClassroomController extends Controller
 {
@@ -15,12 +16,13 @@ class ClassroomController extends Controller
        public function index(){
           
            $class = Classroom::all();
-           return view('classroom.list', compact('class'));
+           return view('dashboard.classroom.list', compact('class'))->withTitle('Liste Classes');
            
        }
    
-       public function addClass(Request $request){
-           return view('classroom.create');
+       public function addClass(){
+           $niveaux = Level::get();
+           return view('dashboard.classroom.create', compact('niveaux'))->withTitle('Ajouter classe');
           
            }
           
@@ -28,10 +30,19 @@ class ClassroomController extends Controller
    
        public function store(Request $request)
        {
-           $class = new Classroom();
-           $class->name= $request->name;
-         
-           $class->save();
+        $niveaux = Level::with('class');
+
+        $class = Classroom::create([
+            "name"=> $request->name,
+            "id_level"=>$niveaux->id
+
+        ]);
+        //dd($request);
+
+        
+           //$class = new Classroom();
+           //$class->name= $request->name;
+           //$class->save();
            
            return redirect('admin/classes')->with('success','class has been added');
            //return response()->json($class);
@@ -50,17 +61,23 @@ class ClassroomController extends Controller
            if(!$class){
                return redirect()->route('classes.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
            }
-           return view('classroom.edit',compact('class'));
+           return view('dashboard.classroom.edit',compact('class'))->withTitle('Edition classe');
        }
    
        public function update(Request $request, $id){
-           $class = Classroom::find($id);
-           if(!$class){
-               return redirect()->route('classes.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
+           return $classID = Classroom::find($id);
+           try{
+                if(!$classID){
+                    return redirect()->route('classes.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
+                }
+
+                $classID->update($request->all)->exept('_token');
+
+                return redirect()->route('classes.index')->with(['success'=>'Modification avec succés']);
+           }catch(Exception $exception){
+               return redirect()->route('classes.index')->with(['error'=>'There is a error :(']);
            }
-           $class->class= $request->class;
-           $class->save();
-           return redirect('/admin/classes');
+
    
        }
        

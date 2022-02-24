@@ -1,4 +1,5 @@
-@extends('layout')
+@extends('layouts.app-admin')
+@section('title', $title)
 
 @section('content')
 <style>
@@ -6,17 +7,9 @@
     margin-top: 40px;
   }
 </style>
-<div class="uper">
-@if(session()->get('error'))
-    <div class="alert alert-danger">
-      {{ session()->get('error') }}  
-    </div><br />
-  @endif
-  @if(session()->get('success'))
-    <div class="alert alert-success">
-      {{ session()->get('success') }}  
-    </div><br />
-  @endif
+<div class="container">
+
+@include('includes.alerts.flash')
   <table class="table table-striped">
     <thead>
         <tr>

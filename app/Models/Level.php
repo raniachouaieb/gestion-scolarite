@@ -17,7 +17,7 @@ class Level extends Model
     ];
 
     public function class(){
-        return $this->hasMany(Classroom::class, 'classroom_id', 'id');
+        return $this->hasMany(Classroom::class, 'id_level', 'id');
     }
 }
 

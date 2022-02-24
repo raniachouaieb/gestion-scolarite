@@ -14,7 +14,7 @@ class Classroom extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'name','id_level'
     ];
 
     public function student(){
@@ -22,6 +22,6 @@ class Classroom extends Model
     }
 
     public function level(){
-        return $this->hasOne(Level::class, 'level_id', 'id');
+        return $this->hasOne(Level::class, 'id_level', 'id');
     }
 }

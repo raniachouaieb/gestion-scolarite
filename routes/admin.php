@@ -25,7 +25,7 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'classes/'],function(){
     Route::get('addClass', 'ClassroomController@addClass');
     Route::post('store', 'ClassroomController@store')->name('classes.store');
     Route::get('edit/{id}', 'ClassroomController@edit')->name('classes.edit');
-    Route::patch('update/{id}', 'ClassroomController@update')->name('classes.update');
+    Route::post('update/{id}', 'ClassroomController@update')->name('classes.update');
     Route::delete('delete/{id}', 'ClassroomController@destroy')->name('classes.destroy');
 });
 

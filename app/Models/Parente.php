@@ -41,9 +41,9 @@ class Parente extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+ //each parent might have multiple students
     public function student(){
-        return $this->hasMany(Student::class, 'student_id', 'id');
+        return $this->hasMany(Student::class, 'parent_id', 'id');
     }
 
         /**

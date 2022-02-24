@@ -30,12 +30,13 @@ class LevelController extends Controller
        
 
 
-    public function store(LevelRequest $request)
+    public function store(Request $request)
     {
         $levelName = new Level();
         $levelName->level= $request->level;
       
         $levelName->save();
+        
         
         return redirect('admin/levels')->with('success','Level has been added');
         //return response()->json($levelName);

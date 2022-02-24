@@ -8,9 +8,9 @@ class Student extends Model
 {
 
     protected $guarded =[];
-
+ //each student have one parent
     public function parent(){
-        return $this->hasOne(Parent::class, 'parent_id', 'id');
+        return $this->hasOne(Parente::class, 'parent_id', 'id');
     }
 
     public function class(){
