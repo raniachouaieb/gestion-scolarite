@@ -12,18 +12,11 @@
     Add class Data
   </div>
   <div class="card-body">
-    @if ($errors->any())
-      <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-      </div><br />
-    @endif
+    <div class="row">
+      <div class="col-md-4 offset-md-4">
       <form method="post" action="{{ route('classes.store') }}">
       @csrf
-      <div class="row mb-3">              
+      <div class="form-group">              
               <div class="col">
                     <label for="nomPere">Classe </label>
                       <input type="text" class="form-control" name="name"/>
@@ -45,6 +38,8 @@
           
           <button type="submit" class="btn btn-primary">Add Classroom</button>
       </form>
+      </div>
+      </div>
   </div>
 </div>
 @endsection

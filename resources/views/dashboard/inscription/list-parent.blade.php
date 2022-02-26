@@ -5,9 +5,9 @@
 
 
 <div class="container">
-    
-<div class="card shadow mb-4">
 @include('includes.alerts.flash')
+
+<div class="card shadow mb-4">
                             <div class="table-responsive">
                             <table class="table table-striped">
                                     <thead>

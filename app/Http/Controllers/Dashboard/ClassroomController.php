@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Classroom;
 use App\Models\Level;
-
+use DB;
 class ClassroomController extends Controller
 {
     public function __construct(){
@@ -30,30 +30,22 @@ class ClassroomController extends Controller
    
        public function store(Request $request)
        {
-        $niveaux = Level::with('class');
+           //dd($request);
+       // $niveaux = Level::with('class');
 
         $class = Classroom::create([
             "name"=> $request->name,
-            "id_level"=>$niveaux->id
+            "id_level"=>$request->niveau
 
         ]);
-        //dd($request);
-
-        
-           //$class = new Classroom();
-           //$class->name= $request->name;
-           //$class->save();
-           
+        //php dd($request);
            return redirect('admin/classes')->with('success','class has been added');
            //return response()->json($class);
-   
-       
        }
    
        public function show($id){
            $class = Classroom::find($id);
-           return response()->json($class);
-   
+          // return response()->json($class);
        }
    
        public function edit(Request $request, $id){
@@ -64,14 +56,19 @@ class ClassroomController extends Controller
            return view('dashboard.classroom.edit',compact('class'))->withTitle('Edition classe');
        }
    
-       public function update(Request $request, $id){
-           return $classID = Classroom::find($id);
+       public function update( Classroom $classroom, Request $request, $id){
+            $classID = Classroom::find($id);
            try{
                 if(!$classID){
                     return redirect()->route('classes.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
                 }
+                $classID->update([
+                    'name'=>$request->name
+                ]);
+                $classID->update($request->all());
+               // DB::table('classerooms')
+                //->update(['name'=> $request->name] );
 
-                $classID->update($request->all)->exept('_token');
 
                 return redirect()->route('classes.index')->with(['success'=>'Modification avec succés']);
            }catch(Exception $exception){

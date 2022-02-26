@@ -12,13 +12,13 @@
              @csrf
                 <div class="row mb-3">
                     <div class="col">
-                    @method('PATCH')
+                   
                     <label for="nomPere">Nom </label>
                       <input type="text" class="form-control" name="nomPere" value="{{ $parent->nomPere }}"/>
 
                     </div>
                     <div class="col">
-                    @method('PATCH')
+                    
                     <label for="prenomPere">Prénom </label>
                     <input type="text" class="form-control" name="prenomPere" value="{{ $parent->prenomPere }}"/>
                     </div>

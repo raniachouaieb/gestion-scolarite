@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Parente;
 use App\Models\Student;
+use DB;
 
 class ParentController extends Controller
 {
@@ -30,12 +31,42 @@ class ParentController extends Controller
     }
 
     public function update(Request $request, $id){
-        $parent = Parente::find($id);
+        //$eleve = Student::find($id);
+        $parent = Parente::with('student')->find($id);
+        try{
         if(!$parent){
             return redirect()->route('inscri.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
         }
+        $parent->update([
+            "nomPere"=>$request->nomPere,
+            "prenomPere"=>$request->prenomPere,
+            "professionPere"=> $request->professionPere,
+            "telPere"=> $request->telPere,
+            "nomMere"=> $request->nomMere,
+            "prenomMere"=> $request->prenomMere,
+            "professionMere"=> $request->professionMere,
+            "telMere"=> $request->telMere,
+            "nbEnfants"=> $request->nbEnfants,
+            "adresse"=> $request->adresse,
+            "email"=> $request->email
+        ]);
 
-        $parent->nomPere= $request->nomPere;
+  foreach ($parent->student as $eleve)
+        $eleve->update([
+            "nomEleve"=>$request->nomEleve,
+            "prenomEleve"=>$request->prenomEleve,
+            
+        ]);
+   
+       
+           /* DB::table('students')
+        ->update([
+            "nomEleve"=>$request->nomEleve,
+            "prenomEleve"=>$request->prenomEleve,
+            
+        ]);*/
+
+        /*$parent->nomPere= $request->nomPere;
         $parent->prenomPere= $request->prenomPere;
         $parent->professionPere= $request->professionPere;
         $parent->telPere= $request->telPere;
@@ -46,14 +77,16 @@ class ParentController extends Controller
         $parent->nbEnfants= $request->nbEnfants;
         $parent->adresse= $request->adresse;
         $parent->email= $request->email;
-        $parent->save();
+        $parent->save();*/
 
         
 
 
-        return redirect()->route('inscri.index');
-
+        return redirect()->route('inscri.index')->with(['success'=>'modification avec succés']);
+    }catch(Exception $exception){
+        return redirect()->route('inscri.index')->with(['error'=>'There is a error :(']);
     }
+}
    
       
 }

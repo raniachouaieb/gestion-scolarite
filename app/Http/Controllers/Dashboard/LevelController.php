@@ -19,7 +19,7 @@ class LevelController extends Controller
         
         $levelName = Level::all();
         //return $levelName;
-        return view ('dashboard.level.list', compact('levelName'));
+        return view ('dashboard.level.list', compact('levelName'))->withTitle('Liste des niveaux');
     }
 
     public function addLevel(Request $request){
@@ -61,17 +61,17 @@ class LevelController extends Controller
     public function update(Request $request, $id){
         $level = Level::find($id);
         if(!$level){
-            return redirect()->route('levels.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
+            return redirect()->route('levels.index')->with(['error'=>'Oups! there is no data with this id, please enter a correct one']);
         }
         $level->level= $request->level;
         $level->save();
-        return redirect('/admin/levels');
+        return redirect()->route('levels.index')->with('success','Level has been modified successfully');
 
     }
     
     public function destroy($id){
         $levelName = Level::find($id);
         $levelName->delete();
-        return redirect('/admin/levels')->with('success','Level has been deleted');
+        return redirect()->route('levels.index')->with('success','Level has been deleted');
     }
 }

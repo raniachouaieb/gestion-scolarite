@@ -21,12 +21,12 @@
       </div><br />
     @endif
       <form method="post" action="{{ route('levels.store') }}">
-          <div class="form-group">
+          <div class="col-md-4">
               @csrf
               <label for="level_name"> Level:</label>
               <input type="text" class="form-control" name="level"/>
           </div>
-     
+     <br>
           
           <button type="submit" class="btn btn-primary">Add Level</button>
       </form>
