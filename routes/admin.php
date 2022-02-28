@@ -33,6 +33,9 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'inscri/'],function(){
     Route::get('/', 'ParentController@index')->name('inscri.index');
     Route::get('edit/{id}', 'ParentController@edit')->name('isncri.edit');
     Route::post('update/{id}', 'ParentController@update')->name('inscri.update');
+    Route::get('changeStatus/{id}', 'ParentController@changeStatus')->name('inscri.chagestatus');
+
+    
    
 });
 

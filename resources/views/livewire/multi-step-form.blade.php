@@ -284,12 +284,12 @@
                                 <label for="">Niveau</label>
                                 <select class="form-control @error('niveau') is-invalid @enderror"  wire:model="niveau">
                                     <option value="" selected> Choisir </option>
-                                    <option value="1" > 1ere </option>
-                                    <option value="2" > 2eme </option>
-                                    <option value="1" > 3ere </option>
-                                    <option value="2" > 4eme </option>
-                                    <option value="1" > 5ere </option>
-                                    <option value="2" > 6eme </option>
+                                    <option value="1ere " > سنة أولى </option>
+                                    <option value="2eme" > سنة ثانية </option>
+                                    <option value="3eme" > سنة ثالثة </option>
+                                    <option value="4eme" > سنة رابعة </option>
+                                    <option value="5eme" > سنة خامسة </option>
+                                    <option value="6eme" > سنة سادسة </option>
                                 </select>                        
                                 @error('niveau')
                                     <span class="invalid-feedback" role="alert">

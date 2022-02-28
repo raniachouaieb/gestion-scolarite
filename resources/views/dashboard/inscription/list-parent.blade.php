@@ -56,6 +56,20 @@
                                          
                                     
                                             <td><a href="{{ route('isncri.edit', $par->id)}}" class="btn btn-info btn-circle"><i class="fas fa-pen fa-sm"></i></a></td>
+                                            <td>
+
+                                            <?php if($par->is_active == '1'){ ?>
+                                            <a href="{{ route('inscri.chagestatus', $par->id)}}" class="btn btn-success">Active</a>
+
+                                            <?php }else{ ?>
+                                                <a href="{{ route('inscri.chagestatus', $par->id)}}" class="btn btn-danger">InActive</a>
+                                                <?php  } ?>
+
+
+                                            
+
+                                        
+                                            </td>
 
 
                                         </tr>
@@ -68,5 +82,7 @@
                             </div>
                         </div>
 </div>
+
+
           
 @endsection

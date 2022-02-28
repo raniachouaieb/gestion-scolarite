@@ -71,7 +71,7 @@ class ClassroomController extends Controller
 
 
                 return redirect()->route('classes.index')->with(['success'=>'Modification avec succés']);
-           }catch(Exception $exception){
+           }catch(\Exception $exception){
                return redirect()->route('classes.index')->with(['error'=>'There is a error :(']);
            }
 

@@ -4,13 +4,15 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Student;
+
+use App\Models\Classroom;
 use App\Models\Parente;
 use App\Http\Requests\ParentRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Providers\RouteServiceProvider;
-
+use DB;
 
 
 
@@ -132,7 +134,7 @@ class MultiStepForm extends Component
 
                 ),
                 'adresse'=>'required|string',
-                'email'=>'required|regex:/(.+)@(.+)\.com/i',
+                'email'=>'required|unique:parentes|regex:/(.+)@(.+)\.com/i',
                 'password'=>'required',
              ]);
         }
@@ -150,12 +152,14 @@ public function rania(){
     return ('rania');
 }
     public function register(){
+        //$classes = Classroom::all();
            
         $this->resetErrorBag();
           if($this->currentStep == 5){
             $this->rania();
         }
-
+        DB::beginTransaction();
+try{
         $parent = Parente::create([
                 "nomPere"=>$this->nomPere,
                 "prenomPere"=>$this->prenomPere,
@@ -171,14 +175,17 @@ public function rania(){
                 'password' => Hash::make($this->password),
 
               ]);
+          
+              
               
 
               $student = Student::create([
                   "nomEleve"=>$this->nomEleve,
                   "prenomEleve"=>$this->prenomEleve,
                   "niveau"=>$this->niveau,
-                  "gender"=>($this->gender =='garcon')? 1:0,
+                  "gender"=>($this->gender =='garcon')? 0:1,
                   "parent_id"=>$parent->id,
+                  "class_id"=>$classes->id
 
               ]);
               //dd($student);
@@ -187,6 +194,10 @@ public function rania(){
             //$data = ['name'=>$this->first_name.' '.$this->last_name,'email'=>$this->email];
             //return redirect()->route('registration.success', $data);
             return redirect()->back();
+}catch(\Exception $exception){
+    DB::rollback();
+
+}
           
     }
 }

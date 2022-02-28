@@ -8,8 +8,7 @@
   }
 </style>
 <div class="container">
-@include('includes.alerts.flash')  
-
+<!--@include('includes.alerts.flash')  -->
 <a  class="btn btn-primary" href="{{ route('levels.add')}}"><i class="fas fa-plus"></i>Ajouter Niveau</a>
 
 
@@ -29,14 +28,14 @@
             <td><a href="{{ route('levels.edit', $niveau->id)}}" class="btn btn-info "><i class="fas fa-pen fa-sm"></i></a>
 
    
-            <form action="{{ route('levels.destroy', $niveau->id)}}" method="post" class="d-inline" onsubmit="return confirm(' Etes vous sur pour supprimer ce niveau?')">
+            <form action="{{ route('levels.destroy', $niveau->id)}}" method="post" class="d-inline" >
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger " type="submit"><i class="fas fa-trash fa-sm"></i></button>
  
                 </form>
                
-               <!-- <a class="btn btn-danger "  data-target="#ModalDlete{{$niveau->id}}"><i class="fas fa-trash fa-sm"></i></a>-->
+               <!--<a class="btn btn-danger "  data-target="#ModalDlete{{$niveau->id}}"><i class="fas fa-trash fa-sm"></i></a>-->
  
                 
                 </td>
@@ -48,7 +47,10 @@
 
 <div>
 
-<form action="{{ route('levels.destroy', $niveau->id) }}" method="post">
+
+
+
+<!--<form action="{{ route('levels.destroy', $niveau->id) }}" method="post">
 @csrf
 @method('DELETE')
     <div class="modal fade" id="ModalDlete{{$niveau->id}}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -69,6 +71,6 @@
 </div>
 </div>
 </div>
-</form>
+</form>-->
 @endsection
 

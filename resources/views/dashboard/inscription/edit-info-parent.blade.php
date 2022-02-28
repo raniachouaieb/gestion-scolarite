@@ -73,7 +73,7 @@
                     <input type="text" class="form-control" name="email" value="{{ $parent->email }}"/>
                     </div>
                 </div>
-                    <div class="form-group">
+                    <div class="col-md-6">
                     <label for="nbEnfants">Nombre Enfants </label>
                     <input type="number" class="form-control" name="nbEnfants" value="{{ $parent->nbEnfants }}"/>
                     </div>
@@ -96,7 +96,31 @@
                     <input type="text" class="form-control" name="prenomEleve" value="{{ $elev->prenomEleve }}"/>
                     </div>
                 </div>
-                
+                <div class="row mb-3">
+                <div class="col">
+                    <label for="gender">gender </label>
+                    <select class="form-control"  name="gender">
+                                    <option value="{{ $elev->gender }}" selected>{{ $elev->gender }}</option>
+                                  
+                                    <option value="garcon" > Garçon </option>
+                                    <option value="fille" > Fille </option>
+                                </select>
+                    </div>
+                    <div class="col">
+                    <label for="niveau">niveau </label>
+                    <input type="text" class="form-control" name="niveau" value="{{ $elev->niveau }}"/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="classe">classe </label>
+                    <select class="form-control"  name="classe">
+                                    <option value="" selected> {{$elev->classe}} </option>
+                                    @foreach( $classes as $class)
+                                      <option value="{{$class->name}}" > {{$class->name}} </option>
+                                    @endforeach
+                                  
+                    </select>  
+                    </div>
 <hr>
 <button type="submit" class="btn btn-success btn-circle right"><i class="fas fa-check"></i></button>
                 

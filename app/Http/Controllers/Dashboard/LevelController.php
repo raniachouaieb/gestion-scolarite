@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Level;
 use Illuminate\Support\Facades\Validator;
+use Session;
 
 class LevelController extends Controller
 {
@@ -37,8 +38,8 @@ class LevelController extends Controller
       
         $levelName->save();
         
-        
-        return redirect('admin/levels')->with('success','Level has been added');
+        Session::flash('statuscode', 'success');
+        return redirect('admin/levels')->with('status','Level has been added');
         //return response()->json($levelName);
 
     
@@ -65,13 +66,18 @@ class LevelController extends Controller
         }
         $level->level= $request->level;
         $level->save();
-        return redirect()->route('levels.index')->with('success','Level has been modified successfully');
+
+        Session::flash('statuscode', 'info');
+        return redirect()->route('levels.index')->with('status','Level has been modified successfully');
 
     }
     
     public function destroy($id){
         $levelName = Level::find($id);
         $levelName->delete();
-        return redirect()->route('levels.index')->with('success','Level has been deleted');
+        //return view('dashboard.modals.delete-level');
+
+        Session::flash('statuscode', 'error');
+       return redirect()->route('levels.index')->with('status','Level has been deleted');
     }
 }

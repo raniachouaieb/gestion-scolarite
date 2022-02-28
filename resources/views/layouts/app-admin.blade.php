@@ -19,6 +19,9 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin-template/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
 </head>
 
@@ -94,6 +97,19 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('admin-template/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('admin-template/js/demo/chart-pie-demo.js') }}"></script>
+    <script src="{{ asset('js/sweetalert.js')}}"></script>
+    <script>
+        @if(Session('status'))             
+     // alert('{{ session('status') }}');
+                swal({
+            title: '{{ session('status') }}',
+            //text: "You clicked the button!",
+            icon: '{{ session('statuscode') }}',
+            button: "Done!",
+            });
+@endif
+
+    </script>
 
 </body>
 
