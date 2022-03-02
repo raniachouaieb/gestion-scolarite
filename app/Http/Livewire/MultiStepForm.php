@@ -185,7 +185,7 @@ try{
                   "niveau"=>$this->niveau,
                   "gender"=>($this->gender =='garcon')? 0:1,
                   "parent_id"=>$parent->id,
-                  "class_id"=>$classes->id
+                  //"class_id"=>$classes->id
 
               ]);
               //dd($student);

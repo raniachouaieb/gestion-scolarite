@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -36,7 +39,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:admin')->except('login');
+        $this->middleware('guest:admin')->except('showLoginForm');
     }
 
     public function showLoginForm(){
@@ -47,6 +50,26 @@ class LoginController extends Controller
         return Auth::guard('admin');
     }
 
-    public function getLogin(){
+    public function getLogin(LoginRequest $request){
+        
+        return view('dashboard.admin.home');
+
+        /*if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password]))
+       {
+      
+        return redirect()->route('admin.getLogin')->with('success','Welcome!');
+           
+       }
+       return redirect()->back();*/
+       
+
     }
+
+    /*public function username(){
+        $value = request()->input('identify'); //get the input value
+        $field= filter_var($value, FILTER_VALIDATE_EMAIL)? 'email':'name';
+        request()->merge([$field=>$value]);
+        return $field;
+
+    }*/
 }

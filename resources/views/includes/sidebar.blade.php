@@ -13,7 +13,7 @@
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active">
-    <a class="nav-link" href="{{ route('admin.home')}}">
+    <a class="nav-link" href="{{ route('admin.getLogin')}}">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
 </li>
@@ -52,6 +52,12 @@
     <a class="nav-link" href="{{ route('levels.index')}}">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Levels</span></a>
+</li>
+<!-- Nav Item - students -->
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('student.index')}}">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>Liste Elèves</span></a>
 </li>
 
 <!-- Nav Item - Utilities Collapse Menu -->

@@ -40,7 +40,6 @@ Route::group(['namespace'=>'Auth'],function(){
 
   });
 
-Route::get('admin', 'Dashboard\LoginController@showLoginForm')->name('admin.login');
-Route::post('admin', 'Dashboard\LoginController@login')->name('admin.getLogin');
 
-Route::get('admin/home', 'Dashboard\AdminController@index');
+
+//Route::get('admin', 'Dashboard\AdminController@index');

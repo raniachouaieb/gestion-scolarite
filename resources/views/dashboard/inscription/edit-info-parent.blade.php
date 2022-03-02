@@ -77,54 +77,94 @@
                     <label for="nbEnfants">Nombre Enfants </label>
                     <input type="number" class="form-control" name="nbEnfants" value="{{ $parent->nbEnfants }}"/>
                     </div>
-                   
+                    <button type="submit" class="btn btn-success btn-circle right"><i class="fas fa-check"></i></button>
+
                
+</form>
+
+           
+        <div class="container test">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>Elèves</h1>
+                <div class="tab-container-one">
+                    <ul class="nav nav-tabs">
+                    @foreach($parent->student as $index=>$elev)
+                        <li class="nav-item @if($index==0) active @endif">
+                            <a class="nav-link @if($index==0) active @endif" href="#home{{$index}}" data-toggle="tab" aria-controls="home{{$index}}">Elève{{$index}}</a></li>
+                        @endforeach
+                    </ul>
+                   
+                    <div class="tab-content">
+
+                        @foreach($parent->student as $index=>$elev)
+                        
+                        <div role="tabpanel" class="tab-pane @if($index==0) active @endif" id="home{{$index}}" aria-labelledby="home-tab{{$index}}">
+                            
+                            <form method="post" action="{{ route('inscri.updateEleve', $elev->id ) }}">
+                            @csrf
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="nomEleve">Nom </label>
+                                        <input type="text" class="form-control" name="nomEleve" value="{{ $elev->nomEleve }}"/>
+                                    </div>
+
+                                    <div class="col">
+                                        <label for="prenomEleve">Prénom </label>
+                                        <input type="text" class="form-control" name="prenomEleve" value="{{ $elev->prenomEleve }}"/>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="gender">gender </label>
+                                        <select class="form-control"  name="gender">
+                                            <option value="{{ $elev->gender }}" selected>{{ $elev->gender==0 ? 'Garcon' : 'Fille' }}</option>
+                                        
+                                            <option value="garcon" > Garçon </option>
+                                            <option value="fille" > Fille </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col">
+                                    <label for="niveau">niveau </label>
+                                    
+                                    
+                                   <input type="text" class="form-control" name="niveau" value="{{ $elev->niveau }}"/>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="classe">classe </label>
+                                    <select class="form-control"  name="classe">
+                                        <option value="" selected> {{$elev->classe}} </option>
+                                        @foreach( $classes as $class)
+                                            <option value="{{$class->id}}" > {{$class->name}} </option>
+                                        @endforeach                                  
+                                    </select>  
+                                </div>
+
+                            
+                            <button type="submit" class="btn btn-success btn-circle right"><i class="fas fa-check"></i></button>
+
+                            
+                            </form>
+                        </div>
+                        @endforeach
+                    </div><!-- End Tab Contant -->
+                    
+                   
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+                 
+
             
 
-            <h3>Information Elève</h3>
-             
-                 @foreach($parent->student as $elev)
-             
-                <div class="row mb-3">
-                    <div class="col">
-                    <label for="nomEleve">Nom </label>
-                      <input type="text" class="form-control" name="nomEleve" value="{{ $elev->nomEleve }}"/>
-
-                    </div>
-                    <div class="col">
-                    <label for="prenomEleve">Prénom </label>
-                    <input type="text" class="form-control" name="prenomEleve" value="{{ $elev->prenomEleve }}"/>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                <div class="col">
-                    <label for="gender">gender </label>
-                    <select class="form-control"  name="gender">
-                                    <option value="{{ $elev->gender }}" selected>{{ $elev->gender }}</option>
-                                  
-                                    <option value="garcon" > Garçon </option>
-                                    <option value="fille" > Fille </option>
-                                </select>
-                    </div>
-                    <div class="col">
-                    <label for="niveau">niveau </label>
-                    <input type="text" class="form-control" name="niveau" value="{{ $elev->niveau }}"/>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label for="classe">classe </label>
-                    <select class="form-control"  name="classe">
-                                    <option value="" selected> {{$elev->classe}} </option>
-                                    @foreach( $classes as $class)
-                                      <option value="{{$class->name}}" > {{$class->name}} </option>
-                                    @endforeach
-                                  
-                    </select>  
-                    </div>
-<hr>
-<button type="submit" class="btn btn-success btn-circle right"><i class="fas fa-check"></i></button>
-                
-                                    @endforeach
-            </form>
          </div>
+
+        
 @endsection

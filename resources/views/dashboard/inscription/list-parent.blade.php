@@ -26,7 +26,8 @@
                                             <th>Enfants</th>
                                             
                
-                                            <th colspan="2">Action</th>
+                                            <th colspan="1">Action</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     
@@ -40,7 +41,6 @@
                                             <td>{{$par->professionPere}}</td>
                                             <td>{{$par->telPere}}</td>
                                             <td>{{$par->nomMere}} {{$par->prenomMere}}</td>
-                                          
                                             <td>{{$par->professionMere}}</td>
                                             <td>{{$par->telMere}}</td>
                                             <td>{{$par->nbEnfants}}</td>

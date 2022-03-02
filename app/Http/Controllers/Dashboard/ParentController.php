@@ -7,6 +7,8 @@ use Illuminate\Routing\Controller;
 use App\Models\Parente;
 use App\Models\Student;
 use App\Models\Classroom;
+use App\Models\Level;
+
 
 use DB;
 
@@ -24,9 +26,16 @@ class ParentController extends Controller
        }
 
        public function edit(Request $request, $id){
-         $classes = Classroom::get();
-
+         
+         $levels = Level::with('class');
+        
+        $classes= Classroom::get();
         $parent = Parente::with('student')->find($id);
+        /* foreach ($parent->student as $eleve)
+         $eleve->select([
+             "niveau"=>$request->niveau
+         ]);*/
+        //$classes = Classroom::where('id_level', $eleve)->get();
         //dd($parent);
         if(!$parent){
             return redirect()->route('inscri.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
@@ -35,10 +44,8 @@ class ParentController extends Controller
     }
 
     public function update(Request $request, $id){
-        //$eleve = Student::find($id);
        
-        $parent = Parente::with('student')->find($id);
-        try{
+        $parent = Parente::with('student')->find($id);        
         if(!$parent){
             return redirect()->route('inscri.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
         }
@@ -54,48 +61,31 @@ class ParentController extends Controller
             "nbEnfants"=> $request->nbEnfants,
             "adresse"=> $request->adresse,
             "email"=> $request->email,
-            "is_active"=>$request->is_active
+            //"is_active"=>$request->is_active
         ]);
+      //  $classStudent = Student::with('class')->find($id);
 
-  foreach ($parent->student as $eleve)
-        $eleve->update([
+        return redirect()->route('inscri.index')->with(['success'=>'modification avec succés']);
+    
+    }
+
+    public function updateEleve(Request $request, $id){
+        //$parent = Parente::with('student')->find($id); 
+        //dd($id);
+    //foreach ($parent->student as $eleve)
+
+           $updateleve= Student::find($id);
+       // dd($request);  
+        $updateleve->update([
             "nomEleve"=>$request->nomEleve,
             "prenomEleve"=>$request->prenomEleve,
             "gender"=>($request->gender == 'garcon')? 0:1,
             "niveau"=>$request->niveau,
             "classe"=>$request->classe,
-           // "class_id"=>$classes->id
+            "class_id"=>$request->classe
         ]);
-   
-       
-           /* DB::table('students')
-        ->update([
-            "nomEleve"=>$request->nomEleve,
-            "prenomEleve"=>$request->prenomEleve,
-            
-        ]);*/
-
-        /*$parent->nomPere= $request->nomPere;
-        $parent->prenomPere= $request->prenomPere;
-        $parent->professionPere= $request->professionPere;
-        $parent->telPere= $request->telPere;
-        $parent->nomMere= $request->nomMere;
-        $parent->prenomMere= $request->prenomMere;
-        $parent->professionMere= $request->professionMere;
-        $parent->telMere= $request->telMere;
-        $parent->nbEnfants= $request->nbEnfants;
-        $parent->adresse= $request->adresse;
-        $parent->email= $request->email;
-        $parent->save();*/
-
-        
-
-
         return redirect()->route('inscri.index')->with(['success'=>'modification avec succés']);
-    }catch(\Exception $exception){
-        return redirect()->route('inscri.index')->with(['error'=>'There is a error :(']);
     }
-}
 public function changeStatus( $id)
 {
     $parent = DB::table('parentes')
