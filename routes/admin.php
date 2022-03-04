@@ -8,6 +8,7 @@ Route::group(['namespace'=>'Dashboard'],function(){
 Route::get('/', 'LoginController@showLoginForm')->name('admin.login');
 Route::post('dash', 'LoginController@getLogin')->name('admin.getLogin');
 
+
 });
 
 

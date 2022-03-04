@@ -20,9 +20,7 @@ Route::get('/', function () {
 
 
 
-//Route::get('/level', function () {
-  //  return view('classroom/create');
-//});
+
 
 
 
@@ -35,11 +33,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['namespace'=>'Auth'],function(){
   Route::get('getRegister','RegisterController@getRegister')->name('getRegister');
-
   Route::post('register', 'RegisterController@register')->name('register');
 
   });
 
 
 
-//Route::get('admin', 'Dashboard\AdminController@index');

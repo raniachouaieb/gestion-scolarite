@@ -14,6 +14,6 @@ class Student extends Model
     }
 
     public function class(){
-        return $this->hasOne(Classroom::class, 'classroom_id', 'id');
+        return $this->hasOne(Classroom::class, 'class_id', 'id');
     }
 }

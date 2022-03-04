@@ -284,12 +284,12 @@
                                 <label for="">Niveau</label>
                                 <select class="form-control @error('niveau') is-invalid @enderror"  wire:model="niveau">
                                     <option value="" selected> Choisir </option>
-                                    <option value="1ere " > سنة أولى </option>
-                                    <option value="2eme" > سنة ثانية </option>
-                                    <option value="3eme" > سنة ثالثة </option>
-                                    <option value="4eme" > سنة رابعة </option>
-                                    <option value="5eme" > سنة خامسة </option>
-                                    <option value="6eme" > سنة سادسة </option>
+                                    <option value="1ere année" > 1ere année </option>
+                                    <option value="2eme année" >2eme année </option>
+                                    <option value="3eme année" > 3eme année</option>
+                                    <option value="4eme année" >4eme année </option>
+                                    <option value="5eme année" > 5eme année </option>
+                                    <option value="6eme année" >  6eme année </option>
                                 </select>                        
                                 @error('niveau')
                                     <span class="invalid-feedback" role="alert">
@@ -297,6 +297,7 @@
                                     </span>
                                 @enderror    </div>
 
+                                
                         </div>
                         <div class="col-md-6">
                         <div class="form-group">
@@ -322,8 +323,12 @@
 
                 </div>
 
-                <button class="add_field_button" id="add" php>Add More Fields</button>
-             </div>
+                     <div class="form-group">
+                        <div class="col-md-4 col-md-offset-8">
+                            <button id="add-more" name="add-more" class="btn btn-primary">Add More</button>
+                        </div>
+                   </div>  
+        </div>
 
 
             </div>
@@ -379,13 +384,15 @@
         @if ($currentStep == 5)
         <input type="submit">
         <!--<button type="submit" class="btn btn-md btn-primary">submit</button>-->
-        <a 
+        
         @endif
         </div>
 </div>
     </form>
 
-
  
 
 </div>
+
+
+

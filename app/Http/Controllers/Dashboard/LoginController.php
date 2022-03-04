@@ -52,15 +52,15 @@ class LoginController extends Controller
 
     public function getLogin(LoginRequest $request){
         
-        return view('dashboard.admin.home');
+        //return view('dashboard.admin.home');
 
-        /*if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password]))
+      if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password]))
        {
       
         return redirect()->route('admin.getLogin')->with('success','Welcome!');
            
-       }
-       return redirect()->back();*/
+      }
+       return redirect()->back()->with('error', 'oups');
        
 
     }

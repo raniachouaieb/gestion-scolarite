@@ -27,20 +27,18 @@ class ParentController extends Controller
 
        public function edit(Request $request, $id){
          
-         $levels = Level::with('class');
+        $levels = Level::get();
         
-        $classes= Classroom::get();
+      
         $parent = Parente::with('student')->find($id);
-        /* foreach ($parent->student as $eleve)
-         $eleve->select([
-             "niveau"=>$request->niveau
-         ]);*/
-        //$classes = Classroom::where('id_level', $eleve)->get();
-        //dd($parent);
+        
+           $classes= Classroom::get();
+           //dd($classes);
+     
         if(!$parent){
             return redirect()->route('inscri.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
         }
-        return view('dashboard.inscription.edit-info-parent',compact('parent'),compact('classes'))->withTitle('Edition fiche parent');
+        return view('dashboard.inscription.edit-info-parent',compact('parent','classes','levels'))->withTitle('Edition fiche parent');
     }
 
     public function update(Request $request, $id){
@@ -82,7 +80,6 @@ class ParentController extends Controller
             "gender"=>($request->gender == 'garcon')? 0:1,
             "niveau"=>$request->niveau,
             "classe"=>$request->classe,
-            "class_id"=>$request->classe
         ]);
         return redirect()->route('inscri.index')->with(['success'=>'modification avec succés']);
     }
