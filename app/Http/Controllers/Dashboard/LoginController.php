@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Validation\ValidationException;
+use Session;
 
 class LoginController extends Controller
 {
@@ -60,7 +61,8 @@ class LoginController extends Controller
         return redirect()->route('admin.getLogin')->with('success','Welcome!');
            
       }
-       return redirect()->back()->with('error', 'oups');
+      Session::flash('statuscode', 'error');
+       return redirect()->back()->with('status', 'oups! Invalid email or password, Please verify');
        
 
     }

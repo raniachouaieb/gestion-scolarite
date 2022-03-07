@@ -28,14 +28,14 @@ class ParentRequest extends FormRequest
             'prenomPere' => 'required |string',
             'telPere' => 'required',
             'professionPere' => 'required',
-            'nomMere' => 'required',
-            'prenomMere' => 'required',
+            'nomMere' => 'required| string',
+            'prenomMere' => 'required| string',
             'telMere' => 'required',
-            'professionMere' => 'required',
+            'professionMere' => 'required| string',
             'nbEnfants' => 'required|numeric', /** -1 innaceptable */
             'adresse' => 'required',
             'email' => 'required|email|unique:parentes',
-            'password' => 'required'|'min:8',
+            'password' => 'required|min:8|confirmed',
             
 
         ];
@@ -50,12 +50,14 @@ class ParentRequest extends FormRequest
             'prennomPere.string' => 'only characters.',
             'professionPere.required' => 'name cannot be empty.',
             'nomMere.required' => 'name cannot be empty.',
+            'nomMere.string' => 'only characters.',
             'prenomMere.required' => 'name cannot be empty.',
+            'prenomPere.string' => 'only characters.',
+            'professionMere.required' => 'name cannot be empty.',
             'telMere.required' => 'name cannot be empty.',
             'telPere.required' => 'name cannot be empty.',
-            'professionMere.required' => 'name cannot be empty.',
             'nbEnfants.required' => 'name cannot be empty.',
-            'adresse.reuired' => 'name cannot be empty.',
+            'adresse.required' => 'name cannot be empty.',
             'password.required' => 'name cannot be empty.',
             'password.min' => 'Minimum is 8.',
             'email.required' => 'cannot be empty.'

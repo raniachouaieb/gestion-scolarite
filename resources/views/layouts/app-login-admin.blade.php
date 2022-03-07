@@ -37,5 +37,17 @@
     <script src="{{ asset('login-template/js/popper.min.js')}}"></script>
     <script src="{{ asset('login-template/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('login-template/js/main.js')}}"></script>
+    <script>
+        @if(Session('status'))             
+     // alert('{{ session('status') }}');
+                swal({
+            title: '{{ session('status') }}',
+            //text: "You clicked the button!",
+            icon: '{{ session('statuscode') }}',
+            button: "Done!",
+            });
+@endif
+
+    </script>
   </body>
 </html>
