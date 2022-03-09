@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <!--@include('includes.alerts.flash')-->
+
     <div class="row align-items-center justify-content-center">
         <div class="col-md-6">
             <div class="form-block">
@@ -11,7 +11,7 @@
                     <h3>Login to <strong>Your dashboard</strong></h3>
                     <!-- <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p> -->
                 </div>
-                <form method="post" action="{{ route('admin.getLogin') }}">
+                <form method="post" action="{{ route('admin.getLogin') }}" novalidate>
                     @csrf
                     <div class="form-group first">
                         <label for="email">Email</label>
@@ -48,9 +48,11 @@
                     <input type="submit" value="Log In" class="btn btn-block btn-primary">
 
                 </form>
+                @include('includes.alerts.flash')
             </div>
         </div>
     </div>
+
 </div>
 
 @endsection

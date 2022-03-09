@@ -25,6 +25,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
      'prefix'=> 'auth'], function(){
         Route::post('/login', 'Api\AuthController@login' );
         Route::post('/register', 'Api\AuthController@register' );
+        Route::post('/forgot', 'Api\ForgotPasswordController@sendResetLink');
+        Route::post('/reset', 'Api\ForgotPasswordController@reset');
 
         Route::group([
             'middleware'=>'auth:api'], function(){

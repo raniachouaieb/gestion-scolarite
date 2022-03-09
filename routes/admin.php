@@ -2,18 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 
-Auth::routes();
-
 Route::group(['namespace'=>'Dashboard'],function(){
-Route::get('/', 'LoginController@showLoginForm')->name('admin.login');
-Route::post('dash', 'LoginController@getLogin')->name('admin.getLogin');
-
-
+    Route::get('login', 'LoginController@showLoginForm')->name('admin.login');
+    Route::post('getLogin', 'LoginController@getLogin')->name('admin.getLogin');
 });
 
 
 
-Route::group(['namespace'=>'Dashboard','prefix' => 'levels/'],function(){
+Route::get('/homeg', 'Dashboard\AdminController@index')->name('homeg');
+Route::post('logout', 'Dashboard\AdminController@logout')->name('logouteff');
+
+Route::group(['namespace'=>'Dashboard','prefix' => 'levels'],function(){
     Route::get('/', 'LevelController@index')->name('levels.index');
     Route::get('show/{id}', 'LevelController@show');
     Route::get('addLevel', 'LevelController@addLevel')->name('levels.add');
@@ -40,15 +39,15 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'inscri/'],function(){
     Route::post('updateEleve/{id}', 'ParentController@updateEleve')->name('inscri.updateEleve');
     Route::get('changeStatus/{id}', 'ParentController@changeStatus')->name('inscri.chagestatus');
 
-    
-   
+
+
 });
 Route::group(['namespace'=>'Dashboard','prefix' => 'student/'],function(){
     Route::get('/', 'StudentController@index')->name('student.index');
-    
 
-    
-   
+
+
+
 });
 
 

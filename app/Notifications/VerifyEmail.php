@@ -38,7 +38,7 @@ class VerifyEmail extends VerifyEmailBase
         }
 
         return (new MailMessage)
-            ->subject(Lang::get('We re happy you signed up for our app.'))
+            ->subject(Lang::get('We\' re happy you signed up for our app.'))
             ->line(Lang::get('To start exploring the academia App, please confirm your email address.'))
             ->action(Lang::get('Verify Now'), $verificationUrl)
             ->line(Lang::get('If you did not create an account, no further action is required.'));

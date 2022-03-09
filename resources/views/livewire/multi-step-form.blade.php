@@ -1,5 +1,6 @@
 <div>
-    <!--form action="{{ route('register') }} " method="post">-->
+@include('includes.alerts.flash')
+<!--form action="{{ route('register') }} " method="post">-->
        <form wire:submit.prevent="register">
         @csrf
         <div>
@@ -51,7 +52,7 @@
                             </div>
 
                         </div>
-                
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Telephone</label>
@@ -71,7 +72,7 @@
 
                 </div>
 
-                
+
 
             </div>
 
@@ -125,7 +126,7 @@
                             </div>
 
                         </div>
-                
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Telephone</label>
@@ -145,7 +146,7 @@
 
                 </div>
 
-                
+
 
             </div>
 
@@ -174,7 +175,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Adresse</label>
-                                <input type="text" class="form-control  @error('adresse') is-invalid @enderror" placeholder="Votre adresse"  wire:model="adresse"> 
+                                <input type="text" class="form-control  @error('adresse') is-invalid @enderror" placeholder="Votre adresse"  wire:model="adresse">
                                 @error('adresse')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -199,7 +200,7 @@
                             </div>
 
                         </div>
-                
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Mot de passe</label>
@@ -231,7 +232,7 @@
 
                 </div>
 
-                
+
 
             </div>
 
@@ -240,7 +241,7 @@
 
         @if($currentStep == 4)
 
-        <div id="dynamic_field"> 
+        <div id="dynamic_field">
 
         <div class="step-four">
             <div class="card">
@@ -249,7 +250,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            
+
                             <div class="form-group">
                                 <label for="">Nom Eleve</label>
                                 <input type="text" class="form-control @error('nomEleve') is-invalid @enderror" placeholder=""  wire:model="nomEleve">
@@ -277,8 +278,8 @@
                     </div>
 
                     <div class="row">
-                       
-                
+
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Niveau</label>
@@ -290,19 +291,19 @@
                                     <option value="4eme année" >4eme année </option>
                                     <option value="5eme année" > 5eme année </option>
                                     <option value="6eme année" >  6eme année </option>
-                                </select>                        
+                                </select>
                                 @error('niveau')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror    </div>
 
-                                
+
                         </div>
                         <div class="col-md-6">
                         <div class="form-group">
                                 <label for="">Genre</label>
-                                
+
                                 <select class="form-control @error('gender') is-invalid @enderror"  wire:model="gender">
                                     <option value="" selected> Choisir </option>
                                     <option value="garcon" > Garcon </option>
@@ -314,7 +315,7 @@
                                     </span>
                                 @enderror
                             </div>
-                       
+
                         </div>
 
                     </div>
@@ -327,16 +328,16 @@
                         <div class="col-md-4 col-md-offset-8">
                             <button id="add-more" name="add-more" class="btn btn-primary">Add More</button>
                         </div>
-                   </div>  
+                   </div>
         </div>
 
 
             </div>
-            
+
         </div>
 
         </div>
-       
+
         @endif
 
 
@@ -345,12 +346,12 @@
 
         <div class="step-five">
             <div class="card">
-               
+
 
                         <div class="form-group">
                             <label for="" class="d-block">
                                 <input type="checkbox" id="terms" wire:model="terms"> Vous devez accepter nos <a href=""> termes et conditions</a>
-                               
+
                              </label>
                              <span class="text-danger">@error('terms'){{ $message }}@enderror</span>
 
@@ -360,7 +361,7 @@
 
 
 
-                
+
 
             </div>
 
@@ -370,7 +371,7 @@
 
         <div class="action-buttons d-flex justify-content-between bg-white pt-2 pb-2">
         <br>
-       
+
 
         @if ($currentStep == 2 || $currentStep == 3 || $currentStep == 4 )
         <button type="button" class="btn btn-md btn-secondary" wire:click.prevent="back()">Back</button>
@@ -383,14 +384,14 @@
 
         @if ($currentStep == 5)
         <input type="submit">
-        <!--<button type="submit" class="btn btn-md btn-primary">submit</button>-->
-        
+       <!-- <button type="submit" class="btn btn-md btn-primary">submit</button>-->
+
         @endif
         </div>
 </div>
     </form>
 
- 
+
 
 </div>
 

@@ -22,7 +22,7 @@ class MultiStepForm extends Component
 {
     use RegistersUsers;
 
-    
+
 
     //use WithFileUploads;
 
@@ -50,16 +50,16 @@ class MultiStepForm extends Component
 
 
     public function mount(){
-       
+
         $this->currentStep = 1;
     }
 
 
     public function render()
     {
-      
+
         return view('livewire.multi-step-form');
-        
+
     }
 
     public function gotonext(){
@@ -88,7 +88,7 @@ class MultiStepForm extends Component
                     'string',
                     'regex:/^[A-Za-z]+$/'
                 ),
-                
+
                 'prenomPere'=>array(
                     'required',
                     'string',
@@ -96,7 +96,7 @@ class MultiStepForm extends Component
                 ),
                 'telPere'=>array(
                     'required',
-                    
+
                 ),
                 'professionPere'=>array(
                     'required',
@@ -146,20 +146,22 @@ class MultiStepForm extends Component
                 'gender'=>'required|string',
              ]);
         }
-        
+        elseif($this->currentStep == 5){
+            $this->validate([
+                'terms'=>'required',
+
+            ]);
+        }
+
     }
 public function rania(){
     return ('rania');
 }
     public function register(){
-        //$classes = Classroom::all();
-           
+
         $this->resetErrorBag();
-          if($this->currentStep == 5){
-            $this->rania();
-        }
-        DB::beginTransaction();
-try{
+
+
         $parent = Parente::create([
                 "nomPere"=>$this->nomPere,
                 "prenomPere"=>$this->prenomPere,
@@ -175,10 +177,7 @@ try{
                 'password' => Hash::make($this->password),
 
               ]);
-          
-              
-              
-
+             $parent->sendEmailVerificationNotification();
               $student = Student::create([
                   "nomEleve"=>$this->nomEleve,
                   "prenomEleve"=>$this->prenomEleve,
@@ -193,12 +192,11 @@ try{
                //$this->currentStep = 1;
             //$data = ['name'=>$this->first_name.' '.$this->last_name,'email'=>$this->email];
             //return redirect()->route('registration.success', $data);
-            return redirect()->back();
-}catch(\Exception $exception){
-    DB::rollback();
+            return redirect()->route('getRegister')->with('success', ' You are now registred successfully! Please check your email to verify!');
 
-}
-          
+
+
+
     }
 }
 

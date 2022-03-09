@@ -50,7 +50,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    
+
    protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -68,9 +68,9 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
-    
 
-    
+
+
     public function create(Request $request)
     {
         dd($request);
@@ -88,7 +88,7 @@ class RegisterController extends Controller
             'nbEnfants' => $data['nbEnfants'],
             'adresse' => $data['adresse'],
 
-            
+
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
@@ -97,7 +97,7 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    
+
     /**
      * Store a newly created resource in storage.
      *

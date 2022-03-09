@@ -13,16 +13,6 @@ use Session;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
 
     use AuthenticatesUsers;
 
@@ -47,25 +37,28 @@ class LoginController extends Controller
         return view('dashboard.admin.login');
     }
 
-    public function guard(){
-        return Auth::guard('admin');
-    }
-
     public function getLogin(LoginRequest $request){
-        
+
         //return view('dashboard.admin.home');
 
       if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password]))
        {
-      
-        return redirect()->route('admin.getLogin')->with('success','Welcome!');
-           
+
+        return redirect()->route('homeg')->with('success','Welcome!');
+
       }
-      Session::flash('statuscode', 'error');
-       return redirect()->back()->with('status', 'oups! Invalid email or password, Please verify');
-       
+
+       return redirect()->back()->with('error', 'oups! Invalid email or password, Please verify');
+
 
     }
+
+    public function logouteff(Request $request) {
+        return $request;
+        /*Auth::guard('admin')->logout();
+        return redirect()->route('admin.login');*/
+    }
+
 
     /*public function username(){
         $value = request()->input('identify'); //get the input value

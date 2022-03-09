@@ -21,19 +21,23 @@ class AuthController extends Controller
 
         ]);
         $parent = Parente::where('email', $request->email)->first();
-        
+        try{
         if ($parent || Hash::check($request->password, $parent->password)){
             $accessToken = $parent->createToken('Auth Token')->accessToken;
-           // $token = $accessToken->token;
             return response([ 'parent'=> $parent, 'access_token' => $accessToken]);
         }
-        return response()->json(['message'=>'Invalid login credentials']);
+    }catch(\Exception $exception){
+        return response()->json([
+            'message'=>'Invalid email/password']);
+
+        }
+       
   
     }
 
     public function register(ParentRequest $request, StudentRequest $requestStd){
-        
-        $parent = Parente::create([
+        try{
+       $parent = Parente::create([
             "nomPere"=>$request->nomPere,
             "prenomPere"=>$request->prenomPere,
             "professionPere"=>$request->professionPere,
@@ -47,7 +51,7 @@ class AuthController extends Controller
             "email"=>$request->email,
             'password' => Hash::make($request->password),
 
-          ]);
+      ]);
 
            Student::create([
             "nomEleve"=>$requestStd->nomEleve,
@@ -56,15 +60,23 @@ class AuthController extends Controller
             "gender"=>$requestStd->gender,
             "parent_id"=>$parent->id,
         ]);
+     
+        return response()->json(['message'=> 'Successfully created']);
+    }catch(\Exception $exception){
+        return response([
+            'message'=>$exception->getMessage()
+        ]);
+    }
 
-    return response()->json(['message'=> 'Successfully created']);
+      
+
 
     }
 
     public function logout(ParentRequest $request){
-        $request->parent()->token()->revoke();
+        $request->user()->token()->revoke();
         return response()->json([
-            'message'=>'Succefully logged out'
+            'message'=>'Successfully logged out'
         ]);
     }
 }  

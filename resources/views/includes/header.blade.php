@@ -169,7 +169,9 @@
 
     <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                     @if(Auth::guard('admin')->user() )
+                                         {{Auth::guard('admin')->user()->name }}
+                                    @endif
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -179,7 +181,7 @@
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('logouteff') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>
@@ -191,7 +193,7 @@
             <img class="img-profile rounded-circle"
                 src="{{ asset('admin-template/img/undraw_profile.svg') }}">
         </a>
-      Dropdown - User Information 
+      Dropdown - User Information
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
             aria-labelledby="userDropdown">
             <a class="dropdown-item" href="#">

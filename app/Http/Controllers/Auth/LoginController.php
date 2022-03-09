@@ -10,16 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
 
     use AuthenticatesUsers;
 
@@ -42,20 +32,21 @@ class LoginController extends Controller
 
     public function username(){
 
-        
+
         $value= request()->input('identifiant');
         //dd($valuePass);
 
         $field = filter_var($value, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
         request()->merge([$field=>$value]);
         return $field;
+
       /*  if (Auth::attempt([$field=>$value]))
         {
-       
+
          return redirect()->route('home')->with('success','Welcome!');
-            
+
        }
         return redirect()->back()->with('error', 'oups');*/
-       
+
     }
 }
