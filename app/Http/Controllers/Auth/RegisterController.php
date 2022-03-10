@@ -104,33 +104,5 @@ class RegisterController extends Controller
      * @param  Illuminate\Http\Request  $request
      * @return Response
      */
-    public function register(Request $request){
-        return $myData = $request->all();
-       //dd($request);
-        //dd($request->nomPere);
-        $parent = Parente::create([
-            "nomPere"=>$request->nomPere,
-            "prenomPere"=>$request->prenomPere,
-            "professionPere"=>$request->professionPere,
-            "telPere"=>$request->telPere,
-            "nomMere"=>$request->nomMere,
-            "prenomMere"=>$request->prenomMere,
-            "professionMere"=>$request->professionMere,
-            "telMere"=>$request->telMere,
-            "nbEnfants"=>$request->nbEnfants,
-            "adresse"=>$request->adresse,
-            "email"=>$request->email,
-            'password' => Hash::make($request->password),
 
-          ]);
-
-          Student::create([
-            "nomEleve"=>$this->nomEleve,
-            "prenomEleve"=>$this->prenomEleve,
-            "niveau"=>$this->niveau,
-            "gender"=>$this->gender,
-            "parent_id"=>$parent->id,
-        ]);
-       // return redirect()->back();
-    }
 }

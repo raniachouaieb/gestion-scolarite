@@ -6,6 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
+                @include('includes.alerts.flash')
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -16,11 +17,11 @@
                                 class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="identifiant" type="text"
-                                    class="form-control @error('identifiant') is-invalid @enderror" name="identifiant"
-                                    value="{{ old('identifiant') }}" required autocomplete="identifiant" autofocus>
+                                <input id="email" type="text"
+                                    class="form-control @error('email') is-invalid @enderror" name="email"
+                                    value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                                @error('identifiant')
+                                @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

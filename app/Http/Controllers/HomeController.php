@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 
@@ -11,10 +11,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-   /* public function __construct()
+   public function __construct()
     {
         $this->middleware(['auth', 'verified']);
-    }*/
+    }
 
     /**
      * Show the application dashboard.

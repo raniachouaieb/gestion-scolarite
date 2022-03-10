@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\ParentRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 
 class LoginController extends Controller
@@ -27,18 +30,34 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        //$this->middleware('auth:parente')->except('logout');
     }
 
-    public function username(){
+    public function getLogin(){
+        return view('auth.login');
+    }
+
+    public function login(LoginRequest   $request){
 
 
-        $value= request()->input('identifiant');
+        if (Auth::guard('parente')->attempt(['email' => $request->email, 'password' => $request->password]))
+        {
+
+
+            return redirect()->route('parentHome')->with('
+            success', 'Your email is verified successfully! you can now');
+
+        }
+
+        return redirect()->route('getLogin')->with('error', ' Invalid email or password, Please verify');
+
+
+        /*$value= request()->input('identifiant');
         //dd($valuePass);
 
         $field = filter_var($value, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
         request()->merge([$field=>$value]);
-        return $field;
+        return $field;*/
 
       /*  if (Auth::attempt([$field=>$value]))
         {
@@ -48,5 +67,9 @@ class LoginController extends Controller
        }
         return redirect()->back()->with('error', 'oups');*/
 
+    }
+
+    public function forgot(){
+        return view('auth.passwords.reset');
     }
 }

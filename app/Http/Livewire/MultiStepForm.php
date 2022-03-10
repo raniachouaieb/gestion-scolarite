@@ -192,8 +192,7 @@ public function rania(){
                //$this->currentStep = 1;
             //$data = ['name'=>$this->first_name.' '.$this->last_name,'email'=>$this->email];
             //return redirect()->route('registration.success', $data);
-            return redirect()->route('getRegister')->with('success', ' You are now registred successfully! Please check your email to verify!');
-
+            return redirect()->route('getRegister')->with('success', ' You are now registred successfully! Please check your email to verification link!');
 
 
 

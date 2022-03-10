@@ -22,7 +22,7 @@ class VerifyEmail extends VerifyEmailBase
      * @var \Closure|null
      */
     public static $toMailCallback;
-    
+
     /**
      * Build the mail representation of the notification.
      *

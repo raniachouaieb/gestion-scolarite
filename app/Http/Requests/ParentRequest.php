@@ -36,7 +36,7 @@ class ParentRequest extends FormRequest
             'adresse' => 'required',
             'email' => 'required|email|unique:parentes',
             'password' => 'required|min:8|confirmed',
-            
+
 
         ];
     }
@@ -66,7 +66,7 @@ class ParentRequest extends FormRequest
 
 
 
-            
+
 
         ];
     }
