@@ -37,13 +37,15 @@ class LoginController extends Controller
         return view('dashboard.admin.login');
     }
 
-    public function getLogin(LoginRequest $request){
+    public function getLogin(LoginRequest  $request){
 
         //return view('dashboard.admin.home');
+        $remember = $request->has('remember_me')? true : false ;
 
-      if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password]))
+      if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $remember))
        {
-
+          // $admin = auth::guard('admin');
+           //return dd($admin);
         return redirect()->route('homeg')->with('success','Welcome!');
 
       }
@@ -53,11 +55,7 @@ class LoginController extends Controller
 
     }
 
-    public function logouteff(Request $request) {
-        return $request;
-        /*Auth::guard('admin')->logout();
-        return redirect()->route('admin.login');*/
-    }
+
 
 
     /*public function username(){

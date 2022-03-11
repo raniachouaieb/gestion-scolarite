@@ -150,7 +150,7 @@
                                 <div class="col-md-6">
                                     <label for="classe">classe </label>
 
-                                    <select class="form-control" name="classe">
+                                    <select class="form-control" name="classe" >
                                         <option value="" selected> {{$elev->class_id}} </option>
 
                                         @foreach( $classes->where('id_level',$elev->niveau) as $class)

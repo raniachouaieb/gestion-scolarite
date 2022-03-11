@@ -3,19 +3,19 @@
 
 @section('content')
 <style>
-  .uper {
-    margin-top: 40px;
+  .position {
+    float: right;
   }
 </style>
 <div class="container">
 <!--@include('includes.alerts.flash')  -->
-<a  class="btn btn-primary" href="{{ route('levels.add')}}"><i class="fas fa-plus"></i>Ajouter Niveau</a>
+<a  class="btn btn-primary position" href="{{ route('levels.add')}}"><i class="fas fa-plus"></i>Ajouter Niveau</a>
 
 
-<table class="table table-striped">
+<table class="table table-hover">
     <thead>
         <tr>
-          <td>ID</td>
+          <td>#</td>
           <td>Level</td>
           <td colspan="2">Action</td>
         </tr>
@@ -27,17 +27,17 @@
             <td>{{$niveau->level}}</td>
             <td><a href="{{ route('levels.edit', $niveau->id)}}" class="btn btn-info "><i class="fas fa-pen fa-sm"></i></a>
 
-   
+
             <form action="{{ route('levels.destroy', $niveau->id)}}" method="post" class="d-inline" >
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger " type="submit"><i class="fas fa-trash fa-sm"></i></button>
- 
+
                 </form>
-               
+
                <!--<a class="btn btn-danger "  data-target="#ModalDlete{{$niveau->id}}"><i class="fas fa-trash fa-sm"></i></a>-->
- 
-                
+
+
                 </td>
         </tr>
         @endforeach

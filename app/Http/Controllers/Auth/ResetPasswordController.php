@@ -44,7 +44,7 @@ class ResetPasswordController extends Controller
 
     public function broker()
     {
-        return Password::broker('parents');
+        return Password::broker('parentes');
     }
 
 }

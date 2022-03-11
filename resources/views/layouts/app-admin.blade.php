@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    
+
     <title> @yield('title') SB  Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
@@ -99,7 +99,7 @@
     <script src="{{ asset('admin-template/js/demo/chart-pie-demo.js') }}"></script>
     <script src="{{ asset('js/sweetalert.js')}}"></script>
     <script>
-        @if(Session('status'))             
+        @if(Session('status'))
      // alert('{{ session('status') }}');
                 swal({
             title: '{{ session('status') }}',

@@ -12,14 +12,14 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('login-template/css/bootstrap.min.css')}}">
-    
+
     <!-- Style -->
     <link rel="stylesheet" href="{{ asset('login-template/css/style.css')}}">
 
     <title>Login #3</title>
   </head>
   <body>
-  
+
 
   <div class="half">
     <div class="bg order-1 order-md-2" style="background-image: url('login-template/images/bg2_academia.webp');"></div>
@@ -28,18 +28,19 @@
      @yield('content')
     </div>
 
-    
+
   </div>
-    
-    
+
+
 
     <script src="{{ asset('login-template/js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{ asset('login-template/js/popper.min.js')}}"></script>
     <script src="{{ asset('login-template/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('login-template/js/main.js')}}"></script>
+  <script src="{{ asset('js/sweetalert.js')}}"></script>
     <script>
-        @if(Session('status'))             
-     // alert('{{ session('status') }}');
+        @if(Session('status'))
+    //  alert('{{ session('status') }}');
                 swal({
             title: '{{ session('status') }}',
             //text: "You clicked the button!",

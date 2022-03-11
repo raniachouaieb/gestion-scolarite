@@ -13,48 +13,46 @@
                                     <thead>
                                         <tr>
                                             <th> Père</th>
-                                            
-                                            <th>profession pere</th>
-                                            <th>telephhone pere</th>
-                                            <th> Mère </th>
-                                            <th>profession mere </th>
-                                            <th>telephone mere</th>
-                                            <th>nombre enfants</th>
 
-                                            <th>Adresse</th>
+
+                                            <th>Télephhone </th>
+                                            <th> Mère </th>
+
+                                            <th>Télephone </th>
+
+
                                             <th>Email</th>
                                             <th>Enfants</th>
-                                            
-               
+
+
                                             <th colspan="1">Action</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
-                                    
-                                       
-                                    
+
+
+
                                     <tbody>
                                     @foreach($parent as $par)
                                         <tr>
                                             <td>{{$par->nomPere}} {{$par->prenomPere}}</td>
-                                           
-                                            <td>{{$par->professionPere}}</td>
+
+
                                             <td>{{$par->telPere}}</td>
                                             <td>{{$par->nomMere}} {{$par->prenomMere}}</td>
-                                            <td>{{$par->professionMere}}</td>
+
                                             <td>{{$par->telMere}}</td>
-                                            <td>{{$par->nbEnfants}}</td>
-                                            <td>{{$par->adresse}}</td>
+
                                             <td>{{$par->email}}</td>
                                             <td> @foreach($par->student as $elev)
                                               <ul>
                                                <li>{{$elev->nomEleve }} {{$elev->prenomEleve }}</li>
-                                               
+
                                               </ul>
                                               @endforeach
                                             </td>
-                                         
-                                    
+
+
                                             <td><a href="{{ route('isncri.edit', $par->id)}}" class="btn btn-info btn-circle"><i class="fas fa-pen fa-sm"></i></a></td>
                                             <td>
 
@@ -66,17 +64,17 @@
                                                 <?php  } ?>
 
 
-                                            
 
-                                        
+
+
                                             </td>
 
 
                                         </tr>
                                         @endforeach
-                                      
-                                        
-                                        
+
+
+
                                     </tbody>
                                 </table>
                             </div>
@@ -84,5 +82,5 @@
 </div>
 
 
-          
+
 @endsection

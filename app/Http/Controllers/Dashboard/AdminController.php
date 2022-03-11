@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-
+use Session;
 
 class AdminController extends Controller
 {
@@ -17,7 +17,8 @@ class AdminController extends Controller
     public function logout(Request $request) {
 
         Auth::guard('admin')->logout();
-        return redirect()->route('admin.login');
+        Session::flash('statuscode', 'success');
+        return redirect()->route('admin.login')->with('status', 'Logout successfully');
     }
 
     public function index()

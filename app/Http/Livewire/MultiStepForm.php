@@ -135,7 +135,7 @@ class MultiStepForm extends Component
                 ),
                 'adresse'=>'required|string',
                 'email'=>'required|unique:parentes|regex:/(.+)@(.+)\.com/i',
-                'password'=>'required',
+                'password'=>'required|min:8',
              ]);
         }
         elseif($this->currentStep == 4){
@@ -148,7 +148,7 @@ class MultiStepForm extends Component
         }
         elseif($this->currentStep == 5){
             $this->validate([
-                'terms'=>'required',
+                'terms'=>'accepted',
 
             ]);
         }
