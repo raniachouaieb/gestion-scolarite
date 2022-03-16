@@ -20,9 +20,9 @@ use Illuminate\Auth\Events\PasswordReset;
 class ForgotPasswordController extends Controller
 {
 
-    
 
-    public function sendResetLink(ForgotPassRequest $request){
+
+    public function forgotPassword(){
 
         $credentials = request()->validate(['email' => 'required|email']);
 
@@ -62,7 +62,8 @@ class ForgotPasswordController extends Controller
     }
 
     public function reset(ResetPassRequest $request){
-       
+
+
         $reset_password_status = Password::reset($request->validated(), function ($user, $password) {
             $user->password = $password;
             $user->save();
@@ -75,6 +76,6 @@ class ForgotPasswordController extends Controller
         return response()->json(("Password has been successfully changed"));
     }
 
-    
+
 
 }

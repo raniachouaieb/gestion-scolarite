@@ -31,8 +31,8 @@ class AuthController extends Controller
             'message'=>'Invalid email/password']);
 
         }
-       
-  
+
+
     }
 
     public function register(ParentRequest $request, StudentRequest $requestStd){
@@ -52,6 +52,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
 
       ]);
+       $parent->sendEmailVerificationNotification();
 
            Student::create([
             "nomEleve"=>$requestStd->nomEleve,
@@ -60,15 +61,15 @@ class AuthController extends Controller
             "gender"=>$requestStd->gender,
             "parent_id"=>$parent->id,
         ]);
-     
-        return response()->json(['message'=> 'Successfully created']);
+           $accessToken = $parent->createToken('Auth Token')->accessToken;
+        return response()->json(['message'=> 'Successfully created', 'access_token' => $accessToken]);
     }catch(\Exception $exception){
         return response([
             'message'=>$exception->getMessage()
         ]);
     }
 
-      
+
 
 
     }
@@ -79,5 +80,5 @@ class AuthController extends Controller
             'message'=>'Successfully logged out'
         ]);
     }
-}  
+}
 

@@ -17,24 +17,32 @@ class ParentController extends Controller
     public function __construct(){
         $this -> middleware(['auth:admin', 'verified']);
      }
-   
+
        public function index(){
-        $parent = Parente::with('student')->get();
-       
+        $parent = Parente::with('student')->where('is_active' , 0)->get();
+
            return view('dashboard.inscription.list-parent',compact('parent'));
-           
+
        }
 
+    public function listAccepted(){
+        $parent = Parente::with('student')->where('is_active', 1)->get();
+
+        return view('dashboard.inscription.list_accepte',compact('parent'));
+
+    }
+
+
        public function edit(Request $request, $id){
-         
+
         $levels = Level::get();
-        
-      
+
+
         $parent = Parente::with('student')->find($id);
-        
+
            $classes= Classroom::get();
            //dd($classes);
-     
+
         if(!$parent){
             return redirect()->route('inscri.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
         }
@@ -42,8 +50,8 @@ class ParentController extends Controller
     }
 
     public function update(Request $request, $id){
-       
-        $parent = Parente::with('student')->find($id);        
+
+        $parent = Parente::with('student')->find($id);
         if(!$parent){
             return redirect()->route('inscri.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
         }
@@ -59,21 +67,18 @@ class ParentController extends Controller
             "nbEnfants"=> $request->nbEnfants,
             "adresse"=> $request->adresse,
             "email"=> $request->email,
-            //"is_active"=>$request->is_active
+            "is_active"=>($request->is_active == 'rejeter')? 0:1,
         ]);
-      //  $classStudent = Student::with('class')->find($id);
+
 
         return redirect()->route('inscri.index')->with(['success'=>'modification avec succés']);
-    
+
     }
 
     public function updateEleve(Request $request, $id){
-        //$parent = Parente::with('student')->find($id); 
-        //dd($id);
-    //foreach ($parent->student as $eleve)
 
            $updateleve= Student::find($id);
-       // dd($request);  
+       // dd($request);
         $updateleve->update([
             "nomEleve"=>$request->nomEleve,
             "prenomEleve"=>$request->prenomEleve,
@@ -97,12 +102,12 @@ public function changeStatus( $id)
               }
               $values = array('is_active'=> $is_active);
               DB::table('parentes')->where('id',$id)->update($values);
-    //$parent->is_active = $request->is_active;
+
     return redirect()->route('inscri.index')->with('status', 'status changed successfully');
-    
+
 
     //return response()->json(['success'=>'Status change successfully.']);
 }
 }
-      
+
 

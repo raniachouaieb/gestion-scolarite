@@ -1,32 +1,31 @@
 @extends('layouts.app-admin')
 
+
+
 @section('content')
 
 
 
 <div class="container">
 @include('includes.alerts.flash')
-
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Library</li>
+        </ol>
+    </nav>
 <div class="card shadow mb-4">
                             <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th> Père</th>
-
-
                                             <th>Télephhone </th>
                                             <th> Mère </th>
-
                                             <th>Télephone </th>
-
-
                                             <th>Email</th>
                                             <th>Enfants</th>
-
-
                                             <th colspan="1">Action</th>
-                                            <th>Status</th>
                                         </tr>
                                     </thead>
 
@@ -51,23 +50,7 @@
                                               </ul>
                                               @endforeach
                                             </td>
-
-
                                             <td><a href="{{ route('isncri.edit', $par->id)}}" class="btn btn-info btn-circle"><i class="fas fa-pen fa-sm"></i></a></td>
-                                            <td>
-
-                                            <?php if($par->is_active == '1'){ ?>
-                                            <a href="{{ route('inscri.chagestatus', $par->id)}}" class="btn btn-success">Active</a>
-
-                                            <?php }else{ ?>
-                                                <a href="{{ route('inscri.chagestatus', $par->id)}}" class="btn btn-danger">InActive</a>
-                                                <?php  } ?>
-
-
-
-
-
-                                            </td>
 
 
                                         </tr>

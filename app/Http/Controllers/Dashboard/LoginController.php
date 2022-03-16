@@ -44,9 +44,8 @@ class LoginController extends Controller
 
       if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $remember))
        {
-          // $admin = auth::guard('admin');
-           //return dd($admin);
-        return redirect()->route('homeg')->with('success','Welcome!');
+           Session::flash('statuscode', 'success');
+        return redirect()->route('homeg')->with('status','Welcome!');
 
       }
 

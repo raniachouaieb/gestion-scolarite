@@ -12,22 +12,22 @@ class ClassroomController extends Controller
     public function __construct(){
         $this -> middleware('auth:admin');
      }
-   
+
        public function index(){
-          
+
            $class = Classroom::all();
            return view('dashboard.classroom.list', compact('class'))->withTitle('Liste Classes');
-           
+
        }
-   
+
        public function addClass(){
            $niveaux = Level::get();
            return view('dashboard.classroom.create', compact('niveaux'))->withTitle('Ajouter classe');
-          
+
            }
-          
-   
-   
+
+
+
        public function store(Request $request)
        {
            //dd($request);
@@ -38,16 +38,16 @@ class ClassroomController extends Controller
             "id_level"=>$request->niveau
 
         ]);
-        //php dd($request);
+
            return redirect('admin/classes')->with('success','class has been added');
-           //return response()->json($class);
+
        }
-   
+
        public function show($id){
            $class = Classroom::find($id);
           // return response()->json($class);
        }
-   
+
        public function edit(Request $request, $id){
            $class = Classroom::find($id);
            if(!$class){
@@ -55,7 +55,7 @@ class ClassroomController extends Controller
            }
            return view('dashboard.classroom.edit',compact('class'))->withTitle('Edition classe');
        }
-   
+
        public function update( Classroom $classroom, Request $request, $id){
             $classID = Classroom::find($id);
            try{
@@ -75,9 +75,9 @@ class ClassroomController extends Controller
                return redirect()->route('classes.index')->with(['error'=>'There is a error :(']);
            }
 
-   
+
        }
-       
+
        public function destroy($id){
            $class = Classroom::find($id);
            $class->delete();

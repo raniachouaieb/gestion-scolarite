@@ -17,11 +17,15 @@ class StudentController extends Controller
     public function __construct(){
         $this -> middleware('auth:admin');
      }
-   
+
        public function index(){
-        $student = Student::get();
-       
-           return view('dashboard.students.list-student',compact('student'));
-           
+
+        $student = Student::whereNotNull('classe')->get();
+           $levels = Level::get();
+          // $studentClass = Student::with('class')->where('class_id', id);
+
+
+           return view('dashboard.students.list-student',compact('student'))->withTitle('Liste des eleves acceptée');
+
        }
     }

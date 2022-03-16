@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ResetPassRequest extends FormRequest
+class MatiereRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class ResetPassRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email',
-            'token' => 'required|string',
-            'password' => 'required|string|confirmed'
+            'nom' => 'required| max:15',
+            'coefficient'=>'require|numeric',
 
 
         ];
@@ -35,6 +34,10 @@ class ResetPassRequest extends FormRequest
     public function messages()
     {
         return [
+            'nom.required' => 'ce champ est obligatoiore',
+            'nom.max' => 'ce chanmp doit etre au maximum 12 characteres',
+            'coefficient.required' => 'ce champ est obligatoiore',
+            'coefficient.numeric'=>' la coefficient doit etre seulement des chiffres',
 
         ];
     }

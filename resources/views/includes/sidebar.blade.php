@@ -36,7 +36,8 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Liste parents:</h6>
-            <a class="collapse-item" href="buttons.html">Acceptés</a>
+            <a class="collapse-item" href="{{route('inscri.index')}}">En attente</a>
+            <a class="collapse-item" href="{{route('inscri.list_accepted')}}">Acceptés</a>
             <a class="collapse-item" href="cards.html">Rejetés</a>
         </div>
     </div>
@@ -53,6 +54,20 @@
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Levels</span></a>
 </li>
+
+    <!-- Nav Item - Matieres -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('matieres.index')}}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Matieres</span></a>
+    </li>
+
+    <!-- Nav Item - Modules -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('modules.index')}}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Modules</span></a>
+    </li>
 <!-- Nav Item - students -->
 <li class="nav-item">
     <a class="nav-link" href="{{ route('student.index')}}">

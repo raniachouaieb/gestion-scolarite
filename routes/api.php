@@ -25,7 +25,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
      'prefix'=> 'auth'], function(){
         Route::post('/login', 'Api\AuthController@login' );
         Route::post('/register', 'Api\AuthController@register' );
-        Route::post('/forgot', 'Api\ForgotPasswordController@sendResetLink');
+
+     Route::post('/forgot-password', 'Api\ForgotPasswordController@forgotPassword');
         Route::post('/reset', 'Api\ForgotPasswordController@reset');
 
         Route::group([
@@ -33,7 +34,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
                 Route::get('logout', 'Api\AuthController@logout');
             });
      });
-     
-   
 
-    
+Route::get('email/verify/{id}', 'Api\VerificationController@verify')->name('verification.verify'); // Make sure to keep this as your route name
+
+Route::get('email/resend', 'Api\VerificationController@resend')->name('verification.resend');
+
+
+
