@@ -112,6 +112,7 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'student/'],function(){
     Route::get('edit\{id}', 'StudentController@edit')->name('student.edit');
     Route::post('update\{id}', 'StudentController@update')->name('student.update');
     Route::get('getClasse', 'StudentController@getClasse')->name('student.getClasse');
+    Route::get('elevePreInscrit','StudentController@elevePreInscrit')->name('student.elevePreInscrit');
 
 
 

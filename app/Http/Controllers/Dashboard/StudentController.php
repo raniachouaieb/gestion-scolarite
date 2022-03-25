@@ -10,7 +10,7 @@ use App\Models\Classroom;
 use App\Models\Level;
 
 
-use DB;
+
 
 class StudentController extends Controller
 {
@@ -38,6 +38,14 @@ class StudentController extends Controller
             $eleveByClass = Student::where('class_id', '=', $req->class)->paginate(PAGINATION);
 
             return view('dashboard.students.list-student',compact('eleveByClass', 'niveaux', 'class'));
+        }
+
+        public function elevePreInscrit(){
+            $class = Classroom::get();
+            $niveaux = Level::get();
+
+            $elevePreInscrit = Student::whereNull('class_id')->get();
+            return view('dashboard.students.list-student-preinscri', compact('elevePreInscrit', 'class', 'niveaux'));
         }
 
     public function getClasse(Request $request){
