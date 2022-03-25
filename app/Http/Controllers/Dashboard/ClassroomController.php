@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Requests\ClassroomRequest;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Classroom;
 use App\Models\Level;
 use DB;
+
 class ClassroomController extends Controller
 {
     public function __construct(){
@@ -28,14 +30,13 @@ class ClassroomController extends Controller
 
 
 
-       public function store(Request $request)
+       public function store(ClassroomRequest $request)
        {
-           //dd($request);
-       // $niveaux = Level::with('class');
+
 
         $class = Classroom::create([
             "name"=> $request->name,
-            "id_level"=>$request->niveau
+            "id_level"=>$request->id_level
 
         ]);
 
@@ -50,10 +51,11 @@ class ClassroomController extends Controller
 
        public function edit(Request $request, $id){
            $class = Classroom::find($id);
+           $niveaux = Level::get();
            if(!$class){
                return redirect()->route('classes.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
            }
-           return view('dashboard.classroom.edit',compact('class'))->withTitle('Edition classe');
+           return view('dashboard.classroom.edit',compact('class', 'niveaux'))->withTitle('Edition classe');
        }
 
        public function update( Classroom $classroom, Request $request, $id){
@@ -63,7 +65,8 @@ class ClassroomController extends Controller
                     return redirect()->route('classes.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
                 }
                 $classID->update([
-                    'name'=>$request->name
+                    'name'=>$request->name,
+                    "id_level"=>$request->niveau
                 ]);
                 $classID->update($request->all());
                // DB::table('classerooms')

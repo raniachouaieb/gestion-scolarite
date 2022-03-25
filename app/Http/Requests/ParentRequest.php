@@ -34,7 +34,7 @@ class ParentRequest extends FormRequest
             'professionMere' => 'required| string',
             'nbEnfants' => 'required|numeric', /** -1 innaceptable */
             'adresse' => 'required',
-            'email' => 'required|email|unique:parentes',
+            'email' => 'required|email|unique:parentes,email',
             'password' => 'required|min:8|confirmed',
 
 
@@ -60,7 +60,10 @@ class ParentRequest extends FormRequest
             'adresse.required' => 'name cannot be empty.',
             'password.required' => 'name cannot be empty.',
             'password.min' => 'Minimum is 8.',
-            'email.required' => 'cannot be empty.'
+            'email.required' => 'cannot be empty.',
+            'email.email'=>'enter a valid address mail',
+            'email.unique'=>'email existe'
+
 
 
 

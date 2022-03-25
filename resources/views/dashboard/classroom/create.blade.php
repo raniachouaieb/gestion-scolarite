@@ -20,19 +20,29 @@
                      <div class="card-body">
                           <div class="form-group">
                               <div class="col">
-                                    <label for="nomPere">Classe </label>
-                                    <input type="text" class="form-control" name="name"/>
+                                    <label for="">Classe </label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"/>
+                                  @error('name')
+                                  <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                  @enderror
 
                               </div>
                               <div class="col">
-                                    <label for="niveau">Niveau </label>
-                                    <select class="form-control @error('niveau') is-invalid @enderror"  name="niveau">
+                                    <label for="">Niveau </label>
+                                    <select class="form-control @error('id_level') is-invalid @enderror"  name="id_level">
                                                     <option value="" selected> Choisir </option>
                                                     @foreach( $niveaux as $niv)
                                                       <option value="{{$niv->id}}" > {{$niv->level}} </option>
                                                     @endforeach
 
                                     </select>
+                                  @error('id_level')
+                                  <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                  @enderror
                               </div>
 
                            </div>

@@ -3,11 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Parente;
+use App\Models\Convocation;
+use App\Models\Classroom;
+use App\Models\Matiere;
 
 class Student extends Model
 {
 
-    protected $guarded =[];
+    protected $fillable=[
+        'nomEleve','prenomEleve','gender','classe','class_id',
+        'niveau', 'parent_id',
+    ];
+    protected $hidden=[
+        'created_at','deleted_at','updated_at'
+        ];
  //each student have one parent
     public function parent(){
         return $this->belongsTo(Parente::class,'parent_id', 'id');
@@ -19,5 +29,9 @@ class Student extends Model
 
     public function matiere(){
         return $this->hasMany(Matiere::class);
+    }
+
+    public function convocations(){
+        return $this->hasMany(Convocation::class , 'student_id', 'id');
     }
 }

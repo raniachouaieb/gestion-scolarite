@@ -111,7 +111,7 @@
                 <h1>Elèves</h1>
                 <div class="tab-container-one">
                     <ul class="nav nav-tabs">
-                        @foreach($parent->student as $index=>$elev)
+                        @foreach($parent->students as $index=>$elev)
                         <li class="nav-item @if($index==0) active @endif">
                             <a class="nav-link @if($index==0) active @endif" href="#home{{$index}}" data-toggle="tab"
                                 aria-controls="home{{$index}}">Elève{{$index}}</a>
@@ -121,7 +121,7 @@
 
                     <div class="tab-content">
 
-                        @foreach($parent->student as $index=>$elev)
+                        @foreach($parent->students as $index=>$elev)
 
                         <div role="tabpanel" class="tab-pane @if($index==0) active @endif" id="home{{$index}}"
                             aria-labelledby="home-tab{{$index}}">
@@ -157,8 +157,8 @@
                                     <div class="col">
                                         <label for="niveau">niveau </label>
 
-                                        <select class="form-control" name="niveau">
-                                            <option value="" selected> {{$elev->niveau}} </option>
+                                        <select class="form-control" id="niveau" name="niveau">
+                                            <option value="{{$elev->niveau}} " selected> {{$elev->niveau}} </option>
                                             @foreach( $levels as $lev)
                                             <option value="{{$lev->id}}"
                                                 {{$lev->id == $elev->niveau ? 'selected' : ''}}> {{$lev->level}}
@@ -172,7 +172,7 @@
                                 <div class="col-md-6">
                                     <label for="classe">classe </label>
 
-                                    <select class="form-control" name="classe" >
+                                    <select class="form-control" id="classe" name="classe" >
                                         <option value="" selected> {{$elev->class_id}} </option>
 
                                         @foreach( $classes->where('id_level',$elev->niveau) as $class)
@@ -205,6 +205,37 @@
 
 
 </div>
+
+<script>
+    $(document).ready(function(){
+        $("#niveau").change(function(){
+            $value=$(this).val(),
+                console.log($value);
+            $('#classe').empty();
+            $('#classe').append('<option value="">--- choisir ---</option>')
+            $.ajax({
+                url: "{{ url('admin/inscri/getClasse') }}",
+                data:{"niveau":$value,},
+                method: 'GET',
+                success: function(data) {
+                    var count=0;
+                    $.each(data,function(k,v){
+                        $('#classe').append($('<option>',{value: k, text: v}));
+                        count++;
+                    });
+                    if(count==0){
+                        $('#classe').empty();
+                        $('#classe').append('<option value="">Aucun Classe disponible</option>')
+                    }
+                },
+                error:function(data){
+                    $('#classe').append('<option value="">Aucun classse affecter</option>')
+                }
+            });
+        });
+    });
+</script>
+
 
 
 @endsection

@@ -24,7 +24,7 @@ class MatiereRequest extends FormRequest
     public function rules()
     {
         return [
-            'nom' => 'required| max:15',
+            'nom' => 'required| max:25',
             'coefficient'=>'require|numeric',
 
 
@@ -35,7 +35,7 @@ class MatiereRequest extends FormRequest
     {
         return [
             'nom.required' => 'ce champ est obligatoiore',
-            'nom.max' => 'ce chanmp doit etre au maximum 12 characteres',
+            'nom.max' => 'ce chanmp doit etre au maximum 25 characteres',
             'coefficient.required' => 'ce champ est obligatoiore',
             'coefficient.numeric'=>' la coefficient doit etre seulement des chiffres',
 

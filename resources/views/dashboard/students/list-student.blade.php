@@ -1,23 +1,30 @@
-@extends('layouts.app-admin')
-@section('title', $title)
-@section('content')
-
-
-
+<style>
+    .countEleve{
+        float: left;
+        margin-left: 5px;
+        margin-top: 1px;
+        border: 1px ridge;
+        box-shadow: 1px 1px 2px indianred;
+        border-radius: 2px 4px 4px;
+        padding: 1px 4px;
+    }
+    .pencil{
+        margin-left: 18px;
+    }
+</style>
 <div class="container">
-@include('includes.alerts.flash')
+<div class="row mb-2"><h6><span class="countEleve mr-2">{{$eleveByClass->count()}}</span>Eleve Inscrits </h6></div>
 
-<div class="card shadow mb-4">
-                            <div class="table-responsive">
-                            <table class="table table-striped">
+
+<div class=" listEleve mb-4">
+    <div class="table-responsive">
+        <table class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th> Elève</th>
-
                                             <th>Classe</th>
                                             <th>Niveau </th>
-                                            <th> Sex </th>
-
+                                            <th> Gender </th>
                                             <th colspan="1">Action</th>
                                         </tr>
                                     </thead>
@@ -25,16 +32,15 @@
 
 
                                     <tbody>
-                                    @foreach($student as $getstudent)
+                                    @foreach($eleveByClass as $getstudent)
                                         <tr>
                                             <td>{{$getstudent->nomEleve}} {{$getstudent->prenomEleve}}</td>
-                                            <td>{{$getstudent->classe}}</td>
-                                            <td>{{$getstudent->niveau}}</td>
+
+                                            <td> @foreach($class as $classe) @if($classe->id == $getstudent->classe) {{$classe->name}} @endif   @endforeach</td>
+
+                                            <td>@foreach($niveaux as $level) @if($level->id == $getstudent->niveau){{$level->level}} @endif @endforeach</td>
                                             <td>{{$getstudent->gender==0 ? 'Garcon' : 'Fille'}}</td>
-
-
-
-                                            <td><a href="" class="btn btn-info btn-circle"><i class="fas fa-pen fa-sm"></i></a></td>
+                                            <td><a href="{{route('student.edit', $getstudent->id)}}" ><i class="fas fa-pen fa-sm pencil"></i></a></td>
 
 
 
@@ -45,10 +51,9 @@
 
                                     </tbody>
                                 </table>
+        {{$eleveByClass->links()}}
                             </div>
                         </div>
+
 </div>
 
-
-
-@endsection

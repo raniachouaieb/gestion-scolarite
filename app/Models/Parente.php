@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use App\Notifications\VerifyEmail;
 use App\Notifications\ResetPasswordNotification;
+use App\Models\Student;
 
 
 
@@ -26,17 +27,13 @@ class Parente extends Authenticatable implements MustVerifyEmail
         'nomPere', 'prenomPere', 'telPere',
         'professionPere','nomMere','prenomMere','telMere',
         'professionMere','nbEnfants','email','password','adresse',
-        'is_active','created_at','deleted_at','updated_at',
+        'is_active',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
+    protected $hidden =[
+        'created_at','deleted_at','updated_at','password', 'remember_token',
     ];
+
 
     /**
      * The attributes that should be cast to native types.
@@ -46,9 +43,11 @@ class Parente extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
  //each parent might have multiple students
-    public function student(){
+    public function students(){
         return $this->hasMany(Student::class, 'parent_id', 'id');
+        //return $this->hasMany('App/Models/Student',)
     }
 
         /**

@@ -24,8 +24,8 @@ class LevelRequest extends FormRequest
     public function rules()
     {
         return [
-            'level' => 'required'|'max:10',
-            
+            'level' => 'required|max:10',
+
 
         ];
     }
@@ -33,8 +33,8 @@ class LevelRequest extends FormRequest
     public function messages()
     {
         return [
-            'level.reuired' => 'Level cannot be empty.',
-            'level.max' => 'You have reached your maximum limit of characters allowed which is 10.'
+            'level.required' => 'ce champs est obligatoire.',
+            'level.max' => 'le niveau ne peut pas dépasser le 10 caracteres'
         ];
     }
 }

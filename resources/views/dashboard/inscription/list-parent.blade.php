@@ -11,7 +11,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Library</li>
+            <li class="breadcrumb-item active" aria-current="page">Liste Parents préinscrits</li>
         </ol>
     </nav>
 <div class="card shadow mb-4">
@@ -43,14 +43,14 @@
                                             <td>{{$par->telMere}}</td>
 
                                             <td>{{$par->email}}</td>
-                                            <td> @foreach($par->student as $elev)
+                                            <td> @foreach($par->students as $elev)
                                               <ul>
                                                <li>{{$elev->nomEleve }} {{$elev->prenomEleve }}</li>
 
                                               </ul>
                                               @endforeach
                                             </td>
-                                            <td><a href="{{ route('isncri.edit', $par->id)}}" class="btn btn-info btn-circle"><i class="fas fa-pen fa-sm"></i></a></td>
+                                            <td><a href="{{ route('isncri.edit', $par->id)}}" ><i class="fas fa-pen fa-sm "></i></a></td>
 
 
                                         </tr>

@@ -24,8 +24,8 @@ class ModuleRequest extends FormRequest
     public function rules()
     {
         return [
-            'nom_module' => 'required| max:15',
-            'coefficient_module'=>'require|numeric',
+            'nom_module' => 'required| max:25',
+            'coefficient_module'=>'required|numeric',
 
 
         ];
@@ -35,7 +35,7 @@ class ModuleRequest extends FormRequest
     {
         return [
             'nom_module.required' => 'ce champ est obligatoiore',
-            'nom_module.max' => 'ce chanmp doit etre au maximum 12 characteres',
+            'nom_module.max' => 'ce chanmp doit etre au maximum 25 characteres',
             'coefficient_module.required' => 'ce champ est obligatoiore',
             'coefficient_module.numeric'=>' la coefficient doit etre seulement des chiffres',
 

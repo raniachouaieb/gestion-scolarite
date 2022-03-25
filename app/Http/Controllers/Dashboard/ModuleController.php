@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Level;
+use App\Models\Matiere;
 use App\Models\Module;
 use Illuminate\Http\Request;
 use App\Http\Requests\ModuleRequest;;
@@ -17,23 +19,28 @@ class ModuleController extends Controller
     public function index(){
 
         $module = Module::all();
+        $matiere= Matiere::with('module');
 
-        return view ('dashboard.module.list-module', compact('module'))->withTitle('Liste des modules');
+
+        return view ('dashboard.module.list-module', compact('module','matiere'))->withTitle('Liste des modules');
     }
 
 
     public function addModule(){
-        return view('dashboard.module.create-module')->withTitle('Ajouter module');
+        $niveaux = Level::get();
+
+        return view('dashboard.module.create-module', compact('niveaux'))->withTitle('Ajouter module');
 
     }
 
 
 
-    public function store(Request $request)
+    public function store(ModuleRequest $request)
     {
         $module = new Module();
-        $module->nom_module= $request->nomModule;
-        $module->coefficient_module= $request->coeffModule;
+        $module->nom_module= $request->nom_module;
+        $module->coefficient_module= $request->coefficient_module;
+        $module->niveau_id=$request->niveau_id;
 
         $module->save();
 
@@ -41,14 +48,23 @@ class ModuleController extends Controller
         return redirect()->route('modules.index')->with('status','Module est ajouté avec succes');
     }
 
+    public function show($id){
+        $module = Module::with('matiere')->find($id);
+       // $matiere= Matiere::with('module');
+
+
+        return view('dashboard.module.list-module', compact('module'));
+    }
+
     public function edit(Request $request, $id){
         $module = Module::find($id);
+        $niveaux = Level::get();
         if(!$module){
             Session::flash('statuscode', 'error');
 
             return redirect()->route('modules.index')->with(['status'=>'there is no data with this id, please enter a correct one']);
         }
-        return view('dashboard.module.edit-module',compact('module'))->withTitle('Edition matiere');
+        return view('dashboard.module.edit-module',compact('module', 'niveaux'))->withTitle('Edition matiere');
     }
 
     public function update(Request $request, $id){
@@ -61,7 +77,8 @@ class ModuleController extends Controller
             }
             $moduleID->update([
                 'nom_module'=>$request->nomModule,
-                'coefficient_module'=>$request->coeffModule
+                'coefficient_module'=>$request->coeffModule,
+                'niveau_id'=>$request->niveau_id
             ]);
             $moduleID->update($request->all());
 

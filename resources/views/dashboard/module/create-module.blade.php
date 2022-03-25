@@ -21,13 +21,38 @@
                                 <div class="form-group">
                                     <div class="col">
                                         @csrf
-                                        <label for="nomModule"> Module:</label>
-                                        <input type="text" class="form-control" name="nomModule"/>
+                                        <label for="nom_module"> Module:</label>
+                                        <input type="text" class="form-control @error('nom_module') is-invalid @enderror" name="nom_module"/>
+                                        @error('nom_module')
+                                        <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                                        @enderror
 
                                     </div>
                                     <div class="col">
-                                        <label for="coeffModule">Coefficient </label>
-                                        <input type="text" class="form-control" name="coeffModule"/>
+                                        <label for="coefficient_module">Coefficient </label>
+                                        <input type="text" class="form-control @error('coefficient_module') is-invalid @enderror" name="coefficient_module"/>
+                                        @error('coefficient_module')
+                                        <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                                        @enderror
+                                    </div>
+                                    <div class="col">
+                                        <label for="">Niveau </label>
+                                        <select class="form-control @error('niveau_id') is-invalid @enderror"  name="niveau_id">
+                                            <option value="" selected> Affecter un niveau </option>
+                                            @foreach( $niveaux as $niv)
+                                                <option value="{{$niv->id}}" > {{$niv->level}} </option>
+                                            @endforeach
+
+                                        </select>
+                                        @error('niveau_id')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
                                     </div>
 
                                     <br>

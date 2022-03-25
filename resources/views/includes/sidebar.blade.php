@@ -13,7 +13,7 @@
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active">
-    <a class="nav-link" href="{{ route('admin.getLogin')}}">
+    <a class="nav-link" href="{{ route('accueil')}}">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
 </li>
@@ -26,6 +26,31 @@
     Interface
 </div>
 
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGeneral"
+           aria-expanded="true" aria-controls="collapseGeneral">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Génèral</span>
+        </a>
+        <div id="collapseGeneral" class="collapse" aria-labelledby="headingGeneral" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+
+                <a class="collapse-item" href="{{route('menu.index')}}">Cantine</a>
+                <a class="collapse-item" href="{{ route('convocations.index')}}">Convocations<span class="countList">{{\App\Models\Convocation::count()}}</span></a>
+                <a class="collapse-item" href="{{ route('travails.index')}}">Travaux à faire<span class="countList">{{\App\Models\Travail::count()}}</span></a>
+
+
+
+            </div>
+        </div>
+    </li>
+
+
+
+
+
+
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -36,60 +61,61 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Liste parents:</h6>
-            <a class="collapse-item" href="{{route('inscri.index')}}">En attente</a>
-            <a class="collapse-item" href="{{route('inscri.list_accepted')}}">Acceptés</a>
+            <a class="collapse-item" href="{{route('inscri.index')}}">En attente<span class="countList">{{\App\Models\Parente::where('is_active' , 0)->count()}}</span></a>
+            <a class="collapse-item" href="{{route('inscri.list_accepted')}}">Inscrits<span class="countList">{{\App\Models\Parente::where('is_active' , 1)->count()}}</span></a>
             <a class="collapse-item" href="cards.html">Rejetés</a>
         </div>
     </div>
 </li>
-<!-- Nav Item - Classes-->
-<li class="nav-item">
-    <a class="nav-link" href="{{ route('classes.index')}}">
-        <i class="fas fa-fw fa-chart-area"></i>
-        <span>Classrooms</span></a>
-</li>
-<!-- Nav Item - Levels -->
-<li class="nav-item">
-    <a class="nav-link" href="{{ route('levels.index')}}">
-        <i class="fas fa-fw fa-chart-area"></i>
-        <span>Levels</span></a>
-</li>
-
-    <!-- Nav Item - Matieres -->
+<style>
+    .countList{
+        float: right;
+        border: 1px ridge;
+        box-shadow: 1px 1px 2px indianred;
+        border-radius: 4px 4px 4px;
+        padding: 1px 4px;
+    }
+</style>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('matieres.index')}}">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Matieres</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEleve"
+           aria-expanded="true" aria-controls="collapseEleve">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Elèves</span>
+        </a>
+        <div id="collapseEleve" class="collapse" aria-labelledby="headingEleve" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+
+                <a class="collapse-item" href="{{ route('student.index')}}">Elève Inscrits <span class="countList">{{\App\Models\Student::whereNotNull('class_id')->count()}}</span></a>
+
+            </div>
+        </div>
     </li>
 
-    <!-- Nav Item - Modules -->
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('modules.index')}}">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Modules</span></a>
-    </li>
+
+
+
+
 <!-- Nav Item - students -->
-<li class="nav-item">
-    <a class="nav-link" href="{{ route('student.index')}}">
+<!--<li class="nav-item">
+    <a class="nav-link" href="">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Liste Elèves</span></a>
-</li>
+</li>-->
 
 <!-- Nav Item - Utilities Collapse Menu -->
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
         aria-expanded="true" aria-controls="collapseUtilities">
         <i class="fas fa-fw fa-wrench"></i>
-        <span>Utilities</span>
+        <span>Gestion Scolarite</span>
     </a>
     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
         data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
+            <a class="collapse-item" href="{{ route('levels.index')}}">Niveaux<span class="countList">{{\App\Models\Level::count()}}</span></a>
+            <a class="collapse-item" href="{{ route('classes.index')}}">Groupes</a>
+            <a class="collapse-item" href="{{ route('modules.index')}}">Modules</a>
+            <a class="collapse-item" href="{{ route('matieres.index')}}">Matieres<span class="countList">{{\App\Models\Matiere::count()}}</span></a>
         </div>
     </div>
 </li>

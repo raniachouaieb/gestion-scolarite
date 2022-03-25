@@ -11,25 +11,29 @@
     Add level Data
   </div>
   <div class="card-body">
-    @if ($errors->any())
-      <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-      </div><br />
-    @endif
-      <form method="post" action="{{ route('levels.store') }}">
-          <div class="col-md-4">
-              @csrf
-              <label for="level_name"> Level:</label>
-              <input type="text" class="form-control" name="level"/>
+      <div class="row">
+          <div class="col-sm-5 mx-auto">
+              <form method="post" action="{{ route('levels.store') }}">
+                  @csrf
+                      <div class="card">
+                          <div class="card-body">
+                              <div class="col-md-12">
+                                  <label for="level"> Level:</label>
+                                  <input type="text" class="form-control @error('level') is-invalid @enderror" name="level"/>
+                                  @error('level')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                                  @enderror
+                              </div>
+                               <br>
+
+                                <button type="submit" class="btn btn-primary"> Ajouter </button>
+                           </div>
+                      </div>
+              </form>
           </div>
-     <br>
-          
-          <button type="submit" class="btn btn-primary">Add Level</button>
-      </form>
+      </div>
   </div>
 </div>
 @endsection

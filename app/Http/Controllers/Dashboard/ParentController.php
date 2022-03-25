@@ -19,18 +19,40 @@ class ParentController extends Controller
      }
 
        public function index(){
-        $parent = Parente::with('student')->where('is_active' , 0)->get();
+        $parent = Parente::with('students')->where('is_active' , 0)->get();
 
            return view('dashboard.inscription.list-parent',compact('parent'));
 
        }
 
     public function listAccepted(){
-        $parent = Parente::with('student')->where('is_active', 1)->get();
+        $niveaux = Level::orderBy('created_at', 'ASC')->get();
+        //$parent = Parente::with('students')->where('is_active', 1)->paginate(PAGINATION);
 
-        return view('dashboard.inscription.list_accepte',compact('parent'));
+        return view('dashboard.inscription.list-parent-by-classe',compact('niveaux'));
 
     }
+    public function parentByClass(Request $req)
+    {
+        $niveaux = Level::orderBy('created_at', 'ASC')->get();
+
+        $parentByClasse = Parente::whereHas('students', function ($query) use ($req) {
+            $query->where('class_id', '=', $req->class);
+        })->where('is_active',1)->paginate(PAGINATION);
+
+        return view('dashboard.inscription.list_accepte',compact('parentByClasse', 'niveaux'));
+    }
+
+    public function getClasse(Request $request){
+        $html=[];
+        $classe = Classroom::where('id_level', $request->get('niveau'))->get();
+        foreach($classe as $class){
+            $html[$class->id]=$class->name;
+        }
+        return $html;
+    }
+
+
 
 
        public function edit(Request $request, $id){
@@ -38,7 +60,7 @@ class ParentController extends Controller
         $levels = Level::get();
 
 
-        $parent = Parente::with('student')->find($id);
+        $parent = Parente::with('students')->find($id);
 
            $classes= Classroom::get();
            //dd($classes);
@@ -51,7 +73,7 @@ class ParentController extends Controller
 
     public function update(Request $request, $id){
 
-        $parent = Parente::with('student')->find($id);
+        $parent = Parente::with('students')->find($id);
         if(!$parent){
             return redirect()->route('inscri.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
         }
@@ -84,7 +106,8 @@ class ParentController extends Controller
             "prenomEleve"=>$request->prenomEleve,
             "gender"=>($request->gender == 'garcon')? 0:1,
             "niveau"=>$request->niveau,
-            "classe"=>$request->classe,
+            "class_id"=>$request->classe,
+            'classe'=>$request->classe
         ]);
         return redirect()->route('inscri.index')->with(['success'=>'modification avec succés']);
     }

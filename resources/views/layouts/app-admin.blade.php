@@ -19,9 +19,26 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin-template/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+
+    <script src="https://cdn.tiny.cloud/1/ij35uvmrlisnjld8g1eo0lhdj9dg1j3m6kcjplp7dobxxhk0/tinymce/5/tinymce.min.js" ></script>
+    <script>
+        tinymce.init({
+            selector: '#myarea'
+        });
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
+
+
+
+
+
 
 </head>
 
@@ -75,7 +92,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="">Logout</a>
                 </div>
             </div>
         </div>
@@ -102,14 +119,25 @@
         @if(Session('status'))
      // alert('{{ session('status') }}');
                 swal({
-            title: '{{ session('status') }}',
-            //text: "You clicked the button!",
-            icon: '{{ session('statuscode') }}',
-            button: "Done!",
-            });
+                    title: '{{ session('status') }}',
+                    //text: "You clicked the button!",
+                    icon: '{{ session('statuscode') }}',
+                    button: "Done!",
+                    });
 @endif
 
     </script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function(){
+            $( ".datepicker").datepicker();
+        } );
+    </script>
+
+
+
+
 
 </body>
 

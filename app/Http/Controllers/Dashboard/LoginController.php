@@ -6,11 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
-use Illuminate\Validation\ValidationException;
-use Session;
-
+use Illuminate\Support\Facades\Session;
 class LoginController extends Controller
 {
 
@@ -40,12 +37,12 @@ class LoginController extends Controller
     public function getLogin(LoginRequest  $request){
 
         //return view('dashboard.admin.home');
-        $remember = $request->has('remember_me')? true : false ;
+       // $remember = $request->has('remember_me')? true : false ;
 
-      if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $remember))
+      if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password]))
        {
            Session::flash('statuscode', 'success');
-        return redirect()->route('homeg')->with('status','Welcome!');
+        return redirect()->route('accueil')->with('status','Welcome!');
 
       }
 

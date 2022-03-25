@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\Http\Request;
+use App\Models\Parente;
+use App\Models\Student;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -14,7 +15,7 @@ class AdminController extends Controller
         $this->middleware('auth:admin')->except('logout');
     }
 
-    public function logout(Request $request) {
+    public function logout() {
 
         Auth::guard('admin')->logout();
         Session::flash('statuscode', 'success');
@@ -23,6 +24,14 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('dashboard.admin.home');
+        $parentPréinscrit = Parente::where('is_active',0)->get();
+        $parentInscrit = Parente::where('is_active',1)->get();
+
+        $elevePréinscrit = Student::whereNull('class_id')->get();
+        $eleveInscrit = Student::whereNotNull('class_id')->get();
+
+        return view('dashboard.admin.home', compact('parentPréinscrit', 'elevePréinscrit', 'parentInscrit', 'eleveInscrit'));
     }
+
+
 }

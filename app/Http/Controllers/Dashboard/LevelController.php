@@ -6,7 +6,6 @@ use App\Http\Requests\LevelRequest;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Level;
-use Illuminate\Support\Facades\Validator;
 use Session;
 
 class LevelController extends Controller
@@ -17,8 +16,8 @@ class LevelController extends Controller
   }
 
     public function index(){
-        
-        $levelName = Level::all();
+
+        $levelName = Level::orderBy('id', 'ASC')->get();
         //return $levelName;
         return view ('dashboard.level.list', compact('levelName'))->withTitle('Liste des niveaux');
     }
@@ -26,23 +25,23 @@ class LevelController extends Controller
     public function addLevel(Request $request){
         //$levelName = Level::all();
         return view('dashboard.level.create');
-       
+
         }
-       
 
 
-    public function store(Request $request)
+
+    public function store(LevelRequest $request)
     {
         $levelName = new Level();
         $levelName->level= $request->level;
-      
+
         $levelName->save();
-        
+
         Session::flash('statuscode', 'success');
         return redirect('admin/levels')->with('status','Level has been added');
         //return response()->json($levelName);
 
-    
+
     }
 
     public function show($id){
@@ -71,7 +70,7 @@ class LevelController extends Controller
         return redirect()->route('levels.index')->with('status','Level has been modified successfully');
 
     }
-    
+
     public function destroy($id){
         $levelName = Level::find($id);
         $levelName->delete();

@@ -264,7 +264,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="">Prenom</label>
+                                <label for="">Prenom Eleve</label>
                                 <input type="text" class="form-control @error('prenomEleve') is-invalid @enderror" placeholder=""  wire:model="prenomEleve">
                                 @error('prenomEleve')
                                     <span class="invalid-feedback" role="alert">

@@ -5,34 +5,55 @@
 <style>
   .position {
     float: right;
+    margin-right: 25px;
+  }
+  .tableNiveau{
+      margin-top: 70px;
+  }
+  .trash{
+      color:red;
+      margin-left: 7px;
   }
 </style>
 <div class="container">
 <!--@include('includes.alerts.flash')  -->
-<a  class="btn btn-primary position" href="{{ route('levels.add')}}"><i class="fas fa-plus"></i>Ajouter Niveau</a>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('homeg')}}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Niveaux</li>
+        </ol>
+    </nav>
+    <div class="row  position mb-5">
+        <a  class="btn btn-primary " href="{{ route('levels.add')}}"><i class="fas fa-plus"></i></a>
+    </div>
 
 
-<table class="table table-hover">
-    <thead>
+
+    <div class="card shadow tableNiveau">
+        <div class="table-responsive">
+
+            <table class="table table-hover">
+
+                <thead>
         <tr>
-          <td>#</td>
-          <td>Level</td>
-          <td colspan="2">Action</td>
+          <td class="col-4">#</td>
+          <td class="col-6">Level</td>
+          <td class="col-2">Action</td>
         </tr>
     </thead>
     <tbody>
         @foreach($levelName as $niveau)
         <tr>
-            <td>{{$niveau->id}}</td>
-            <td>{{$niveau->level}}</td>
-            <td><a href="{{ route('levels.edit', $niveau->id)}}" class="btn btn-info "><i class="fas fa-pen fa-sm"></i></a>
+            <td class="col-4">{{$niveau->id}}</td>
+            <td class="col-6">{{$niveau->level}}</td>
+            <td class="col-2"><a href="{{ route('levels.edit', $niveau->id)}}" ><i class="fas fa-pen fa-sm"></i></a>
 
 
             <form action="{{ route('levels.destroy', $niveau->id)}}" method="post" class="d-inline" >
                   @csrf
                   @method('DELETE')
-                  <button class="btn btn-danger " type="submit"><i class="fas fa-trash fa-sm"></i></button>
-
+                <input name="_method" type="hidden" value="DELETE">
+                <a  class=" trash show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash fa-sm"></i></a>
                 </form>
 
                <!--<a class="btn btn-danger "  data-target="#ModalDlete{{$niveau->id}}"><i class="fas fa-trash fa-sm"></i></a>-->
@@ -43,34 +64,36 @@
         @endforeach
     </tbody>
   </table>
+    </div>
+    </div>
 
 
 <div>
+    <script type="text/javascript">
+
+        $('.show_confirm').click(function(event) {
+            var form =  $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: `Are you sure you want to delete this record?`,
+                text: "If you delete this, it will be gone forever.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+        });
+
+    </script>
 
 
 
 
-<!--<form action="{{ route('levels.destroy', $niveau->id) }}" method="post">
-@csrf
-@method('DELETE')
-    <div class="modal fade" id="ModalDlete{{$niveau->id}}" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">{{ __('Supprimer niveau')}}</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="close">
-                        <span aria-hidden="true">&times;</span>
-</button>
-</div>
-<div class="modal-body"> Vous etes sur pur supprimer <b>{{$niveau->id}}</b>?</div>
-<div class="modal-footer">
-    <button type="button" class="btn gray btn-outline-secondary" data-dismiss="modal">{{ __('Annuler')}}</button>
-    <button type="button" class="btn  btn-outline-danger" >Supprimer</button>
 
-</div>
-</div>
-</div>
-</div>
-</form>-->
 @endsection
 

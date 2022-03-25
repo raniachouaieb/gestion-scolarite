@@ -18,8 +18,10 @@ class MatiereController extends Controller
     public function index(){
 
         $matiere = Matiere::all();
+        $module= Module::get();
 
-        return view ('dashboard.matiere.list-matiere', compact('matiere'))->withTitle('Liste des matières');
+
+        return view ('dashboard.matiere.list-matiere', compact('matiere', 'module'))->withTitle('Liste des matières');
     }
 
 
