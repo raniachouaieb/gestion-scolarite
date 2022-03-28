@@ -24,15 +24,59 @@ class ConvocationController extends Controller
 
         $convocations = Convocation::orderBy('date_envoie', 'DESC')->paginate(PAGINATION);
 
-        //$parent =Parente::where('id', $convocations->student->parent_id)->get();
-
-        /*$parent = Student::with(['parent'=> function($q){
-
-            $q->select('id', 'nomPere', 'telPere')->where('id', 52);
-        }])->get();*/
-       //dd($parent);
-
         return view ('dashboard.convocation.list-convocation', compact('convocations'))->withTitle('Liste des convocations');
+    }
+
+    public function search(Request $req){
+        if($req->ajax()){
+            $output='';
+            $total_data='';
+            $query = $req->get('query');
+            if($query !='')
+            {
+                $convocations = Convocation::where('titre_conv', 'LIKE', '%'.$query.'%')
+                    ->get();
+
+            }
+            else{
+                $convocations = Convocation::orderBy('date_envoie', 'DESC')->paginate(PAGINATION);
+            }
+            $total_row = $convocations->count();
+            if($convocations && $total_row > 0){
+                foreach($convocations as $row)
+                {
+                    $output .= '
+                    <tr>
+                        <td>'.$row->titre_conv.'</td>
+                        <td>'.$row->description.'</td>
+                        <td>'.$row->date_envoie.'</td>
+                        <td>'.$row->student['nomEleve'].' '.$row->student['prenomEleve'].'</td>
+                        <td>'.$row->student->parent['nomPere'].' '.$row->student->parent['prenomPere'].'</td>
+                        <td>'.$row->student->parent['telPere'].'</td>
+                        <td><form action="" method="post" class="d-inline" >
+                        <input name="_method" type="hidden" value="DELETE">
+                        <a type="submit"  class=" show_confirm iconSupp" data-toggle="tooltip" ><i class="fas fa-trash trashcolor"></i></a>
+                    </form>
+                    </td>
+
+
+                     </tr>';
+                }
+            }
+            else{
+                $output = '
+                <tr>
+                <td class="nodata" colspan="5">No data</td>
+                </tr>';
+            }
+            $convocations = array(
+                'table_data' => $output,
+                'total_data' => $total_data
+            );
+            echo json_encode($convocations);
+
+        }
+
     }
 
     public function addConv(){
@@ -61,6 +105,13 @@ class ConvocationController extends Controller
         }
         return $html;
     }
+
+   /* public function searchConv(){
+        $search_text = $_GET['query'];
+        $convocations = Convocation::where('titre_conv', 'LIKE', '%'.$search_text.'%')->get();
+         return view('dashboard.convocation.search', compact('convocations'));
+
+    }*/
 
     public function store(ConvocationRequest $request)
     {

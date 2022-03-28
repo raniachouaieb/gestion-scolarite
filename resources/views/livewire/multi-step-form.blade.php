@@ -241,7 +241,7 @@
 
         @if($currentStep == 4)
 
-        <div id="dynamic_field">
+        <div class="input_fields_wrap">
 
         <div class="step-four">
             <div class="card">
@@ -253,7 +253,7 @@
 
                             <div class="form-group">
                                 <label for="">Nom Eleve</label>
-                                <input type="text" class="form-control @error('nomEleve') is-invalid @enderror" placeholder=""  wire:model="nomEleve">
+                                <input type="text" class="form-control @error('nomEleve') is-invalid @enderror" placeholder="" wire:model="nomEleve" >
                                 @error('nomEleve')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -275,7 +275,7 @@
 
                         </div>
 
-                    </div>
+                     </div>
 
                     <div class="row">
 
@@ -283,7 +283,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Niveau</label>
-                                <select class="form-control @error('niveau') is-invalid @enderror"  wire:model="niveau">
+                                <select class="form-control @error('niveau') is-invalid @enderror" wire:model="niveau">
                                     <option value="" selected> Choisir </option>
                                     <option value="1ere année" > 1ere année </option>
                                     <option value="2eme année" >2eme année </option>
@@ -320,13 +320,13 @@
 
                     </div>
 
-                </div>
+                 </div>
 
                 </div>
 
                      <div class="form-group">
                         <div class="col-md-4 col-md-offset-8">
-                            <button id="add-more" name="add-more" class="btn btn-primary">Add More</button>
+                            <button id="add-more" name="add-more" class="btn btn-primary add_field_button">Add More</button>
                         </div>
                    </div>
         </div>
@@ -390,6 +390,7 @@
         </div>
 </div>
     </form>
+
 
 
 

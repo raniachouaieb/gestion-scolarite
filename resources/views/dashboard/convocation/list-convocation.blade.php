@@ -7,6 +7,12 @@
             float: right;
             margin-right: 20px;
         }
+        .search{
+            margin-left: 355px;
+        }
+        .nodata{
+            color: red;
+        }
         .convTab{
             margin-top: 70px;
             margin-left: 18px;
@@ -31,6 +37,26 @@
             </ol>
         </nav>
 
+       <form  method="get" action="{{route('convocations.search')}}">
+           @csrf
+           <br>
+           <div class="container">
+               <div class="row">
+                   <div class="form-group row search">
+                       <div class="col-sm-9">
+                           <input class="form-control mr-sm-2" name="search" id="search" type="text" placeholder="chercher">
+                       </div>
+                       <div class="col-sm-1">
+                           <button class="btn btn-outline-info my-2 my-sm-0" type="submit"> <i class="fas fa-search"></i></button>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </form>
+
+
+
+
 
         <div class="row  position mb-5">
             <a  class="btn btn-primary position" href="{{ route('convocations.addConv')}}"><i class="fas fa-plus"></i></a>
@@ -38,6 +64,7 @@
 
         <div class="card shadow mb-4 convTab">
             <div class="table-responsive">
+                <!--<h3 class="align-content-center"> Total data : <span id="total_records"></span></h3>-->
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -54,35 +81,19 @@
 
 
                     <tbody>
-                    @if($convocations && $convocations->count()>0)
-                    @foreach($convocations as $conv)
-                        <tr>
-                            <td>{{$conv->titre_conv}} </td>
-                            <td>{!! $conv->description !!}</td>
-                            <td>{{$conv->date_envoie}}</td>
-
-<td>{{$conv->student['nomEleve']}} {{$conv->student['prenomEleve']}}</td>
-
-
-                            <td>{{$conv->student->parent['nomPere']}} {{$conv->student->parent['prenomPere']}}</td>
-                            <td>{{$conv->student->parent['telPere']}}</td>
-
-                            <td>
-                                <form action="{{ route('convocations.destroy', $conv->id)}}" method="post" class="d-inline" >
-                                    @csrf
-                                    @method('DELETE')
-                                    <input name="_method" type="hidden" value="DELETE">
-                                    <a type="submit"  class=" show_confirm iconSupp" data-toggle="tooltip" title='Delete'><i class="fas fa-trash trashcolor"></i></a>
-                                </form>
-
-                            </td>
-
-
-                        </tr>
-                    @endforeach
-                    @endif
-
-
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><form action="" method="post" class="d-inline" >
+                        @csrf
+                        @method('DELETE')
+                        <input name="_method" type="hidden" value="DELETE">
+                        <a type="submit"  class=" show_confirm iconSupp" data-toggle="tooltip" title='Delete'><i class="fas fa-trash trashcolor"></i></a>
+                    </form>
+                    </td>
                     </tbody>
                 </table>
 
@@ -122,6 +133,31 @@
         });
 
     </script>
+
+    <script>
+        $(document).ready(function(){
+            fetch_convocation_data();
+            function fetch_convocation_data(query = '')
+            {
+                $.ajax({
+                    url:"{{route('convocations.search')}}",
+                    method:"GET",
+                    data:{query:query},
+                    dataType:'json',
+                    success:function(data){
+                        $('tbody').html(data.table_data);
+                        $('#total_records').text(data.total_data);
+
+                    }
+                })
+            }
+            $(document).on('keyup', '#search', function(){
+                var query = $(this).val();
+                fetch_convocation_data(query);
+            });
+        });
+    </script>
+
 
 
 

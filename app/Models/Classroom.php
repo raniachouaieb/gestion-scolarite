@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Level;
 use App\Models\Travail;
+use App\Models\Emploi;
 
 class Classroom extends Model
 {
@@ -28,6 +29,10 @@ class Classroom extends Model
     }
 
     public function travails(){
-        return $this->hasMany('Travail::class', 'class_id', 'id');
+        return $this->hasMany(Travail::class, 'class_id', 'id');
+    }
+
+    public function emplois(){
+        return $this->hasMany(Emploi::class, 'class_id', 'id');
     }
 }

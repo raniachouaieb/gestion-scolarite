@@ -39,4 +39,8 @@ class Matiere extends Model
         return $this->belongsTo(Travail::class, 'matiere_id', 'id');
     }
 
+    public function seances(){
+        return $this->hasMany(Seance::class, 'matiere_id', 'id');
+    }
+
 }

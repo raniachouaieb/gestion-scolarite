@@ -63,6 +63,7 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'convocations/'], function(){
     Route::get('getClasse', 'ConvocationController@getClasse')->name('convocations.getClasse');
     Route::get('getEleve', 'ConvocationController@getEleve')->name('convocations.getEleve');
     Route::delete('delete/{id}', 'ConvocationController@destroy')->name('convocations.destroy');
+    Route::get('search', 'ConvocationController@search')->name('convocations.search');
 
 
 });
@@ -113,11 +114,25 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'student/'],function(){
     Route::post('update\{id}', 'StudentController@update')->name('student.update');
     Route::get('getClasse', 'StudentController@getClasse')->name('student.getClasse');
     Route::get('elevePreInscrit','StudentController@elevePreInscrit')->name('student.elevePreInscrit');
+    Route::get('search', 'StudentController@search')->name('student.search');
 
 
+});
 
+Route::group(['namespace'=>'Dashboard', 'prefix'=>'emploi/'], function(){
+    Route::get('/', 'EmploiController@index')->name('emploi.index');
+    Route::get('add', 'EmploiController@add')->name('emploi.add');
+    Route::post('store', 'EmploiController@store')->name('emploi.store');
+    Route::get('getClasse', 'EmploiController@getClasse')->name('emploi.getClasse');
+    Route::delete('delete/{id}', 'EmploiController@destroy')->name('emploi.destroy');
 
+});
 
+Route::group(['namespace'=>'Dashboard', 'prefix'=>'seance/'], function(){
+    Route::get('/', 'SeanceController@index')->name('seance.index');
+    Route::get('add', 'SeanceController@add')->name('seance.add');
+    Route::post('store', 'SeanceController@store')->name('seance.store');
+    Route::delete('delete/{id}', 'SeanceController@destroy')->name('seance.destroy');
 
 });
 

@@ -28,6 +28,14 @@ class StudentController extends Controller
            return view('dashboard.students.list-student-by-class',compact(  'niveaux'))->withTitle('Liste des eleves acceptée');
 
        }
+    public function search(){
+        $niveaux = Level::orderBy('created_at', 'ASC')->get();
+        $class = Classroom::get();
+        $search_text = $_GET['query'];
+        $eleveByClass = Student::where('nomEleve', 'LIKE', '%'.$search_text.'%')->get();
+        return view('dashboard.students.search', compact('eleveByClass', 'niveaux', 'class'));
+
+    }
 
         public function eleveByClass(Request $req)
         {

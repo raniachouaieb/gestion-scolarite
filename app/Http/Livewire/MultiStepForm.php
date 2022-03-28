@@ -43,6 +43,7 @@ class MultiStepForm extends Component
     public $niveau;
     public $terms;
     public $gender;
+
     //public $frameworks = [];
 
     public $totalSteps = 5;
@@ -159,7 +160,7 @@ public function rania(){
 }
     public function register(){
 
-        $this->resetErrorBag();
+       // $this->resetErrorBag();
 
 
         $parent = Parente::create([
@@ -178,7 +179,7 @@ public function rania(){
 
               ]);
              $parent->sendEmailVerificationNotification();
-              $student = Student::create([
+              $students = Student::create([
                   "nomEleve"=>$this->nomEleve,
                   "prenomEleve"=>$this->prenomEleve,
                   "niveau"=>$this->niveau,

@@ -8,10 +8,29 @@
         border-radius: 2px 4px 4px;
         padding: 1px 4px;
     }
+    .search{
+        margin-left: 400px;
+    }
     .pencil{
         margin-left: 18px;
     }
 </style>
+<form  method="get" action="{{route('student.search')}}">
+    @csrf
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="form-group row search">
+                <div class="col-sm-9">
+                    <input class="form-control mr-sm-2" name="query" id="query" type="text" placeholder="chercher">
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit"> <i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 <div class="container">
 <div class="row mb-2"><h6><span class="countEleve mr-2">{{$eleveByClass->count()}}</span>Eleve Inscrits </h6></div>
 
