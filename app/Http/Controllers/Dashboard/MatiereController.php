@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Level;
 use App\Models\Matiere;
 use App\Models\Module;
 use App\Http\Requests\MatiereRequest;
@@ -27,8 +28,18 @@ class MatiereController extends Controller
 
     public function addMatiere(){
         $modules = Module::get();
-        return view('dashboard.matiere.create-matiere', compact('modules'))->withTitle('Ajouter matiere');
+        $niveaux = Level::get();
+        return view('dashboard.matiere.create-matiere', compact('modules', 'niveaux'))->withTitle('Ajouter matiere');
 
+    }
+
+    public function getModule(Request $request){
+        $html=[];
+        $module = Module::where('niveau_id', $request->get('niveau'))->get();
+        foreach($module as $modul){
+            $html[$modul->id]=$modul->nom_module;
+        }
+        return $html;
     }
 
 
@@ -38,7 +49,8 @@ class MatiereController extends Controller
         $matiere = new Matiere();
         $matiere->nom= $request->nom;
         $matiere->coefficient= $request->coeff;
-        $matiere->module_id=$request->module;
+        $matiere->module_id=$request->modul;
+        $matiere->niveau_id=$request->niveau;
 
         $matiere->save();
 
@@ -51,12 +63,13 @@ class MatiereController extends Controller
     public function edit(Request $request, $id){
         $matiere = Matiere::find($id);
         $modules = Module::get();
+        $niveaux = Level::get();
         if(!$matiere){
             Session::flash('statuscode', 'error');
 
             return redirect()->route('matieres.index')->with(['status'=>'there is no data with this id, please enter a correct one']);
         }
-        return view('dashboard.matiere.edit-matiere',compact('matiere', 'modules'))->withTitle('Edition matiere');
+        return view('dashboard.matiere.edit-matiere',compact('matiere', 'modules', 'niveaux'))->withTitle('Edition matiere');
     }
 
     public function update(Request $request, $id){
@@ -70,7 +83,8 @@ class MatiereController extends Controller
             $matiereID->update([
                 'nom'=>$request->nom,
                 'coefficient'=>$request->coeff,
-                'module_id'=>$request->module,
+                'module_id'=>$request->modul,
+                'niveau_id'=>$request->niveau,
             ]);
             $matiereID->update($request->all());
 

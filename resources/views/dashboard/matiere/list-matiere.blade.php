@@ -71,7 +71,6 @@
          </div>
 
 
-        <div>
             <script type="text/javascript">
 
                 $('.show_confirm').click(function(event) {

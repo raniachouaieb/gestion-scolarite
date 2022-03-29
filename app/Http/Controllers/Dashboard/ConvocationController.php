@@ -34,6 +34,7 @@ class ConvocationController extends Controller
             $query = $req->get('query');
             if($query !='')
             {
+
                 $convocations = Convocation::where('titre_conv', 'LIKE', '%'.$query.'%')
                     ->get();
 

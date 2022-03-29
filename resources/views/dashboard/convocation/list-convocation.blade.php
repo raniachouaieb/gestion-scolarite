@@ -81,19 +81,7 @@
 
 
                     <tbody>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><form action="" method="post" class="d-inline" >
-                        @csrf
-                        @method('DELETE')
-                        <input name="_method" type="hidden" value="DELETE">
-                        <a type="submit"  class=" show_confirm iconSupp" data-toggle="tooltip" title='Delete'><i class="fas fa-trash trashcolor"></i></a>
-                    </form>
-                    </td>
+
                     </tbody>
                 </table>
 

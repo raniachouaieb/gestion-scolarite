@@ -1,34 +1,23 @@
-@extends('layouts.app-admin')
-@section('title', $title)
+<style>
+    .countModule{
+        float: left;
+        margin-left: 25px;
+        margin-top: 2px;
+        border: 1px ridge;
+        box-shadow: 1px 1px 2px indianred;
+        border-radius: 2px 4px 4px;
+        padding: 1px 4px;
+    }
+</style>
 
-@section('content')
-    <style>
-        .position {
-            float: right;
-            margin-right: 20px;
-        }
-        .moduleTab{
-            margin-top: 70px;
-            margin-left: 18px;
-        }
-        .colrtrash{
-            color: red;
-            margin-left: 7px;
-        }
-    </style>
-    <div class="container">
+<div class="container">
     <!--@include('includes.alerts.flash')  -->
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Modules</li>
-            </ol>
-        </nav>
-        <div class="row  position mb-5">
-            <a  class="btn btn-primary position" href="{{ route('modules.add')}}"><i class="fas fa-plus"></i></a>
-        </div>
 
-        <div class="card shadow mb-6 moduleTab">
+
+
+        <div class=" mb-6 ">
+            <div class="row mb-2 module"><h6><span class="countModule mr-2">{{$moduleByLevel->count()}}</span>Modules </h6></div>
+
             <div class="table-responsive">
 
         <table class="table table-hover">
@@ -41,7 +30,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($module as $modul)
+            @foreach($moduleByLevel as $modul)
                 <tr>
                     <td class="col-1">{{$modul->id}}</td>
                     <td class="col-6"><a href="{{route('modules.show', $modul->id)}}" class="btn btn-info" data-toggle="collapse" data-target="#demo{{ $modul->id}}">{{$modul->nom_module}}</a></td>
@@ -52,7 +41,9 @@
                         <form action="{{route('modules.destroy', $modul->id)}}" method="post" class="d-inline" >
                             @csrf
                             @method('DELETE')
-                            <a ><i class="fas fa-trash fa-sm colrtrash"></i></a>
+                            <input name="_method" type="hidden" value="DELETE">
+                            <a type="submit" class=" show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash fa-sm colrtrash"></i></a>
+
 
 
                         </form>
@@ -60,7 +51,7 @@
                 </tr>
                 <div  id="demo{{ $modul->id}}" class="collapse" >
                     <ul>
-                        @foreach($modul->matiere as $listMat)
+                        @foreach($modul->matieres as $listMat)
 
                             <li>{{$listMat->nom}}</li>
                         @endforeach
@@ -78,6 +69,28 @@
         </div>
 
 
+</div>
+    <script type="text/javascript">
 
-@endsection
+        $('.show_confirm').click(function(event) {
+            var form =  $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: `Are you sure you want to delete this record?`,
+                text: "If you delete this, it will be gone forever.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+        });
+
+    </script>
+
+
 

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Matiere;
 class Module extends Model
 {
     protected $table='modules';
@@ -21,7 +21,7 @@ class Module extends Model
         'created_at','deleted_at','updated_at',
     ];
 
-    public function matiere(){
+    public function matieres(){
         return $this->hasMany(Matiere::class, 'module_id', 'id');
     }
 

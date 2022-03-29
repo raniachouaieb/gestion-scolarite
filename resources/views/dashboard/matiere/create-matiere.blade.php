@@ -38,16 +38,23 @@
                                             </span>
                                             @enderror
                                         </div>
+                                       <div class="col">
+                                           <label for="module">Niveau </label>
+                                           <select class="form-control @error('niveau') is-invalid @enderror" id="niveau" name="niveau">
+                                               <option value="" selected> Selectionner niveau </option>
+                                               @foreach( $niveaux as $niveau)
+                                                   <option value="{{$niveau->id}}" > {{$niveau->level}} </option>
+                                               @endforeach
+
+                                           </select>
+                                       </div>
 
 
                                        <div class="col">
                                            <label for="module">Module </label>
-                                           <select class="form-control @error('module') is-invalid @enderror"  name="module">
+                                           <select class="form-control @error('modul') is-invalid @enderror" id="modul" name="modul">
                                                <option value="" selected> Choisir module </option>
-                                               @foreach( $modules as $modul)
-                                                   <option value="{{$modul->id}}" > {{$modul->nom_module}} </option>
-                                               @endforeach
-
+                                                   <option value="" > </option>
                                            </select>
                                        </div>
                                         <br>
@@ -61,4 +68,34 @@
                  </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function(){
+            $("#niveau").change(function(){
+                $value=$(this).val(),
+                    console.log($value);
+                $('#modul').empty();
+                $('#modul').append('<option value="">--- choisir ---</option>')
+                $.ajax({
+                    url: "{{ url('admin/matieres/getModule') }}",
+                    data:{"niveau":$value,},
+                    method: 'GET',
+                    success: function(data) {
+                        var count=0;
+                        $.each(data,function(k,v){
+                            $('#modul').append($('<option>',{value: k, text: v}));
+                            count++;
+                        });
+                        if(count==0){
+                            $('#modul').empty();
+                            $('#modul').append('<option value="">Aucun emploi disponible</option>')
+                        }
+                    },
+                    error:function(data){
+                        $('#modul').append('<option value="">Aucun emploi affecter</option>')
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

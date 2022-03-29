@@ -40,6 +40,7 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'matieres/'],function(){
     Route::get('edit/{id}', 'MatiereController@edit')->name('matieres.edit');
     Route::post('update/{id}', 'MatiereController@update')->name('matieres.update');
     Route::delete('delete/{id}', 'MatiereController@destroy')->name('matieres.destroy');
+    Route::get('getModule', 'MatiereController@getModule')->name('matieres.getModule');
 
 });
 
@@ -51,6 +52,8 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'modules/'],function(){
     Route::get('edit/{id}', 'ModuleController@edit')->name('modules.edit');
     Route::post('update/{id}', 'ModuleController@update')->name('modules.update');
     Route::delete('delete/{id}', 'ModuleController@destroy')->name('modules.destroy');
+    Route::get('moduleByLevel', 'ModuleController@moduleByLevel')->name('modules.moduleByLevel');
+
 });
 
 Route::group(['namespace'=>'Dashboard', 'prefix'=>'convocations/'], function(){
@@ -123,8 +126,13 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'emploi/'], function(){
     Route::get('/', 'EmploiController@index')->name('emploi.index');
     Route::get('add', 'EmploiController@add')->name('emploi.add');
     Route::post('store', 'EmploiController@store')->name('emploi.store');
+    Route::get('editEmploi\{id}', 'EmploiController@editEmploi')->name('emploi.editEmploi');
+    Route::post('update\{id}', 'EmploiController@update')->name('emploi.update');
     Route::get('getClasse', 'EmploiController@getClasse')->name('emploi.getClasse');
     Route::delete('delete/{id}', 'EmploiController@destroy')->name('emploi.destroy');
+
+
+
 
 });
 
@@ -133,6 +141,11 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'seance/'], function(){
     Route::get('add', 'SeanceController@add')->name('seance.add');
     Route::post('store', 'SeanceController@store')->name('seance.store');
     Route::delete('delete/{id}', 'SeanceController@destroy')->name('seance.destroy');
+    Route::get('getEmploi', 'SeanceController@getEmploi')->name('seance.getEmploi');
+    Route::get('getMatiere', 'SeanceController@getMatiere')->name('seance.getMatiere');
+    Route::get('edit/{id}', 'SeanceController@edit')->name('seance.edit');
+    Route::post('update/{id}','SeanceController@update')->name('seance.update');
+
 
 });
 

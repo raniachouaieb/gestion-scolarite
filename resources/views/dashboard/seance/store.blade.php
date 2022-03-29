@@ -23,12 +23,11 @@
 
             </ol>
         </nav>
-        <!-- <div class="card-header">
-             Créer une convocation
-         </div>-->
+
         <div class="card-body">
 
             <form method="post" action="{{ route('seance.store') }}">
+                @csrf
                 <div class="row">
                     <div class="col-md-8 ">
                         <div class="card tt">
@@ -40,9 +39,9 @@
                                                     <label for="">Niveau</label>
                                                     <select class="form-control "  id="niveau" name="niveau">
                                                         <option value="" selected> Choisir </option>
-
-                                                            <option value="" >  </option>
-
+                                                        @foreach($niveaux as $niveau)
+                                                            <option value="{{$niveau->id}}" > {{$niveau->level}} </option>
+                                                        @endforeach
 
                                                     </select>
                                                 </div>
@@ -57,7 +56,7 @@
 
                                                 <div class="form-group col-md-12">
                                                     <label for="">Matière</label>
-                                                    <select class="form-control @error('matiere') is-invalid @enderror "  id="elev" name="matiere">
+                                                    <select class="form-control @error('matiere') is-invalid @enderror "  id="matiere" name="matiere">
                                                         <option value="" selected>  </option>
                                                         <option value="" >  </option>
 
@@ -112,13 +111,13 @@
                                                 <div class="form-group ">
                                                         <label for="appt" class="col-md-8">heure debut:</label>
                                                     <div class="col">
-                                                        <input  class="col-md-12" type="time" id="appt" name="appt">
+                                                        <input  class="col-md-12" type="time" id="start_time" name="start_time">
                                                     </div>
                                                 </div>
                                                 <div class="form-group ">
                                                     <label for="appt" class="col-md-8">heure fin:</label>
                                                     <div class="col">
-                                                        <input  class="col-md-12" type="time" id="appt" name="appt">
+                                                        <input  class="col-md-12" type="time" id="end_time" name="end_time">
                                                     </div>
                                                 </div>
 
@@ -147,25 +146,25 @@
             $("#niveau").change(function(){
                 $value=$(this).val(),
                     console.log($value);
-                $('#class').empty();
-                $('#class').append('<option value="">--- choisir ---</option>')
+                $('#emploi').empty();
+                $('#emploi').append('<option value="">--- choisir ---</option>')
                 $.ajax({
-                    url: "{{ url('admin/convocations/getClasse') }}",
+                    url: "{{ url('admin/seance/getEmploi') }}",
                     data:{"niveau":$value,},
                     method: 'GET',
                     success: function(data) {
                         var count=0;
                         $.each(data,function(k,v){
-                            $('#class').append($('<option>',{value: k, text: v}));
+                            $('#emploi').append($('<option>',{value: k, text: v}));
                             count++;
                         });
                         if(count==0){
-                            $('#class').empty();
-                            $('#class').append('<option value="">Aucun Classe disponible</option>')
+                            $('#emploi').empty();
+                            $('#emploi').append('<option value="">Aucun emploi disponible</option>')
                         }
                     },
                     error:function(data){
-                        $('#class').append('<option value="">Aucun classse affecter</option>')
+                        $('#emploi').append('<option value="">Aucun emploi affecter</option>')
                     }
                 });
             });
@@ -174,34 +173,35 @@
 
     <script>
         $(document).ready(function(){
-            $("#class").change(function(){
+            $("#niveau").change(function(){
                 $value=$(this).val(),
                     console.log($value);
-                $('#elev').empty();
-                $('#elev').append('<option value="">--- Please select ---</option>')
+                $('#matiere').empty();
+                $('#matiere').append('<option value="">--- choisir ---</option>')
                 $.ajax({
-                    url: "{{ url('admin/convocations/getEleve') }}",
-                    data:{"class":$value,},
+                    url: "{{ url('admin/seance/getMatiere') }}",
+                    data:{"niveau":$value,},
                     method: 'GET',
                     success: function(data) {
                         var count=0;
                         $.each(data,function(k,v){
-                            $('#elev').append($('<option>',{value: k, text: v}));
-                            //  $('#eleve').hide();
+                            $('#matiere').append($('<option>',{value: k, text: v}));
                             count++;
                         });
                         if(count==0){
-                            $('#elev').empty();
-                            $('#elev').append('<option value="">Aucun eleve disponible</option>')
+                            $('#matiere').empty();
+                            $('#matiere').append('<option value="">Aucune matiere disponible</option>')
                         }
                     },
                     error:function(data){
-                        $('#elev').append('<option value="">Aucun eleve affecter</option>')
+                        $('#matiere').append('<option value="">Aucune matiere a affecter</option>')
                     }
                 });
             });
         });
     </script>
+
+
 
 
 

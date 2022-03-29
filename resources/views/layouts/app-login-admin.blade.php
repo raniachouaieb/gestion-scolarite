@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('login-admin/css/style.css')}}">
 
 </head>
-<body class="img js-fullheight" style="background-image: url(https://thumbs.dreamstime.com/b/child-girl-running-back-to-school-pupil-kid-retro-dress-briefcase-jumping-over-blackboard-background-child-girl-running-155758904.jpg);">
+<body class="img js-fullheight" style="background-image: url(https://www.ppt-backgrounds.net/thumbs/background-school-free-school-board-for---download-templates-backgrounds.jpg);">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5">

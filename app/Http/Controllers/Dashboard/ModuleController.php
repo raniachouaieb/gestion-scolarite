@@ -20,9 +20,18 @@ class ModuleController extends Controller
 
         $module = Module::all();
         $matiere= Matiere::with('module');
+        $niveaux = Level::orderBy('created_at', 'ASC')->get();
 
 
-        return view ('dashboard.module.list-module', compact('module','matiere'))->withTitle('Liste des modules');
+        return view ('dashboard.module.list-module-niveau', compact('module','matiere', 'niveaux'))->withTitle('Liste des modules');
+    }
+
+    public function moduleByLevel(Request $req){
+        $niveaux = Level::orderBy('created_at', 'ASC')->get();
+        $moduleByLevel = Module::where('niveau_id', '=', $req->niveau)->get();
+
+        return view('dashboard.module.list-module',compact('niveaux', 'moduleByLevel'));
+
     }
 
 

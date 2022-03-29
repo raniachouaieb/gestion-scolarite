@@ -16,7 +16,7 @@
         }
     </style>
     <div class="container">
-    <!--@include('includes.alerts.flash')  -->
+    @include('includes.alerts.flash')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
@@ -46,8 +46,8 @@
                     @foreach($emplois as $emploi)
                         <tr>
                             <td class="col-4">{{$emploi->id}}</td>
-                            <td class="col-6" @if($emploi->class_id ) @endif>{{$emploi->classe['name']}} </td>
-                            <td class="col-2"><a href="" ><i class="fas fa-pen fa-sm"></i></a>
+                            <td>{{$emploi->titre}}</td>
+                            <td class="col-2"><a href="{{ route('emploi.editEmploi', $emploi->id)}}" ><i class="fas fa-pen fa-sm"></i></a>
 
 
                                 <form action="{{route('emploi.destroy', $emploi->id)}}" method="post" class="d-inline" >

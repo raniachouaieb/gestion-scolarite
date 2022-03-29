@@ -19,7 +19,7 @@
 <!--@include('includes.alerts.flash')  -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('homeg')}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">Niveaux</li>
         </ol>
     </nav>

@@ -50,11 +50,11 @@
                                 <td class="col-2">{{$seance->id}}</td>
                                 <td class="col-3">{{$seance->start_time}}</td>
                                 <td class="col-3">{{$seance->end_time}}</td>
-                                <td class="col-3">{{$seance->emploi_id}}</td>
-                                <td class="col-2"><a href="" ><i class="fas fa-pen fa-sm"></i></a>
+                                <td class="col-3">{{$seance->emploi['titre']}}</td>
+                                <td class="col-2"><a href="{{route('seance.edit', $seance->id)}}" ><i class="fas fa-pen fa-sm"></i></a>
 
 
-                                    <form action="{{route('senace.destroy', $seance->id)}}" method="post" class="d-inline" >
+                                    <form action="{{route('seance.destroy', $seance->id)}}" method="post" class="d-inline" >
                                         @csrf
                                         @method('DELETE')
                                         <input name="_method" type="hidden" value="DELETE">

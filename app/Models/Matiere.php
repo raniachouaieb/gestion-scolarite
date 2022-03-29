@@ -21,6 +21,7 @@ class Matiere extends Model
         'nom',
         'coefficient',
         'module_id',
+        'niveau_id'
     ];
     protected $hidden=[
         'created_at','deleted_at','updated_at',
