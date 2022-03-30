@@ -84,6 +84,12 @@ class MenuController extends Controller
             $menu->menu=$request->menu;
             $menu->jour=$request->jour;
             if($request->hasfile('image')){
+                /*
+                 * call a function (2 parametres)
+                 * name,folder
+                 * helper
+                 * general trait
+                 * */
                 $destination = 'uploads/menus/'.$menu->image;
                 if(File::exists($destination))
                 {

@@ -37,21 +37,31 @@
                                             <div class="card-body">
                                                 <div class="form-group col-md-12">
                                                     <label for="">Niveau</label>
-                                                    <select class="form-control "  id="niveau" name="niveau">
+                                                    <select class="form-control @error('niveau') is-invalid @enderror  "  id="niveau" name="niveau">
                                                         <option value="" selected> Choisir </option>
                                                         @foreach($niveaux as $niveau)
                                                             <option value="{{$niveau->id}}" > {{$niveau->level}} </option>
                                                         @endforeach
 
                                                     </select>
+                                                    @error('niveau')
+                                                    <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="form-group col-md-12">
                                                     <label for="">Emploi</label>
-                                                    <select class="form-control " id="emploi" name="emploi">
+                                                    <select class="form-control @error('emploi') is-invalid @enderror  " id="emploi" name="emploi">
                                                         <option value="" selected> </option>
                                                         <option value="" > </option>
                                                     </select>
+                                                    @error('emploi')
+                                                    <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="form-group col-md-12">
@@ -109,15 +119,25 @@
 
                                                  </div>
                                                 <div class="form-group ">
-                                                        <label for="appt" class="col-md-8">heure debut:</label>
+                                                        <label for="" class="col-md-8">heure debut:</label>
                                                     <div class="col">
-                                                        <input  class="col-md-12" type="time" id="start_time" name="start_time">
+                                                        <input  class="col-md-12 form-control @error('start_time') is-invalid @enderror" type="time" id="start_time" name="start_time">
+                                                        @error('start_time')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group ">
-                                                    <label for="appt" class="col-md-8">heure fin:</label>
+                                                    <label for="" class="col-md-8">heure fin:</label>
                                                     <div class="col">
-                                                        <input  class="col-md-12" type="time" id="end_time" name="end_time">
+                                                        <input  class="col-md-12 form-control @error('end_time') is-invalid @enderror" type="time" id="end_time" name="end_time">
+                                                        @error('end_time')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                        @enderror
                                                     </div>
                                                 </div>
 

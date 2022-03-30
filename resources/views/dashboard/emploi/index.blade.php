@@ -46,7 +46,7 @@
                     @foreach($emplois as $emploi)
                         <tr>
                             <td class="col-4">{{$emploi->id}}</td>
-                            <td>{{$emploi->titre}}</td>
+                            <td><a href="">{{$emploi->titre}}</a></td>
                             <td class="col-2"><a href="{{ route('emploi.editEmploi', $emploi->id)}}" ><i class="fas fa-pen fa-sm"></i></a>
 
 

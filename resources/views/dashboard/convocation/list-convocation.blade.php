@@ -81,7 +81,31 @@
 
 
                     <tbody>
+                    @if($convocations && $convocations->count()>0)
+                        @foreach($convocations as $conv)
+                            <tr>
+                                <td>{{$conv->titre_conv}} </td>
+                                <td>{!! $conv->description !!}</td>
+                                <td>{{$conv->date_envoie}}</td>
 
+                                <td>{{$conv->student['nomEleve']}} {{$conv->student['prenomEleve']}}</td>
+
+
+                                <td>{{$conv->student->parent['nomPere']}} {{$conv->student->parent['prenomPere']}}</td>
+                                <td>{{$conv->student->parent['telPere']}}</td>
+
+                                <td>
+                                    <form action="{{ route('convocations.destroy', $conv->id)}}" method="post" class="d-inline" >
+                                        @csrf
+                                        <a type="submit"  class=" show_confirm iconSupp" data-toggle="tooltip" title='Delete'><i class="fas fa-trash trashcolor"></i></a>
+                                    </form>
+
+                                </td>
+
+
+                            </tr>
+                        @endforeach
+                    @endif
                     </tbody>
                 </table>
 
@@ -101,30 +125,33 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script type="text/javascript">
+        $(document).ready(function() {
 
-        $('.show_confirm').click(function(event) {
-            var form =  $(this).closest("form");
-            var name = $(this).data("name");
-            event.preventDefault();
-            swal({
-                title: `Are you sure you want to delete this record?`,
-                text: "If you delete this, it will be gone forever.",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        form.submit();
-                    }
-                });
+
+            $('.show_confirm').click(function (event) {
+                var form = $(this).closest("form");
+                var name = $(this).data("name");
+                event.preventDefault();
+                swal({
+                    title: `Are you sure you want to delete this record?`,
+                    text: "If you delete this, it will be gone forever.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            form.submit();
+                        }
+                    });
+            });
         });
 
     </script>
 
     <script>
         $(document).ready(function(){
-            fetch_convocation_data();
+            //fetch_convocation_data();
             function fetch_convocation_data(query = '')
             {
                 $.ajax({

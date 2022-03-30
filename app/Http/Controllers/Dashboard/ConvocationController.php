@@ -34,10 +34,8 @@ class ConvocationController extends Controller
             $query = $req->get('query');
             if($query !='')
             {
-
                 $convocations = Convocation::where('titre_conv', 'LIKE', '%'.$query.'%')
                     ->get();
-
             }
             else{
                 $convocations = Convocation::orderBy('date_envoie', 'DESC')->paginate(PAGINATION);
@@ -54,13 +52,11 @@ class ConvocationController extends Controller
                         <td>'.$row->student['nomEleve'].' '.$row->student['prenomEleve'].'</td>
                         <td>'.$row->student->parent['nomPere'].' '.$row->student->parent['prenomPere'].'</td>
                         <td>'.$row->student->parent['telPere'].'</td>
-                        <td><form action="" method="post" class="d-inline" >
-                        <input name="_method" type="hidden" value="DELETE">
-                        <a type="submit"  class=" show_confirm iconSupp" data-toggle="tooltip" ><i class="fas fa-trash trashcolor"></i></a>
+                        <td><form action="'.route('convocations.destroy', $row->id).'" method="post" class="d-inline" >
+                                <input type="hidden" name="_token" value="XNJK4lAvRz7cmMFJOgttLJvDRQW0IXzYOJXlTTuf">
+                                   <input type="submit" name="" id="" class="show_confirm" data-toggle="tooltip">
                     </form>
                     </td>
-
-
                      </tr>';
                 }
             }
@@ -134,50 +130,6 @@ class ConvocationController extends Controller
         }catch (\Exception $ex){
             //return $ex;
             return redirect()->route('convocations.index')->with(['status'=>'Error']);
-        }
-
-
-    }
-
-    public function edit(Request $request, $id){
-        $convocations = Convocation::find($id);
-        $niveaux =Level::get();
-        $students =Student::find($convocations->student_id);
-        //$classe =Classroom::where('id-level' ,$students->niveau)->get();
-        //dd($classe);
-
-
-
-        if(!$convocations){
-            Session::flash('statuscode', 'error');
-
-            return redirect()->route('convocations.index')->with(['status'=>'there is no data with this id, please enter a correct one']);
-        }
-        return view('dashboard.convocation.edit-conv',compact('convocations', 'niveaux', 'students'))->withTitle('Edition Convocation');
-    }
-
-    public function update(Request $request, $id){
-        $convocationsID = Convocation::find($id);
-        try{
-            if(!$convocationsID){
-                Session::flash('statuscode', 'error');
-
-                return redirect()->route('convocations.index')->with(['status'=>'there is no data with this id, please enter a correct one']);
-            }
-            $convocationsID->update([
-                'titre_conv'=>$request->titre_conv,
-                'description'=>$request->description,
-                'date_envoie'=>$request->date_envoie,
-            ]);
-            $convocationsID->update($request->all());
-
-            Session::flash('statuscode', 'success');
-
-            return redirect()->route('convocations.index')->with(['status'=>'Modification avec succés']);
-        }catch(\Exception $exception){
-            Session::flash('statuscode', 'error');
-
-            return redirect()->route('convocations.index')->with(['status'=>'There is an error :(']);
         }
 
 

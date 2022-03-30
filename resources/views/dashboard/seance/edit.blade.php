@@ -77,13 +77,6 @@
                                 </div>
 
 
-
-
-
-
-
-
-
                             </div>
                         </div>
                     </div>
@@ -96,7 +89,7 @@
                                             <label for="" class="col-md-8">Jour</label>
                                             <div class="col">
                                                 <select class="form-control @error('day') is-invalid @enderror"  name="day" >
-                                                    <option value="" selected>  {{$seances->day}}  </option>
+                                                    <option value="{{$seances->day}}" selected>  {{$seances->day}}  </option>
                                                     <option value="Lundi" > Lundi </option>
                                                     <option value="Mardi" > Mardi </option>
                                                     <option value="Mercredi" > Mercredi </option>
@@ -115,13 +108,13 @@
                                             <div class="form-group ">
                                                 <label for="appt" class="col-md-8">heure debut:</label>
                                                 <div class="col">
-                                                    <input  class="col-md-12" type="time" id="start_time" name="start_time" value="{{$seances->start_time}}">
+                                                    <input  class="col-md-12" type="time"  name="start_time" value="{{$seances->start_time}}">
                                                 </div>
                                             </div>
                                             <div class="form-group ">
                                                 <label for="appt" class="col-md-8">heure fin:</label>
                                                 <div class="col">
-                                                    <input  class="col-md-12" type="time" id="end_time" name="end_time" value="{{$seances->end_time}}">
+                                                    <input  class="col-md-12" type="time"  name="end_time" value="{{$seances->end_time}}">
                                                 </div>
                                             </div>
 

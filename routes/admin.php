@@ -65,7 +65,7 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'convocations/'], function(){
     Route::delete('delete/{id}', 'ConvocationController@destroy')->name('convocations.destroy');
     Route::get('getClasse', 'ConvocationController@getClasse')->name('convocations.getClasse');
     Route::get('getEleve', 'ConvocationController@getEleve')->name('convocations.getEleve');
-    Route::delete('delete/{id}', 'ConvocationController@destroy')->name('convocations.destroy');
+    Route::post('delete/{id}', 'ConvocationController@destroy')->name('convocations.destroy');
     Route::get('search', 'ConvocationController@search')->name('convocations.search');
 
 
