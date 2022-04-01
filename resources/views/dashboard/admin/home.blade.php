@@ -1,7 +1,74 @@
 @extends('layouts.app-admin')
 
 @section('content')
+<style>
 
+    .cards{
+        width: 100%;
+        padding: 35px 20px;
+        display: grid;
+        grid-gap: 20px;
+    }
+    .cardDetail{
+        padding: 18px;
+        width: 272px;
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+        margin-top: 62px;
+
+    }
+    .cardpie{
+        padding: 6rem 6rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+        border-radius: 10px;
+        height: 220px;
+    }
+    .pie{
+        width: 50%;
+        padding: 1rem 4rem;
+    }
+
+
+    .cards .card:hover{
+        background: #0f6674;
+    }
+    .cards .card:hover .number{
+        color: #fff;
+    }
+    .cards .card:hover .card-name{
+        color: #fff;
+    }
+    .cards .card:hover .icon-box i{
+        color: #fff;
+    }
+
+    .number{
+        font-size: 35px;
+        font-weight: 500;
+        color: #0f6674;
+        margin-left: 100px;
+    }
+    .card-name{
+        color: #888;
+        font-weight: 600;
+    }
+    .icon-box i{
+        font-size: 45px;
+        color: #0f6674;
+        margin-left: 10px;
+    }
+
+
+
+</style>
 
 
 <div class="container">
@@ -25,7 +92,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{$parentPréinscrit->count()}}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            <i class="fa fa-users fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -43,7 +110,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{$elevePréinscrit->count()}}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <i class="fa fa-graduation-cap fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -60,7 +127,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{$eleveInscrit->count()}}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                            <i class="fa fa-graduation-cap fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -79,7 +146,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{$parentInscrit->count()}}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <i class="fa fa-users fa-2x text-gray-300" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
@@ -87,81 +154,234 @@
         </div>
     </div>
 
-        <!-- Earnings (Monthly) Card Example -->
-        <!--<div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                            </div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                </div>
-                                <div class="col">
-                                    <div class="progress progress-sm mr-2">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
-                                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
 
+       <div class="row">
+        <div class="col-sm-6">
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="cardDetail">
+                                <div class="card-content">
+                                    <div class="icon-box">
+                                        <i class="fa fa-paper-plane"></i>
+                                    </div>
+                                    <div class="number">22</div>
+                                    <div class="card-name"> Information envoyées</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                                <div class="cardDetail">
+                                    <div class="card-content">
+
+                                            <div class="icon-box">
+                                                <i class="fa fa-paper-plane"></i>
+                                            </div>
+                                            <div class="number">{{$convocations->count()}}</div>
+
+
+                                        <div class="card-name">Convocations envoyées</div>
+                                    </div>
+
+                                </div>
+
+                        </div>
+
+                     </div>
+
+         </div>
+
+
+       <div class="col-md-6">
+           <div class="cardpie shadow mb-4">
+               <div class="card-body pie">
+                   <div class="chart">
+                       <canvas id="piechart" ></canvas>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
 
     <div class="row">
         <div class="col-xl-6">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title mb-0">Line Chart</h4>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Bar chart</h6>
                 </div>
-                <div class="card-body">
-                    <div id="line-chart" data-colors="[&quot;#34c38f&quot;, &quot;#ccc&quot;]" class="e-charts" _echarts_instance_="ec_1648658706525" style="-webkit-tap-highlight-color: transparent; user-select: none;"><div style="position: relative; width: 474px; height: 350px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas data-zr-dom-id="zr_0" width="474" height="350" style="position: absolute; left: 0px; top: 0px; width: 474px; height: 350px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div></div>
+                <div class="card-body chart">
+                    <div class="chart">
+                        <canvas id="barchart"></canvas>
+                    </div>
                 </div>
             </div>
-            <!-- end card -->
         </div>
-        <!-- end col -->
         <div class="col-xl-6">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title mb-0">Mix Line-Bar</h4>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Line chart</h6>
                 </div>
                 <div class="card-body">
-                    <div id="mix-line-bar" data-colors="[&quot;#34c38f&quot;, &quot;#1c84ee&quot;, &quot;#ef6767&quot;]" class="e-charts" _echarts_instance_="ec_1648658706526" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;"><div style="position: relative; width: 474px; height: 350px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas data-zr-dom-id="zr_0" width="474" height="350" style="position: absolute; left: 0px; top: 0px; width: 474px; height: 350px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div style="position: absolute; display: none; border-style: solid; white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s, top 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s; background-color: rgba(50, 50, 50, 0.7); border-width: 0px; border-color: rgb(51, 51, 51); border-radius: 4px; color: rgb(255, 255, 255); font: 14px / 21px &quot;Microsoft YaHei&quot;; padding: 5px; left: 110px; top: 73px; pointer-events: none;">Jan<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#34c38f;"></span>Evaporation: 2<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#1c84ee;"></span>Precipitation: 2.6<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#ef6767;"></span>Average Temperature: 2</div></div>
+                    <div class="chart">
+                        <canvas id="linechart"></canvas>
+                    </div>
+
+
                 </div>
             </div>
-            <!-- end card -->
         </div>
-        <!-- end col -->
     </div>
+
 
 
 </div>
 
 <!-- Page level plugins -->
-<script src="{{ asset('admin-template/vendor/chart.js/Chart.min.js') }}"></script>
 
-<!-- Page level custom scripts -->
-<script src="{{ asset('admin-template/js/demo/chart-area-demo.js') }}"></script>
-<script src="{{ asset('admin-template/js/demo/chart-pie-demo.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 
-<script src="assets/libs/jquery/jquery.min.js"></script>
-<script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/libs/metismenu/metisMenu.min.js"></script>
-<script src="assets/libs/simplebar/simplebar.min.js"></script>
-<script src="assets/libs/node-waves/waves.min.js"></script>
-<script src="assets/libs/feather-icons/feather.min.js"></script>
-<script src="assets/libs/pace-js/pace.min.js"></script>
-<script src="assets/libs/echarts/echarts.min.js"></script>
-<script src="assets/js/pages/echarts.init.js"></script>
-<script src="assets/js/app.js"></script>
+<script>
+
+    //setup bar chart
+    function generateData() {
+        return Utils.numbers({
+            count: DATA_COUNT,
+            min: 0,
+            max: 100
+        });
+    }
+    const data ={
+            labels: ['1ere année', '2eme année', '3eme année', '4eme année', '5eme année', '6eme année'],
+            datasets: [{
+                label: '',
+                data: [0.2, 0.1, 0.3, 0.8, 1.5, 1],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+    };
+    //config bar chart
+    const config = {
+        type: 'bar',
+        data,
+        options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            format: {
+                                style: 'percent'
+                            }
+                        }
+
+                    }
+                }
+            }
+    }
+    //render init block
+    const barchart = new Chart(
+        document.getElementById('barchart'),
+        config
+    );
+
+    //setup piechart
+    const datapie = {
+        labels: [
+            'Fille',
+            'Garçon'
+
+        ],
+        datasets: [{
+            label: 'My First Dataset',
+            data: [300, 50],
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+
+            ],
+            hoverOffset: 4
+        }]
+    };
+
+    //config pie chart
+    const configPie = {
+        type: 'pie',
+        data : datapie,
+    };
+    //render piechart
+    const piechart = new Chart(
+        document.getElementById('piechart'),
+        configPie
+    );
+
+    //setup linechart
+    const dataLine ={
+        labels: ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb','Mar','Apr','May','Jun'],
+        datasets: [{
+            label: '',
+            data: [10, 20, 30, 40, 20, 60, 45],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    //configline
+    const configLine = {
+        type: 'line',
+        data: dataLine,
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+
+                }
+            }
+        }
+    };
+    //render linechart
+
+    const linechart = new Chart(
+        document.getElementById('linechart'),
+        configLine
+    );
+
+</script>
+
+
 
 @endsection

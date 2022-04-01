@@ -80,17 +80,21 @@ class MatiereController extends Controller
 
                 return redirect()->route('matieres.index')->with(['status'=>'there is no data with this id, please enter a correct one']);
             }
-            $matiereID->update([
+            $dataMatiereupdated =$matiereID->update([
                 'nom'=>$request->nom,
                 'coefficient'=>$request->coeff,
                 'module_id'=>$request->modul,
                 'niveau_id'=>$request->niveau,
             ]);
             $matiereID->update($request->all());
+            if($dataMatiereupdated &&   $request->all() === 'canceled' ){
+                Session::flash('statuscode', 'success');
+                return redirect()->route('matieres.index')->with(['status'=>'Modification avec succés']);
+            }else {
+                Session::flash('statuscode', 'success');
+                return redirect()->route('matieres.index')->with(['status'=>'nothing updated']);
+            }
 
-            Session::flash('statuscode', 'success');
-
-            return redirect()->route('matieres.index')->with(['status'=>'Modification avec succés']);
         }catch(\Exception $exception){
             Session::flash('statuscode', 'error');
 

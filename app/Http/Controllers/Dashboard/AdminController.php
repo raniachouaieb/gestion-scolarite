@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\Convocation;
 use App\Models\Parente;
 use App\Models\Student;
 use Illuminate\Routing\Controller;
@@ -29,8 +30,9 @@ class AdminController extends Controller
 
         $elevePréinscrit = Student::whereNull('class_id')->get();
         $eleveInscrit = Student::whereNotNull('class_id')->get();
+        $convocations = Convocation::get();
 
-        return view('dashboard.admin.home', compact('parentPréinscrit', 'elevePréinscrit', 'parentInscrit', 'eleveInscrit'));
+        return view('dashboard.admin.home', compact('parentPréinscrit', 'elevePréinscrit', 'parentInscrit', 'eleveInscrit', 'convocations'));
     }
 
 

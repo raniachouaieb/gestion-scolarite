@@ -8,6 +8,8 @@ use Illuminate\Routing\Controller;
 use App\Models\Classroom;
 use App\Models\Level;
 use DB;
+use Illuminate\Support\Facades\Session;
+
 
 class ClassroomController extends Controller
 {
@@ -64,16 +66,20 @@ class ClassroomController extends Controller
                 if(!$classID){
                     return redirect()->route('classes.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
                 }
-                $classID->update([
+                $classUpdated = $classID->update([
                     'name'=>$request->name,
                     "id_level"=>$request->niveau
                 ]);
                 $classID->update($request->all());
-               // DB::table('classerooms')
-                //->update(['name'=> $request->name] );
+               if($classUpdated && $request->all() === 'canceled'){
+                   Session::flash('statuscode', 'success');
+                   return redirect()->route('classes.index')->with(['status'=>'Modification avec succés']);
+               }else{
+                   Session::flash('statuscode', 'success');
+                   return redirect()->route('classes.index')->with(['status'=>'nothing updateted']);
+               }
 
 
-                return redirect()->route('classes.index')->with(['success'=>'Modification avec succés']);
            }catch(\Exception $exception){
                return redirect()->route('classes.index')->with(['error'=>'There is a error :(']);
            }
