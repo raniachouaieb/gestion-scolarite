@@ -10,15 +10,15 @@
         grid-gap: 20px;
     }
     .cardDetail{
-        padding: 18px;
-        width: 272px;
+        padding: 21px;
+        margin-top: 98px;
+        width: 268px;
         display:flex;
         align-items: center;
         justify-content: space-between;
         background: #fff;
         border-radius: 10px;
         box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
-        margin-top: 62px;
 
     }
     .cardpie{
@@ -37,16 +37,16 @@
     }
 
 
-    .cards .card:hover{
+    .cardDetail:hover{
         background: #0f6674;
     }
-    .cards .card:hover .number{
+    .cardDetail:hover .number{
         color: #fff;
     }
-    .cards .card:hover .card-name{
+    .cardDetail:hover .card-name{
         color: #fff;
     }
-    .cards .card:hover .icon-box i{
+    .cardDetail:hover .icon-box i{
         color: #fff;
     }
 
@@ -163,11 +163,12 @@
                         <div class="col-md-6">
                             <div class="cardDetail">
                                 <div class="card-content">
-                                    <div class="icon-box">
-                                        <i class="fa fa-paper-plane"></i>
-                                    </div>
+
                                     <div class="number">22</div>
                                     <div class="card-name"> Information envoyées</div>
+                                </div>
+                                <div class="icon-box">
+                                    <i class="fa fa-paper-plane"></i>
                                 </div>
                             </div>
                         </div>
@@ -177,14 +178,11 @@
 
                                 <div class="cardDetail">
                                     <div class="card-content">
-
-                                            <div class="icon-box">
-                                                <i class="fa fa-paper-plane"></i>
-                                            </div>
                                             <div class="number">{{$convocations->count()}}</div>
-
-
                                         <div class="card-name">Convocations envoyées</div>
+                                    </div>
+                                    <div class="icon-box">
+                                        <i class="fa fa-paper-plane"></i>
                                     </div>
 
                                 </div>

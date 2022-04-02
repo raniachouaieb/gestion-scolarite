@@ -11,7 +11,28 @@ Route::group(['namespace'=>'Dashboard'],function(){
 
 
 Route::get('accueil', 'Dashboard\AdminController@index')->name('accueil');
+
 Route::post('logout', 'Dashboard\AdminController@logout')->name('logouteff');
+
+Route::group(['namespace'=>'Dashboard', 'prefix'=>'users'], function(){
+    Route::get('admins','AdminController@list')->name('admins');
+    Route::get('add', 'AdminController@add')->name('users.add');
+    Route::post('storeUser', 'AdminController@storeUser')->name('users.storeUser');
+    Route::get('edit\{id}', 'AdminController@edit')->name('users.edit');
+    Route::post('update\{id}', 'AdminController@update')->name('users.update');
+    Route::post('delete/{id}', 'AdminController@destroy')->name('users.destroy');
+
+});
+Route::group(['namespace'=>'Dashboard', 'prefix'=>'roles'], function(){
+    Route::get('list','RoleController@index')->name('list');
+    Route::get('add', 'RoleController@add')->name('roles.add');
+    Route::post('store', 'RoleController@store')->name('roles.store');
+
+
+
+});
+
+
 
 Route::group(['namespace'=>'Dashboard','prefix' => 'levels'],function(){
     Route::get('/', 'LevelController@index')->name('levels.index');
