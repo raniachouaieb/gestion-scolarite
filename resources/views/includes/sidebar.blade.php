@@ -41,6 +41,8 @@
                 <a class="collapse-item" href="{{ route('travails.index')}}">Travaux à faire<span class="countList">{{\App\Models\Travail::count()}}</span></a>
                 <a class="collapse-item" href="{{ route('emploi.index')}}">Emplois<span class="countList">{{\App\Models\Emploi::count()}}</span></a>
                 <a class="collapse-item" href="{{ route('seance.index')}}">Séance<span class="countList">{{\App\Models\Seance::count()}}</span></a>
+                <a class="collapse-item" href="{{ route('info.index')}}">Note d'info<span class="countList">{{\App\Models\Info::count()}}</span></a>
+
 
 
 
@@ -135,12 +137,9 @@
         <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
 
-                <a class="collapse-item" href="{{route('admins') }}">liste </a>
-                <a class="collapse-item" href="{{route('list') }}">rôles </a>
-
-
-
-
+                <a class="collapse-item" href="{{route('admins') }}">liste utilisateur<span class="countList">{{App\Models\Admin::count()}}</span></a>
+                <a class="collapse-item" href="{{route('list') }}">rôles <span class="countList">{{Spatie\Permission\Models\Role::count()}}</span></a>
+                <a class="collapse-item" href="{{route('permissions') }}">permissions<span class="countList">{{Spatie\Permission\Models\Permission::count()}}</span> </a>
 
 
             </div>

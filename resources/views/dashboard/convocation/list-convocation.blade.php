@@ -81,42 +81,44 @@
 
 
                     <tbody>
-                    @if($convocations && $convocations->count()>0)
-                        @foreach($convocations as $conv)
-                            <tr>
-                                <td>{{$conv->titre_conv}} </td>
-                                <td>{!! $conv->description !!}</td>
-                                <td>{{$conv->date_envoie}}</td>
+                        @if($convocations && $convocations->count()>0)
+                            @foreach($convocations as $conv)
+                                <tr>
+                                    <td>{{$conv->titre_conv}} </td>
+                                    <td>{!! $conv->description !!}</td>
+                                    <td>{{$conv->date_envoie}}</td>
 
-                                <td>{{$conv->student['nomEleve']}} {{$conv->student['prenomEleve']}}</td>
-
-
-                                <td>{{$conv->student->parent['nomPere']}} {{$conv->student->parent['prenomPere']}}</td>
-                                <td>{{$conv->student->parent['telPere']}}</td>
-
-                                <td>
-                                    <form action="{{ route('convocations.destroy', $conv->id)}}" method="post" class="d-inline" >
-                                        @csrf
-                                        <a type="submit"  class=" show_confirm iconSupp" data-toggle="tooltip" title='Delete'><i class="fas fa-trash trashcolor"></i></a>
-                                    </form>
-
-                                </td>
+                                    <td>{{$conv->student['nomEleve']}} {{$conv->student['prenomEleve']}}</td>
 
 
-                            </tr>
-                        @endforeach
-                    @endif
+                                    <td>{{$conv->student->parent['nomPere']}} {{$conv->student->parent['prenomPere']}}</td>
+                                    <td>{{$conv->student->parent['telPere']}}</td>
+
+                                    <td>
+                                        <form action="{{ route('convocations.destroy', $conv->id)}}" method="post" class="d-inline" >
+                                            @csrf
+                                            <a type="submit"  class=" show_confirm iconSupp" data-toggle="tooltip" title='Delete'><i class="fas fa-trash trashcolor"></i></a>
+                                        </form>
+
+                                    </td>
+
+
+                                </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
 
-            </div>
+             </div>
 
 
+         </div>
+        <div class="d-flex justify-content-center">
+            {!! $convocations->links() !!}
         </div>
     </div>
-    <div class="d-flex justify-content-center">
-        {!! $convocations->links() !!}
-    </div>
+
+
 
 
 

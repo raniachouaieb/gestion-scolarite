@@ -59,15 +59,28 @@ class LevelController extends Controller
     }
 
     public function update(Request $request, $id){
-        $level = Level::find($id);
-        if(!$level){
-            return redirect()->route('levels.index')->with(['error'=>'Oups! there is no data with this id, please enter a correct one']);
-        }
-        $level->level= $request->level;
-        $level->save();
+        $levelID = Level::find($id);
+        try{
+            if(!$levelID){
+                return redirect()->route('permissions')->with(['error'=>'there is no data with this id, please enter a correct one']);
+            }
+            $levelUpdated = $levelID->update([
+                'level'=>$request->level,
 
-        Session::flash('statuscode', 'info');
-        return redirect()->route('levels.index')->with('status','Level has been modified successfully');
+            ]);
+            $levelID->update($request->all());
+            if($levelUpdated && $request->all() === 'canceled'){
+                Session::flash('statuscode', 'success');
+                return redirect()->route('levels.index')->with(['status'=>'nothing updateted']);
+            }else{
+                Session::flash('statuscode', 'success');
+                return redirect()->route('levels.index')->with(['status'=>'Modification avec succés']);
+            }
+
+
+        }catch(\Exception $exception){
+            return redirect()->route('levels.index')->with(['error'=>'There is a error :(']);
+        }
 
     }
 

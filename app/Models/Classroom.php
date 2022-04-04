@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Level;
 use App\Models\Travail;
 use App\Models\Emploi;
+use App\Models\Info;
 
 class Classroom extends Model
 {
@@ -34,5 +35,9 @@ class Classroom extends Model
 
     public function emplois(){
         return $this->hasMany(Emploi::class, 'class_id', 'id');
+    }
+
+    public function infos(){
+        return $this->hasMany(Info::class);
     }
 }

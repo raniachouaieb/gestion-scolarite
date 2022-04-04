@@ -39,8 +39,8 @@ class RoleController extends Controller
             return redirect()->route('list')
                 ->with('status','Role created successfully');
         }catch(\Exception $ex){
+            return $ex;
             Session::flash('statuscode', 'error');
-
             return redirect()->route('list')
                 ->with(['status'=>'Error']);
         }

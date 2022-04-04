@@ -7,9 +7,14 @@
   }
 </style>
 <div class="container">
-  <div class="card-header">
-    Add level Data
-  </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="{{route('levels.index')}}">Niveaux</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Ajouter niveau</li>
+
+        </ol>
+    </nav>
   <div class="card-body">
       <div class="row">
           <div class="col-sm-5 mx-auto">

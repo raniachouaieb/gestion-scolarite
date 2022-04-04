@@ -47,7 +47,7 @@
                                                                 </div>
                                                                 <div class="col-6">
 
-                                                                        <label for="" >Date d'envoie</label>
+                                                                        <label for="" >Date Réunion</label>
 
                                                                             <input id="date_envoie" type="datetime-local" class="form-control  @error('date_envoie') is-invalid @enderror" name="date_envoie" autocomplete="off">
                                                                             @error('date_envoie')

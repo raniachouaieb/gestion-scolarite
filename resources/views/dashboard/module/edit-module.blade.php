@@ -2,8 +2,8 @@
 @section('title', $title)
 @section('content')
     <style>
-        .uper {
-            margin-top: 40px;
+        .btnModif {
+            margin-left: 90px;
         }
     </style>
 
@@ -44,7 +44,7 @@
                                          </div>
 
 
-                                             <button type="submit" class="btn btn-primary">Valider</button>
+                                             <button type="submit" class="btn btn-outline-primary btnModif">Modifier</button>
                                       </div>
                                   </div>
                         </form>

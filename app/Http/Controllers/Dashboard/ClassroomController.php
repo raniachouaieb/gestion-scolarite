@@ -18,11 +18,19 @@ class ClassroomController extends Controller
      }
 
        public function index(){
+           $niveaux = Level::orderBy('created_at', 'ASC')->get();
 
            $class = Classroom::all();
-           return view('dashboard.classroom.list', compact('class'))->withTitle('Liste Classes');
+           return view('dashboard.classroom.list-class-niveau', compact('class', 'niveaux'))->withTitle('Liste Classes');
 
        }
+    public function classByLevel(Request $req){
+        //$niveaux = Level::orderBy('created_at', 'ASC')->get();
+        $classByLevel = Classroom::where('id_level', '=', $req->niveau)->get();
+
+        return view('dashboard.classroom.list',compact( 'classByLevel'));
+
+    }
 
        public function addClass(){
            $niveaux = Level::get();
@@ -73,10 +81,10 @@ class ClassroomController extends Controller
                 $classID->update($request->all());
                if($classUpdated && $request->all() === 'canceled'){
                    Session::flash('statuscode', 'success');
-                   return redirect()->route('classes.index')->with(['status'=>'Modification avec succés']);
+                   return redirect()->route('classes.index')->with(['status'=>'nothing updateted']);
                }else{
                    Session::flash('statuscode', 'success');
-                   return redirect()->route('classes.index')->with(['status'=>'nothing updateted']);
+                   return redirect()->route('classes.index')->with(['status'=>'Modification avec succés']);
                }
 
 

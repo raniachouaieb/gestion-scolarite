@@ -2,14 +2,19 @@
 @section('title', $title)
 @section('content')
     <style>
-        .uper {
-            margin-top: 40px;
+        .btnModif {
+            margin-left: 90px;
         }
     </style>
     <div class="container">
-        <div class="card-header">
-            Edit Matiere Data
-        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{route('matieres.index')}}">Matières</a></li>
+                <li class="breadcrumb-item active" aria-current="page">modifier matière</li>
+
+            </ol>
+        </nav>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4 offset-md-4">
@@ -52,9 +57,9 @@
 
                                         </select>
                                     </div>
+<br>
 
-
-                                    <button type="submit" class="btn btn-primary">Valider</button>
+                                    <button type="submit" class="btn btn-outline-primary btnModif">Modifier</button>
                                 </div>
                             </div>
                         </form>

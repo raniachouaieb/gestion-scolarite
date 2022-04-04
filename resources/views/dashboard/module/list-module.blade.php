@@ -40,8 +40,7 @@
 
                         <form action="{{route('modules.destroy', $modul->id)}}" method="post" class="d-inline" >
                             @csrf
-                            @method('DELETE')
-                            <input name="_method" type="hidden" value="DELETE">
+
                             <a type="submit" class=" show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash fa-sm colrtrash"></i></a>
 
 

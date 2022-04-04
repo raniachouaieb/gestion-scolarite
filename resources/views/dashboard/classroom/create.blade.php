@@ -8,9 +8,15 @@
   }
 </style>
 <div class="containerr">
-  <div class="card-header">
-    Add class Data
-  </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="{{route('classes.index')}}">Classes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Ajouter classe</li>
+
+
+        </ol>
+    </nav>
   <div class="card-body">
     <div class="row">
         <div class="col-md-4 offset-md-4">
@@ -48,7 +54,7 @@
                            </div>
 
 
-                            <button type="submit" class="btn btn-primary">Add Classroom</button>
+                            <button type="submit" class="btn btn-primary">Ajouter</button>
                       </div>
                   </div>
               </form>

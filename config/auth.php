@@ -36,15 +36,17 @@ return [
     */
 
     'guards' => [
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
 
-        'admin' => [
-            'driver' => 'session',
-            'provider' => 'admins',
-        ],
+
         'parente' => [
             'driver' => 'session',
             'provider' => 'parentes',
@@ -55,6 +57,8 @@ return [
             'provider' => 'parentes',
             'hash' => false,
         ],
+
+
     ],
 
     /*

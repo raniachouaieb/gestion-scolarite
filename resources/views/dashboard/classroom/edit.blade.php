@@ -2,8 +2,8 @@
 @section('title', $title)
 @section('content')
 <style>
-  .uper {
-    margin-top: 40px;
+  .btnModif {
+      margin-left: 90px;
   }
 </style>
 
@@ -42,7 +42,7 @@
                               </div>
                                <br>
 
-                                <button type="submit" class="btn btn-primary">Update Data</button>
+                                <button type="submit" class="btn btn-outline-primary btnModif">Modifier</button>
                         </div>
                   </div>
               </form>

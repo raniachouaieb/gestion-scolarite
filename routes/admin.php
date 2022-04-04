@@ -32,6 +32,16 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'roles'], function(){
 
 });
 
+Route::group(['namespace'=>'Dashboard', 'prefix'=>'permissions'], function(){
+    Route::get('permission', 'PermissionController@index')->name('permissions');
+    Route::get('add', 'PermissionController@add')->name('permissions.add');
+    Route::post('store','PermissionController@store')->name('permissions.store');
+    Route::get('edit\{id}', 'PermissionController@edit')->name('permissions.edit');
+    Route::post('update\{id}', 'PermissionController@update')->name('permissions.update');
+    Route::post('delete/{id}', 'PermissionController@destroy')->name('permissions.destroy');
+
+});
+
 
 
 Route::group(['namespace'=>'Dashboard','prefix' => 'levels'],function(){
@@ -40,8 +50,8 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'levels'],function(){
     Route::get('addLevel', 'LevelController@addLevel')->name('levels.add');
     Route::post('store', 'LevelController@store')->name('levels.store');
     Route::get('edit/{id}', 'LevelController@edit')->name('levels.edit');
-    Route::patch('update/{id}', 'LevelController@update')->name('levels.update');
-    Route::delete('delete/{id}', 'LevelController@destroy')->name('levels.destroy');
+    Route::post('update/{id}', 'LevelController@update')->name('levels.update');
+    Route::post('delete/{id}', 'LevelController@destroy')->name('levels.destroy');
 });
 
 Route::group(['namespace'=>'Dashboard','prefix' => 'classes/'],function(){
@@ -51,7 +61,9 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'classes/'],function(){
     Route::post('store', 'ClassroomController@store')->name('classes.store');
     Route::get('edit/{id}', 'ClassroomController@edit')->name('classes.edit');
     Route::post('update/{id}', 'ClassroomController@update')->name('classes.update');
-    Route::delete('delete/{id}', 'ClassroomController@destroy')->name('classes.destroy');
+    Route::post('delete/{id}', 'ClassroomController@destroy')->name('classes.destroy');
+    Route::get('classByLevel', 'ClassroomController@classByLevel')->name('classes.classByLevel');
+
 });
 
 Route::group(['namespace'=>'Dashboard','prefix' => 'matieres/'],function(){
@@ -72,7 +84,7 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'modules/'],function(){
     Route::post('storeModule', 'ModuleController@store')->name('modules.storeModule');
     Route::get('edit/{id}', 'ModuleController@edit')->name('modules.edit');
     Route::post('update/{id}', 'ModuleController@update')->name('modules.update');
-    Route::delete('delete/{id}', 'ModuleController@destroy')->name('modules.destroy');
+    Route::post('delete/{id}', 'ModuleController@destroy')->name('modules.destroy');
     Route::get('moduleByLevel', 'ModuleController@moduleByLevel')->name('modules.moduleByLevel');
 
 });
@@ -88,6 +100,18 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'convocations/'], function(){
     Route::get('getEleve', 'ConvocationController@getEleve')->name('convocations.getEleve');
     Route::post('delete/{id}', 'ConvocationController@destroy')->name('convocations.destroy');
     Route::get('search', 'ConvocationController@search')->name('convocations.search');
+
+
+});
+
+Route::group(['namespace'=>'Dashboard', 'prefix'=>'info/'], function(){
+    Route::get('/', 'InfoController@index')->name('info.index');
+    Route::get('add', 'InfoController@add')->name('info.add');
+    Route::post('store', 'InfoController@store')->name('info.store');
+    Route::get('edit/{id}', 'InfoController@edit')->name('info.edit');
+    Route::post('update/{id}', 'InfoController@update')->name('info.update');
+    Route::get('getClasse', 'InfoController@getClasse')->name('info.getClasse');
+    Route::post('delete/{id}', 'InfoController@destroy')->name('info.destroy');
 
 
 });
