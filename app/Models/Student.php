@@ -7,6 +7,7 @@ use App\Models\Parente;
 use App\Models\Convocation;
 use App\Models\Classroom;
 use App\Models\Matiere;
+use App\Models\Absence;
 
 class Student extends Model
 {
@@ -33,5 +34,9 @@ class Student extends Model
 
     public function convocations(){
         return $this->hasMany(Convocation::class , 'student_id', 'id');
+    }
+
+    public function absences(){
+        return $this->belongsToMany(Absence::class, 'eleve_id','id');
     }
 }

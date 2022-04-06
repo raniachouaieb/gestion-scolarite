@@ -5,14 +5,14 @@ namespace App\Models;
 use App\Models\Info;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class Classeroom_Info extends Model
+class Classroom_Info extends Model
 {
     use SoftDeletes;
 
-    protected $table="classeroom_info";
+    protected $table="classroom_info";
 
     protected $fillable = [
-        'id','classeroom_id','info_id'
+        'id','classroom_id','info_id'
     ];
 
     protected $dates = ['deleted_at'];

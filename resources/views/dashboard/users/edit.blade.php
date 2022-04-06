@@ -65,24 +65,34 @@
                     <div class="col-5 passModif">
                         <div class="card shadow">
                             <div class="card-body">
-                                <label>Status</label>
                                 <div class="row">
-                                    <div class="form-check col-4 ml-5">
-                                        <input class="form-check-input" type="radio" name="status" value="false" {{ $user->status == 0 ? 'checked' : ''}} id="exampleRadios1" value="option1" checked>
-                                        <label class="form-check-label" for="exampleRadios1">
-                                            Absent
-                                        </label>
+                                    <div class="col-4">
+                                        <label>Status</label>
                                     </div>
-                                    <div class="form-check col-4">
-                                        <input class="form-check-input" type="radio" name="status" value="true" {{ $user->status == 1 ? 'checked' : ''}} id="exampleRadios2" value="option2">
-                                        <label class="form-check-label" for="exampleRadios2">
-                                            Active
-                                        </label>
+
+
+                                    <div class="form-check col-2">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" @if($user->status=="Active") checked @endif   id="switch1" name="status">
+                                            <label class="custom-control-label" for="switch1"></label>
+                                        </div>
                                     </div>
+
                                 </div>
-                                <div class="form-group">
-                                    <label>Modifier mot de passe</label>
-                                    <button type="submit" class="btn btn-info">Génerer mot de passe</button>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <label for="">Mot de passe </label>
+                                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" aria-describedby="emailHelp" placeholder="">
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $message }}</strong>
+                                          </span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-4">
+                                        <br>
+                                        <a href="#" id="btn" onclick="passwordGenerator()">Génerer </a>
+                                    </div>
                                 </div>
 
                             </div>

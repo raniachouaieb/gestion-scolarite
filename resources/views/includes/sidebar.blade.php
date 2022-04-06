@@ -37,11 +37,13 @@
             <div class="bg-white py-2 collapse-inner rounded">
 
                @can('menu-list') <a class="collapse-item" href="{{route('menu.index')}}">Cantine</a>@endcan
-               @can('convocation-list') <a class="collapse-item" href="{{ route('convocations.index')}}">Convocations<span class="countList">{{\App\Models\Convocation::count()}}</span>@endcan
+                @can('convocation-list') <a class="collapse-item" href="{{ route('convocations.index')}}">Convocations<span class="countList">{{\App\Models\Convocation::count()}}</span></a>@endcan
                     @can('travail-list') <a class="collapse-item" href="{{ route('travails.index')}}">Travaux à faire<span class="countList">{{\App\Models\Travail::count()}}</span></a>@endcan
                     @can('emploi-list')  <a class="collapse-item" href="{{ route('emploi.index')}}">Emplois<span class="countList">{{\App\Models\Emploi::count()}}</span></a>@endcan
                @can('senace_list') <a class="collapse-item" href="{{ route('seance.index')}}">Séance<span class="countList">{{\App\Models\Seance::count()}}</span></a>@endcan
                @can('information-list') <a class="collapse-item" href="{{ route('info.index')}}">Note d'info<span class="countList">{{\App\Models\Info::count()}}</span></a>@endcan
+                <a class="collapse-item" href="{{ route('absence.index')}}">Absence</a>
+
 
             </div>
         </div>

@@ -36,27 +36,31 @@
 
                     <thead>
                     <tr>
-                        <td class="col-2">Nom</td>
-                        <td class="col-3">Email</td>
+                        <td class="col-1">Nom</td>
+                        <td class="col-2">Email</td>
                         <td class="col-2">Status</td>
-                        <td class="col-3">Rôle</td>
+                        <td class="col-2">Rôle</td>
+                        <td class="col-3">Pass</td>
+
                         <td class="col-2">Action</td>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($data as $user)
+                    @foreach($admin as $value)
                         <tr>
-                            <td class="col-2">{{$user->name}}</td>
-                            <td class="col-3"> {{$user->email}}</td>
-                            <td class="col-2">{{$user->status==0 ? 'Absent' : 'Active'}}</td>
+                            <td class="col-2">{{$value->name}}</td>
+                            <td class="col-3"> {{$value->email}}</td>
+                            <td class="col-2">{{$value->status}}</td>
 
                             <td class="col-3">
-                                    <label class="badge badge-success"> @foreach($role as $rol)@if($user->roles_name== $rol->id){{$rol->name}}@endif @endforeach</label>
+                                    <label class="badge badge-success"> @foreach($role as $rol)@if($value->roles_name== $rol->id){{$rol->name}}@endif @endforeach</label>
                             </td>
-                            <td class="col-2"><a href="{{route('users.edit', $user->id)}}" ><i class="fas fa-pen fa-sm"></i></a>
+                            <td class="col-3">{{$value->password}}</td>
+
+                            <td class="col-2"><a href="{{route('users.edit', $value->id)}}" ><i class="fas fa-pen fa-sm"></i></a>
 
 
-                                <form action="{{route('users.destroy', $user->id)}}" method="post" class="d-inline" >
+                                <form action="{{route('users.destroy', $value->id)}}" method="post" class="d-inline" >
                                     @csrf
 
                                     <a  class=" trash show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash fa-sm"></i></a>
@@ -69,6 +73,7 @@
                     @endforeach
                     </tbody>
                 </table>
+                {!! $admin->links() !!}
             </div>
         </div>
 

@@ -45,7 +45,7 @@
                                     <select class="form-control "  id="niveau" name="niveau">
                                         <option value="" selected> Choisir </option>
                                         @foreach($niveaux as $niv)
-                                            <option value="{{$niv->id}}" > {{$niv->level}} </option>
+                                            <option value="{{$niv->id}}"  > {{$niv->level}} </option>
 
                                         @endforeach
                                     </select>

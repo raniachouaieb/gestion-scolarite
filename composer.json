@@ -47,7 +47,7 @@
             "database/factories"
         ],
         "files": [
-            "app/Helpers/loadImg.php"
+          "App/Helpers/General.php"
         ]
     },
     "autoload-dev": {

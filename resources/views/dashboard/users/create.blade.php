@@ -53,24 +53,22 @@
                                           </span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
+                                <div class="row">
+                                    <div class="col-8">
                                     <label for="">Mot de passe </label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" aria-describedby="emailHelp" placeholder="">
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" aria-describedby="emailHelp" placeholder="">
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
                                           </span>
                                     @enderror
+                                    </div>
+                                    <div class="col-4">
+                                        <br>
+                                    <a href="#" id="btn" onclick="passwordGenerator()">Génerer </a>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="">Confirmer mot de passe </label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" aria-describedby="emailHelp" placeholder="">
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                              <strong>{{ $message }}</strong>
-                                          </span>
-                                    @enderror
-                                </div>
+
 
 
 
@@ -100,19 +98,9 @@
                         <div class="card shadow">
                             <div class="card-body">
                                 <label>Status</label>
-                                <div class="row">
-                                    <div class="form-check col-4 ml-5">
-                                        <input class="form-check-input" type="radio" name="status" value="false" id="exampleRadios1" value="option1" checked>
-                                        <label class="form-check-label" for="exampleRadios1">
-                                            Absent
-                                        </label>
-                                    </div>
-                                    <div class="form-check col-4">
-                                        <input class="form-check-input" type="radio" name="status" value="true" id="exampleRadios2" value="option2">
-                                        <label class="form-check-label" for="exampleRadios2">
-                                            Active
-                                        </label>
-                                    </div>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" checked id="switch1" name="status">
+                                    <label class="custom-control-label" for="switch1">Status</label>
                                 </div>
 
                             </div>
@@ -124,4 +112,20 @@
             </form>
         </div>
     </div>
+
+    <script>
+
+        function passwordGenerator(){
+            var key_value= "1234567890!@#$%^&*()qwertyuiplmkjnhbgvfcxdsazQWERTYUIOPLKJHGFDSAZXCVBMN<,>.?//.[]{}|"
+            var pass_size= 10;
+            var create_pass = "";
+            for(var i=0; i<pass_size; i++){
+                var generate_random_number = Math.floor(Math.random() * key_value.length);
+                create_pass += key_value.substring(generate_random_number, generate_random_number + 1);
+            }
+            document.getElementById("password").value= create_pass;
+        }
+
+
+    </script>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Classroom;
+use App\Models\Classroom_Info;
 use App\Models\Info;
 use App\Models\Level;
 use Illuminate\Http\Request;
@@ -67,11 +68,12 @@ class InfoController extends Controller
         $infos = Info::find($id);
         $niveaux = Level::get();
         $classe = Classroom::get();
+        $levelName= Classroom_Info::get();
 
         if(!$infos){
             return redirect()->route('info.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
         }
-        return view('dashboard.information.edit',compact('infos', 'niveaux','classe'))->withTitle('Edition information');
+        return view('dashboard.information.edit',compact('infos', 'niveaux','classe','levelName'))->withTitle('Edition information');
     }
 
     public function update(Request $request, $id){
@@ -82,19 +84,18 @@ class InfoController extends Controller
 
                 return redirect()->route('info.index')->with(['status'=>'there is no data with this id, please enter a correct one']);
             }
+
             $dataInfoupdated =$infoID->update([
                 'titre'=>$request->titre,
                 'info'=>$request->info,
                 'class_id'=>$request->class,
             ]);
-            $infoID->update($request->all());
-            if($dataInfoupdated && $request->all() === 'canceled' ){
-                Session::flash('statuscode', 'success');
-                return redirect()->route('info.index')->with(['status'=>'aucun changement']);
-            }else {
+            $infoID->classes()->sync($request->get('class'));
+
+
                 Session::flash('statuscode', 'success');
                 return redirect()->route('info.index')->with(['status'=>'Modification avec succés']);
-            }
+
 
         }catch(\Exception $exception){
             Session::flash('statuscode', 'error');

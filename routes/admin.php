@@ -46,9 +46,16 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'permissions'], function(){
 });
 Route::group(['namespace'=>'Dashboard', 'prefix'=>'matrix'], function(){
     Route::get('all', 'MatrixController@index')->name('all');
+});
 
+Route::group(['namespace'=>'Dashboard', 'prefix'=>'absences'], function(){
+    Route::get('/', 'AbsenceController@index')->name('absence.index');
+    Route::get('getClasse', 'AbsenceController@getClasse')->name('absence.getClasse');
+    Route::get('eleveByClass', 'AbsenceController@eleveByClass')->name('absence.eleveByClass');
 
 });
+
+
 
 
 

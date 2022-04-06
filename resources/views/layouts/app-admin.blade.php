@@ -19,6 +19,7 @@
 
     <!--<link rel="stylesheet" href="assets/css/preloader.min.css" type="text/css" />-->
 
+    <link rel="stylesheet" href="list-grid.css"/>
 
 
     <!-- Custom styles for this template-->

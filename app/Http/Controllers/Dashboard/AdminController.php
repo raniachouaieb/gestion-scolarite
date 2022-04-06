@@ -43,9 +43,9 @@ class AdminController extends Controller
 
     public function list(Request $request)
     {
-        $data = Admin::orderBy('id')->paginate(5);
+        $admin = Admin::orderBy('id')->paginate(PAGINATION);
         $role = Role::get();
-        return view('dashboard.users.list_users',compact('data','role'))->withTitle('liste des utilisateurs');
+        return view('dashboard.users.list_users',compact('admin','role'))->withTitle('liste des utilisateurs');
 
     }
 
@@ -63,11 +63,12 @@ class AdminController extends Controller
         $user = new Admin();
         $user->name= $request->name;
         $user->email= $request->email;
-        $user->status=$request->status == 'true' ? 1 : 0;
-        $user->password=Hash::make($request->password);
+        $user->status=isset($request->status) ? 1 : 0;
+        $user->password=$request->password;
         $user->roles_name=$request->role;
         $user->assignRole($request->input('role'));
         $user->save();
+        Admin::sendPasswordEmail($user);
         Session::flash('statuscode', 'success');
         return redirect()->route('admins')->with('status','utilisateur est ajoutée avec ucces');
 
@@ -78,7 +79,7 @@ class AdminController extends Controller
         $user = Admin::find($id);
         $roles = Role::get();
         //$roles = Role::pluck('name','name')->all();
-        $userRole = $user->roles->pluck('name','name')->all();
+        $userRole = $user->roles->pluck('name')->all();
         return view('dashboard.users.edit',compact('user','roles','userRole'))->withTitle('Modifier utilisateur');
     }
 
@@ -91,22 +92,18 @@ class AdminController extends Controller
             $userUpdated = $userID->update([
                 'name'=>$request->name,
                 "email"=>$request->email,
-                "status"=>($request->status == 'false')? 0:1,
-
+                "status"=>isset($request->status) ? 1 : 0,
+                'password' => $request->password,
             "roles_name"=>$request->role,
             ]);
             $userID->assignRole($request->input('role'));
-            if(!empty($userID['password'])){
-                $userID['password'] = Hash::make($userID['password']);
-            }
-            $userID->update($request->all());
-            if($userUpdated && $request->all() === 'canceled'){
-                Session::flash('statuscode', 'success');
-                return redirect()->route('admins')->with(['status'=>'nothing updated']);
-            }else{
+
+
+
+
                 Session::flash('statuscode', 'success');
                 return redirect()->route('admins')->with(['status'=>'Modification avec succés']);
-            }
+
 
 
         }catch(\Exception $exception){

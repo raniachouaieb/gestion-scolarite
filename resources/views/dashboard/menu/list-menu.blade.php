@@ -98,7 +98,7 @@
 
                         <div class="col-4 mb-5">
                             <div class="article">
-                                <img class="art" src="{{asset('uploads/menus/'.$menu->image)}}"  alt="image">
+                                <img class="art" src="{{asset('assets/'.$menu->image)}}"  alt="image">
                                     <div class="text">
                                         <h3>{{$menu->jour}} {{$menu->date}} </h3>
                                         <p>{!! $menu->menu !!}</p>

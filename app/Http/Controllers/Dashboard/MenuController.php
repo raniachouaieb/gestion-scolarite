@@ -8,6 +8,7 @@ use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use App\Helpers\General;
 
 class MenuController extends Controller
 {
@@ -29,19 +30,24 @@ class MenuController extends Controller
 
     public function store(MenuRequest $request){
         try{
-            $menu = new Menu;
+            $menu = new Menu();
             $menu->date= $request->date;
             $menu->menu=$request->menu;
             $menu->jour=$request->jour;
+
             if($request->hasfile('image')){
 
-                $file = $request->file('image');
+                $path = uploadImage('menus',$request->file('image'));
+                $menu->image= $path;
+                //return $path;
+                /*$file = $request->file('image');
                 $extension = $file->getClientOriginalExtension();
                 $filename = time().'.'.$extension;
                 $file->move('uploads/menus/', $filename);
-                $menu->image= $filename;
+                $menu->image= $filename;*/
 
             }
+
             $dataMenu = $menu->save();
             if($dataMenu){
                 Session::flash('statuscode', 'success');
@@ -52,6 +58,7 @@ class MenuController extends Controller
                 return redirect()->route('menu.index')->with('status','Convocation est error');
             }
         }catch(\Exception $ex){
+            return $ex;
             return redirect()->route('menu.index')->with(['status'=>'Error']);
 
         }

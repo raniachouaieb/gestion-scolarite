@@ -28,9 +28,9 @@ class MenuRequest extends FormRequest
             'date' => 'required| date|after_or_equal:today',
             'jour' => 'required |string',
             'menu' => 'required',
-            'image' => 'required_whithout:id_menu'|
-                   'mimes:jpeg,jpg,gif|
-                   max:10000' // max 10000kb
+            'image' => 'required_without:id_menu|
+                mimes:jpeg,jpg,gif'
+
 
 
 
