@@ -36,17 +36,12 @@
         <div id="collapseGeneral" class="collapse" aria-labelledby="headingGeneral" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
 
-                <a class="collapse-item" href="{{route('menu.index')}}">Cantine</a>
-                <a class="collapse-item" href="{{ route('convocations.index')}}">Convocations<span class="countList">{{\App\Models\Convocation::count()}}</span></a>
-                <a class="collapse-item" href="{{ route('travails.index')}}">Travaux à faire<span class="countList">{{\App\Models\Travail::count()}}</span></a>
-                <a class="collapse-item" href="{{ route('emploi.index')}}">Emplois<span class="countList">{{\App\Models\Emploi::count()}}</span></a>
-                <a class="collapse-item" href="{{ route('seance.index')}}">Séance<span class="countList">{{\App\Models\Seance::count()}}</span></a>
-                <a class="collapse-item" href="{{ route('info.index')}}">Note d'info<span class="countList">{{\App\Models\Info::count()}}</span></a>
-
-
-
-
-
+               @can('menu-list') <a class="collapse-item" href="{{route('menu.index')}}">Cantine</a>@endcan
+               @can('convocation-list') <a class="collapse-item" href="{{ route('convocations.index')}}">Convocations<span class="countList">{{\App\Models\Convocation::count()}}</span>@endcan
+                    @can('travail-list') <a class="collapse-item" href="{{ route('travails.index')}}">Travaux à faire<span class="countList">{{\App\Models\Travail::count()}}</span></a>@endcan
+                    @can('emploi-list')  <a class="collapse-item" href="{{ route('emploi.index')}}">Emplois<span class="countList">{{\App\Models\Emploi::count()}}</span></a>@endcan
+               @can('senace_list') <a class="collapse-item" href="{{ route('seance.index')}}">Séance<span class="countList">{{\App\Models\Seance::count()}}</span></a>@endcan
+               @can('information-list') <a class="collapse-item" href="{{ route('info.index')}}">Note d'info<span class="countList">{{\App\Models\Info::count()}}</span></a>@endcan
 
             </div>
         </div>
@@ -67,8 +62,8 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Liste parents:</h6>
-            <a class="collapse-item" href="{{route('inscri.index')}}">En attente<span class="countList">{{\App\Models\Parente::where('is_active' , 0)->count()}}</span></a>
-            <a class="collapse-item" href="{{route('inscri.list_accepted')}}">Inscrits<span class="countList">{{\App\Models\Parente::where('is_active' , 1)->count()}}</span></a>
+            @can('parent-preinscrit-list')<a class="collapse-item" href="{{route('inscri.index')}}">En attente<span class="countList">{{\App\Models\Parente::where('is_active' , 0)->count()}}</span></a>@endcan
+            @can('parent-inscrit-list')<a class="collapse-item" href="{{route('inscri.list_accepted')}}">Inscrits<span class="countList">{{\App\Models\Parente::where('is_active' , 1)->count()}}</span></a>@endcan
             <a class="collapse-item" href="">Rejetés</a>
         </div>
     </div>
@@ -91,8 +86,8 @@
         <div id="collapseEleve" class="collapse" aria-labelledby="headingEleve" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
 
-                <a class="collapse-item" href="{{ route('student.index')}}">Elève Inscrits <span class="countList">{{\App\Models\Student::whereNotNull('class_id')->count()}}</span></a>
-                <a class="collapse-item" href="{{ route('student.elevePreInscrit')}}">Elève Pré-Inscrits <span class="countList">{{\App\Models\Student::whereNull('class_id')->count()}}</span></a>
+                @can('leve-inscrit-list')<a class="collapse-item" href="{{ route('student.index')}}">Elève Inscrits <span class="countList">{{\App\Models\Student::whereNotNull('class_id')->count()}}</span></a>@endcan
+                @can('eleve-preinscrit-list')<a class="collapse-item" href="{{ route('student.elevePreInscrit')}}">Elève Pré-Inscrits <span class="countList">{{\App\Models\Student::whereNull('class_id')->count()}}</span></a>@endcan
 
 
             </div>
@@ -120,10 +115,10 @@
     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
         data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{ route('levels.index')}}">Niveaux<span class="countList">{{\App\Models\Level::count()}}</span></a>
-            <a class="collapse-item" href="{{ route('classes.index')}}">Groupes</a>
-            <a class="collapse-item" href="{{ route('modules.index')}}">Modules</a>
-            <a class="collapse-item" href="{{ route('matieres.index')}}">Matieres<span class="countList">{{\App\Models\Matiere::count()}}</span></a>
+            @can('level-list')<a class="collapse-item" href="{{ route('levels.index')}}">Niveaux<span class="countList">{{\App\Models\Level::count()}}</span></a>@endcan
+            @can('class_list')<a class="collapse-item" href="{{ route('classes.index')}}">Groupes</a>@endcan
+            @can('module_list')<a class="collapse-item" href="{{ route('modules.index')}}">Modules</a>@endcan
+           @can('matiere-list') <a class="collapse-item" href="{{ route('matieres.index')}}">Matieres<span class="countList">{{\App\Models\Matiere::count()}}</span></a>@endcan
         </div>
     </div>
 </li>
@@ -137,9 +132,11 @@
         <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
 
-                <a class="collapse-item" href="{{route('admins') }}">liste utilisateur<span class="countList">{{App\Models\Admin::count()}}</span></a>
-                <a class="collapse-item" href="{{route('list') }}">rôles <span class="countList">{{Spatie\Permission\Models\Role::count()}}</span></a>
-                <a class="collapse-item" href="{{route('permissions') }}">permissions<span class="countList">{{Spatie\Permission\Models\Permission::count()}}</span> </a>
+               @can('user-list')<a class="collapse-item" href="{{route('admins') }}">liste utilisateur<span class="countList">{{App\Models\Admin::count()}}</span></a>@endcan
+              @can('role-list')<a class="collapse-item" href="{{route('list') }}">rôles <span class="countList">{{Spatie\Permission\Models\Role::count()}}</span></a>@endcan
+              @can('permission-list') <a class="collapse-item" href="{{route('permissions') }}">permissions<span class="countList">{{Spatie\Permission\Models\Permission::count()}}</span> </a>@endcan
+                    <a class="collapse-item" href="{{route('all') }}">Permission matrix </a>
+
 
 
             </div>

@@ -34,7 +34,6 @@ class AdminController extends Controller
     {
         $parentPréinscrit = Parente::where('is_active',0)->get();
         $parentInscrit = Parente::where('is_active',1)->get();
-
         $elevePréinscrit = Student::whereNull('class_id')->get();
         $eleveInscrit = Student::whereNotNull('class_id')->get();
         $convocations = Convocation::get();
@@ -45,7 +44,8 @@ class AdminController extends Controller
     public function list(Request $request)
     {
         $data = Admin::orderBy('id')->paginate(5);
-        return view('dashboard.users.list_users',compact('data'))->withTitle('liste des utilisateurs');
+        $role = Role::get();
+        return view('dashboard.users.list_users',compact('data','role'))->withTitle('liste des utilisateurs');
 
     }
 
@@ -63,13 +63,11 @@ class AdminController extends Controller
         $user = new Admin();
         $user->name= $request->name;
         $user->email= $request->email;
+        $user->status=$request->status == 'true' ? 1 : 0;
         $user->password=Hash::make($request->password);
-
-        $user->assignRole($request->role);
-
+        $user->roles_name=$request->role;
+        $user->assignRole($request->input('role'));
         $user->save();
-
-
         Session::flash('statuscode', 'success');
         return redirect()->route('admins')->with('status','utilisateur est ajoutée avec ucces');
 
@@ -78,7 +76,8 @@ class AdminController extends Controller
     public function edit($id)
     {
         $user = Admin::find($id);
-        $roles = Role::pluck('name','name')->all();
+        $roles = Role::get();
+        //$roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
         return view('dashboard.users.edit',compact('user','roles','userRole'))->withTitle('Modifier utilisateur');
     }
@@ -92,20 +91,29 @@ class AdminController extends Controller
             $userUpdated = $userID->update([
                 'name'=>$request->name,
                 "email"=>$request->email,
-                "password"=>Crypt::decrypt($request->password),
+                "status"=>($request->status == 'false')? 0:1,
+
+            "roles_name"=>$request->role,
             ]);
+            $userID->assignRole($request->input('role'));
+            if(!empty($userID['password'])){
+                $userID['password'] = Hash::make($userID['password']);
+            }
             $userID->update($request->all());
             if($userUpdated && $request->all() === 'canceled'){
                 Session::flash('statuscode', 'success');
-                return redirect()->route('admins')->with(['status'=>'Modification avec succés']);
+                return redirect()->route('admins')->with(['status'=>'nothing updated']);
             }else{
                 Session::flash('statuscode', 'success');
-                return redirect()->route('admins')->with(['status'=>'nothing updateted']);
+                return redirect()->route('admins')->with(['status'=>'Modification avec succés']);
             }
 
 
         }catch(\Exception $exception){
-            return redirect()->route('classes.index')->with(['error'=>'There is a error :(']);
+            //return $exception;
+            Session::flash('statuscode', 'success');
+
+            return redirect()->route('admins')->with(['status'=>'There is a error :(']);
         }
 
 

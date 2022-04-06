@@ -27,6 +27,7 @@ class UserRequest extends FormRequest
             'name' => 'required| string',
             'email' => 'required|email|unique:admins,email',
             'password' => 'required|min:8',
+            'role'=>'required'
             //'password_confirm' => 'required|min:8|confirmed'
 
 
@@ -46,6 +47,7 @@ class UserRequest extends FormRequest
             'password_confirm.required'=>'obligatoire',
             'password_confirm.min'=>'minimum 8',
             'password_confirm.same'=>'pas conforme',
+            'role.required'=> 'champs obligatoire'
 
 
 

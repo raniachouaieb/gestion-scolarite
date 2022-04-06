@@ -19,16 +19,10 @@ class AdminSeeder extends Seeder
         $user = DB::table('admins')->insert([
             'name' => 'Rania',
             'email' => 'raniachouaieb82@gmail.com',
-            'password' => Hash::make('raniadmin1'),
+            'password' => Hash::make('adminrania1'),
             'roles_name'=>"Admin",
         ]);
 
-        $role = Role::create(['name' => 'Admin']);
 
-        $permissions = Permission::pluck('id','id')->all();
-
-        $role->syncPermissions($permissions);
-
-        $user->assignRole([$role->id]);
     }
 }

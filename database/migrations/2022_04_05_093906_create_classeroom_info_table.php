@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInfosClassesTable extends Migration
+class CreateClasseroomInfoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateInfosClassesTable extends Migration
      */
     public function up()
     {
-        Schema::create('infos_classes', function (Blueprint $table) {
+        Schema::create('classeroom_info', function (Blueprint $table) {
             $table->id();
-            $table->integer('class_id')->unsigned();
-            $table->foreign('class_id')->references('id')->on('classerooms');
+            $table->integer('classeroom_id')->unsigned();
+            $table->foreign('classeroom_id')->references('id')->on('classerooms');
             $table->integer('info_id')->unsigned();
             $table->foreign('info_id')->references('id')->on('infos');
             $table->timestamps();
@@ -31,6 +31,6 @@ class CreateInfosClassesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('infos_classes');
+        Schema::dropIfExists('classeroom_info');
     }
 }

@@ -31,6 +31,7 @@
 
                 <form method="post" action="{{ route('menu.updateMenu', $menu->id) }}" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" value="{{$menu->id}}" name="id_menu" id="id_menu"/>
                     <div class="row">
                         <div class="col-md-8 ">
                             <div class="card editcard">
@@ -78,8 +79,13 @@
                                 <div class="card-body">
                                     <div class="form-group col-md-12 ">
                                         <label for="">Selectionner image</label>
-                                        <input type="file" name="image" class="form-control-file">
+                                        <input type="file" name="image" class="form-control-file @error('image') is-invalid @enderror"">
                                         <img src="{{asset('uploads/menus/'.$menu->image)}}"  width="90px" alt="image">
+                                        @error('image')
+                                        <span class="invalid-feedback" role="alert">
+                                                           <strong>{{ $message }}</strong>
+                                                        </span>
+                                        @enderror
                                     </div>
                                 </div>
                              </div>

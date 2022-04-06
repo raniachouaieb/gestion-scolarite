@@ -71,7 +71,7 @@ class MenuController extends Controller
         return view('dashboard.menu.edit-menu',compact('menu'))->withTitle('Edition menu');
     }
 
-    public function update(Request $request, $id){
+    public function update(MenuRequest $request, $id){
         $menu = Menu::find($id);
         try{
             if(!$menu){

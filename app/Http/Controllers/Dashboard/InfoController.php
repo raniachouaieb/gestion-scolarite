@@ -35,16 +35,20 @@ class InfoController extends Controller
 
     public function store(Request $request)
     {
-        try{
-            $infos = new Info();
-            $infos->titre= $request->titre;
-            $infos->info= $request->info;
-            $infos->class_id=$request->class;
 
-            $dataInfo =$infos->save();
-         //   $class = Classroom::find(10);
-          //  $infos->classes()->attach($class);
-            if($dataInfo){
+        try{
+            $infos = Info::create([
+               "titre"=>$request->titre,
+                "info"=> $request->info,
+                "class_id"=>$request->class,
+            ]);
+            //dd($infos);
+            $infos->classes()->attach($request->get('class'));
+
+
+
+
+            if($infos){
                 Session::flash('statuscode', 'success');
                 return redirect()->route('info.index')->with('status','information est envoyée avec succes');
             }else
@@ -53,6 +57,7 @@ class InfoController extends Controller
 
 
         }catch(\Exception $ex){
+            return $ex;
             return redirect()->route('info.index')->with(['status'=>'Error']);
 
         }
@@ -83,7 +88,7 @@ class InfoController extends Controller
                 'class_id'=>$request->class,
             ]);
             $infoID->update($request->all());
-            if($dataInfoupdated &&   $request->all() === 'canceled' ){
+            if($dataInfoupdated && $request->all() === 'canceled' ){
                 Session::flash('statuscode', 'success');
                 return redirect()->route('info.index')->with(['status'=>'aucun changement']);
             }else {

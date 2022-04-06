@@ -72,7 +72,7 @@ class MatiereController extends Controller
         return view('dashboard.matiere.edit-matiere',compact('matiere', 'modules', 'niveaux'))->withTitle('Edition matiere');
     }
 
-    public function update(Request $request, $id){
+    public function update(MatiereRequest $request, $id){
         $matiereID = Matiere::find($id);
         try{
             if(!$matiereID){
@@ -86,7 +86,7 @@ class MatiereController extends Controller
                 'module_id'=>$request->modul,
                 'niveau_id'=>$request->niveau,
             ]);
-            $matiereID->update($request->all());
+            $dataMatiereupdated = $matiereID->update($request->all());
             if($dataMatiereupdated &&   $request->all() === 'canceled' ){
                 Session::flash('statuscode', 'success');
                 return redirect()->route('matieres.index')->with(['status'=>'Modification avec succés']);

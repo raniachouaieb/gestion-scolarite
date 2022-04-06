@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Classeroom_Info;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Classroom;
 
 class Info extends Model
 {
 
-    protected $table='Infos';
+    protected $table='infos';
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +23,18 @@ class Info extends Model
     protected $casts=[
         'created_at','updated_at','deleted_at'
     ];
-    public function classes(){
-        return $this->hasMany(Classroom::class);
+
+
+
+    public function classes()
+    {
+        return $this->belongsToMany(\App\Models\Classroom::class);
     }
+
+    public function classe()
+    {
+        return $this->hasMany(\App\Models\Classeroom_Info::class,'info_id','id')->orderByDesc('Created_at');
+
+    }
+
 }

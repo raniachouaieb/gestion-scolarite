@@ -27,6 +27,9 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'roles'], function(){
     Route::get('list','RoleController@index')->name('list');
     Route::get('add', 'RoleController@add')->name('roles.add');
     Route::post('store', 'RoleController@store')->name('roles.store');
+    Route::get('edit\{id}', 'RoleController@edit')->name('roles.edit');
+    Route::post('update\{id}', 'RoleController@update')->name('roles.update');
+    Route::post('destroy\{id}', 'RoleController@destroy')->name('roles.destroy');
 
 
 
@@ -41,6 +44,12 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'permissions'], function(){
     Route::post('delete/{id}', 'PermissionController@destroy')->name('permissions.destroy');
 
 });
+Route::group(['namespace'=>'Dashboard', 'prefix'=>'matrix'], function(){
+    Route::get('all', 'MatrixController@index')->name('all');
+
+
+});
+
 
 
 

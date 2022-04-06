@@ -23,9 +23,11 @@
             <li class="breadcrumb-item active" aria-current="page">Niveaux</li>
         </ol>
     </nav>
+    @can('level-create')
     <div class="row  position mb-5">
         <a  class="btn btn-primary " href="{{ route('levels.add')}}"><i class="fas fa-plus"></i></a>
     </div>
+    @endcan
 
 
 

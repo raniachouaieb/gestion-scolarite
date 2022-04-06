@@ -36,9 +36,9 @@
 
                     <thead>
                     <tr>
-                        <td class="col-1">#</td>
-                        <td class="col-3">Nom</td>
+                        <td class="col-2">Nom</td>
                         <td class="col-3">Email</td>
+                        <td class="col-2">Status</td>
                         <td class="col-3">Rôle</td>
                         <td class="col-2">Action</td>
                     </tr>
@@ -46,13 +46,12 @@
                     <tbody>
                     @foreach($data as $user)
                         <tr>
-                            <td class="col-1">{{$user->id}}</td>
-                            <td class="col-3">{{$user->name}}</td>
+                            <td class="col-2">{{$user->name}}</td>
                             <td class="col-3"> {{$user->email}}</td>
+                            <td class="col-2">{{$user->status==0 ? 'Absent' : 'Active'}}</td>
+
                             <td class="col-3">
-
-                                    <label class="badge badge-success">{{ $user->roles_name }}</label>
-
+                                    <label class="badge badge-success"> @foreach($role as $rol)@if($user->roles_name== $rol->id){{$rol->name}}@endif @endforeach</label>
                             </td>
                             <td class="col-2"><a href="{{route('users.edit', $user->id)}}" ><i class="fas fa-pen fa-sm"></i></a>
 

@@ -97,7 +97,7 @@
                                     <div class="card-body">
                                         <div class="form-group mb-3">
                                             <label for="">Selectionner image</label>
-                                            <input type="file" name="image" class="form-control-file @error('image') is-invalid @enderror  ">
+                                            <input type="file" name="image" class="form-control-file @error('image') is-invalid @enderror"/>
                                             @error('image')
                                             <span class="invalid-feedback" role="alert">
                                                            <strong>{{ $message }}</strong>

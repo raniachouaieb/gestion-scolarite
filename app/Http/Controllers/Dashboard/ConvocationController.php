@@ -17,6 +17,8 @@ class ConvocationController extends Controller
 {
     public function __construct(){
         $this -> middleware('auth:admin');
+        $this->middleware('permission:convocation-list|convocation-create|convocation-edit|convocation-delete', ['only' => ['index','store']]);
+
     }
 
     public function index(){

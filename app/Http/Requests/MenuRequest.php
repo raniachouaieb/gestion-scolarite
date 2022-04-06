@@ -24,13 +24,15 @@ class MenuRequest extends FormRequest
     public function rules()
     {
         return [
+            //'id_menu'=>'required_without:'
             'date' => 'required| date|after_or_equal:today',
             'jour' => 'required |string',
             'menu' => 'required',
-            'image' => array(
-                   'mimes:jpeg,jpg,gif|required|max:10000' // max 10000kb
+            'image' => 'required_whithout:id_menu'|
+                   'mimes:jpeg,jpg,gif|
+                   max:10000' // max 10000kb
 
-            ),
+
 
         ];
     }

@@ -48,10 +48,10 @@
                             <td class="col-4">{{$role->id}}</td>
                             <td class="col-5">{{$role->name}}</td>
 
-                            <td class="col-3"><a href="" ><i class="fas fa-pen fa-sm"></i></a>
+                            <td class="col-3"><a href="{{route('roles.edit',$role->id)}}" ><i class="fas fa-pen fa-sm"></i></a>
 
 
-                                <form action="" method="post" class="d-inline" >
+                                <form action="{{route('roles.destroy', $role->id)}}" method="post" class="d-inline" >
                                     @csrf
 
                                     <a  class=" trash show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash fa-sm"></i></a>
