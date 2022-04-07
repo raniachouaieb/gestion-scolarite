@@ -36,10 +36,11 @@
 
                     <thead>
                     <tr>
-                        <td class="col-1">#</td>
                         <td class="col-3">heure debut</td>
                         <td class="col-3">heure fin</td>
-                        <td class="col-3">emploi</td>
+                        <td class="col-2">emploi</td>
+                        <td class="col-2">Matière</td>
+
                         <td class="col-2">Action</td>
                     </tr>
                     </thead>
@@ -47,10 +48,11 @@
                     @if($seances)
                         @foreach($seances as $seance)
                             <tr>
-                                <td class="col-2">{{$seance->id}}</td>
                                 <td class="col-3">{{$seance->start_time}}</td>
                                 <td class="col-3">{{$seance->end_time}}</td>
-                                <td class="col-3">{{$seance->emploi['titre']}}</td>
+                                <td class="col-2">{{$seance->emploi['titre']}}</td>
+                                <td class="col-2">{{$seance->matiere['nom']}}</td>
+
                                 <td class="col-2"><a href="{{route('seance.edit', $seance->id)}}" ><i class="fas fa-pen fa-sm"></i></a>
 
 

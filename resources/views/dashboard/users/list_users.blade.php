@@ -36,11 +36,10 @@
 
                     <thead>
                     <tr>
-                        <td class="col-1">Nom</td>
-                        <td class="col-2">Email</td>
-                        <td class="col-2">Status</td>
+                        <td class="col-2">Nom</td>
+                        <td class="col-3">Email</td>
+                        <td class="col-3">Status</td>
                         <td class="col-2">Rôle</td>
-                        <td class="col-3">Pass</td>
 
                         <td class="col-2">Action</td>
                     </tr>
@@ -50,12 +49,11 @@
                         <tr>
                             <td class="col-2">{{$value->name}}</td>
                             <td class="col-3"> {{$value->email}}</td>
-                            <td class="col-2">{{$value->status}}</td>
+                            <td class="col-3">{{$value->status}}</td>
 
-                            <td class="col-3">
+                            <td class="col-2">
                                     <label class="badge badge-success"> @foreach($role as $rol)@if($value->roles_name== $rol->id){{$rol->name}}@endif @endforeach</label>
                             </td>
-                            <td class="col-3">{{$value->password}}</td>
 
                             <td class="col-2"><a href="{{route('users.edit', $value->id)}}" ><i class="fas fa-pen fa-sm"></i></a>
 
@@ -73,9 +71,12 @@
                     @endforeach
                     </tbody>
                 </table>
-                {!! $admin->links() !!}
             </div>
         </div>
+        <div class="d-flex justify-content-center mt-5">
+          {!! $admin->links() !!}
+        </div>
+
 
 
         <div>

@@ -168,17 +168,21 @@
     <!-- Nav Item - User Information -->
 
     <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="position: relative; padding-left: 50px">
                                      @if(Auth::guard('admin')->user() )
+                                        <img src="{{asset('assets/'.Auth::guard('admin')->user()->image)}}"  style="width: 32px; height: 32px; position: absolute; top: 10px; left: 10px; border-radius: 50%; top: 15px">
                                          {{Auth::guard('admin')->user()->name }}
                                     @endif
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('profile', Auth::guard('admin')->user()->id) }}">
+                                        <i class="fa fa-user-alt"></i> {{ __('Profile') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        <i class="fa fa-sign-out-alt"></i> {{ __('Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logouteff') }}" method="POST" class="d-none">

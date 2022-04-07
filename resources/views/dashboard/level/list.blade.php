@@ -54,11 +54,9 @@
             <form action="{{ route('levels.destroy', $niveau->id)}}" method="post" class="d-inline" >
                   @csrf
 
-                <input name="_method" type="hidden" value="DELETE">
                 <a  class=" trash show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash fa-sm"></i></a>
                 </form>
 
-               <!--<a class="btn btn-danger "  data-target="#ModalDlete{{$niveau->id}}"><i class="fas fa-trash fa-sm"></i></a>-->
 
 
                 </td>

@@ -16,6 +16,9 @@ class Level extends Model
     protected $fillable = [
         'level',
     ];
+    protected $casts=[
+        'created_at', 'updated_at','deleted_at',
+    ];
 
     public function classes(){
         return $this->hasMany(Classroom::class, 'id_level', 'id');

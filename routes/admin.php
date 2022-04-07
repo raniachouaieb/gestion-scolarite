@@ -14,6 +14,7 @@ Route::get('accueil', 'Dashboard\AdminController@index')->name('accueil');
 
 Route::post('logout', 'Dashboard\AdminController@logout')->name('logouteff');
 
+
 Route::group(['namespace'=>'Dashboard', 'prefix'=>'users'], function(){
     Route::get('admins','AdminController@list')->name('admins');
     Route::get('add', 'AdminController@add')->name('users.add');
@@ -21,6 +22,8 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'users'], function(){
     Route::get('edit\{id}', 'AdminController@edit')->name('users.edit');
     Route::post('update\{id}', 'AdminController@update')->name('users.update');
     Route::post('delete/{id}', 'AdminController@destroy')->name('users.destroy');
+    Route::get('profile\{id}', 'AdminController@profile')->name('profile');
+    Route::post('Updateprofile\{id}', 'AdminController@updateImg')->name('Updateprofile');
 
 });
 Route::group(['namespace'=>'Dashboard', 'prefix'=>'roles'], function(){

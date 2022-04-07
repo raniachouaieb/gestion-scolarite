@@ -101,7 +101,7 @@ class SeanceController extends Controller
                 return redirect()->route('convocations.index')->with(['status'=>'there is no data with this id, please enter a correct one']);
             }
 
-            $dataupdatetd = $seanceID->update([
+             $seanceID->update([
                 'start_time'=>$request->start_time,
                 'end_time'=> $request->end_time,
                 'day'=>$request->day,
@@ -110,15 +110,11 @@ class SeanceController extends Controller
                 'niveau'=>$request->niveau
                 ]);
 
-             //$dataupdatetd =$seanceID->update($request->all());
 
-             if($dataupdatetd &&   $request->all() === 'canceled' ){
                 Session::flash('statuscode', 'success');
                 return redirect()->route('seance.index')->with(['status'=>'Modification avec succés']);
-             }else{
-                 Session::flash('statuscode', 'success');
-                 return redirect()->route('seance.index')->with(['status'=>'nothing updated']);
-             }
+
+
         }catch(\Exception $exception){
             return $exception;
             Session::flash('statuscode', 'error');

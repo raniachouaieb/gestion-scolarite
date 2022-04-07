@@ -61,6 +61,10 @@ return [
             'visibility' => 'public',
         ],
         'admin'=>[
+            'driver' => 'local',
+            'root' => base_path().'/public/assets/uploads/admin/',
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
 
 
         ],

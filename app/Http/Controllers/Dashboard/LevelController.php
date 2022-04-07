@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Requests\LevelRequest;
+use App\Models\Classroom;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Level;
@@ -86,9 +87,13 @@ class LevelController extends Controller
 
     public function destroy($id){
         $levelName = Level::find($id);
-        $levelName->delete();
-        //return view('dashboard.modals.delete-level');
-
+        /*Level::whereNotExists(function($query)
+        {
+            $query->from('Classroom')
+                ->where('Level.id = Classroom.id_level');
+        })->delete();*/
+        $levelName->doesntHave('classes')->delete();
+        //return ($levelName);
         Session::flash('statuscode', 'error');
        return redirect()->route('levels.index')->with('status','Level has been deleted');
     }

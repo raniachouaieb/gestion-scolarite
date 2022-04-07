@@ -79,8 +79,8 @@
                                 <div class="card-body">
                                     <div class="form-group col-md-12 ">
                                         <label for="">Selectionner image</label>
-                                        <input type="file" name="image" class="form-control-file @error('image') is-invalid @enderror"">
-                                        <img src="{{asset('uploads/menus/'.$menu->image)}}"  width="90px" alt="image">
+                                        <input type="file" name="image" class="form-control-file @error('image') is-invalid @enderror">
+                                        <img src="{{asset('assets/'.$menu->image)}}"  width="90px" alt="image">
                                         @error('image')
                                         <span class="invalid-feedback" role="alert">
                                                            <strong>{{ $message }}</strong>

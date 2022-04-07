@@ -97,17 +97,13 @@ class MenuController extends Controller
                  * helper
                  * general trait
                  * */
-                $destination = 'uploads/menus/'.$menu->image;
-                if(File::exists($destination))
+                $path = uploadImage('menus',$request->file('image'));
+                if(File::exists($path))
                 {
-                    File::delete($destination);
+                    File::delete($path);
                 }
-                $file = $request->file('image');
-                $extension = $file->getClientOriginalExtension();
-                $filename = time().'.'.$extension;
-                $file->move('uploads/menus/', $filename);
-                $menu->image= $filename;
-            }
+                $menu->image= $path;
+                            }
           $MenuData=  $menu->update();
 
             if($MenuData) {

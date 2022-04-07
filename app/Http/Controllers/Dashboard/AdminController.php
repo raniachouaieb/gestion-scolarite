@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Permission;
@@ -97,9 +98,7 @@ class AdminController extends Controller
             "roles_name"=>$request->role,
             ]);
             $userID->assignRole($request->input('role'));
-
-
-
+            Admin::sendPasswordEmail($userID);
 
                 Session::flash('statuscode', 'success');
                 return redirect()->route('admins')->with(['status'=>'Modification avec succés']);
@@ -122,6 +121,48 @@ class AdminController extends Controller
 
         Session::flash('statuscode', 'error');
         return redirect()->route('admins')->with('status','Cet utilisateur est supprimé');
+    }
+
+    public function profile($id){
+        $user = Auth::guard('admin')->user()->find($id);
+        return view('dashboard.users.profile', compact('user'))->withTitle('Profile');
+    }
+
+    public function updateImg(Request $request, $id){
+        try{
+            $user = Auth::guard('admin')->user()->find($id);
+
+            if($request->hasfile('image')){
+
+                $path = uploadImage('admin',$request->image);
+              //  return $path;
+                if(File::exists($path))
+                {
+                    File::delete($path);
+                }
+
+                $user->image= $path;
+            }
+            $profile =$user->update();
+
+            if($profile){
+                Session::flash('statuscode', 'success');
+                return view('dashboard.users.profile', compact('user'))->with('status', 'image changée avec succée')->withTitle('profile');
+
+            }else{
+                Session::flash('statuscode', 'error');
+                return view('dashboard.users.profile')->with('status', 'error')->withTitle('profile');
+            }
+
+        }catch(\Exception $ex){
+            return $ex;
+            Session::flash('statuscode', 'error');
+
+            return view('dashboard.users.profile')->with('status', 'error')->withTitle('profile');
+
+        }
+
+
     }
 
 

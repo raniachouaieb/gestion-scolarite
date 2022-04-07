@@ -104,4 +104,20 @@
             </form>
         </div>
     </div>
+
+    <script>
+
+        function passwordGenerator(){
+            var key_value= "1234567890!@#$%^&*()qwertyuiplmkjnhbgvfcxdsazQWERTYUIOPLKJHGFDSAZXCVBMN<,>.?//.[]{}|"
+            var pass_size= 10;
+            var create_pass = "";
+            for(var i=0; i<pass_size; i++){
+                var generate_random_number = Math.floor(Math.random() * key_value.length);
+                create_pass += key_value.substring(generate_random_number, generate_random_number + 1);
+            }
+            document.getElementById("password").value= create_pass;
+        }
+
+
+    </script>
 @endsection

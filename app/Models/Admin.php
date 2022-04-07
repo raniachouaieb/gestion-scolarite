@@ -21,7 +21,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','roles_name','status'
+        'name', 'email', 'password','roles_name','status','image'
     ];
 
     /**
@@ -56,12 +56,9 @@ class Admin extends Authenticatable
 
     public static function sendPasswordEmail($user)
     {
-        // Generate a new reset password token
-        //$token = app('auth.password.broker')->createToken($user);
+
         // Send email
         Mail::send('dashboard.mails.password', ['user' => $user], function ($m) use ($user) {
-            $m->from('admin@gmail.com', 'Academia');
-
             $m->to($user->email, $user->name)->subject('Password');
         });
     }
