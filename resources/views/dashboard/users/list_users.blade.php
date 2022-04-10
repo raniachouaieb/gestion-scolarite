@@ -32,7 +32,7 @@
         <div class="card shadow tableNiveau">
             <div class="table-responsive">
 
-                <table class="table table-hover">
+                <table class="table table-hover" id="user_table">
 
                     <thead>
                     <tr>
@@ -49,7 +49,10 @@
                         <tr>
                             <td class="col-2">{{$value->name}}</td>
                             <td class="col-3"> {{$value->email}}</td>
-                            <td class="col-3">{{$value->status}}</td>
+                            <td class="col-3"><input data-id="{{$value->id}}" class="toggle-class" type="checkbox"
+                                                     data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active"
+                                                     data-off="Inactive" {{$value->status =='Active' ? 'checked': '' }}></td>
+
 
                             <td class="col-2">
                                     <label class="badge badge-success"> @foreach($role as $rol)@if($value->roles_name== $rol->id){{$rol->name}}@endif @endforeach</label>
@@ -101,6 +104,28 @@
                 });
 
             </script>
+            <!--<script>
+                $document.ready(function(){
+                    $("#user_table").Datatable()
+                });
+                $(function(){
+                    $('.toggle-class').change(function(){
+                        var status= $(this).prop('checked') == true ?1 : 0;
+                        var user_id= $(this).data('id');
+                        $.ajax({
+                            type:"GET",
+                            dataType: "json",
+                            url:",
+                            data: {'status': status, 'user_id': user_id},
+                            success: function(data){
+                                console.log(success)
+                            }
+                        });
+                });
+
+
+                });
+            </script>-->
 
 
 

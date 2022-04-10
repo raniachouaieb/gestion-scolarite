@@ -73,24 +73,24 @@ class RegisterController extends Controller
 
     public function create(Request $request)
     {
-        dd($request);
+        //dd($request);
 
         return Parente::create([
             //'name' => $data['name'],
-            'nomPere' => $data['nomPere'],
-            'prenomPere' => $data['prenomPere'],
-            'telPere' => $data['telPere'],
-            'professionPere' => $data['professionPere'],
-            'nomMere' => $data['nomMere'],
-            'prenomMere' => $data['prenomMere'],
-            'telMere' => $data['telMere'],
-            'professionMere' => $data['professionMere'],
-            'nbEnfants' => $data['nbEnfants'],
-            'adresse' => $data['adresse'],
+            'nomPere' => $request['nomPere'],
+            'prenomPere' => $request['prenomPere'],
+            'telPere' => $request['telPere'],
+            'professionPere' => $request['professionPere'],
+            'nomMere' => $request['nomMere'],
+            'prenomMere' => $request['prenomMere'],
+            'telMere' => $request['telMere'],
+            'professionMere' => $request['professionMere'],
+            'nbEnfants' => $request['nbEnfants'],
+            'adresse' => $request['adresse'],
 
 
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
         ]);
     }
     public function getRegister(){
@@ -98,11 +98,6 @@ class RegisterController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Illuminate\Http\Request  $request
-     * @return Response
-     */
+
 
 }
