@@ -37,6 +37,11 @@ class Admin extends Authenticatable
       return  $value==0 ? 'Absent':'Active';
     }
 
+    public function setStatusAttribute($value)
+    {
+       return  $this->attributes['status'] = $value;
+    }
+
     public function setPasswordAttribute($password){
         if(!empty($password))
             //return  $this->attributes['password'] = bcrypt($password);

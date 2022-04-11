@@ -165,14 +165,29 @@ class AdminController extends Controller
 
     }
 
-    public function changeStatus( Request $request)
+    public function changeStatus( $id)
     {
-       $user = Admin::find($request->user_id);
-       $user->status = $request->status;
-       $user->save();
+        $getStatus= Admin::select('status')->where('id', $id)->first();
+        //return $getStatus;
+        if($getStatus->status == 'Active'){
+            $status = 0;
+        }else{
+            $status= 1;
+        }
 
-        //return response()->json(['success'=>'Status change successfully.']);
+        Admin::where('id', $id)->update(['status'=>$status]);
+        Session::flash('statuscode', 'succes');
+
+        return view('dashboard.users.list_users')->with('status', 'changed')->withTitle('list users');
+        //return $getStatus;
     }
+
+
+
+
+
+
+
 
 
 

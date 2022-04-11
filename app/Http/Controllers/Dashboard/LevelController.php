@@ -86,13 +86,18 @@ class LevelController extends Controller
     }
 
     public function destroy($id){
-        $levelName = Level::find($id);
-        /*Level::whereNotExists(function($query)
+        //$levelName = Level::find($id);
+        /*$id= Level::wherehas('classes', function($query) use($id){
+            $query->where('id_level', '!=', $id);
+        })->get();*/
+        $id =Level::with('classes')->whereNotExists(function($query) use($id)
         {
-            $query->from('Classroom')
-                ->where('Level.id = Classroom.id_level');
-        })->delete();*/
-        $levelName->doesntHave('classes')->delete();
+            $query->select('id_level')
+            ->from('Classerooms')
+                ->where('id_level' ,'!=', $id)->orWhereNull('id_level');
+        })->get();
+        return $id;
+       // $levelName->doesntHave('classes')->delete();
         //return ($levelName);
         Session::flash('statuscode', 'error');
        return redirect()->route('levels.index')->with('status','Level has been deleted');

@@ -49,9 +49,13 @@
                         <tr>
                             <td class="col-2">{{$value->name}}</td>
                             <td class="col-3"> {{$value->email}}</td>
-                            <td class="col-3"><input data-id="{{$value->id}}" class="toggle-class" type="checkbox"
-                                                     data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active"
-                                                     data-off="Inactive" {{$value->status =='Active' ? 'checked': '' }}></td>
+                            <td class="col-3">
+                                @if($value->status =='Active')
+                                    <a href="{{route('changeStatus', $value->id)}}" class="btn btn-sm btn-success"> Active</a>
+                                @else
+                                    <a href="{{route('changeStatus', $value->id)}}" class="btn btn-sm btn-danger"> Inactive</a>
+                                @endif
+                            </td>
 
 
                             <td class="col-2">
@@ -82,53 +86,30 @@
 
 
 
-        <div>
-            <script type="text/javascript">
-
-                $('.show_confirm').click(function(event) {
-                    var form =  $(this).closest("form");
-                    var name = $(this).data("name");
-                    event.preventDefault();
-                    swal({
-                        title: `Are you sure you want to delete this record?`,
-                        text: "If you delete this, it will be gone forever.",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                        .then((willDelete) => {
-                            if (willDelete) {
-                                form.submit();
-                            }
-                        });
-                });
-
-            </script>
-            <!--<script>
-                $document.ready(function(){
-                    $("#user_table").Datatable()
-                });
-                $(function(){
-                    $('.toggle-class').change(function(){
-                        var status= $(this).prop('checked') == true ?1 : 0;
-                        var user_id= $(this).data('id');
-                        $.ajax({
-                            type:"GET",
-                            dataType: "json",
-                            url:",
-                            data: {'status': status, 'user_id': user_id},
-                            success: function(data){
-                                console.log(success)
-                            }
-                        });
-                });
-
-
-                });
-            </script>-->
 
 
 
+        <script type="text/javascript">
+
+            $('.show_confirm').click(function(event) {
+                var form =  $(this).closest("form");
+                var name = $(this).data("name");
+                event.preventDefault();
+                swal({
+                    title: `Are you sure you want to delete this record?`,
+                    text: "If you delete this, it will be gone forever.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            form.submit();
+                        }
+                    });
+            });
+
+        </script>
 
 
 @endsection
