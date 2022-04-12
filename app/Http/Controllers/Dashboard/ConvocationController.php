@@ -54,9 +54,7 @@ class ConvocationController extends Controller
                         <td>'.$row->student->parent['nomPere'].' '.$row->student->parent['prenomPere'].'</td>
                         <td>'.$row->student->parent['telPere'].'</td>
                         <td><form action="'.route('convocations.destroy', $row->id).'" method="post" class="d-inline" >
-
-                                <input type="hidden" name="_token" value="XNJK4lAvRz7cmMFJOgttLJvDRQW0IXzYOJXlTTuf">
-                                   <input type="submit" name="" id="" class="show_confirm" data-toggle="tooltip">
+                             <input type="submit" name="" id="" class="show_confirm" data-toggle="tooltip">
                     </form>
                     </td>
                      </tr>';

@@ -50,11 +50,19 @@
                             <td class="col-2">{{$value->name}}</td>
                             <td class="col-3"> {{$value->email}}</td>
                             <td class="col-3">
-                                @if($value->status =='Active')
-                                    <a href="{{route('changeStatus', $value->id)}}" class="btn btn-sm btn-success"> Active</a>
-                                @else
-                                    <a href="{{route('changeStatus', $value->id)}}" class="btn btn-sm btn-danger"> Inactive</a>
-                                @endif
+                                <form action="{{route('changeStatus', $value->id)}}" method="post">
+                                    @csrf
+
+                                    <button class="btn btn-sm {{($value->status =='Active')?'btn-success' : 'btn-danger'}}" type="submit" >
+                                        @if($value->status =='Active')
+                                            Make Inactive
+                                        @else
+                                            Make Active
+                                        @endif
+                                    </button>
+
+                                </form>
+
                             </td>
 
 

@@ -24,7 +24,7 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'users'], function(){
     Route::post('delete/{id}', 'AdminController@destroy')->name('users.destroy');
     Route::get('profile\{id}', 'AdminController@profile')->name('profile');
     Route::post('Updateprofile\{id}', 'AdminController@updateImg')->name('Updateprofile');
-    Route::get('changeStatus/{id}', 'AdminController@changeStatus')->name('changeStatus');
+    Route::post('changeStatus/{id}', 'AdminController@changeStatus')->name('changeStatus');
 
 
 });

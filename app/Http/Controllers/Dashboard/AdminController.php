@@ -165,21 +165,29 @@ class AdminController extends Controller
 
     }
 
-    public function changeStatus( $id)
+    public function changeStatus( $id, Request $request)
     {
-        $getStatus= Admin::select('status')->where('id', $id)->first();
-        //return $getStatus;
-        if($getStatus->status == 'Active'){
-            $status = 0;
-        }else{
-            $status= 1;
+        try {
+            //$getStatus= Admin::select('status')->where('id', $id)->first();
+            $admin = Admin::paginate(PAGINATION);;
+            $role = Role::get();
+            $getStatus = Admin::select('status')->find($id);
+            //dd($getStatus);
+            //return $getStatus;
+            if($getStatus->status == 'Active'){
+                $getStatus::where('id', $id)->update(['status'=>0]);
+            }else{
+                $getStatus::where('id', $id)->update(['status'=>1]);
+            }
+            Session::flash('statuscode', 'succes');
+            return redirect()->route('admins')->with(['status'=>'changed'])->withTitle('list users');;
+            //return view('dashboard.admin.home',compact('admin','role'))->with(['status'=>'changed'])->withTitle('list users');
+            //return $getStatus;
+        }catch (\Exception $exception){
+            //return $exception;
+            //return view('dashboard.users.list_users',compact('admin','role'))->with(['status'=>'No'])->withTitle('list users');
         }
 
-        Admin::where('id', $id)->update(['status'=>$status]);
-        Session::flash('statuscode', 'succes');
-
-        return view('dashboard.users.list_users')->with('status', 'changed')->withTitle('list users');
-        //return $getStatus;
     }
 
 
