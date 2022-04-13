@@ -23,6 +23,7 @@ class Travail extends Model
         'date_limite',
         'matiere_id',
         'class_id',
+        'file',
 
     ];
     protected $hidden=[

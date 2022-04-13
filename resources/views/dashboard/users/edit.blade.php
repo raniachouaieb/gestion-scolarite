@@ -17,6 +17,30 @@
             margin-left: 151px;
             width: 126px;
         }
+        .customFile{
+            font-size: 16px;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 5px 5px 10px black;
+            width: 280px;
+            outline: none;
+        }
+        ::-webkit-file-upload-button{
+            color: white;
+            background: #206a5d;
+            padding: 9px;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 1px 0 1px #6b4559;
+            outline: none;
+        }
+        ::-webkit-file-upload-button:hover{
+            background: #438a5e;
+        }
+        .profilImg{
+            width: 150px;
+            height: 150px;
+        }
 
     </style>
     <div class="container">
@@ -32,7 +56,7 @@
 
         <div class="card-body">
 
-            <form method="post" action="{{ route('users.update', $user->id) }}">
+            <form method="post" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-6 editUser">
@@ -93,6 +117,11 @@
                                         <br>
                                         <a href="#" id="btn" onclick="passwordGenerator()">Génerer </a>
                                     </div>
+                                    <div class="form-group">
+                                        <label>Image de profile</label>
+                                        <input type="file" name="image" class="customFile" id="image-input"  onchange="loadFile(event)" >
+                                        <div class="image"><img class="profilImg" id="output" src="{{asset('assets/'.$user->image)}}"></div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -117,7 +146,13 @@
             }
             document.getElementById("password").value= create_pass;
         }
+    </script>
 
+    <script>
+        var loadFile= function(event){
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+        };
 
     </script>
 @endsection

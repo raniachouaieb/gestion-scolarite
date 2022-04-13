@@ -10,6 +10,8 @@ use App\Models\Travail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+use App\Helpers\General;
+
 
 class TravailController extends Controller
 {
@@ -54,6 +56,14 @@ class TravailController extends Controller
             $travaux->date_limite=$request->date_limite;
             $travaux->matiere_id=$request->matiere;
             $travaux->class_id=$request->class;
+            if($request->has('image')) {
+               // dd($request->input('image'));
+                /*$name = time().'.' .explode('/',explode(':', substr($request->image, 0,
+                        strpos($request->image, ';')))[1])[1];*/
+                $path = uploadImage('travaux', $request->input('image'));
+               dd($path);
+               $travaux->file = $path;
+            }
             $dataTravail =$travaux->save();
             if($dataTravail){
                 Session::flash('statuscode', 'success');
@@ -99,6 +109,7 @@ class TravailController extends Controller
                 'date_limite'=>$request->date_limite,
                 'matiere_id'=>$request->matiere,
                 'class_id'=>$request->class,
+
 
             ]);
             $travailId->update($request->all());

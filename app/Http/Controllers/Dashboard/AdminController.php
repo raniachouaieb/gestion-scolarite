@@ -67,6 +67,12 @@ class AdminController extends Controller
         $user->status=isset($request->status) ? 1 : 0;
         $user->password=$request->password;
         $user->roles_name=$request->role;
+        if($request->has('image')){
+           // dd($request->input('image'));
+            $path = uploadImage('admin',$request->image);
+            //return $path;
+            $user->image = $path;
+        }
         $user->assignRole($request->input('role'));
         $user->save();
         Admin::sendPasswordEmail($user);
@@ -90,13 +96,22 @@ class AdminController extends Controller
             if(!$userID){
                 return redirect()->route('admins')->with(['error'=>'there is no data with this id, please enter a correct one']);
             }
-            $userUpdated = $userID->update([
-                'name'=>$request->name,
-                "email"=>$request->email,
-                "status"=>isset($request->status) ? 1 : 0,
-                'password' => $request->password,
-            "roles_name"=>$request->role,
-            ]);
+            $userID->name= $request->name;
+            $userID->email=$request->email;
+            $userID->status=isset($request->status) ? 1 : 0;
+            $userID->password=$request->password;
+            $userID->roles_name=$request->role;
+
+            if($request->hasfile('image')){
+
+                $path = uploadImage('admin',$request->file('image'));
+                if(File::exists($path))
+                {
+                    File::delete($path);
+                }
+                $userID->image= $path;
+            }
+            $userID->update();
             $userID->assignRole($request->input('role'));
             Admin::sendPasswordEmail($userID);
 

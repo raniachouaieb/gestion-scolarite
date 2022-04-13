@@ -12,6 +12,46 @@
         margin-top: -11px;
         width: 138px;
     }
+    .drag-area{
+        border: 2px dashed #1b1e21;
+        height: 205px;
+        width: 692px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .drag-area.active{
+        border: 2px solid #1b1e21;
+
+
+    }
+    .drag-area .icon{
+        font-size: 30px;
+        font-weight: 500;
+    }
+    .drag-area .header{
+        font-size: 20px;
+        font-weight: 500;
+    }
+    .drag-area span{
+        font-size: 20px;
+        font-weight: 500;
+        margin: 10px 0 15px 0;
+    }
+    .drag-area .button{
+        font-size: 20px;
+        font-weight: 500;
+        color: #5256ad;
+        cursor: pointer;
+
+    }
+    .drag-area img{
+        width: 40%;
+        height: 85%;
+        object-fit: cover;
+    }
 </style>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -24,7 +64,7 @@
 <div class="container">
     <div class="card-body">
 
-                <form method="post" action="{{ route('travails.storeTravail') }}">
+                <form method="post" action="{{ route('travails.storeTravail') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-8 ">
@@ -129,6 +169,17 @@
                         </div>
 
                      </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="drag-area">
+                                <div class="icon"><i class="fa fa-cloud-download-alt"></i></div>
+                                <div class="header">Drag & drop to upload</div>
+                                <span class="header"> OR <span class="button">Browse file</span></span>
+                                <!--<button id="file">Browse file</button>-->
+                                <input type="file"  name="image" hidden>
+                            </div>
+                        </div>
+                    </div>
                 </form>
 
 
@@ -166,6 +217,69 @@
         });
     });
 </script>
+    <script>
+        const dropArea = document.querySelector(".drag-area");
+        dragText = dropArea.querySelector(".header");
+        button = dropArea.querySelector(".button");
+        input = dropArea.querySelector("input");
+
+        button.onclick = ()=>{
+            input.click();
+        }
+        input.addEventListener('change',function(){
+            file = this.files[0];
+            dropArea.classList.add('active');
+            displayFiles();
+        })
+
+        let file;
+        //if user drag file over dropArea
+         dropArea.addEventListener("dragover", (event)=>{
+             event.preventDefault();
+            // console.log("file is over dropArea");
+             dropArea.classList.add("active");
+             dragText.textContent = "release to upload file";
+         });
+
+        //if user leave file from dropArea
+        dropArea.addEventListener("dragleave", (event)=>{
+            //console.log("file is outside from dropArea");
+            dropArea.classList.remove("active");
+            dragText.textContent= "Drag & drop o upload";
+        });
+
+        //if user drop file on dropArea
+        dropArea.addEventListener("drop", (event)=>{
+            event.preventDefault();
+            file = event.dataTransfer.files[0];
+            displayFiles();
+
+
+        });
+        function displayFiles(){
+            let fileType = file.type;
+
+            let validExtensions = ["image/jpeg", "image/png", "image/jpg", "application/pdf" ];
+            if(validExtensions.includes(fileType)){
+                let fileReader = new FileReader(); //creating new fileReader object
+                fileReader.onload = ()=>{
+                    //remplace par le nom du fichier et non pas par le Base64
+                   // let fileURL = file.name;
+                    let fileURL = fileReader.result;//passing user file source in fileURl variable
+                    console.log(fileURL);
+
+                    let imgTag = `<img name="image" src="${fileURL}" alt=""><input value="${fileURL}" type="hidden" name="image">`;
+                    dropArea.innerHTML = imgTag; //add created img in dropArea
+
+                }
+                fileReader.readAsDataURL(file);
+            }else{
+                console.log("this is not image ");
+                dropArea.classList.remove("active");
+            }
+        }
+
+    </script>
 
 
 

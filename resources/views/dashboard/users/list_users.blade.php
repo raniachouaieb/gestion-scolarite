@@ -70,6 +70,7 @@
                                     <label class="badge badge-success"> @foreach($role as $rol)@if($value->roles_name== $rol->id){{$rol->name}}@endif @endforeach</label>
                             </td>
 
+
                             <td class="col-2"><a href="{{route('users.edit', $value->id)}}" ><i class="fas fa-pen fa-sm"></i></a>
 
 

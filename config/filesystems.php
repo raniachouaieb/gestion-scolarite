@@ -65,8 +65,12 @@ return [
             'root' => base_path().'/public/assets/uploads/admin/',
             'url' => env('APP_URL').'/public',
             'visibility' => 'public',
-
-
+        ],
+        'travaux'=>[
+            'driver' => 'local',
+            'root' => base_path().'/public/assets/uploads/travaux/',
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
         ],
 
         's3' => [

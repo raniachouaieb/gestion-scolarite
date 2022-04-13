@@ -8,10 +8,36 @@
         .user{
             margin-left: 56px;
         }
-        .add{
-            margin-left: 839px;
-            margin-top: -65px;
-            width: 116px;
+
+        .customFile{
+            font-size: 16px;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 5px 5px 10px black;
+            width: 280px;
+            outline: none;
+        }
+        ::-webkit-file-upload-button{
+            color: white;
+            background: #206a5d;
+            padding: 9px;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 1px 0 1px #6b4559;
+            outline: none;
+        }
+        ::-webkit-file-upload-button:hover{
+            background: #438a5e;
+        }
+        .image{
+            border: 2px dashed #c2cdda;
+            padding: 45px;
+            margin-top: 15px;
+
+        }
+        .profilImg{
+            width: 150px;
+            height: 150px;
         }
     </style>
     <div class="container">
@@ -27,12 +53,11 @@
 
         <div class="card-body">
 
-            <form method="post" action="{{ route('users.storeUser') }}">
+            <form method="post" action="{{ route('users.storeUser') }}" enctype="multipart/form-data">
                 @csrf
-                <button type="submit" class="btn btn-primary add">Ajouter</button>
 
                 <div class="row">
-                    <div class="col-md-7 user">
+                    <div class="col-md-6 user">
                         <div class="card shadow">
                             <div class="card-body">
                                 <div class="form-group">
@@ -85,29 +110,38 @@
                                               <strong>{{ $message }}</strong>
                                           </span>
                                     @enderror
-                                </div>
+                                 </div>
 
+                             </div>
 
+                         </div>
 
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <div class="col-3 status">
-                        <div class="card shadow">
+                     </div>
+                    <div class="col-4 status">
+                        <div class="card shadow" style="margin-top: -102px;">
                             <div class="card-body">
-                                <label>Status</label>
+                                <div class="form-group">
+
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" checked id="switch1" name="status">
                                     <label class="custom-control-label" for="switch1">Status</label>
                                 </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Image de profile</label>
+                                    <input type="file" name="image" class="customFile" id="image-input"  onchange="loadFile(event)" >
+                                    <div class="image"><img class="profilImg" id="output"></div>
+                                </div>
 
                             </div>
                         </div>
 
                     </div>
+                    <button type="submit" class="btn btn-primary add">Ajouter</button>
+
+
                 </div>
+
 
             </form>
         </div>
@@ -125,7 +159,14 @@
             }
             document.getElementById("password").value= create_pass;
         }
+    </script>
 
+    <script>
+        var loadFile= function(event){
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+        };
 
     </script>
+
 @endsection
