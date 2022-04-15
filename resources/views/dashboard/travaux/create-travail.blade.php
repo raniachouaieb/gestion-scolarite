@@ -84,7 +84,7 @@
 
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <h5 class="card-title color"><i class="fa fa-list-alt"></i> Travail à faire</h5>
+                                                    <h5 class="card-title color"><i class="fa fa-th-list"></i> Travail à faire</h5>
                                                     <hr />
                                                     <div class="row">
                                                         <div class="col-4">
@@ -109,7 +109,7 @@
                                                 </div>
                                                 <!--/span-->
                                                 <div class="col-md-4">
-                                                    <h5 class="card-title">About Product</h5>
+                                                    <h5 class="card-title color">Pour</h5>
                                                     <hr />
                                                     <div class="mb-3">
                                                         <label for="">Niveau</label>

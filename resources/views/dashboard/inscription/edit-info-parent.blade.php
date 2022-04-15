@@ -1,109 +1,166 @@
 @extends('layouts.app-admin')
 @section('title', $title)
 @section('content')
+    <style>
+        .modifInfo{
 
-<div class="container">
+            margin-left: 889px;
+            width: 121px;
+            margin-top: 11px;
 
+        }
+        .modifElev{
+            width: 121px;
+            margin-left: 550px;
 
-    <h1>Détaille</h1>
-    <h3>Information Pere</h3>
+        }
+        .color{
+            color: #1d68a7;
+        }
+    </style>
+
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="">Détaille</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Modifier Information</li>
+
+            </ol>
+        </nav>
+        <div class="row">
+            <!-- Column -->
+            <div class="col-lg-12">
+                <div class="card material-card">
+                    <div class="card-body">
 
     <form method="post" action="{{ route('inscri.update', $parent->id ) }}">
         @csrf
         <div class="card">
             <div class="card-body">
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="nomPere">Nom </label>
-                        <input type="text" class="form-control" name="nomPere" value="{{ $parent->nomPere }}" />
-                    </div>
-                    <div class="col">
-                        <label for="prenomPere">Prénom </label>
-                        <input type="text" class="form-control" name="prenomPere" value="{{ $parent->prenomPere }}" />
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col">
-                        <label for="professionPere">Profession</label>
-                        <input type="text" class="form-control" name="professionPere" value="{{ $parent->professionPere }}" />
-                    </div>
-                    <div class="col">
-                        <label for="telPere">Téléphone</label>
-                        <input type="text" class="form-control" name="telPere" value="{{ $parent->telPere }}" />
-                    </div>
-                </div>
-             </div>
-        </div>
-
-        <h3>Information Mere</h3>
-        <div class="card">
-            <div class="card-body">
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label for="nomMere">Nom </label>
-                            <input type="text" class="form-control" name="nomMere" value="{{ $parent->nomMere }}" />
-                        </div>
-                        <div class="col">
-                            <label for="prenomMere">Prénom </label>
-                            <input type="text" class="form-control" name="prenomMere" value="{{ $parent->prenomMere }}" />
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5 class="card-title color"><i class="fa fa-info-circle"></i> Informations personnelles</h5>
+                        <hr />
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="mb-3">
+                                    <label for="nomPere">Nom  Père</label>
+                                    <input type="text" class="form-control" name="nomPere" value="{{ $parent->nomPere }} " />
+                                </div>
+                            </div>
+                            <div class="col-4"><label for="" >Nom  Mère</label>
+                                <input type="text" class="form-control" name="nomMere" value="{{ $parent->nomMere }} " />
+                            </div>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="col">
-                            <label for="professionMere">Profession </label>
-                            <input type="text" class="form-control" name="professionMere" value="{{ $parent->professionMere }}" />
+                    <!--/span-->
+                    <div class="col-md-4">
+                        <h5 class="card-title color"><i class="fa fa-info-circle"></i> Information communes</h5>
+                        <hr />
+                        <div class="mb-3">
+                            <label for="adresse">Adresse </label>
+                            <input type="text" class="form-control" name="adresse" value="{{ $parent->adresse }}" />
                         </div>
-                        <div class="col">
-                            <label for="telMere">Téléphone </label>
-                            <input type="text" class="form-control" name="telMere" value="{{ $parent->telMere }}" />
-                        </div>
                     </div>
-            </div>
-        </div>
-
-
-        <h3>Information Générale</h3>
-        <div class="card">
-            <div class="card-body">
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="adresse">Adresse </label>
-                        <input type="text" class="form-control" name="adresse" value="{{ $parent->adresse }}" />
-                    </div>
-                    <div class="col">
-                        <label for="email">Email </label>
-                        <input type="text" class="form-control" name="email" value="{{ $parent->email }}" />
-                    </div>
+                    <!--/span-->
                 </div>
                 <div class="row">
-                        <div class="col-md-6">
+                    <div class="col-md-8">
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="mb-3">
+                                    <label for="nomPere">Prénom Père</label>
+                                    <input type="text" class="form-control" name="prenomPere" value="{{ $parent->prenomPere }}" />
+                                </div>
+                            </div>
+                            <div class="col-4"><label for="" >Prénom Mère</label>
+                                <input type="text" class="form-control" name="prenomMere" value="{{ $parent->prenomMere }}" />
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-4">
+
+                        <div class="mb-3">
+                            <label for="email">Email </label>
+                            <input type="text" class="form-control" name="email" value="{{ $parent->email }}" />
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="mb-3">
+                                    <label for="nomPere">Professio Père</label>
+                                    <input type="text" class="form-control" name="professionPere" value="{{ $parent->professionPere }}" />
+                                </div>
+                            </div>
+                            <div class="col-4"><label for="" >Profession Mère</label>
+                                <input type="text" class="form-control" name="professionMere" value="{{ $parent->professionMere }}" />
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-4">
+
+                        <div class="mb-3">
                             <label for="nbEnfants">Nombre Enfants </label>
                             <input type="number" class="form-control" name="nbEnfants" value="{{ $parent->nbEnfants }}" />
                         </div>
+                    </div>
+                    <!--/span-->
+                </div>
 
-                        <div class="col-md-6">
-                            <div class="form-check">
-                                <label for="status"> Status</label>
-                                <select class="form-control" name="status" selected>
-                                    <option value="{{$parent->is_active}}" >
-                                        En attente</option>
-                                    <option value="accepter"  {{$parent->is_active ? 'selected' : ''}}>
-                                        Accepter</option>
-                                    <option value="rejeter" >
-                                        Refuser</option>
-                                </select>
+                <div class="row">
+                    <div class="col-md-8">
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="mb-3">
+                                    <label for="">Téléphone Père</label>
+                                    <input type="text" class="form-control" name="telPere" value="{{ $parent->telPere }}" />
+                                </div>
+                            </div>
+                            <div class="col-4"><label for="" >Téléphone Mère</label>
+                                <input type="text" class="form-control" name="telMere" value="{{ $parent->telMere }}" />
                             </div>
                         </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-4">
+
+                        <div class="mb-3">
+                            <label for="status"> Status</label>
+                            <select class="form-control" name="status" selected>
+                                <option value="{{$parent->is_active}}" >
+                                    En attente</option>
+                                <option value="accepter"  {{$parent->is_active ? 'selected' : ''}}>
+                                    Accepter</option>
+                                <option value="rejeter" >
+                                    Refuser</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--/span-->
                  </div>
-            </div>
-        </div>
 
 
-        <button type="submit" class="btn btn-success btn-circle right"><i class="fas fa-check"></i></button>
+             </div>
+         </div>
+
+        <button type="submit" class="btn btn-outline-info btn-circle right modifInfo"><i class="fas fa-check"></i> Modifier</button>
 
 
     </form>
-
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <div class="container test">
         <div class="row">
@@ -184,8 +241,8 @@
                                 </div>
 
 
-                                <button type="submit" class="btn btn-success btn-circle right"><i
-                                        class="fas fa-check"></i></button>
+                                <button type="submit" class="btn btn-outline-success btn-circle right modifElev"><i
+                                        class="fas fa-check"></i> Modifier</button>
 
 
                             </form>

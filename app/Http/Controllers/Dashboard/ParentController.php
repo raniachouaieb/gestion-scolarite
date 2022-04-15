@@ -93,7 +93,7 @@ class ParentController extends Controller
         ]);
 
 
-        return redirect()->route('inscri.index')->with(['success'=>'modification avec succés']);
+        return redirect()->route('inscri.list_accepted')->with(['success'=>'modification avec succés']);
 
     }
 

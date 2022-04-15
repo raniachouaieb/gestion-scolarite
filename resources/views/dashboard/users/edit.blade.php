@@ -153,7 +153,7 @@
                                 <div class="form-group">
                                     <div class="mb-3">
                                         <input type="file" name="image" class="customFile" id="image-input"  onchange="loadFile(event)" >
-                                        <div class="image" ><img  src="./public/images.png" id="output" class="profilImg" ></div>
+                                        <div class="image" ><img  src="{{asset('assets/'.$user->image)}}" id="output" class="profilImg" ></div>
                                     </div>
                                 </div>
                             </div>

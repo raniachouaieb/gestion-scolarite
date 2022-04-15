@@ -1,6 +1,12 @@
 @extends('layouts.app-admin')
 
 @section('content')
+    <style>
+        .cardNivClass{
+            padding: 18px;
+
+        }
+    </style>
 
     <div class="container">
         @include('includes.alerts.flash')
@@ -13,7 +19,7 @@
 
 
 
-        <div class=" card shadow mb-5">
+        <div class=" card shadow mb-5 cardNivClass">
             <div class="row">
                 @foreach($niveaux as $niv)
 

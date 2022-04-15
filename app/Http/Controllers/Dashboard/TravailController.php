@@ -8,6 +8,7 @@ use App\Models\Level;
 use App\Models\Matiere;
 use App\Models\Travail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
 use App\Helpers\General;
@@ -102,18 +103,22 @@ class TravailController extends Controller
 
                 return redirect()->route('convocations.index')->with(['status'=>'there is no data with this id, please enter a correct one']);
             }
-            $travailId->update([
-                'titre_travail'=>$request->titre_travail,
-                'detail_travail'=>$request->detail_travail,
-                'date_depot'=>$request->date_depot,
-                'date_limite'=>$request->date_limite,
-                'matiere_id'=>$request->matiere,
-                'class_id'=>$request->class,
+            $travailId->titre_travail= $request->titre_travail;
+            $travailId->detail_travail=$request->detail_travail;
+            $travailId->date_depot=$request->date_depot;
+            $travailId->date_limite=$request->date_limite;
+            $travailId->matiere_id=$request->matiere;
+            $travailId->class_id=$request->class;
+            if($request->hasfile('image')){
 
-
-            ]);
-            $travailId->update($request->all());
-
+                $path = uploadImage('travaux',$request->file('image'));
+                if(File::exists($path))
+                {
+                    File::delete($path);
+                }
+                $travailId->image= $path;
+            }
+            $travailId->update();
             Session::flash('statuscode', 'success');
 
             return redirect()->route('travails.index')->with(['status'=>'Modification avec succés']);

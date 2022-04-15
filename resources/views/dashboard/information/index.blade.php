@@ -7,12 +7,25 @@
             float: right;
             margin-right: 25px;
         }
-        .tableSeance{
-            margin-top: 70px;
+        .tableNotInfo{
+            margin-top: 112px;
         }
         .trash{
             color:red;
             margin-left: 7px;
+        }
+        .position-relative {
+            position: relative!important;
+        }
+
+        .ps-3 {
+            padding-left: 1rem!important;
+        }
+        .box{
+            box-shadow: 3px 3px 2px ;
+            border-radius: 5px 5px 5px;
+            border: 1px ;
+            margin-bottom: 15px;
         }
     </style>
     <div class="container">
@@ -29,7 +42,12 @@
 
 
 
-        <div class="card shadow tableSeance">
+        <div class="card shadow tableNotInfo">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary  pt-4 pb-3 box">
+                    <h6 class="text-white text-capitalize ps-3"> Informations</h6>
+                </div>
+            </div>
             <div class="table-responsive">
 
                 <table class="table table-hover">
