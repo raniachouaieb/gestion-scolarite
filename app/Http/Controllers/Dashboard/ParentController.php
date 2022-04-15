@@ -25,7 +25,7 @@ class ParentController extends Controller
 
        }
 
-    public function listAccepted(){
+    public function listAccepted(Request $req){
         $niveaux = Level::orderBy('created_at', 'ASC')->get();
         //$parent = Parente::with('students')->where('is_active', 1)->paginate(PAGINATION);
 

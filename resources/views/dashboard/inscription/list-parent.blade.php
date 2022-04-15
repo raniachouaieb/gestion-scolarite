@@ -4,7 +4,21 @@
 
 @section('content')
 
+<style>
+    .position-relative {
+        position: relative!important;
+    }
 
+    .ps-3 {
+        padding-left: 1rem!important;
+    }
+    .box{
+        box-shadow: 3px 3px 2px ;
+        border-radius: 5px 5px 5px;
+        border: 1px ;
+        margin-bottom: 15px;
+    }
+</style>
 
 <div class="container">
 @include('includes.alerts.flash')
@@ -14,7 +28,12 @@
             <li class="breadcrumb-item active" aria-current="page">Liste Parents préinscrits</li>
         </ol>
     </nav>
-<div class="card shadow mb-4">
+<div class="card shadow mb-4 mt-5">
+    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+        <div class="bg-gradient-primary shadow-primary  pt-4 pb-3 box">
+            <h6 class="text-white text-capitalize ps-3"> Parents pré-Inscrit</h6>
+        </div>
+    </div>
                             <div class="table-responsive">
                             <table class="table table-hover">
                                     <thead>

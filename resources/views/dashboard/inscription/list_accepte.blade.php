@@ -10,10 +10,23 @@
         padding: 1px 4px;
     }
 
+
+    .ps-3 {
+        padding-left: 1rem!important;
+    }
+    .box{
+        box-shadow: 3px 3px 2px ;
+        border-radius: 5px 5px 5px;
+        border: 1px ;
+        margin-bottom: 15px;
+    }
+
 </style>
 <div class="container">
 <div class="row "><h6><span class="countParent mr-2">{{$parentByClasse->count()}}</span>Parent Inscrits </h6></div>
+
         <div class="parentTab mb-4" id="list">
+
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>

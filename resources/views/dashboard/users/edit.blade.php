@@ -4,14 +4,9 @@
 @section('content')
     <style>
         .editUser{
-            margin-left: 39px;
-            margin-top: 49px;
+            margin-left: 13px;
         }
-        .passModif{
-            margin-top: 131px;
-            margin-left: 12px;
 
-        }
         .edit{
             margin-top: 23px;
             margin-left: 151px;
@@ -41,6 +36,29 @@
             width: 150px;
             height: 150px;
         }
+        .image{
+            border: 2px dashed #c2cdda;
+            padding: 34px;
+            margin-top: 47px;
+            width: 53%;
+            margin-left: 74px;
+
+        }
+        .profilImg{
+            width: 144px;
+            height: 150px;
+            margin-left: -32px;
+            border: none;
+        }
+        .profil{
+            margin-top: 17px;
+        }
+        .btn{
+            margin-left: 725%;
+            margin-top: 25px;
+            width: 120px;
+
+        }
 
     </style>
     <div class="container">
@@ -59,9 +77,25 @@
             <form method="post" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                    <div class="col-md-6 editUser">
+                    <div class="col-md-7 editUser">
                         <div class="card shadow">
                             <div class="card-body">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <h5 class="card-title">User information</h5>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-check col-2">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" @if($user->status=="Active") checked @endif   id="switch1" name="status">
+                                                <label class="custom-control-label" for="switch1">Status</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <hr />
                                 <div class="form-group">
                                     <label for="">Nom & Prénom</label>
                                     <input type="text" class="form-control" name="name" value="{{$user->name}}" >
@@ -69,6 +103,30 @@
                                 <div class="form-group">
                                     <label for="">Email </label>
                                     <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Saisir email" value="{{$user->email}}">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="mb-3">
+                                            <label for="">Mot de passe </label>
+                                            <div class="input-group mb-3">
+                                                      <span class="input-group-text" id="basic-addon1"
+                                                      ><i class="fa fa-key"></i></span>
+                                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" aria-describedby="emailHelp" placeholder="">
+                                                @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                         <strong>{{ $message }}</strong>
+                                                        </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <br><br>
+                                        <a href="#" id="btn" onclick="passwordGenerator()">Génerer </a>
+                                    </div>
+                                    <!--/span-->
+
+                                    <!--/span-->
                                 </div>
 
 
@@ -86,47 +144,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-5 passModif">
+
+                    <div class="col-4 profil">
                         <div class="card shadow">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <label>Status</label>
-                                    </div>
-
-
-                                    <div class="form-check col-2">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" @if($user->status=="Active") checked @endif   id="switch1" name="status">
-                                            <label class="custom-control-label" for="switch1"></label>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-8">
-                                        <label for="">Mot de passe </label>
-                                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" aria-describedby="emailHelp" placeholder="">
-                                        @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                              <strong>{{ $message }}</strong>
-                                          </span>
-                                        @enderror
-                                    </div>
-                                    <div class="col-4">
-                                        <br>
-                                        <a href="#" id="btn" onclick="passwordGenerator()">Génerer </a>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Image de profile</label>
+                                <h5 class="card-title">Image de profil</h5>
+                                <hr />
+                                <div class="form-group">
+                                    <div class="mb-3">
                                         <input type="file" name="image" class="customFile" id="image-input"  onchange="loadFile(event)" >
-                                        <div class="image"><img class="profilImg" id="output" src="{{asset('assets/'.$user->image)}}"></div>
+                                        <div class="image" ><img  src="./public/images.png" id="output" class="profilImg" ></div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-outline-primary edit">Submit</button>
+
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-outline-info rounded-pill px-4">Enregistrer</button>
 
                     </div>
                 </div>

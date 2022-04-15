@@ -17,14 +17,15 @@
         }
     </style>
 
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Travaux à faire</li>
-        </ol>
-    </nav>
+
 
     <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Travaux à faire</li>
+            </ol>
+        </nav>
         <a  class="btn btn-primary position" href="{{ route('travails.addTravail')}}"><i class="fas fa-plus"></i></a>
 
     </div>
