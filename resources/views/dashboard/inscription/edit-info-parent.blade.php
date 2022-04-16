@@ -17,6 +17,14 @@
         .color{
             color: #1d68a7;
         }
+        #profileDisplay{
+            display: block;
+            width: 60%;
+            margin: 10px auto;
+            border-radius: 50%;
+
+
+        }
     </style>
 
     <div class="container">
@@ -34,7 +42,7 @@
                 <div class="card material-card">
                     <div class="card-body">
 
-    <form method="post" action="{{ route('inscri.update', $parent->id ) }}">
+    <form method="post" action="{{ route('inscri.update', $parent->id ) }}" enctype="multipart/form-data">
         @csrf
         <div class="card">
             <div class="card-body">
@@ -148,6 +156,29 @@
                     </div>
                     <!--/span-->
                  </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="card-title color"><i class="fa fa-image"></i> Image de profil</h5>
+                        <hr />
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <div class="mb-3">
+                                    <img src="{{asset('assets/'.$parent->image_profile)}}"  onclick="clickImage()" id="profileDisplay" alt="fgh"/>
+                                    <label>Choisir une photo</label>
+                                    <input type="file" name="image_profile" id="imageProfile" onchange="loadFile(event)" style="display: none;">
+
+                                </div>
+                            </div>
+                            <div class="col-4">
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-4">
+
+                    </div>
+                    <!--/span-->
+                </div>
 
 
              </div>
@@ -292,7 +323,15 @@
         });
     });
 </script>
-
+<script>
+    function clickImage(){
+        document.querySelector('#imageProfile').click();
+    }
+    var loadFile = function(event){
+        var profileDisplay = document.getElementById('profileDisplay');
+        profileDisplay.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
 
 
 @endsection

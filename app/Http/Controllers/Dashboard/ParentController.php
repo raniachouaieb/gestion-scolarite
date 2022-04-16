@@ -11,6 +11,7 @@ use App\Models\Level;
 
 
 use DB;
+use Illuminate\Support\Facades\File;
 
 class ParentController extends Controller
 {
@@ -77,20 +78,30 @@ class ParentController extends Controller
         if(!$parent){
             return redirect()->route('inscri.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
         }
-        $parent->update([
-            "nomPere"=>$request->nomPere,
-            "prenomPere"=>$request->prenomPere,
-            "professionPere"=> $request->professionPere,
-            "telPere"=> $request->telPere,
-            "nomMere"=> $request->nomMere,
-            "prenomMere"=> $request->prenomMere,
-            "professionMere"=> $request->professionMere,
-            "telMere"=> $request->telMere,
-            "nbEnfants"=> $request->nbEnfants,
-            "adresse"=> $request->adresse,
-            "email"=> $request->email,
-            "is_active"=>($request->is_active == 'rejeter')? 0:1,
-        ]);
+        $parent->nomPere= $request->nomPere;
+        $parent->prenomPere=$request->prenomPere;
+        $parent->professionPere=$request->professionPere;
+        $parent->telPere=$request->telPere;
+        $parent->nomMere=$request->nomMere;
+        $parent->prenomMere=$request->prenomMere;
+        $parent->professionMere=$request->professionMere;
+        $parent->telMere=$request->telMere;
+        $parent->nbEnfants=$request->nbEnfants;
+        $parent->adresse=$request->adresse;
+        $parent->email=$request->email;
+        $parent->email=$request->email;
+        $parent->is_active=$request->is_active == 'rejeter' ? 0:1;
+        if($request->hasfile('image_profile')){
+
+            $path = uploadImage('parents',$request->file('image_profile'));
+            if(File::exists($path))
+            {
+                File::delete($path);
+            }
+            $parent->image_profile= $path;
+        }
+        $parent->update();
+
 
 
         return redirect()->route('inscri.list_accepted')->with(['success'=>'modification avec succés']);

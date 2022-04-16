@@ -72,6 +72,12 @@ return [
             'url' => env('APP_URL').'/public',
             'visibility' => 'public',
         ],
+        'parents'=>[
+            'driver' => 'local',
+            'root' => base_path().'/public/assets/uploads/parents/',
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',

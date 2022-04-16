@@ -26,7 +26,7 @@ class Parente extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'nomPere', 'prenomPere', 'telPere',
         'professionPere','nomMere','prenomMere','telMere',
-        'professionMere','nbEnfants','email','password','adresse',
+        'professionMere','nbEnfants','email', 'image_profile','password','adresse',
         'is_active',
     ];
 
