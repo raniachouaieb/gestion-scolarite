@@ -8,6 +8,9 @@
         border-radius: 2px 4px 4px;
         padding: 1px 4px;
     }
+    table-responsive table thead tr{color: #ffffff;
+        font-family: 'Nunito', sans-serif;
+        font-weight: inherit}
 </style>
 
 <div class="container">
@@ -20,8 +23,8 @@
 
             <div class="table-responsive">
 
-        <table class="table table-hover">
-            <thead>
+                <table class="table table-striped">
+                    <thead class="bg-primary">
             <tr>
                 <td class="col-1">#</td>
                 <td class="col-6">Nom</td>

@@ -9,6 +9,7 @@ use App\Models\Matiere;
 use App\Models\Travail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use App\Helpers\General;
 
@@ -86,6 +87,9 @@ class TravailController extends Controller
         $niveaux = Level::get();
 
         $matieres = Matiere::get();
+        /*$fil= $request->file('image');
+        $ext = $fil->getClientOriginalExtension();
+        Log::info($ext);*/
         if(!$travail){
             Session::flash('statuscode', 'error');
 
@@ -115,11 +119,12 @@ class TravailController extends Controller
                 {
                     File::delete($path);
                 }
+
                 $travailId->image= $path;
             }
+
             $travailId->update();
             Session::flash('statuscode', 'success');
-
             return redirect()->route('travails.index')->with(['status'=>'Modification avec succés']);
         }catch(\Exception $exception){
             Session::flash('statuscode', 'error');

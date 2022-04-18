@@ -258,6 +258,8 @@
         input.addEventListener('change',function(){
             file = this.files[0];
             dropArea.classList.add('active');
+            let eleToRemove = document.getElementsByClassName('eleToRemove')[0];// to get only the first element
+            eleToRemove.style.display= 'none';
             displayFiles();
         })
 
@@ -310,8 +312,8 @@
                     {
                         const pdfTag = new Image();
                         pdfTag.src = window.location.href;
-                        pdfTag.src = "http://127.0.0.1:8000/assets/uploads/travaux/pdf.png";
-                        pdfTag.style.width= "100";
+                        pdfTag.src = "http://127.0.0.1:8000/assets/uploads/travaux/pdf1.png";
+                        pdfTag.style.width= "50";
                         dropArea.appendChild(pdfTag);
                     }
 
@@ -320,11 +322,8 @@
 
                     const imgTag = new Image();
                     imgTag.src = URL.createObjectURL(file);
-                     //dropArea.innerHTML = imgTag; //add created img in dropArea
-
                     dropArea.appendChild(imgTag);
                     console.log(imgTag);
-
                 }
 
                 fileReader.readAsDataURL(file);

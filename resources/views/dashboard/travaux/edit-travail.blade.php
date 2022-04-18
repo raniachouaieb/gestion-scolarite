@@ -17,7 +17,7 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            margin-left: 20px;
+            /*margin-left: 20px;*/
         }
         .drag-area.active{
             border: 2px solid #1b1e21;
@@ -87,8 +87,8 @@
                                             <input id="date_depot" type="date" class="form-control  @error('date_depot') is-invalid @enderror" name="date_depot" value="{{$travail->date_depot}}">
                                             @error('date_depot')
                                             <span class="invalid-feedback" role="alert">
-                                                                           <strong>{{ $message }}</strong>
-                                                                        </span>
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                             @enderror
                                         </div>
                                     </div>
@@ -175,15 +175,30 @@
                             </div>
                             <!--/span-->
                         </div>
-
-                        <div class="drag-area">
-                            <div class="icon"><i class="fa fa-cloud-download-alt"></i></div>
-                            <div class="header">Drag & drop to upload</div>
-                            <span class="header"> OR <span class="button">Browse file</span></span>
-                            <!--<button id="file">Browse file</button>-->
-                            <input type="file"  name="image" hidden>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <div class="drag-area">
+                                    <div class="eleToRemove">
+                                        <div class="icon"><i class="fa fa-cloud-download-alt"></i></div>
+                                        <div class="header">Drag & drop to upload</div>
+                                        <span class="header"> OR <span class="button">Browse file</span></span>
+                                        <!--<button id="file">Browse file</button>-->
+                                    </div>
+                                    <input type="file"  name="image" hidden>
+                                </div>
+                            </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label>File</label>
+                                <br>
 
+                                <img src="{{asset('assets/'.$travail->file)}}" style="width: 105px;margin-left: 124px;" alt=""/>
+
+                            </div>
+                        </div>
                     </div>
                     <div class="form-actions">
                         <button type="submit" class="btn btn-outline-success taf px-4">Déposer</button>
@@ -237,6 +252,8 @@
                     }
                     input.addEventListener('change',function(){
                         file = this.files[0];
+                        let eleToRemove = document.getElementsByClassName('eleToRemove')[0];// to get only the first element
+                        eleToRemove.style.display= 'none';
                         dropArea.classList.add('active');
                         displayFiles();
                     })
@@ -260,6 +277,8 @@
                     //if user drop file on dropArea
                     dropArea.addEventListener("drop", (event)=>{
                         event.preventDefault();
+                        let eleToRemove = document.getElementsByClassName('eleToRemove')[0];// to get only the first element
+                        eleToRemove.style.display= 'none';
                         file = event.dataTransfer.files[0];
                         displayFiles();
 
@@ -274,11 +293,21 @@
                             fileReader.onload = ()=>{
                                 //remplace par le nom du fichier et non pas par le Base64
                                 // let fileURL = file.name;
-                                let fileURL = fileReader.result;//passing user file source in fileURl variable
-                                console.log(fileURL);
 
-                                let imgTag = `<img name="image" src="{{asset('assets/'.$travail->image)}}" alt=""><input value="" type="hidden" name="image">`;
-                                dropArea.innerHTML = imgTag; //add created img in dropArea
+                                if(fileType =="application/pdf")
+                                {
+                                    const pdfTag = new Image();
+                                    pdfTag.src = window.location.href;
+                                    pdfTag.src = "http://127.0.0.1:8000/assets/uploads/travaux/pdf1.png";
+                                    pdfTag.style.width= "50";
+                                    dropArea.appendChild(pdfTag);
+                                }
+                                else{
+                                    const imgTag = new Image();
+                                    imgTag.src = URL.createObjectURL(file);
+                                    dropArea.appendChild(imgTag);
+                                    console.log(imgTag);
+                                }
 
                             }
                             fileReader.readAsDataURL(file);

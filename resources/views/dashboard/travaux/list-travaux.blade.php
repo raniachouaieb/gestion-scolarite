@@ -15,7 +15,9 @@
             margin-top: 70px;
             margin-left: 18px;
         }
-        .table-responsive table thead tr{color: #ffffff;}
+        .table-responsive table thead tr{color: #ffffff;
+            font-family: 'Nunito', sans-serif;
+            font-weight: inherit}
 
     </style>
 
@@ -38,10 +40,10 @@
                 <thead class="bg-primary">
                 <tr>
                     <td class="col-2">{{__('Travail')}}</td>
-                    <td class="col-3">Matiere</td>
-                    <td class="col-3">Classe</td>
-                    <td class="col-2">Niveau</td>
-                    <td class="col-2">Action</td>
+                    <td class="col-3">{{__('Matiere')}}</td>
+                    <td class="col-3">{{__('Classe')}}</td>
+                    <td class="col-2">{{__('Niveau')}}</td>
+                    <td class="col-2">{{__('Action')}}</td>
                 </tr>
                 </thead>
                 <tbody>

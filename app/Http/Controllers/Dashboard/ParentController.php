@@ -74,6 +74,7 @@ class ParentController extends Controller
 
     public function update(Request $request, $id){
 
+
         $parent = Parente::with('students')->find($id);
         if(!$parent){
             return redirect()->route('inscri.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
@@ -101,6 +102,7 @@ class ParentController extends Controller
             $parent->image_profile= $path;
         }
         $parent->update();
+
 
 
 

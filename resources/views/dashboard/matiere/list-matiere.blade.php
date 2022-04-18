@@ -15,6 +15,9 @@
             color: red;
             margin-left: 7px;
         }
+        .table-responsive table thead tr{color: #ffffff;
+            font-family: 'Nunito', sans-serif;
+            font-weight: inherit}
     </style>
     <div class="container">
     <!--@include('includes.alerts.flash')  -->
@@ -31,9 +34,8 @@
         <div class="card shadow mb-6 matiereTab">
              <div class="table-responsive">
 
-                 <table class="table table-hover">
-
-                                <thead>
+                 <table class="table table-striped">
+                     <thead class="bg-primary">
                                 <tr>
                                     <td>#</td>
                                     <td>Nom</td>
