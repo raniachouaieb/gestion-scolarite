@@ -76,7 +76,7 @@
         <div class="col-lg-12">
             <div class="card material-card">
                 <div class="card-body">
-                <form method="post" action="{{ route('travails.storeTravail') }}" enctype="multipart/form-data">
+                <form enctype="multipart/form-data" method="post" action="{{ route('travails.storeTravail') }}">
                     @csrf
 
 
@@ -181,10 +181,13 @@
                                                 </div>
 
                                                 <div class="drag-area">
-                                                    <div class="icon"><i class="fa fa-cloud-download-alt"></i></div>
-                                                    <div class="header">Drag & drop to upload</div>
-                                                    <span class="header"> OR <span class="button">Browse file</span></span>
-                                                    <!--<button id="file">Browse file</button>-->
+                                                    <div class="eleToRemove">
+                                                        <div class="icon"><i class="fa fa-cloud-download-alt"></i></div>
+                                                        <div class="header">Drag & drop to upload</div>
+                                                        <span class="header"> OR <span class="button">Browse file</span></span>
+                                                        <!--<button id="file">Browse file</button>-->
+                                                    </div>
+
                                                     <input type="file"  name="image" hidden>
                                                 </div>
 
@@ -277,8 +280,11 @@
         //if user drop file on dropArea
         dropArea.addEventListener("drop", (event)=>{
             event.preventDefault();
+            let eleToRemove = document.getElementsByClassName('eleToRemove')[0];// to get only the first element
+            eleToRemove.style.display= 'none';
             file = event.dataTransfer.files[0];
             displayFiles();
+
 
 
         });
@@ -291,13 +297,36 @@
                 fileReader.onload = ()=>{
                     //remplace par le nom du fichier et non pas par le Base64
                    // let fileURL = file.name;
-                    let fileURL = fileReader.result;//passing user file source in fileURl variable
-                    console.log(fileURL);
+                   // let fileURL = fileReader.result;//passing user file source in fileURl variable
+                    //console.log(fileURL);
+                    //let imgTag = `<img name="image" src="${fileURL}" alt=""><input value="${fileURL}" type="hidden" name="image">`;
+                    //dropArea.innerHTML = imgTag; //add created img in dropArea
 
-                    let imgTag = `<img name="image" src="${fileURL}" alt=""><input value="${fileURL}" type="hidden" name="image">`;
+                   /* const imgTag =`<img name="image" src="${URL.createObjectURL(file)}" alt=""><input value="${URL.createObjectURL(file)}" type="hidden" name="image">`;
                     dropArea.innerHTML = imgTag; //add created img in dropArea
+                    console.log(imgTag);*/
+
+                    if(fileType =="application/pdf")
+                    {
+                        const pdfTag = new Image();
+                        pdfTag.src = window.location.href;
+                        pdfTag.src = "http://127.0.0.1:8000/assets/uploads/travaux/pdf.png";
+                        pdfTag.style.width= "100";
+                        dropArea.appendChild(pdfTag);
+                    }
+
+
+
+
+                    const imgTag = new Image();
+                    imgTag.src = URL.createObjectURL(file);
+                     //dropArea.innerHTML = imgTag; //add created img in dropArea
+
+                    dropArea.appendChild(imgTag);
+                    console.log(imgTag);
 
                 }
+
                 fileReader.readAsDataURL(file);
             }else{
                 console.log("this is not image ");

@@ -10,7 +10,6 @@ use App\Models\Travail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
-
 use App\Helpers\General;
 
 
@@ -57,12 +56,12 @@ class TravailController extends Controller
             $travaux->date_limite=$request->date_limite;
             $travaux->matiere_id=$request->matiere;
             $travaux->class_id=$request->class;
-            if($request->has('image')) {
+            if($request->hasfile('image')) {
                // dd($request->input('image'));
                 /*$name = time().'.' .explode('/',explode(':', substr($request->image, 0,
                         strpos($request->image, ';')))[1])[1];*/
-                $path = uploadImage('travaux', $request->input('image'));
-               dd($path);
+                $path = uploadImage('travaux', $request->file('image'));
+               //dd($path);
                $travaux->file = $path;
             }
             $dataTravail =$travaux->save();

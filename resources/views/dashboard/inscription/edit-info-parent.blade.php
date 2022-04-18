@@ -11,7 +11,7 @@
         }
         .modifElev{
             width: 121px;
-            margin-left: 550px;
+            margin-left: 872px;
 
         }
         .color{
@@ -163,7 +163,12 @@
                         <div class="row text-center">
                             <div class="col-4">
                                 <div class="mb-3">
-                                    <img src="{{asset('assets/'.$parent->image_profile)}}"  onclick="clickImage()" id="profileDisplay" alt="fgh"/>
+                                    @if($parent->image_profile)
+                                        <img src="{{asset('assets/'.$parent->image_profile)}}"  onclick="clickImage()" id="profileDisplay" alt="fgh"/>
+                                    @else
+                                        <img src="{{asset('assets/uploads/parents/placeholderImage.png')}}"  onclick="clickImage()" id="profileDisplay" alt="fgh"/>
+
+                                    @endif
                                     <label>Choisir une photo</label>
                                     <input type="file" name="image_profile" id="imageProfile" onchange="loadFile(event)" style="display: none;">
 
@@ -193,104 +198,107 @@
             </div>
         </div>
 
-    <div class="container test">
-        <div class="row">
-            <div class="col-md-8">
-                <h1>Elèves</h1>
-                <div class="tab-container-one">
-                    <ul class="nav nav-tabs">
-                        @foreach($parent->students as $index=>$elev)
-                        <li class="nav-item @if($index==0) active @endif">
-                            <a class="nav-link @if($index==0) active @endif" href="#home{{$index}}" data-toggle="tab"
-                                aria-controls="home{{$index}}">Elève{{$index}}</a>
-                        </li>
-                        @endforeach
-                    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mt-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5 class="card-title color"><i class="fa fa-info-circle"></i>Informations Enfants</h5>
+                            <div class="tab-container-one">
+                                <ul class="nav nav-tabs">
+                                    @foreach($parent->students as $index=>$elev)
+                                        <li class="nav-item @if($index==0) active @endif">
+                                            <a class="nav-link @if($index==0) active @endif" href="#home{{$index}}" data-toggle="tab"
+                                               aria-controls="home{{$index}}">Elève{{$index}}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
 
-                    <div class="tab-content">
+                                <div class="tab-content">
 
-                        @foreach($parent->students as $index=>$elev)
+                                    @foreach($parent->students as $index=>$elev)
 
-                        <div role="tabpanel" class="tab-pane @if($index==0) active @endif" id="home{{$index}}"
-                            aria-labelledby="home-tab{{$index}}">
+                                        <div role="tabpanel" class="tab-pane @if($index==0) active @endif" id="home{{$index}}"
+                                             aria-labelledby="home-tab{{$index}}">
 
-                            <form method="post" action="{{ route('inscri.updateEleve', $elev->id ) }}">
-                                @csrf
-                                <div class="row mb-3">
-                                    <div class="col">
-                                        <label for="nomEleve">Nom </label>
-                                        <input type="text" class="form-control" name="nomEleve"
-                                            value="{{ $elev->nomEleve }}" />
-                                    </div>
+                                            <form method="post" action="{{ route('inscri.updateEleve', $elev->id ) }}">
+                                                @csrf
+                                                <div class="row mb-3">
+                                                    <div class="col">
+                                                        <label for="nomEleve">Nom </label>
+                                                        <input type="text" class="form-control" name="nomEleve"
+                                                               value="{{ $elev->nomEleve }}" />
+                                                    </div>
 
-                                    <div class="col">
-                                        <label for="prenomEleve">Prénom </label>
-                                        <input type="text" class="form-control" name="prenomEleve"
-                                            value="{{ $elev->prenomEleve }}" />
-                                    </div>
-                                </div>
+                                                    <div class="col">
+                                                        <label for="prenomEleve">Prénom </label>
+                                                        <input type="text" class="form-control" name="prenomEleve"
+                                                               value="{{ $elev->prenomEleve }}" />
+                                                    </div>
+                                                </div>
 
-                                <div class="row mb-3">
-                                    <div class="col">
-                                        <label for="gender">gender </label>
-                                        <select class="form-control" name="gender">
-                                            <option value="{{ $elev->gender }}" selected>
-                                                {{ $elev->gender==0 ? 'Garcon' : 'Fille' }}</option>
+                                                <div class="row mb-3">
+                                                    <div class="col">
+                                                        <label for="gender">gender </label>
+                                                        <select class="form-control" name="gender">
+                                                            <option value="{{ $elev->gender }}" selected>
+                                                                {{ $elev->gender==0 ? 'Garcon' : 'Fille' }}</option>
 
-                                            <option value="garcon"> Garçon </option>
-                                            <option value="fille"> Fille </option>
-                                        </select>
-                                    </div>
+                                                            <option value="garcon"> Garçon </option>
+                                                            <option value="fille"> Fille </option>
+                                                        </select>
+                                                    </div>
 
-                                    <div class="col">
-                                        <label for="niveau">niveau </label>
+                                                    <div class="col">
+                                                        <label for="niveau">niveau </label>
 
-                                        <select class="form-control" id="niveau" name="niveau">
-                                            <option value="{{$elev->niveau}} " selected> {{$elev->niveau}} </option>
-                                            @foreach( $levels as $lev)
-                                            <option value="{{$lev->id}}"
-                                                {{$lev->id == $elev->niveau ? 'selected' : ''}}> {{$lev->level}}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-md-6">
-                                    <label for="classe">classe </label>
-
-                                    <select class="form-control" id="classe" name="classe" >
-                                        <option value="" selected> {{$elev->class_id}} </option>
-
-                                        @foreach( $classes->where('id_level',$elev->niveau) as $class)
-                                        <option value="{{$class->id}}"
-                                            {{$class->id == $elev->class_id ? 'selected' : ''}}> {{$class->name}}
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                                        <select class="form-control" id="niveau" name="niveau">
+                                                            <option value="{{$elev->niveau}} " selected> {{$elev->niveau}} </option>
+                                                            @foreach( $levels as $lev)
+                                                                <option value="{{$lev->id}}"
+                                                                    {{$lev->id == $elev->niveau ? 'selected' : ''}}> {{$lev->level}}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
 
 
-                                <button type="submit" class="btn btn-outline-success btn-circle right modifElev"><i
-                                        class="fas fa-check"></i> Modifier</button>
+                                                <div class="col-md-6">
+                                                    <label for="classe">classe </label>
+
+                                                    <select class="form-control" id="classe" name="classe" >
+                                                        <option value="" selected> {{$elev->class_id}} </option>
+
+                                                        @foreach( $classes->where('id_level',$elev->niveau) as $class)
+                                                            <option value="{{$class->id}}"
+                                                                {{$class->id == $elev->class_id ? 'selected' : ''}}> {{$class->name}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
 
 
-                            </form>
+                                                <button type="submit" class="btn btn-outline-info btn-circle right modifElev"><i
+                                                        class="fas fa-check"></i> Modifier</button>
+
+
+                                            </form>
+                                        </div>
+                                    @endforeach
+                                </div><!-- End Tab Contant -->
+
+
+
+                            </div>
                         </div>
-                        @endforeach
-                    </div><!-- End Tab Contant -->
-
-
-
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
-
-
-
-
 
 </div>
 

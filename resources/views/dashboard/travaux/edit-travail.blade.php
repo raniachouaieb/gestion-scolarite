@@ -277,7 +277,7 @@
                                 let fileURL = fileReader.result;//passing user file source in fileURl variable
                                 console.log(fileURL);
 
-                                let imgTag = `<img name="image" src="${fileURL}" alt=""><input value="${fileURL}" type="hidden" name="image">`;
+                                let imgTag = `<img name="image" src="{{asset('assets/'.$travail->image)}}" alt=""><input value="" type="hidden" name="image">`;
                                 dropArea.innerHTML = imgTag; //add created img in dropArea
 
                             }

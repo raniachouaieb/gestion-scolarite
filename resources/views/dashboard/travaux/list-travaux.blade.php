@@ -15,6 +15,8 @@
             margin-top: 70px;
             margin-left: 18px;
         }
+        .table-responsive table thead tr{color: #ffffff;}
+
     </style>
 
 
@@ -32,12 +34,11 @@
     <div class="container">
     <div class="card shadow mb-6 TravailTab">
         <div class="table-responsive">
-
-            <table class="table table-hover">
-                <thead>
+            <table class="table table-striped">
+                <thead class="bg-primary">
                 <tr>
-                    <td class="col-2">travail</td>
-                    <td class="col-3">matiere</td>
+                    <td class="col-2">{{__('Travail')}}</td>
+                    <td class="col-3">Matiere</td>
                     <td class="col-3">Classe</td>
                     <td class="col-2">Niveau</td>
                     <td class="col-2">Action</td>
