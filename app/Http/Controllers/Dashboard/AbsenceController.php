@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\Absence;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Parente;
 use App\Models\Student;
 use App\Models\Classroom;
 use App\Models\Level;
-
-
+use Illuminate\Support\Facades\Session;
 
 
 class AbsenceController extends Controller
@@ -45,6 +45,31 @@ class AbsenceController extends Controller
         }
         return $html;
     }
+
+    public function store(Request $request){
+        try{
+            $dateAbs= date('Y-m-d');
+            //foreach ($request->status as $studentId)
+
+                $abs = new Absence();
+                $abs->eleve_id = $request->eleve_id;
+                $abs->date_absence = $dateAbs;
+                $abs->etat = isset($request->status) ? 1 : 0;
+
+                $abs->save();
+
+
+                Session::flash('statuscode', 'success');
+                return redirect()->route('absence.index')->with('status', 'Convocation est envoyée avec succes');
+
+        }catch(\Exception $ex){
+            return $ex;
+            Session::flash('statuscode', 'success');
+            return redirect()->route('absence.index')->with('error', 'error');
+
+
+        }
+}
 
 
 }

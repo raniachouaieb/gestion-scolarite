@@ -9,8 +9,8 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><a href="{{route('classes.index')}}">Groupes</a></li>
+        <li class="breadcrumb-item"><a href="{{route('accueil')}}">Accueil</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a href="{{route('classes.index')}}">Classes</a></li>
         <li class="breadcrumb-item">Modifier groupe</li>
 
     </ol>

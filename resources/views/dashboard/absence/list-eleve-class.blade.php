@@ -33,7 +33,7 @@
         </div>
 
 
-        <div id="tabEleveHide">
+        <div  id="tabEleveHide">
             <div class="item">
                 <div id="eleve_filter">
 

@@ -24,12 +24,12 @@
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Accueil</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Matières</li>
             </ol>
         </nav>
         <div class="row  position mb-5">
-            <a  class="btn btn-primary position" href="{{ route('matieres.add')}}"><i class="fas fa-plus"></i></a>
+            <a  class="btn btn-primary position" href="{{ route('matieres.add')}}"><i class="fas fa-plus"></i> Ajouter </a>
         </div>
         <div class="card shadow mb-6 matiereTab">
              <div class="table-responsive">
@@ -37,7 +37,6 @@
                  <table class="table table-striped">
                      <thead class="bg-primary">
                                 <tr>
-                                    <td>#</td>
                                     <td>Nom</td>
                                     <td>Module</td>
                                     <td>Coefficient</td>
@@ -47,7 +46,6 @@
                             <tbody>
                             @foreach($matiere as $mat)
                                 <tr>
-                                    <td>{{$mat->id}}</td>
                                     <td>{{$mat->nom}}</td>
                                     @foreach($module as $modul)
                                     <td @if($modul->id == $mat->module_id ) > {{$modul->nom_module}} </td>@endif

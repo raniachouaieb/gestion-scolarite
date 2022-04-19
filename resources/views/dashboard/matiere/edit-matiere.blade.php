@@ -9,7 +9,7 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Accueil</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a href="{{route('matieres.index')}}">Matières</a></li>
                 <li class="breadcrumb-item active" aria-current="page">modifier matière</li>
 

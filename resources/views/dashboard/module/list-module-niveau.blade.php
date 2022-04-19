@@ -26,15 +26,15 @@
     <!--@include('includes.alerts.flash')  -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Accueil</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Modules</li>
             </ol>
         </nav>
         <div class="row  position mb-5">
-            <a  class="btn btn-primary position" href="{{ route('modules.add')}}"><i class="fas fa-plus"></i></a>
+            <a  class="btn btn-primary position" href="{{ route('modules.add')}}"><i class="fas fa-plus"></i> Ajouter </a>
         </div>
 
-        <div class="row niv">
+        <div class=" row niv">
                 @foreach($niveaux as $niv)
 
                 <div class="row">
@@ -48,7 +48,7 @@
 
         </div>
 
-        <div class="card shadow tabModule mb-4" id="tabModuleHide">
+        <div class=" tabModule mb-4" id="tabModuleHide">
             <div class="table-responsive">
                 <div id="module_filter">
 

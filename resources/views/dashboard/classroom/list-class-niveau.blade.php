@@ -13,7 +13,6 @@
         }
         .tabModule{
             margin-top: 100px;
-            margin-left: 41px;
         }
 
         .colrtrash{
@@ -26,12 +25,12 @@
     <!--@include('includes.alerts.flash')  -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Accueil</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Classes</li>
             </ol>
         </nav>
         <div class="row  position mb-5">
-            <a  class="btn btn-primary position" href="{{ route('classes.add')}}"><i class="fas fa-plus"></i></a>
+            <a  class="btn btn-primary position" href="{{ route('classes.add')}}"><i class="fas fa-plus"></i> Ajouter</a>
         </div>
 
         <div class="row niv">
@@ -48,7 +47,7 @@
 
         </div>
 
-        <div class="card shadow tabModule mb-4" id="tabClassHide">
+        <div class=" tabModule mb-4" id="tabClassHide">
             <div class="table-responsive">
                 <div id="class_filter">
 

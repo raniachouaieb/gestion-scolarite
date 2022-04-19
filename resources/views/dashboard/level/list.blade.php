@@ -22,7 +22,7 @@
 <!--@include('includes.alerts.flash')  -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{route('accueil')}}">Accueil</a></li>
             <li class="breadcrumb-item active" aria-current="page">Niveaux</li>
         </ol>
     </nav>
@@ -40,15 +40,13 @@
             <table class="table table-striped">
                 <thead class="bg-primary">
         <tr>
-          <td class="col-4">#</td>
-          <td class="col-6">Level</td>
-          <td class="col-2">Action</td>
+          <td class="col-6">{{__('Niveau')}}</td>
+          <td class="col-2">{{__('Action')}}</td>
         </tr>
     </thead>
     <tbody>
         @foreach($levelName as $niveau)
         <tr>
-            <td class="col-4">{{$niveau->id}}</td>
             <td class="col-6">{{$niveau->level}}</td>
             <td class="col-2"><a href="{{ route('levels.edit', $niveau->id)}}" ><i class="fas fa-pen fa-sm"></i></a>
 

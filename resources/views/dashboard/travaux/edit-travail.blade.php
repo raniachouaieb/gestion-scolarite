@@ -50,7 +50,7 @@
             object-fit: cover;
         }
         .color{
-            color: #34ce57;
+            color: #ef6f6c;
         }
 
     </style>
@@ -193,15 +193,26 @@
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label>File</label>
-                                <br>
+
+                                @if($travail->extension == 'pdf')
+                                    <img src="{{asset('assets/uploads/travaux/pdf1.png')}}" style="width: 135px;margin-left: 124px;" alt="" onClick="printDiv('iframepdf')" />
+                                    <a href="{{route('download', $travail->file)}}">Download</a>
+                                    <br>
+                                    <a href="{{route('view', $travail->id)}}"> show pdf</a>
+                                    <br>
+                                    <div id="iframepdf">
+                                        <iframe src="{{asset('assets/'.$travail->file)}}" ></iframe>
+                                    </div>
+                                @else
 
                                 <img src="{{asset('assets/'.$travail->file)}}" style="width: 105px;margin-left: 124px;" alt=""/>
+                                    @endif
 
                             </div>
                         </div>
                     </div>
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-outline-success taf px-4">Déposer</button>
+                        <button type="submit" class="btn btn-outline-danger taf px-4">Déposer</button>
 
                     </div>
             </form>
@@ -318,6 +329,19 @@
                     }
 
                 </script>
+    <script>
+        window.printDiv = function(iframepdf){
+
+            var printContents = document.getElementById(iframepdf).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+    </script>
 
 
 

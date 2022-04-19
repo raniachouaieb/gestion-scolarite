@@ -64,6 +64,7 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Liste parents:</h6>
+            <a class="collapse-item" href="">Ajouter Parent</a>
             @can('parent-preinscrit-list')<a class="collapse-item" href="{{route('inscri.index')}}">En attente<span class="countList">{{\App\Models\Parente::where('is_active' , 0)->count()}}</span></a>@endcan
             @can('parent-inscrit-list')<a class="collapse-item" href="{{route('inscri.list_accepted')}}">Inscrits<span class="countList">{{\App\Models\Parente::where('is_active' , 1)->count()}}</span></a>@endcan
         </div>

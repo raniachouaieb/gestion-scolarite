@@ -3,18 +3,15 @@
 
 @section('content')
 <style>
-  .uper {
-    margin-top: 40px;
-  }
+
 </style>
-<div class="containerr">
+<div class="container">
+
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{route('accueil')}}">Accueil</a></li>
             <li class="breadcrumb-item active" aria-current="page"><a href="{{route('classes.index')}}">Classes</a></li>
             <li class="breadcrumb-item active" aria-current="page">Ajouter classe</li>
-
-
         </ol>
     </nav>
   <div class="card-body">

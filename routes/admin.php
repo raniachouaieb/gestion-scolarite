@@ -57,6 +57,8 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'absences'], function(){
     Route::get('/', 'AbsenceController@index')->name('absence.index');
     Route::get('getClasse', 'AbsenceController@getClasse')->name('absence.getClasse');
     Route::get('eleveByClass', 'AbsenceController@eleveByClass')->name('absence.eleveByClass');
+    Route::post('store', 'AbsenceController@store')->name('absence.store');
+
 
 });
 
@@ -153,6 +155,9 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'Travails/'], function(){
     Route::post('updateTravail/{id}', 'TravailController@update')->name('travails.updateTravail');
     Route::delete('delete/{id}', 'TravailController@destroy')->name('travails.destroy');
     Route::get('getClasse', 'TravailController@getClasse')->name('travails.getClasse');
+    Route::get('download/{file}', 'TravailController@download')->name('download');
+    Route::get('view/{id}', 'TravailController@view')->name('view');
+
 
 
 
@@ -214,6 +219,8 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'seance/'], function(){
 
 
 });
+
+
 
 
 

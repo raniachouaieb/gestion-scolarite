@@ -9,10 +9,8 @@ use App\Models\Matiere;
 use App\Models\Travail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use App\Helpers\General;
-
 
 class TravailController extends Controller
 {
@@ -57,13 +55,16 @@ class TravailController extends Controller
             $travaux->date_limite=$request->date_limite;
             $travaux->matiere_id=$request->matiere;
             $travaux->class_id=$request->class;
+            $travaux->extension=$request->file('image')->getClientOriginalExtension();
             if($request->hasfile('image')) {
-               // dd($request->input('image'));
-                /*$name = time().'.' .explode('/',explode(':', substr($request->image, 0,
-                        strpos($request->image, ';')))[1])[1];*/
                 $path = uploadImage('travaux', $request->file('image'));
                //dd($path);
+
+               // dd($travaux->file= $request->file('image')->getClientOriginalExtension());
                $travaux->file = $path;
+
+
+
             }
             $dataTravail =$travaux->save();
             if($dataTravail){
@@ -87,9 +88,7 @@ class TravailController extends Controller
         $niveaux = Level::get();
 
         $matieres = Matiere::get();
-        /*$fil= $request->file('image');
-        $ext = $fil->getClientOriginalExtension();
-        Log::info($ext);*/
+
         if(!$travail){
             Session::flash('statuscode', 'error');
 
@@ -120,6 +119,8 @@ class TravailController extends Controller
                     File::delete($path);
                 }
 
+
+
                 $travailId->image= $path;
             }
 
@@ -141,5 +142,15 @@ class TravailController extends Controller
 
         Session::flash('statuscode', 'error');
         return redirect()->route('travails.index')->with('status','Ce travail est annulée');
+    }
+
+    public function  download(Request $req,$file){
+
+        return response()->download(asset('assets/'.$file));
+    }
+    public function view($id){
+        $travail=Travail::find($id);
+        return view('dashboard.travaux.viewPDF', compact('travail'));
+
     }
 }

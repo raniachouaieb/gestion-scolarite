@@ -24,6 +24,7 @@ class Travail extends Model
         'matiere_id',
         'class_id',
         'file',
+        'extension',
 
     ];
     protected $hidden=[

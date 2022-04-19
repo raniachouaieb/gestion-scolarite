@@ -8,9 +8,14 @@
         }
     </style>
     <div class="container">
-        <div class="card-header">
-            Ajouter une matière
-        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Accueil</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{route('matieres.index')}}">Matières</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Ajouter matière</li>
+
+            </ol>
+        </nav>
         <div class="card-body">
 
                 <div class="row">

@@ -8,7 +8,7 @@
         border-radius: 2px 4px 4px;
         padding: 1px 4px;
     }
-    table-responsive table thead tr{color: #ffffff;
+    .table-responsive table thead tr{color: #ffffff;
         font-family: 'Nunito', sans-serif;
         font-weight: inherit}
 </style>
@@ -26,7 +26,6 @@
                 <table class="table table-striped">
                     <thead class="bg-primary">
             <tr>
-                <td class="col-1">#</td>
                 <td class="col-6">Nom</td>
                 <td class="col-3">Coefficient</td>
                 <td class="col-2">Action</td>
@@ -35,7 +34,6 @@
             <tbody>
             @foreach($moduleByLevel as $modul)
                 <tr>
-                    <td class="col-1">{{$modul->id}}</td>
                     <td class="col-6"><a href="{{route('modules.show', $modul->id)}}" class="btn btn-info" data-toggle="collapse" data-target="#demo{{ $modul->id}}">{{$modul->nom_module}}</a></td>
                     <td class="col-3">{{$modul->coefficient_module}}</td>
                     <td class="col-2"><a href="{{route('modules.edit', $modul->id)}}"  type="submit" ><i class="fas fa-pen fa-sm"></i></a>

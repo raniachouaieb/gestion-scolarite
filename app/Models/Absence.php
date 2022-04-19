@@ -7,7 +7,7 @@ use App\Models\Student;
 
 class Absence extends Model
 {
-    protected $table='classerooms';
+    protected $table='absences';
 
     /**
      * The attributes that are mass assignable.
@@ -16,6 +16,8 @@ class Absence extends Model
      */
     protected $fillable = [
         'date_absence',
+        'etat',
+        'eleve_id'
     ];
 
     protected $casts=[

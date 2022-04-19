@@ -5,7 +5,7 @@
     <style>
         .trash{
             color:red;
-            margin-left: 7px;
+            margin-left: 5px;
         }
         .position {
             float: right;
@@ -13,7 +13,7 @@
         }
         .TravailTab{
             margin-top: 70px;
-            margin-left: 18px;
+            margin-left: 8px;
         }
         .table-responsive table thead tr{color: #ffffff;
             font-family: 'Nunito', sans-serif;
@@ -30,49 +30,48 @@
                 <li class="breadcrumb-item active" aria-current="page">Travaux à faire</li>
             </ol>
         </nav>
-        <a  class="btn btn-primary position" href="{{ route('travails.addTravail')}}"><i class="fas fa-plus"></i></a>
+        <a  class="btn btn-outline-primary position" href="{{ route('travails.addTravail')}}"><i class="fas fa-plus"></i> Ajouter</a>
 
-    </div>
-    <div class="container">
-    <div class="card shadow mb-6 TravailTab">
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead class="bg-primary">
-                <tr>
-                    <td class="col-2">{{__('Travail')}}</td>
-                    <td class="col-3">{{__('Matiere')}}</td>
-                    <td class="col-3">{{__('Classe')}}</td>
-                    <td class="col-2">{{__('Niveau')}}</td>
-                    <td class="col-2">{{__('Action')}}</td>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($travaux as $trav)
+
+        <div class="card shadow mb-6 TravailTab">
+             <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="bg-primary">
                     <tr>
-                        <td class="col-4">{{$trav->titre_travail}}</td>
-
-                        <td class="col-3">@foreach($matieres as $matiere) @if($trav->matiere_id == $matiere->id){{$matiere->nom}}@endif @endforeach</td>
-                        <td class="col-3">@foreach($classes as $class)@if($trav->class_id == $class->id) {{$class->name}} @endif @endforeach</td>
-                        <td class="col-3">@foreach($niveaux as $niv)@if($trav->class->id_level == $niv->id) {{$niv->level}} @endif @endforeach</td>
-
-                        <td class="col-2"><a href="{{route('travails.editTravail', $trav->id)}}"  type="submit" ><i class="fas fa-pen fa-sm"></i></a>
-
-
-                            <form action="{{route('travails.destroy', $trav->id)}}" method="post" class="d-inline" >
-                                @csrf
-                                @method('DELETE')
-                                <input name="_method" type="hidden" value="DELETE">
-                                <a  class=" trash show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash fa-sm"></i></a>
-                            </form>
-
-                        </td>
+                        <td class="col-2">{{__('Travail')}}</td>
+                        <td class="col-3">{{__('Matiere')}}</td>
+                        <td class="col-3">{{__('Classe')}}</td>
+                        <td class="col-2">{{__('Niveau')}}</td>
+                        <td class="col-2">{{__('Action')}}</td>
                     </tr>
-                @endforeach
+                    </thead>
+                    <tbody>
+                    @foreach($travaux as $trav)
+                        <tr>
+                            <td class="col-4">{{$trav->titre_travail}}</td>
 
-                </tbody>
-            </table>
+                            <td class="col-3">@foreach($matieres as $matiere) @if($trav->matiere_id == $matiere->id){{$matiere->nom}}@endif @endforeach</td>
+                            <td class="col-3">@foreach($classes as $class)@if($trav->class_id == $class->id) {{$class->name}} @endif @endforeach</td>
+                            <td class="col-3">@foreach($niveaux as $niv)@if($trav->class['id_level'] == $niv->id) {{$niv->level}} @endif @endforeach</td>
+
+                            <td class="col-2"><a href="{{route('travails.editTravail', $trav->id)}}"  type="submit" ><i class="fas fa-pen fa-sm"></i></a>
+
+
+                                <form action="{{route('travails.destroy', $trav->id)}}" method="post" class="d-inline" >
+                                    @csrf
+                                    @method('DELETE')
+                                    <input name="_method" type="hidden" value="DELETE">
+                                    <a  class=" trash show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash fa-sm"></i></a>
+                                </form>
+
+                            </td>
+                        </tr>
+                    @endforeach
+
+                    </tbody>
+                 </table>
+             </div>
         </div>
-    </div>
     </div>
     <script type="text/javascript">
 

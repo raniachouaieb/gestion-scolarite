@@ -35,10 +35,13 @@
     .drag-area .icon{
         font-size: 30px;
         font-weight: 500;
+        margin-left: 83px;
     }
     .drag-area .header{
         font-size: 20px;
         font-weight: 500;
+        margin-left: 16px;
+
     }
     .drag-area span{
         font-size: 20px;
@@ -58,7 +61,7 @@
         object-fit: cover;
     }
     .color{
-        color: #34ce57;
+        color: #ef6f6c;
     }
 </style>
 
@@ -193,7 +196,7 @@
 
                                             </div>
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-outline-success taf px-4">Ajouter</button>
+                        <button type="submit" class="btn btn-outline-danger taf px-4">Déposer</button>
 
                     </div>
 

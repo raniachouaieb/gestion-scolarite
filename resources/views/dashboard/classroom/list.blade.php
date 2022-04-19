@@ -12,17 +12,18 @@
       margin-top: 70px;
       margin-left: 18px;
   }
+    .table-responsive table thead tr{color: #ffffff;
+        font-family: 'Nunito', sans-serif;
+        font-weight: inherit}
 </style>
 <div class="container">
 
 @include('includes.alerts.flash')
 
         <div class="table-responsive">
-                    <table class="table table-hover">
-
-                                <thead>
+            <table class="table table-striped">
+                <thead class="bg-primary">
                                     <tr>
-                                        <th class="col-4">#</th>
                                         <th class="col-6">Classe</th>
                                         <th class="col-2">Actions</th>
                                     </tr>
@@ -31,7 +32,6 @@
                                 @foreach($classByLevel as $classroom)
                                 <tr>
 
-                                    <td class="col-4">{{$classroom->id}}</td>
                                     <td class="col-6">{{$classroom->name}}</td>
                                     <td class="col-2"><a href="{{ route('classes.edit', $classroom->id)}}" ><i class="fas fa-pen fa-sm"></i></a>
 
