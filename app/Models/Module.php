@@ -24,5 +24,14 @@ class Module extends Model
     public function matieres(){
         return $this->hasMany(Matiere::class, 'module_id', 'id');
     }
+    public function enseignants()
+    {
+        return $this->belongsToMany(\App\Models\Enseignant::class);
+    }
+    public function teachers()
+    {
+        return $this->hasMany(\App\Models\Enseignant_Module::class,'module_id','id')->orderByDesc('Created_at');
+
+    }
 
 }

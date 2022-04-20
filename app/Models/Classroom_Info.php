@@ -15,7 +15,7 @@ class Classroom_Info extends Model
         'id','classroom_id','info_id'
     ];
 
-    protected $dates = ['deleted_at'];
+    protected $casts = ['deleted_at'];
 
 
     public function classe()

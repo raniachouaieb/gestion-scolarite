@@ -24,6 +24,8 @@ class Absence extends Model
         'created_at','updated_at','deleted_at'
     ];
 
+
+
     public function student(){
         return $this->belongsTo(Student::class, 'eleve_id', 'id');
     }

@@ -32,12 +32,14 @@
                                 <td>{{$getstudent->nomEleve}}</td>
                                 <td>{{$getstudent->prenomEleve}}</td>
                                 <td>
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" value="1" checked id="switch{{$getstudent->id}}" name="status{{$getstudent->id}}">
-                                        <label class="custom-control-label" for="switch{{$getstudent->id}}">Status</label>
-                                    </div>
 
-                                   <input  name="eleve_id" value="{{$getstudent->id}}">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" value="1"  checked   id="switch{{$getstudent->id}}" name="status[{{$getstudent->id}}]" >
+                                            <label class="custom-control-label" for="switch{{$getstudent->id}}">Status</label>
+                                        </div>
+
+
+                                   <input  name="eleve_id[]" value="{{$getstudent->id}}">
                                 </td>
 
 

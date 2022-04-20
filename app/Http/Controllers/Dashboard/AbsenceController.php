@@ -49,15 +49,19 @@ class AbsenceController extends Controller
     public function store(Request $request){
         try{
             $dateAbs= date('Y-m-d');
-            //foreach ($request->status as $studentId)
-
+            foreach ($request->status as $studentId=> $etatabs) {
+                if($etatabs == 'Active'){
+                    $etat = 1;
+                }elseif($etatabs == 'Absent'){
+                    $etat = 0;
+                }
                 $abs = new Absence();
-                $abs->eleve_id = $request->eleve_id;
+                $abs->eleve_id = $studentId;
                 $abs->date_absence = $dateAbs;
-                $abs->etat = isset($request->status) ? 1 : 0;
+                $abs->etat = $etat;
 
                 $abs->save();
-
+            }
 
                 Session::flash('statuscode', 'success');
                 return redirect()->route('absence.index')->with('status', 'Convocation est envoyée avec succes');

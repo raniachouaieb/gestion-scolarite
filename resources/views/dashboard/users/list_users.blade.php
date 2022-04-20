@@ -28,7 +28,7 @@
             </ol>
         </nav>
         <div class="row  position mb-5">
-            <a  class="btn btn-primary " href="{{route('users.add')}}"><i class="fas fa-plus"></i></a>
+            <a  class="btn btn-primary " href="{{route('users.add')}}"><i class="fas fa-plus"></i> Ajouter</a>
         </div>
 
 

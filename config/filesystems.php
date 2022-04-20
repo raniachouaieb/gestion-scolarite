@@ -78,6 +78,12 @@ return [
             'url' => env('APP_URL').'/public',
             'visibility' => 'public',
         ],
+        'enseignants'=>[
+            'driver' => 'local',
+            'root' => base_path().'/public/assets/uploads/enseignants/',
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',

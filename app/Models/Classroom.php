@@ -20,6 +20,9 @@ class Classroom extends Model
     protected $fillable = [
         'name','id_level'
     ];
+    protected $hidden =[
+        'created_at','deleted_at','updated_at',
+    ];
 
     public function student(){
         return $this->hasMany(Student::class, 'class_id', 'id');

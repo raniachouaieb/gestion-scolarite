@@ -144,6 +144,10 @@ public function changeStatus( $id)
 
     //return response()->json(['success'=>'Status change successfully.']);
 }
+public function add(){
+        $niveaux = Level::get();
+        return view('dashboard.inscription.create', compact('niveaux'))->withTitle('Ajouter parent');
+}
 }
 
 

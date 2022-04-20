@@ -28,6 +28,23 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'users'], function(){
 
 
 });
+
+Route::group(['namespace'=>'Dashboard', 'prefix'=>'enseignants'], function(){
+    Route::get('enseignants','EnseignantController@index')->name('enseignants');
+    Route::get('add','EnseignantController@add')->name('enseignant.add');
+    Route::post('create', 'EnseignantController@create')->name('enseignant.create');
+    Route::post('changeStatus/{id}', 'EnseignantController@changeStatus')->name('changeStatus');
+    Route::get('edit/{id}', 'EnseignantController@edit')->name('enseignant.edit');
+    Route::post('update\{id}', 'EnseignantController@update')->name('enseignant.update');
+
+    Route::post('delete/{id}', 'EnseignantController@destroy')->name('enseignant.destroy');
+    Route::get('getModule', 'EnseignantController@getModule')->name('enseignant.getModule');
+
+
+
+
+
+});
 Route::group(['namespace'=>'Dashboard', 'prefix'=>'roles'], function(){
     Route::get('list','RoleController@index')->name('list');
     Route::get('add', 'RoleController@add')->name('roles.add');
@@ -175,6 +192,7 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'inscri/'],function(){
     Route::get('changeStatus/{id}', 'ParentController@changeStatus')->name('inscri.chagestatus');
     Route::get('parentByClass', 'ParentController@parentByClass')->name('inscri.parentByClass');
     Route::get('getClasse', 'ParentController@getClasse')->name('inscri.getClasse');
+    Route::get('add', 'ParentController@add')->name('inscri.add');
 
 
 
