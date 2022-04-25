@@ -102,10 +102,6 @@ class ParentController extends Controller
             $parent->image_profile= $path;
         }
         $parent->update();
-
-
-
-
         return redirect()->route('inscri.list_accepted')->with(['success'=>'modification avec succés']);
 
     }

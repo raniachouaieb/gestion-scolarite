@@ -74,8 +74,9 @@ class AdminController extends Controller
             $user->image = $path;
         }
         $user->assignRole($request->input('role'));
-        $user->save();
         Admin::sendPasswordEmail($user);
+        $user->save();
+
         Session::flash('statuscode', 'success');
         return redirect()->route('admins')->with('status','utilisateur est ajoutée avec ucces');
 

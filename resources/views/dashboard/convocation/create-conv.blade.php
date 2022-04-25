@@ -52,8 +52,8 @@
                                                                             <input id="date_envoie" type="datetime-local" class="form-control  @error('date_envoie') is-invalid @enderror" name="date_envoie" autocomplete="off">
                                                                             @error('date_envoie')
                                                                             <span class="invalid-feedback" role="alert">
-                                                                       <strong>{{ $message }}</strong>
-                                                                    </span>
+                                                                                <strong>{{ $message }}</strong>
+                                                                             </span>
                                                                             @enderror
 
 

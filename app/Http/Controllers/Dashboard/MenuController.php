@@ -17,7 +17,7 @@ class MenuController extends Controller
     }
 
     public function index(){
-        $menu = Menu::all();
+        $menu = Menu::orderBy('date', 'ASC')->get();
 
         return view ('dashboard.menu.list-menu', compact('menu'))->withTitle('Menu du semaine');
     }

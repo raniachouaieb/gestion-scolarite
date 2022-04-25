@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -46,12 +48,14 @@ class Admin extends Authenticatable
         if(!empty($password))
             //return  $this->attributes['password'] = bcrypt($password);
 
-        return  $this->attributes['password'] = Crypt::encryptString($password);
+        return  $this->attributes['password'] = bcrypt($password);
     }
 
     public function getPasswordAttribute($password){
         try{
-            return  Crypt::decryptString($password);
+            return Hash::check($password, Auth::user()->password, []);
+
+            //return  Crypt::decryptString($password);
         }catch(\Exception $ex){
             return $password;
         }

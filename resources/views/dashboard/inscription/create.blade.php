@@ -101,7 +101,7 @@
             </ol>
         </nav>
 
-        <section class="cover">
+
             <form action="">
                 <div class="form active">
 
@@ -293,14 +293,13 @@
 
                 </div>
                 <button>Previous</button>
-                <button>Next</button>
+                <button onclick="validate()">Next</button>
 
                 <div class="page-indicator">
 
 
                 </div>
             </form>
-        </section>
     </div>
     <script>
         let form, div, button, indicate, curPage, emn;
@@ -324,7 +323,7 @@
             }
         }
 
-        button[1].onclick =()=>{validate();} ;
+        button[1].onclick =validate() ;
         button[0].onclick = ()=>{
             if (curPage > 0){curPage --;}
             if (curPage < 1) {button[0].style.display = 'none';}

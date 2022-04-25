@@ -17,6 +17,10 @@ class Menu extends Model
         'date',
         'menu',
         'image ',
+        'jour',
+
+    ];
+    protected $casts=[
         'created_at','deleted_at','updated_at',
     ];
 }
