@@ -49,6 +49,14 @@
         </div>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('notification')}}" >
+            <i class="fa fa-bell"></i>
+            <span>Push notification</span>
+        </a>
+    </li>
+
+
 
 
 

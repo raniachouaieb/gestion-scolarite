@@ -235,8 +235,9 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'seance/'], function(){
     Route::get('edit/{id}', 'SeanceController@edit')->name('seance.edit');
     Route::post('update/{id}','SeanceController@update')->name('seance.update');
 
-
 });
+
+Route::get('notification','Dashboard\NotificationController@notification')->name('notification');
 
 
 
