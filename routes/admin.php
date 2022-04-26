@@ -193,6 +193,7 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'inscri/'],function(){
     Route::get('parentByClass', 'ParentController@parentByClass')->name('inscri.parentByClass');
     Route::get('getClasse', 'ParentController@getClasse')->name('inscri.getClasse');
     Route::get('add', 'ParentController@add')->name('inscri.add');
+    Route::post('store', 'ParentController@store')->name('store');
 
 
 

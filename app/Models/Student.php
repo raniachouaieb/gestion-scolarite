@@ -14,7 +14,7 @@ class Student extends Model
 
     protected $fillable=[
         'nomEleve','prenomEleve','gender','classe','class_id',
-        'niveau', 'parent_id',
+        'niveau', 'parent_id','birth',
     ];
     protected $hidden=[
         'created_at','deleted_at','updated_at'

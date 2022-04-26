@@ -12,6 +12,7 @@ use App\Models\Level;
 
 use DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
 class ParentController extends Controller
 {
@@ -143,6 +144,38 @@ public function changeStatus( $id)
 public function add(){
         $niveaux = Level::get();
         return view('dashboard.inscription.create', compact('niveaux'))->withTitle('Ajouter parent');
+}
+
+public function store(Request $request){
+    $parent = Parente::create([
+        "nomPere"=>$request->nomPere,
+        "prenomPere"=>$request->prenomPere,
+        "professionPere"=>$request->professionPere,
+        "telPere"=>$request->telPere,
+        "nomMere"=>$request->nomMere,
+        "prenomMere"=>$request->prenomMere,
+        "professionMere"=>$request->professionMere,
+        "telMere"=>$request->telMere,
+        "nbEnfants"=>$request->nbEnfants,
+        "adresse"=>$request->adresse,
+        "email"=>$request->email,
+        'password' => Hash::make($request->password),
+
+    ]);
+    $parent->sendEmailVerificationNotification();
+    $students = Student::create([
+        "nomEleve"=>$request->nomEleve,
+        "prenomEleve"=>$request->prenomEleve,
+        "niveau"=>$request->niveau,
+        "gender"=>($request->gender =='garcon')? 0:1,
+        "birth"=>$request->birth,
+        "parent_id"=>$parent->id,
+
+
+    ]);
+
+    return redirect()->route('inscri.index')->with('success', ' You are now registred successfully! Please check your email to verification link!');
+
 }
 }
 
