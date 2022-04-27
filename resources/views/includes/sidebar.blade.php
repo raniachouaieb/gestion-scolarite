@@ -75,6 +75,8 @@
             <a class="collapse-item" href="{{route('inscri.add')}}">Ajouter Parent</a>
             @can('parent-preinscrit-list')<a class="collapse-item" href="{{route('inscri.index')}}">En attente<span class="countList">{{\App\Models\Parente::where('is_active' , 0)->count()}}</span></a>@endcan
             @can('parent-inscrit-list')<a class="collapse-item" href="{{route('inscri.list_accepted')}}">Inscrits<span class="countList">{{\App\Models\Parente::where('is_active' , 1)->count()}}</span></a>@endcan
+         <a class="collapse-item" href="{{route('listSuggestion')}}">Boite suggestions<span style="float: right; border: 1px ridge; box-shadow: 1px 1px 7px 0px indianred; border-radius: 1px 15px 14px;padding: 1px 7px;">{{\App\Models\Suggestion::count()}}</span></a>
+
         </div>
     </div>
 </li>

@@ -239,6 +239,7 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'seance/'], function(){
 });
 
 Route::get('notification','Dashboard\NotificationController@notification')->name('notification');
+Route::get('listSuggestion','Dashboard\SuggestionController@index')->name('listSuggestion');
 
 
 

@@ -131,7 +131,7 @@
                                                     <div class="input-group mb-3">
                                                       <span class="input-group-text" id="basic-addon1"
                                                       ><i class="fa fa-key"></i></span>
-                                                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" aria-describedby="emailHelp" placeholder="">
+                                                        <input type="text" class="form-control @error('password') is-invalid @enderror" name="password" id="password" aria-describedby="emailHelp" placeholder="">
                                                         @error('password')
                                                         <span class="invalid-feedback" role="alert">
                                                          <strong>{{ $message }}</strong>

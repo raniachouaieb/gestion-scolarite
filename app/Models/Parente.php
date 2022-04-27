@@ -50,6 +50,10 @@ class Parente extends Authenticatable implements MustVerifyEmail
         //return $this->hasMany('App/Models/Student',)
     }
 
+    public function suggestions(){
+        return $this->hasMany('App\Models\Suggestion', 'parent_id', 'id');
+    }
+
         /**
  * Send the email verification notification.
  *
