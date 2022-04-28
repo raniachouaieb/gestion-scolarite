@@ -4,9 +4,12 @@
     <style>
         .addParent{
 
-            margin-left: 889px;
-            width: 121px;
-            margin-top: 11px;
+
+            margin-left: 192px;
+            /* width: 121px; */
+            margin-top: -24px;
+            position: absolute;
+            width: 38%;
 
         }
         .modifElev{
@@ -183,23 +186,23 @@
                                         <div class="col-md-8">
                                             <h5 class="card-title color"><i class="fa fa-info-circle"></i> Information Enfant(s)</h5>
                                             <hr />
-                                            <div class="field1">
+                                            <div class="field1" data-groupe="eleve">
                                                 <div class="row">
                                                     <div class="col-4">
                                                         <div class="mb-3">
                                                             <label for="">Nom  </label>
-                                                            <input type="text" class="form-control" name="nomEleve"  />
+                                                            <input type="text" class="form-control" name="nomEleve1"  />
                                                         </div>
                                                     </div>
                                                     <div class="col-4"><label for="" >Prénom  </label>
-                                                        <input type="text" class="form-control" name="prenomEleve"   />
+                                                        <input type="text" class="form-control" name="prenomEleve1"   />
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-4">
                                                         <div class="mb-3">
                                                             <label for="">Gender</label>
-                                                            <select  id="month" name="gender" class="form-control @error('gender') is-invalid @enderror list-dt"  >
+                                                            <select  id="month" name="gender1" class="form-control @error('gender') is-invalid @enderror list-dt"  >
                                                                 <option selected>Gender</option>
                                                                 <option value="garcon" > Garcon </option>
                                                                 <option value="fille" > Fille </option>
@@ -319,7 +322,12 @@
             '<div class="col-4"><label for="" >Prénom  </label>'+
                 '<input type="text" class="form-control" name="prenomEleve'+counter+'"   />'+
            '</div>'+
+                '<div class="col-4">'+
+
+                ' <a  type="button" id="remove" name="remove" value="remove" class="btn btn-danger" style="color: white;">-</a>'+
+                '</div>'+
         '</div>'+
+
            ' <div class="row">'+
                 '<div class="col-4">'+
                     '<div class="mb-3">'+
@@ -361,7 +369,68 @@
         '</div>');
 
 
+
         }
+
+
+        $("#info-eleve").on("click", "#remove", function(){
+
+
+        $(this).parent('<div class="field'+counter+'">'+
+            '<div class="row">'+
+            '<div class="col-4">'+
+            '<div class="mb-3">'+
+            '<label for="">Nom  </label>'+
+            '<input type="text" class="form-control" name="nomEleve'+counter+'"  />'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-4"><label for="" >Prénom  </label>'+
+            '<input type="text" class="form-control" name="prenomEleve'+counter+'"   />'+
+            '</div>'+
+            '</div>'+
+            ' <div class="row">'+
+            '<div class="col-4">'+
+            '<div class="mb-3">'+
+            '<label for="">Gender</label>'+
+            '<select  id="month" name="gender'+counter+'" class="form-control @error('gender') is-invalid @enderror list-dt"  >'+
+            'option selected>Gender</option>'+
+            ' <option value="garcon" > Garcon </option>'+
+            ' <option value="fille" > Fille </option>'+
+            '</select>'+
+            ' </div>'+
+            '</div>'+
+            '<div class="col-4">'+
+            '<label for="" >Niveau</label>'+
+            '<select id="niv" name="niveau'+counter+'" class="form-control @error('niveau') is-invalid @enderror list-dt">'+
+            '<option value="" selected> Niveau </option>'+
+            '@foreach($niveaux as $niv)'+
+            '<option value="{{$niv->id}}" > {{$niv->level}}</option>'+
+            '@endforeach'+
+            '</select>'+
+            '@error('niveau')'+
+            '<span class="invalid-feedback" role="alert">'+
+            '<strong>{{ $message }}</strong>'+
+            '</span>'+
+            '@enderror'+
+            ' </div>'+
+            '</div>'+
+            '<div class="row">'+
+
+            '<div class="col-8">'+
+            '<label>Date naissance</label>'+
+            '<input type="date" name="birth'+counter+'" placeholder="Date naissance" class="form-control @error('birth') is-invalid @enderror" />'+
+            '@error('birth')'+
+            ' <span class="invalid-feedback" role="alert">'+
+            ' <strong>{{ $message }}</strong>'+
+            ' </span>'+
+            '@enderror'+
+            '</div>'+
+            '</div>'+
+            '</div>').remove();
+        counter--;
+
+
+        })
     </script>
 
 

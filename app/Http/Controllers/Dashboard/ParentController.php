@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Requests\ParentRequest;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Parente;
@@ -146,37 +147,51 @@ public function add(){
         return view('dashboard.inscription.create', compact('niveaux'))->withTitle('Ajouter parent');
 }
 
-public function store(Request $request){
-    $parent = Parente::create([
-        "nomPere"=>$request->nomPere,
-        "prenomPere"=>$request->prenomPere,
-        "professionPere"=>$request->professionPere,
-        "telPere"=>$request->telPere,
-        "nomMere"=>$request->nomMere,
-        "prenomMere"=>$request->prenomMere,
-        "professionMere"=>$request->professionMere,
-        "telMere"=>$request->telMere,
-        "nbEnfants"=>$request->nbEnfants,
-        "adresse"=>$request->adresse,
-        "email"=>$request->email,
-        'password' => Hash::make($request->password),
-
-    ]);
-    $parent->sendEmailVerificationNotification();
-    $students = Student::create([
-        "nomEleve"=>$request->nomEleve,
-        "prenomEleve"=>$request->prenomEleve,
-        "niveau"=>$request->niveau,
-        "gender"=>($request->gender =='garcon')? 0:1,
-        "birth"=>$request->birth,
-        "parent_id"=>$parent->id,
+public function store(Request $request)
+{
+    try{
+        $parent = Parente::create([
+            "nomPere" => $request->nomPere,
+            "prenomPere" => $request->prenomPere,
+            "professionPere" => $request->professionPere,
+            "telPere" => $request->telPere,
+            "nomMere" => $request->nomMere,
+            "prenomMere" => $request->prenomMere,
+            "professionMere" => $request->professionMere,
+            "telMere" => $request->telMere,
+            "nbEnfants" => $request->nbEnfants,
+            "adresse" => $request->adresse,
+            "email" => $request->email,
+            "password" => Hash::make($request->password),
 
 
-    ]);
+        ]);
+        $parent->sendEmailVerificationNotification();
+        $students = [];
+       //dd($request);
+        foreach ($students as $std) {
+            $std = Student::create([
+                "nomEleve" => $students->nomEleve1[$std],
+                "prenomEleve" => $request->prenomEleve1,
+                "niveau" => $request->niveau1,
+                "gender" => ($request->gender1 == 'garcon') ? 0 : 1,
+                "birth" => $request->birth1,
+                "parent_id" => $parent->id,
 
-    return redirect()->route('inscri.index')->with('success', ' You are now registred successfully! Please check your email to verification link!');
 
-}
+            ]);
+
+        }
+        return redirect()->route('inscri.index')->with('success', ' You are now registred successfully! Please check your email to verification link!');
+
+    }catch(\Exception $ex){
+        return $ex;
+    }
+
+
+
+
+    }
 }
 
 
