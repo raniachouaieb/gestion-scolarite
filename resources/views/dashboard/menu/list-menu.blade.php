@@ -79,18 +79,21 @@
     }
 </style>
 
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Menu</li>
 
-        </ol>
-    </nav>
 
-<a  class="btn btn-primary position" href="{{ route('menu.addMenu')}}"><i class="fas fa-plus"></i> </a>
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{route('accueil')}}">Accueil</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Menu</li>
+
+    </ol>
+</nav>
+<a  class="btn btn-outline-primary position" href="{{ route('menu.addMenu')}}"><i class="fas fa-plus"></i> Ajouter </a>
 
         <div class="container">
+
+
 
             <div class="grid">
                 <div class="row">
@@ -115,8 +118,8 @@
 
 
 
-        </div>
-<br>
+         </div>
+
 
 
 

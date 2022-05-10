@@ -168,14 +168,14 @@ public function store(Request $request)
         ]);
         $parent->sendEmailVerificationNotification();
         $students = [];
-       //dd($request);
+       dd($request);
         foreach ($students as $std) {
             $std = Student::create([
-                "nomEleve" => $students->nomEleve1[$std],
-                "prenomEleve" => $request->prenomEleve1,
-                "niveau" => $request->niveau1,
-                "gender" => ($request->gender1 == 'garcon') ? 0 : 1,
-                "birth" => $request->birth1,
+                "nomEleve" => $students->nomEleve[$std],
+                "prenomEleve" => $request->prenomEleve,
+                "niveau" => $request->niveau,
+                "gender" => ($request->gender == 'garcon') ? 0 : 1,
+                "birth" => $request->birth,
                 "parent_id" => $parent->id,
 
 

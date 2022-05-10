@@ -27,6 +27,9 @@
         .trashcolor{
             color:red;
         }
+        .table-responsive table thead tr{color: #ffffff;
+            font-family: 'Nunito', sans-serif;
+            font-weight: inherit}
     </style>
     <div class="container">
         <nav aria-label="breadcrumb">
@@ -59,14 +62,14 @@
 
 
         <div class="row  position mb-5">
-            <a  class="btn btn-primary position" href="{{ route('convocations.addConv')}}"><i class="fas fa-plus"></i></a>
+            <a  class="btn btn-outline-primary position" href="{{ route('convocations.addConv')}}"><i class="fas fa-plus"></i> Ajouter</a>
         </div>
 
         <div class="card shadow mb-4 convTab">
             <div class="table-responsive">
                 <!--<h3 class="align-content-center"> Total data : <span id="total_records"></span></h3>-->
-                <table class="table table-hover">
-                    <thead>
+                <table class="table table-striped">
+                    <thead class="bg-primary">
                     <tr>
                         <th> Titre</th>
                         <th>Raison </th>

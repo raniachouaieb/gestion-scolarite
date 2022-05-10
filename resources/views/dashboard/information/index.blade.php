@@ -27,6 +27,9 @@
             border: 1px ;
             margin-bottom: 15px;
         }
+        .table-responsive table thead tr{color: #ffffff;
+            font-family: 'Nunito', sans-serif;
+            font-weight: inherit}
     </style>
     <div class="container">
     <!--@include('includes.alerts.flash')  -->
@@ -37,7 +40,7 @@
             </ol>
         </nav>
         <div class="row  position mb-5">
-            <a  class="btn btn-primary " href="{{route('info.add')}}"><i class="fas fa-plus"></i></a>
+            <a  class="btn btn-outline-primary " href="{{route('info.add')}}"><i class="fas fa-plus"></i> Ajouter</a>
         </div>
 
 
@@ -50,11 +53,11 @@
             </div>
             <div class="table-responsive">
 
-                <table class="table table-hover">
+                <table class="table table-striped">
 
-                    <thead>
+                    <thead class="bg-primary">
                     <tr>
-                        <td class="col-1">#</td>
+
                         <td class="col-3">Sujet</td>
                         <td class="col-3">Information</td>
                         <td class="col-3">Classe</td>
@@ -65,7 +68,6 @@
 
                     @foreach($informations as $inf)
                             <tr>
-                                <td class="col-1">{{$inf->id}}</td>
                                 <td class="col-3">{{$inf->titre}}</td>
                                 <td class="col-3">{!!  $inf->info!!}</td>
 

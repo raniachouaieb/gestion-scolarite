@@ -164,7 +164,7 @@
                             <div class="cardDetail">
                                 <div class="card-content">
 
-                                    <div class="number">22</div>
+                                    <div class="number">{{$informations->count()}}</div>
                                     <div class="card-name"> Information envoyées</div>
                                 </div>
                                 <div class="icon-box">
@@ -199,6 +199,7 @@
                <div class="card-body pie">
                    <div class="chart">
                        <canvas id="piechart" ></canvas>
+
                    </div>
                </div>
            </div>
@@ -310,7 +311,7 @@
         ],
         datasets: [{
             label: 'My First Dataset',
-            data: [300, 50],
+            data: [JSON.parse('{!! json_encode($fille_records) !!}'), JSON.parse('{!! json_encode($garcon_records) !!}')],
             backgroundColor: [
                 'rgb(255, 99, 132)',
                 'rgb(54, 162, 235)',
@@ -379,6 +380,7 @@
     );
 
 </script>
+
 
 
 

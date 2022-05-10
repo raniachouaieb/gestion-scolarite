@@ -9,7 +9,7 @@ class Classroom_Info extends Model
 {
     use SoftDeletes;
 
-    protected $table="classroom_info";
+    protected $table="classroominfo";
 
     protected $fillable = [
         'id','classroom_id','info_id'

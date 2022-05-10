@@ -14,6 +14,9 @@
             color:red;
             margin-left: 7px;
         }
+        .table-responsive table thead tr{color: #ffffff;
+            font-family: 'Nunito', sans-serif;
+            font-weight: inherit}
     </style>
     <div class="container">
     <!--@include('includes.alerts.flash')  -->
@@ -24,7 +27,7 @@
             </ol>
         </nav>
         <div class="row  position mb-5">
-            <a  class="btn btn-primary " href="{{ route('seance.add')}}"><i class="fas fa-plus"></i></a>
+            <a  class="btn btn-outline-primary " href="{{ route('seance.add')}}"><i class="fas fa-plus"></i> Ajouter</a>
         </div>
 
 
@@ -32,9 +35,9 @@
         <div class="card shadow tableSeance">
             <div class="table-responsive">
 
-                <table class="table table-hover">
+                <table class="table table-striped">
 
-                    <thead>
+                    <thead class="bg-primary">
                     <tr>
                         <td class="col-3">heure debut</td>
                         <td class="col-3">heure fin</td>

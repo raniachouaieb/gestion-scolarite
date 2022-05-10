@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Requests\UserRequest;
 use App\Models\Admin;
 use App\Models\Convocation;
+use App\Models\Info;
 use App\Models\Parente;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -38,8 +39,11 @@ class AdminController extends Controller
         $elevePréinscrit = Student::whereNull('class_id')->get();
         $eleveInscrit = Student::whereNotNull('class_id')->get();
         $convocations = Convocation::get();
-
-        return view('dashboard.admin.home', compact('parentPréinscrit', 'elevePréinscrit', 'parentInscrit', 'eleveInscrit', 'convocations'));
+        $informations = Info::get();
+        $fille_records = Student::whereNotNull('class_id')->where('gender', 1)->count();
+        $garcon_records = Student::whereNotNull('class_id')->where('gender', 0)->count();
+       // dd($fille_records, $garcon_records );
+        return view('dashboard.admin.home', compact('parentPréinscrit', 'elevePréinscrit', 'parentInscrit', 'eleveInscrit', 'convocations','informations', 'garcon_records', 'fille_records'));
     }
 
     public function list(Request $request)

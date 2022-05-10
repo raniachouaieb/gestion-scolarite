@@ -30,7 +30,7 @@
             </ol>
         </nav>
         <div class="row  position mb-5">
-            <a  class="btn btn-primary position" href="{{ route('classes.add')}}"><i class="fas fa-plus"></i> Ajouter</a>
+            <a  class="btn btn-outline-primary position" href="{{ route('classes.add')}}"><i class="fas fa-plus"></i> Ajouter</a>
         </div>
 
         <div class="row niv">

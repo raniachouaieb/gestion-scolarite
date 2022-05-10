@@ -8,6 +8,7 @@
         border-radius: 2px 4px 4px;
         padding: 1px 4px;
     }
+    .err{color: red}
     .table-responsive table thead tr{color: #ffffff;
         font-family: 'Nunito', sans-serif;
         font-weight: inherit}
@@ -32,7 +33,8 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($moduleByLevel as $modul)
+            @if($moduleByLevel && $moduleByLevel->count()>0)
+                @foreach($moduleByLevel as $modul)
                 <tr>
                     <td class="col-6"><a href="{{route('modules.show', $modul->id)}}" class="btn btn-info" data-toggle="collapse" data-target="#demo{{ $modul->id}}">{{$modul->nom_module}}</a></td>
                     <td class="col-3">{{$modul->coefficient_module}}</td>
@@ -53,11 +55,14 @@
                     <ul>
                         @foreach($modul->matieres as $listMat)
 
-                            <li>{{$listMat->nom}}</li>
+                            <li >{{$listMat->nom}}</li>
                         @endforeach
                     </ul>
                 </div>
             @endforeach
+            @else
+                <tr class="err">Aucun module attribué pour ce niveau</tr>
+            @endif
 
             </tbody>
 

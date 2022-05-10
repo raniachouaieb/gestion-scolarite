@@ -29,7 +29,7 @@
             </ol>
         </nav>
         <div class="row  position mb-5">
-            <a  class="btn btn-primary position" href="{{ route('matieres.add')}}"><i class="fas fa-plus"></i> Ajouter </a>
+            <a  class="btn btn-outline-primary position" href="{{ route('matieres.add')}}"><i class="fas fa-plus"></i> Ajouter </a>
         </div>
         <div class="card shadow mb-6 matiereTab">
              <div class="table-responsive">

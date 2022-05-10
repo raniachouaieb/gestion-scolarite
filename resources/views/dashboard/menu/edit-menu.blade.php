@@ -17,6 +17,43 @@
             margin-top: 100px;
             margin-right: 15px;
         }
+        .customFile{
+            font-size: 16px;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 5px 5px 10px black;
+            width: 280px;
+            outline: none;
+        }
+        ::-webkit-file-upload-button{
+            color: white;
+            background: #206a5d;
+            padding: 9px;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 1px 0 1px #6b4559;
+            outline: none;
+        }
+        ::-webkit-file-upload-button:hover{
+            background: #438a5e;
+        }
+        .image{
+            border: 2px dashed #c2cdda;
+            padding: 34px;
+            margin-top: 47px;
+            width: 53%;
+            margin-left: 74px;
+
+        }
+        .profilImg{
+            width: 144px;
+            height: 100px;
+            margin-left: -32px;
+            border: none;
+        }
+        .profil{
+            margin-top: 17px;
+        }
     </style>
     <div class="container">
          <nav aria-label="breadcrumb">
@@ -74,21 +111,20 @@
                              </div>
 
                          </div>
-                        <div class="col-md-4">
-                            <div class="card imgcard">
+                        <div class="col-4 profil">
+                            <div class="card shadow">
                                 <div class="card-body">
-                                    <div class="form-group col-md-12 ">
-                                        <label for="">Selectionner image</label>
-                                        <input type="file" name="image" class="form-control-file @error('image') is-invalid @enderror">
-                                        <img src="{{asset('assets/'.$menu->image)}}"  width="90px" alt="image">
-                                        @error('image')
-                                        <span class="invalid-feedback" role="alert">
-                                                           <strong>{{ $message }}</strong>
-                                                        </span>
-                                        @enderror
+                                    <h5 class="card-title">Image de profil</h5>
+                                    <hr />
+                                    <div class="form-group">
+                                        <div class="mb-3">
+
+                                            <input type="file" name="image" class="customFile" id="image-input"  onchange="loadFile(event)" >
+                                            <div class="image" ><img  src="{{asset('assets/'.$menu->image)}}")}} id="output" class="profilImg"></div>
+                                        </div>
                                     </div>
                                 </div>
-                             </div>
+                            </div>
                             <button type="submit" class="btn btn-primary pos">Modifier</button>
 
                         </div>
@@ -102,5 +138,12 @@
 
 
      </div>
+    <script>
+        var loadFile= function(event){
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+        };
+
+    </script>
 
 @endsection

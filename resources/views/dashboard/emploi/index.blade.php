@@ -14,17 +14,20 @@
             color:red;
             margin-left: 7px;
         }
+        .table-responsive table thead tr{color: #ffffff;
+            font-family: 'Nunito', sans-serif;
+            font-weight: inherit}
     </style>
     <div class="container">
     @include('includes.alerts.flash')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Accueil</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Emplois</li>
             </ol>
         </nav>
         <div class="row  position mb-5">
-            <a  class="btn btn-primary " href="{{ route('emploi.add')}}"><i class="fas fa-plus"></i></a>
+            <a  class="btn btn-outline-primary " href="{{ route('emploi.add')}}"><i class="fas fa-plus"></i> Ajouter</a>
         </div>
 
 
@@ -32,9 +35,9 @@
         <div class="card shadow tableEmploi">
             <div class="table-responsive">
 
-                <table class="table table-hover">
+                <table class="table table-striped">
 
-                    <thead>
+                    <thead class="bg-primary">
                     <tr>
                         <td class="col-4">#</td>
                         <td class="col-6">Emploi</td>

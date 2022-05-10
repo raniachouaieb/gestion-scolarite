@@ -34,10 +34,10 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'email' => 'Please,Enter a valid address email',
-            'email.required' => 'email cannot be empty.',
-            'password.required' => 'pass cannot be empty.',
-            'password.min'=> 'password should be at least 8 character'
+            'email' => 'Entrer un format valid',
+            'email.required' => 'Veuillez remplir ce champs.',
+            'password.required' => 'Veuillez remplir ce champs.',
+            'password.min'=> 'le mot de passe doit être au minimum 8 charactères'
         ];
     }
 }

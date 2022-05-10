@@ -119,6 +119,12 @@ class ConvocationController extends Controller
             $convocations->date_envoie=$request->date_envoie;
             $convocations->student_id=$request->elev;
             $dataStatus = $convocations->save();
+
+
+            //// contenu notification
+
+
+
             if($dataStatus) {
                 Session::flash('statuscode', 'success');
                 return redirect()->route('convocations.index')->with('status', 'Convocation est envoyée avec succes');

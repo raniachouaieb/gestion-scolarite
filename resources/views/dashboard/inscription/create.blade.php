@@ -186,23 +186,23 @@
                                         <div class="col-md-8">
                                             <h5 class="card-title color"><i class="fa fa-info-circle"></i> Information Enfant(s)</h5>
                                             <hr />
-                                            <div class="field1" data-groupe="eleve">
+                                            <div class="field[1]" data-groupe="eleve">
                                                 <div class="row">
                                                     <div class="col-4">
                                                         <div class="mb-3">
                                                             <label for="">Nom  </label>
-                                                            <input type="text" class="form-control" name="nomEleve1"  />
+                                                            <input type="text" class="form-control" name="nomEleve[1]"  />
                                                         </div>
                                                     </div>
                                                     <div class="col-4"><label for="" >Prénom  </label>
-                                                        <input type="text" class="form-control" name="prenomEleve1"   />
+                                                        <input type="text" class="form-control" name="prenomEleve[1]"   />
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-4">
                                                         <div class="mb-3">
                                                             <label for="">Gender</label>
-                                                            <select  id="month" name="gender1" class="form-control @error('gender') is-invalid @enderror list-dt"  >
+                                                            <select  id="month" name="gender[1]" class="form-control @error('gender') is-invalid @enderror list-dt"  >
                                                                 <option selected>Gender</option>
                                                                 <option value="garcon" > Garcon </option>
                                                                 <option value="fille" > Fille </option>
@@ -211,7 +211,7 @@
                                                     </div>
                                                     <div class="col-4">
                                                         <label for="" >Niveau</label>
-                                                        <select id="niv" name="niveau" class="form-control @error('niveau') is-invalid @enderror list-dt">
+                                                        <select id="niv" name="niveau[1]" class="form-control @error('niveau') is-invalid @enderror list-dt">
                                                             <option value="" selected> Niveau </option>
                                                             @foreach($niveaux as $niv)
                                                                 <option value="{{$niv->id}}" > {{$niv->level}}</option>
@@ -228,7 +228,7 @@
 
                                                     <div class="col-8">
                                                         <label>Date naissance</label>
-                                                        <input type="date" name="birth" placeholder="Date naissance" class="form-control @error('birth') is-invalid @enderror" />
+                                                        <input type="date" name="birth[1]" placeholder="Date naissance" class="form-control @error('birth') is-invalid @enderror" />
                                                         @error('birth')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -311,16 +311,16 @@
 
             counter+=1;
 
-            $('#info-eleve').append( '<div class="field1'+counter+'">'+
+            $('#info-eleve').append( '<div class="field['+counter+']">'+
                 '<div class="row">'+
                '<div class="col-4">'+
                 '<div class="mb-3">'+
                 '<label for="">Nom  </label>'+
-                '<input type="text" class="form-control" name="nomEleve'+counter+'"  />'+
+                '<input type="text" class="form-control" name="nomEleve['+counter+']"  />'+
         '</div>'+
         '</div>'+
             '<div class="col-4"><label for="" >Prénom  </label>'+
-                '<input type="text" class="form-control" name="prenomEleve'+counter+'"   />'+
+                '<input type="text" class="form-control" name="prenomEleve['+counter+']"   />'+
            '</div>'+
                 '<div class="col-4">'+
 
@@ -332,7 +332,7 @@
                 '<div class="col-4">'+
                     '<div class="mb-3">'+
                         '<label for="">Gender</label>'+
-                        '<select  id="month" name="gender'+counter+'" class="form-control @error('gender') is-invalid @enderror list-dt"  >'+
+                        '<select  id="month" name="gender['+counter+']" class="form-control @error('gender') is-invalid @enderror list-dt"  >'+
                             'option selected>Gender</option>'+
                            ' <option value="garcon" > Garcon </option>'+
                            ' <option value="fille" > Fille </option>'+
@@ -341,7 +341,7 @@
                 '</div>'+
                 '<div class="col-4">'+
                     '<label for="" >Niveau</label>'+
-                    '<select id="niv" name="niveau'+counter+'" class="form-control @error('niveau') is-invalid @enderror list-dt">'+
+                    '<select id="niv" name="niveau['+counter+']" class="form-control @error('niveau') is-invalid @enderror list-dt">'+
                        '<option value="" selected> Niveau </option>'+
                        '@foreach($niveaux as $niv)'+
                         '<option value="{{$niv->id}}" > {{$niv->level}}</option>'+
@@ -358,7 +358,7 @@
 
                 '<div class="col-8">'+
                     '<label>Date naissance</label>'+
-                    '<input type="date" name="birth'+counter+'" placeholder="Date naissance" class="form-control @error('birth') is-invalid @enderror" />'+
+                    '<input type="date" name="birth['+counter+']" placeholder="Date naissance" class="form-control @error('birth') is-invalid @enderror" />'+
                     '@error('birth')'+
                                                        ' <span class="invalid-feedback" role="alert">'+
                                                            ' <strong>{{ $message }}</strong>'+

@@ -42,11 +42,11 @@ class LoginController extends Controller
       if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password]))
        {
            Session::flash('statuscode', 'success');
-        return redirect()->route('accueil')->with('status','Welcome!');
+        return redirect()->route('accueil')->with('status','Bienvenue! :)');
 
       }
 
-       return redirect()->back()->with('error', 'oups! Invalid email or password, Please verify');
+       return redirect()->back()->with('error', 'oups! email ou mot de passe invalide, ');
 
 
     }
