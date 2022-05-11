@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale-1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />"
 
 <body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -67,6 +67,17 @@
         background-color:  #007bff;
         color: #fff;
     }
+    .eye{
+        position: absolute;
+        right: 8%;
+        transform: translate(0, -50%);
+        top: 53%;
+        cursor: pointer;
+    }
+    .fa{
+        font-size: 18px;
+        color: #7a797e;
+    }
 </style>
 
 <div class="container">
@@ -78,7 +89,8 @@
         </div>
         <div class="col-md-6">
             @include('includes.alerts.flash')
-            <h3 class="signin-text mb-3"> Login</h3>
+            <h3 class="signin-text mb-3">Login</h3>
+
             <form method="post" action="{{ route('admin.getLogin') }}" novalidate>
                 @csrf
                 <div class="form-group">
@@ -93,9 +105,11 @@
                     @enderror                </div>
                 <div class="form-group">
                     <label for="password">Mot de passe</label>
+
                     <input id="password" type="password"
                            class="form-control @error('password') is-invalid @enderror"
                            name="password" required autocomplete="current-password">
+                    <span><i class="fa fa-eye eye" aria-hidden="true" id="eye" onclick="toggle()"></i></span>
 
                     @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -103,6 +117,7 @@
                         </span>
                     @enderror
                 </div>
+
                 <div class="col-3">
                     <div class="custom-control custom-switch">
                         <input type="checkbox" class="custom-control-input"  id="switch1" name="status">
@@ -132,6 +147,9 @@
     @endif
 
 </script>
+<script src="{{ asset('js/togglePassword.js')}}"></script>
+
+
 
 </body>
 </html>

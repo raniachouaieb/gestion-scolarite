@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Classroom;
-use App\Models\Classroom_Info;
+use App\Models\ClassroomInfo;
 use App\Models\Info;
 use App\Models\Level;
 use Illuminate\Http\Request;
@@ -68,7 +68,7 @@ class InfoController extends Controller
         $infos = Info::find($id);
         $niveaux = Level::get();
         $classe = Classroom::get();
-        $levelName= Classroom_Info::get();
+        $levelName= ClassroomInfo::get();
 
         if(!$infos){
             return redirect()->route('info.index')->with(['error'=>'there is no data with this id, please enter a correct one']);
@@ -99,7 +99,7 @@ class InfoController extends Controller
 
         }catch(\Exception $exception){
             Session::flash('statuscode', 'error');
-
+return $exception;
             return redirect()->route('info.index')->with(['status'=>'There is an error :(']);
         }
 

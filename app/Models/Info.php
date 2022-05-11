@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Classroom_Info;
+use App\Models\ClassroomInfo;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Classroom;
 
 class Info extends Model
 {
@@ -33,7 +32,7 @@ class Info extends Model
 
     public function classe()
     {
-        return $this->hasMany(Classroom_Info::class,'info_id','id')->orderByDesc('Created_at');
+        return $this->belongsToMany(ClassroomInfo::class,'info_id','id')->orderByDesc('Created_at');
 
     }
 

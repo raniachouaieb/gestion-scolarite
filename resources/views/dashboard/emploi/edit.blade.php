@@ -10,8 +10,8 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{route('emploi.index')}}">Emplois</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="">Mettre à jour </a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{route('emploi.index')}}">Emploi</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Mettre à jour </li>
 
             </ol>
         </nav>
@@ -61,7 +61,7 @@
                                 </div>
                                 <br>
 
-                                <button type="submit" class="btn btn-primary"> Ajouter </button>
+                                <button type="submit" class="btn btn-outline-primary" style="margin-left: 40%"> Ajouter </button>
                             </div>
                         </div>
                     </form>

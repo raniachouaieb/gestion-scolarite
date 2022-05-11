@@ -59,6 +59,17 @@
             width: 120px;
 
         }
+        .eye{
+            position: absolute;
+            right: 8%;
+            transform: translate(0, -50%);
+            top: 63%;
+            cursor: pointer;
+        }
+        .fa{
+            font-size: 18px;
+            color: #7a797e;
+        }
 
     </style>
     <div class="container">
@@ -112,6 +123,8 @@
                                                       <span class="input-group-text" id="basic-addon1"
                                                       ><i class="fa fa-key"></i></span>
                                                 <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" aria-describedby="emailHelp" placeholder="">
+                                                <span><i class="fa fa-eye eye" aria-hidden="true" id="eye" onclick="toggle()"></i></span>
+
                                                 @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                          <strong>{{ $message }}</strong>
@@ -191,4 +204,6 @@
         };
 
     </script>
+    <script src="{{ asset('js/togglePassword.js')}}"></script>
+
 @endsection

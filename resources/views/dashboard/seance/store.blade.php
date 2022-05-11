@@ -3,15 +3,12 @@
 
 @section('content')
     <style>
-        .pos {
-            float: right;
-            margin-right: 100px;
-            margin-top: -11px;
-            width: 138px;
-
+        .color{
+            color: #ef6f6c;
         }
-        .pp{
-            margin-top: 15px;
+        .seanceAdd{
+            margin-left: 889px;
+            width: 121px;
         }
     </style>
     <div class="container">
@@ -28,130 +25,128 @@
 
             <form method="post" action="{{ route('seance.store') }}">
                 @csrf
-                <div class="row">
-                    <div class="col-md-8 ">
-                        <div class="card tt">
-                            <div class="card-body">
-                                    <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h5 class="card-title color"><i class="fa fa-pen"></i> Créer la séance</h5>
+                                <hr />
 
-                                            <div class="card-body">
-                                                <div class="form-group col-md-12">
-                                                    <label for="">Niveau</label>
-                                                    <select class="form-control @error('niveau') is-invalid @enderror  "  id="niveau" name="niveau">
-                                                        <option value="" selected> Choisir </option>
-                                                        @foreach($niveaux as $niveau)
-                                                            <option value="{{$niveau->id}}" > {{$niveau->level}} </option>
-                                                        @endforeach
+                                <div class="mb-3">
+                                    <label for="">Niveau</label>
+                                    <select class="form-control @error('niveau') is-invalid @enderror  "  id="niveau" name="niveau">
+                                        <option value="" selected> Choisir </option>
+                                        @foreach($niveaux as $niveau)
+                                            <option value="{{$niveau->id}}" > {{$niveau->level}} </option>
+                                        @endforeach
 
-                                                    </select>
-                                                    @error('niveau')
-                                                    <span class="invalid-feedback" role="alert">
+                                    </select>
+                                    @error('niveau')
+                                    <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                                     </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group col-md-12">
-                                                    <label for="">Emploi</label>
-                                                    <select class="form-control @error('emploi') is-invalid @enderror  " id="emploi" name="emploi">
-                                                        <option value="" selected> </option>
-                                                        <option value="" > </option>
-                                                    </select>
-                                                    @error('emploi')
-                                                    <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                                    </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group col-md-12">
-                                                    <label for="">Matière</label>
-                                                    <select class="form-control @error('matiere') is-invalid @enderror "  id="matiere" name="matiere">
-                                                        <option value="" selected>  </option>
-                                                        <option value="" >  </option>
-
-                                                    </select>
-                                                    @error('matiere')
-                                                    <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                                    </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-
-                                     </div>
-
-
-
-
-
-
-
-
+                                    @enderror
+                                </div>
 
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="card-body">
-                            <div class="col">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="form-group col-md-12">
-                                            <label for="" class="col-md-8">Jour</label>
-                                                <div class="col">
-                                                    <select class="form-control @error('day') is-invalid @enderror"  name="day">
-                                                        <option value="" selected>  Selectionner un jour  </option>
-                                                        <option value="Lundi" > Lundi </option>
-                                                        <option value="Mardi" > Mardi </option>
-                                                        <option value="Mercredi" > Mercredi </option>
-                                                        <option value="jeudi" > jeudi </option>
-                                                        <option value="vendredi" > vendredi </option>
-                                                        <option value="samedi" > samedi </option>
+                            <!--/span-->
+                            <div class="col-md-4">
+                                <h5 class="card-title color"><i class="fa fa-business-time"></i> Fixer l'heure</h5>
+                                <hr />
+                                <div class="mb-3">
+                                    <label for="" class="col-md-8">Jour</label>
 
-                                                    </select>
-                                                    @error('day')
-                                                    <span class="invalid-feedback" role="alert">
+                                        <select class="form-control @error('day') is-invalid @enderror"  name="day">
+                                            <option value="" selected>  Selectionner un jour  </option>
+                                            <option value="Lundi" > Lundi </option>
+                                            <option value="Mardi" > Mardi </option>
+                                            <option value="Mercredi" > Mercredi </option>
+                                            <option value="jeudi" > jeudi </option>
+                                            <option value="vendredi" > vendredi </option>
+                                            <option value="samedi" > samedi </option>
+
+                                        </select>
+                                        @error('day')
+                                        <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
-                                                    @enderror
+                                        @enderror
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
 
-                                                 </div>
-                                                <div class="form-group ">
-                                                        <label for="" class="col-md-8">heure debut:</label>
-                                                    <div class="col">
-                                                        <input  class="col-md-12 form-control @error('start_time') is-invalid @enderror" type="time" id="start_time" name="start_time">
-                                                        @error('start_time')
-                                                        <span class="invalid-feedback" role="alert">
+                                <div class="mb-3">
+                                    <label for="">Emploi</label>
+                                    <select class="form-control @error('emploi') is-invalid @enderror  " id="emploi" name="emploi">
+                                        <option value="" selected> </option>
+                                        <option value="" > </option>
+                                    </select>
+                                    @error('emploi')
+                                    <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                                     </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="form-group ">
-                                                    <label for="" class="col-md-8">heure fin:</label>
-                                                    <div class="col">
-                                                        <input  class="col-md-12 form-control @error('end_time') is-invalid @enderror" type="time" id="end_time" name="end_time">
-                                                        @error('end_time')
-                                                        <span class="invalid-feedback" role="alert">
+                                    @enderror
+                                </div>
+
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-4">
+
+                                <div class="mb-3">
+                                    <label for="" class="col-md-8">heure debut:</label>
+
+                                        <input  class="col-md-12 form-control @error('start_time') is-invalid @enderror" type="time" id="start_time" name="start_time">
+                                        @error('start_time')
+                                        <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                                     </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
+                                        @enderror
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
 
+                                <div class="mb-3">
+                                    <label for="">Matière</label>
+                                    <select class="form-control @error('matiere') is-invalid @enderror "  id="matiere" name="matiere">
+                                        <option value="" selected>  </option>
+                                        <option value="" >  </option>
 
-                                         </div>
-                                    </div>
-                                      </div>
-                                  </div>
-                             </div>
+                                    </select>
+                                    @error('matiere')
+                                    <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                                    </span>
+                                    @enderror
+                                </div>
+
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-4">
+
+                                <div class="mb-3">
+                                    <label for="" class="col-md-8">heure fin:</label>
+                                        <input  class="col-md-12 form-control @error('end_time') is-invalid @enderror" type="time" id="end_time" name="end_time">
+                                        @error('end_time')
+                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                                    </span>
+                                        @enderror
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+
+                        <button type="submit" class="btn btn-outline-danger seanceAdd px-4">Ajouter</button>
                     </div>
                 </div>
 
 
-                <button type="submit" class="btn btn-outline-primary pos">Ajouter</button>
 
 
             </form>

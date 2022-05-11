@@ -10,8 +10,12 @@
             width: 138px;
 
         }
-        .pp{
-            margin-top: 15px;
+        .color{
+            color: #ef6f6c;
+        }
+        .conv{
+            margin-left: 889px;
+            width: 121px;
         }
     </style>
     <div class="container">
@@ -19,120 +23,133 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a href="{{route('convocations.index')}}">Convocations</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Créer une convocation</li>
+                <li class="breadcrumb-item active" aria-current="page">Creation d'une convocation</li>
 
             </ol>
         </nav>
        <!-- <div class="card-header">
             Créer une convocation
         </div>-->
-        <div class="card-body">
 
+            <div class="row">
+                <!-- Column -->
+                <div class="col-lg-12">
+                    <div class="card material-card">
+                        <div class="card-body">
                     <form method="post" action="{{ route('convocations.storeConv') }}">
-                        <div class="row">
-                            <div class="col-md-8 ">
-                                <div class="card tt">
-                                            <div class="card-body">
+                        @csrf
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h5 class="card-title color"><i class="fa fa-pen"></i> Créer convocation</h5>
+                                        <hr />
 
-                                                            <div class="row">
-                                                                <div class="col-6">
-                                                                    @csrf
-                                                                    <label for=""> Titre </label>
-                                                                    <input type="text" class="form-control @error('titre_conv') is-invalid @enderror" name="titre_conv"/>
-                                                                    @error('titre_conv')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                       <strong>{{ $message }}</strong>
-                                                                    </span>
-                                                                    @enderror
-                                                                </div>
-                                                                <div class="col-6">
-
-                                                                        <label for="" >Date Réunion</label>
-
-                                                                            <input id="date_envoie" type="datetime-local" class="form-control  @error('date_envoie') is-invalid @enderror" name="date_envoie" autocomplete="off">
-                                                                            @error('date_envoie')
-                                                                            <span class="invalid-feedback" role="alert">
-                                                                                <strong>{{ $message }}</strong>
-                                                                             </span>
-                                                                            @enderror
-
-
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="">Description </label>
-                                                                <textarea id="myarea" name="description" class="form-control tinymce-editor @error('description') is-invalid @enderror" ></textarea>
-                                                                @error('description')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                       <strong>{{ $message }}</strong>
-                                                                    </span>
-                                                                @enderror
-                                                            </div>
-
-
-                                                    <br>
-
-
-                                            </div>
-                                 </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="card-body">
-                                    <div class="col">
-                                        <div class="card pp">
-                                            <div class="card-body">
-                                                <div class="form-group col-md-12">
-                                                    <label for="">Niveau</label>
-                                                    <select class="form-control "  id="niveau" name="niveau">
-                                                        <option value="" selected> Choisir </option>
-                                                        @foreach( $niveaux as $niv)
-
-                                                            <option value="{{$niv->id}}" >  {{$niv->level}}</option>
-
-                                                        @endforeach
-
-                                                    </select>
-                                                </div>
-
-                                                <div class="form-group col-md-12">
-                                                    <label for="">Classe</label>
-                                                    <select class="form-control " id="class" name="class">
-                                                        <option value="" selected> </option>
-                                                        <option value="" > </option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="form-group col-md-12">
-                                                    <label for="">Elève</label>
-                                                    <select class="form-control @error('elev') is-invalid @enderror "  id="elev" name="elev">
-                                                        <option value="" selected>  </option>
-                                                        <option value="" >  </option>
-
-                                                    </select>
-                                                    @error('elev')
+                                                <div class="mb-3">
+                                                    <label for=""> Titre </label>
+                                                    <input type="text" class="form-control @error('titre_conv') is-invalid @enderror" name="titre_conv"/>
+                                                    @error('titre_conv')
                                                     <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
+                                                                       <strong>{{ $message }}</strong>
                                                                     </span>
                                                     @enderror
                                                 </div>
-                                            </div>
+
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+                                        <h5 class="card-title color"><i class="fa fa-arrow-pointer"></i> Veuillez selectionnez</h5>
+                                        <hr />
+                                        <div class="mb-3">
+                                            <label for="">Niveau</label>
+                                            <select class="form-control "  id="niveau" name="niveau">
+                                                <option value="" selected> Choisir </option>
+                                                @foreach( $niveaux as $niv)
+
+                                                    <option value="{{$niv->id}}" >  {{$niv->level}}</option>
+
+                                                @endforeach
+
+                                            </select>
                                         </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
 
-                                     </div>
+                                                <div class="mb-3">
+                                                    <label for="" >Date Réunion</label>
+
+                                                    <input id="date_envoie" type="datetime-local" class="form-control  @error('date_envoie') is-invalid @enderror" name="date_envoie" autocomplete="off">
+                                                    @error('date_envoie')
+                                                    <span class="invalid-feedback" role="alert">
+                                                                                <strong>{{ $message }}</strong>
+                                                                             </span>
+                                                    @enderror
+                                                </div>
+
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+
+                                        <div class="mb-3">
+                                            <label for="">Classe</label>
+                                            <select class="form-control " id="class" name="class">
+                                                <option value="" selected> </option>
+                                                <option value="" > </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
 
 
+                                                <div class="mb-3">
+                                                    <label for="">Description </label>
+                                                    <textarea id="myarea" name="description" class="form-control tinymce-editor @error('description') is-invalid @enderror" ></textarea>
+                                                    @error('description')
+                                                    <span class="invalid-feedback" role="alert">
+                                                                       <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                    @enderror
+                                                </div>
 
-                                 </div>
-                                <button type="submit" class="btn btn-primary pos">Envoyer</button>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+
+                                        <div class="mb-3">
+                                            <label for="">Elève</label>
+                                            <select class="form-control @error('elev') is-invalid @enderror "  id="elev" name="elev">
+                                                <option value="" selected>  </option>
+                                                <option value="" >  </option>
+
+                                            </select>
+                                            @error('elev')
+                                            <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                                    </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+
+                                <button type="submit" class="btn btn-outline-danger conv px-4">Envoyer</button>
                             </div>
                         </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 
 
-                    </form>
-        </div>
 
 
 

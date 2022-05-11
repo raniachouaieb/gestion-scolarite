@@ -125,7 +125,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary pos">Modifier</button>
+                            <button type="submit" class="btn btn-outline-primary pos">Modifier</button>
 
                         </div>
 

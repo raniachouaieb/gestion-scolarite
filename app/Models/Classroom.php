@@ -41,12 +41,12 @@ class Classroom extends Model
     }
 
     public function infos(){
-        return $this->hasMany(Info::class);
+        return $this->belongsToMany(Info::class);
     }
 
     public function informations()
     {
-        return $this->hasMany(\App\Models\Classroom_Info::class,'class_id','id')->orderByDesc('Created_at');
+        return $this->hasMany(\App\Models\ClassroomInfo::class,'class_id','id')->orderByDesc('Created_at');
 
     }
 }

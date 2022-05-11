@@ -164,9 +164,9 @@
                             <div class="col-4">
                                 <div class="mb-3">
                                     @if($parent->image_profile)
-                                        <img src="{{asset('assets/'.$parent->image_profile)}}"  onclick="clickImage()" id="profileDisplay" alt="fgh"/>
+                                        <img src="{{asset('assets/'.$parent->image_profile)}}"  onclick="clickImage()" id="profileDisplay" />
                                     @else
-                                        <img src="{{asset('assets/uploads/parents/placeholderImage.png')}}"  onclick="clickImage()" id="profileDisplay" alt="fgh"/>
+                                        <img src="{{asset('assets/uploads/parents/placeholderImage.png')}}"  onclick="clickImage()" id="profileDisplay" alt=""/>
 
                                     @endif
                                     <label>Choisir une photo</label>
@@ -265,7 +265,8 @@
                                                 </div>
 
 
-                                                <div class="col-md-6">
+                                                <div class="row mb-3">
+                                                    <div class="col">
                                                     <label for="classe">classe </label>
 
                                                     <select class="form-control" id="classe" name="classe" >
@@ -277,6 +278,14 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
+                                                    </div>
+                                                        <div class="col">
+                                                            <label for="classe">Date Naissance </label>
+
+                                                            <input class="form-control"  type="date" id="birth" name="birth" value="{{$elev->birth}}"/>
+
+
+                                                        </div>
                                                 </div>
 
 

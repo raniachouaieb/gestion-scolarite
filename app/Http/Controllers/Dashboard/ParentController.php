@@ -118,7 +118,8 @@ class ParentController extends Controller
             "gender"=>($request->gender == 'garcon')? 0:1,
             "niveau"=>$request->niveau,
             "class_id"=>$request->classe,
-            'classe'=>$request->classe
+            'classe'=>$request->classe,
+            "birth"=>$request->birth
         ]);
         return redirect()->route('inscri.index')->with(['success'=>'modification avec succés']);
     }
