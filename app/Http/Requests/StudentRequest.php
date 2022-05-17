@@ -28,8 +28,9 @@ class StudentRequest extends FormRequest
             'prenomEleve' => 'required |string',
             'gender' => 'required',
             'niveau' => 'required',
-            
-            
+            'birth'=> 'required'
+
+
 
         ];
     }
@@ -37,19 +38,20 @@ class StudentRequest extends FormRequest
     public function messages()
     {
         return [
-            'nomEleve.required' => 'name cannot be empty.',
+            'nomEleve.required' => 'ce champ est obligatoire.',
             'nomEleve.string' => 'only characters.',
-            'prenomEleve.required' => 'name cannot be empty.',
+            'prenomEleve.required' => 'ce champ est obligatoire.',
             'prennomEleve.string' => 'only characters.',
-            'gender.required' => 'name cannot be empty.',
-            'niveau.required' => 'name cannot be empty.',
-           
+            'gender.required' => 'ce champ est obligatoire.',
+            'niveau.required' => 'ce champ est obligatoire.',
+            'birth.required'=> 'ce champ est obligatoire'
 
 
 
 
 
-            
+
+
 
         ];
     }

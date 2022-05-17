@@ -39,8 +39,10 @@
                     <thead class="bg-primary">
                     <tr>
                         <td class="col-2">{{__('Travail')}}</td>
-                        <td class="col-3">{{__('Matiere')}}</td>
-                        <td class="col-3">{{__('Classe')}}</td>
+                        <td class="col-2">{{__('Date depot')}}</td>
+                        <td class="col-2">{{__('Date limite')}}</td>
+                        <td class="col-2">{{__('Matiere')}}</td>
+                        <td class="col-1">{{__('Classe')}}</td>
                         <td class="col-2">{{__('Niveau')}}</td>
                         <td class="col-2">{{__('Action')}}</td>
                     </tr>
@@ -48,11 +50,13 @@
                     <tbody>
                     @foreach($travaux as $trav)
                         <tr>
-                            <td class="col-4">{{$trav->titre_travail}}</td>
+                            <td class="col-2">{{$trav->titre_travail}}</td>
+                            <td class="col-2"> <label class="badge badge-success">{{$trav->date_depot}}</label></td>
+                            <td class="col-2"> <label class="badge badge-danger">{{$trav->date_limite}}</label></td>
 
-                            <td class="col-3">@foreach($matieres as $matiere) @if($trav->matiere_id == $matiere->id){{$matiere->nom}}@endif @endforeach</td>
-                            <td class="col-3">@foreach($classes as $class)@if($trav->class_id == $class->id) {{$class->name}} @endif @endforeach</td>
-                            <td class="col-3">@foreach($niveaux as $niv)@if($trav->class['id_level'] == $niv->id) {{$niv->level}} @endif @endforeach</td>
+                            <td class="col-2">@foreach($matieres as $matiere) @if($trav->matiere_id == $matiere->id){{$matiere->nom}}@endif @endforeach</td>
+                            <td class="col-2">@foreach($classes as $class)@if($trav->class_id == $class->id) {{$class->name}} @endif @endforeach</td>
+                            <td class="col-1">@foreach($niveaux as $niv)@if($trav->class['id_level'] == $niv->id) {{$niv->level}} @endif @endforeach</td>
 
                             <td class="col-2"><a href="{{route('travails.editTravail', $trav->id)}}"  type="submit" ><i class="fas fa-pen fa-sm"></i></a>
 

@@ -27,7 +27,7 @@
                                         <div class="col">
                                             @csrf
                                             <label for="nom"> Nom Matière:</label>
-                                            <input type="text" class="form-control @error('nom') is-invalid @enderror" name="nom"/>
+                                            <input type="text" class="form-control @error('nom') is-invalid @enderror" name="nom" value="{{old('nom')}}"/>
                                             @error('nom')
                                             <span class="invalid-feedback" role="alert">
                                                <strong>{{ $message }}</strong>
@@ -36,7 +36,7 @@
                                         </div>
                                         <div class="col">
                                             <label for="coeff">Coefficient </label>
-                                            <input type="text" class="form-control @error('coeff') is-invalid @enderror" name="coeff"/>
+                                            <input type="text" class="form-control @error('coeff') is-invalid @enderror" name="coeff" value="{{old('coeff')}}"/>
                                             @error('coeff')
                                             <span class="invalid-feedback" role="alert">
                                                <strong>{{ $message }}</strong>
@@ -45,22 +45,32 @@
                                         </div>
                                        <div class="col">
                                            <label for="module">Niveau </label>
-                                           <select class="form-control @error('niveau') is-invalid @enderror" id="niveau" name="niveau">
+                                           <select class="form-control @error('niveau') is-invalid @enderror" id="niveau" name="niveau" value="{{old('niveau')}}">
                                                <option value="" selected> Selectionner niveau </option>
                                                @foreach( $niveaux as $niveau)
                                                    <option value="{{$niveau->id}}" > {{$niveau->level}} </option>
                                                @endforeach
 
                                            </select>
+                                           @error('niveau')
+                                           <span class="invalid-feedback" role="alert">
+                                               <strong>{{ $message }}</strong>
+                                            </span>
+                                           @enderror
                                        </div>
 
 
                                        <div class="col">
                                            <label for="module">Module </label>
-                                           <select class="form-control @error('modul') is-invalid @enderror" id="modul" name="modul">
+                                           <select class="form-control @error('module') is-invalid @enderror" id="modul" name="modul" value="{{old('modul')}}">
                                                <option value="" selected> Choisir module </option>
                                                    <option value="" > </option>
                                            </select>
+                                           @error('module')
+                                           <span class="invalid-feedback" role="alert">
+                                               <strong>{{ $message }}</strong>
+                                            </span>
+                                           @enderror
                                        </div>
                                         <br>
                                         <button type="submit" class="btn btn-primary">Ajouter</button>

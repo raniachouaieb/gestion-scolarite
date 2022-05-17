@@ -20,7 +20,7 @@ class TravailController extends Controller
 
     public function index(){
 
-        $travaux = Travail::all();
+        $travaux = Travail::orderBy('created_at', 'DESC')->get();
         $matieres = Matiere::get();
         $classes = Classroom::get();
         $niveaux =Level::get();
@@ -48,6 +48,8 @@ class TravailController extends Controller
     public function store(Request $request)
     {
         try{
+            //add check value
+            $path = (!$request->file('image')) ? '' : $request->file('image')->getClientOriginalExtension();
             $travaux = new Travail();
             $travaux->titre_travail= $request->titre_travail;
             $travaux->detail_travail= $request->detail_travail;
@@ -55,7 +57,7 @@ class TravailController extends Controller
             $travaux->date_limite=$request->date_limite;
             $travaux->matiere_id=$request->matiere;
             $travaux->class_id=$request->class;
-            $travaux->extension=$request->file('image')->getClientOriginalExtension();
+            $travaux->extension=$path;
             if($request->hasfile('image')) {
                 $path = uploadImage('travaux', $request->file('image'));
                //dd($path);
@@ -76,6 +78,7 @@ class TravailController extends Controller
 
 
         }catch(\Exception $ex){
+            return $ex;
             return redirect()->route('travails.index')->with(['status'=>'Error']);
 
         }

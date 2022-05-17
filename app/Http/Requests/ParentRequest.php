@@ -25,7 +25,7 @@ class ParentRequest extends FormRequest
     {
         return [
             'nomPere' => 'required| string',
-            'prenomPere' => 'required |string',
+            'prenomPere' => 'required |string|regex:/^[A-Za-z]+$/',
             'telPere' => 'required',
             'professionPere' => 'required',
             'nomMere' => 'required| string',
@@ -35,7 +35,8 @@ class ParentRequest extends FormRequest
             'nbEnfants' => 'required|numeric', /** -1 innaceptable */
             'adresse' => 'required',
             'email' => 'required|email|unique:parentes,email',
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required|min:8',
+            'image_profile'=>'required'
 
 
         ];
@@ -44,25 +45,26 @@ class ParentRequest extends FormRequest
     public function messages()
     {
         return [
-            'nomPere.required' => 'name cannot be empty.',
-            'nomPere.string' => 'only characters.',
-            'prenomPere.required' => 'name cannot be empty.',
+            'nomPere.required' => 'ce champ est obligatoire.',
+            'nomPere.regex' => 'only characters.',
+            'prenomPere.required' => 'ce champ est obligatoire.',
             'prennomPere.string' => 'only characters.',
-            'professionPere.required' => 'name cannot be empty.',
-            'nomMere.required' => 'name cannot be empty.',
+            'professionPere.required' => 'ce champ est obligatoire.',
+            'nomMere.required' => 'ce champ est obligatoire.',
             'nomMere.string' => 'only characters.',
-            'prenomMere.required' => 'name cannot be empty.',
+            'prenomMere.required' => 'ce champ est obligatoire.',
             'prenomPere.string' => 'only characters.',
-            'professionMere.required' => 'name cannot be empty.',
-            'telMere.required' => 'name cannot be empty.',
-            'telPere.required' => 'name cannot be empty.',
-            'nbEnfants.required' => 'name cannot be empty.',
-            'adresse.required' => 'name cannot be empty.',
-            'password.required' => 'name cannot be empty.',
+            'professionMere.required' => 'ce champ est obligatoire.',
+            'telMere.required' => 'ce champ est obligatoire.',
+            'telPere.required' => 'ce champ est obligatoire.',
+            'nbEnfants.required' => 'ce champ est obligatoire.',
+            'adresse.required' => 'ce champ est obligatoire.',
+            'password.required' => 'ce champ est obligatoire.',
             'password.min' => 'Minimum is 8.',
-            'email.required' => 'cannot be empty.',
+            'email.required' => 'ce champ est obligatoire.',
             'email.email'=>'enter a valid address mail',
-            'email.unique'=>'email existe'
+            'email.unique'=>'email existe',
+            'image_profile.required'=>'image est obligatoire'
 
 
 

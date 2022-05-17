@@ -5,6 +5,9 @@
         .pencil{
             margin-left: 19px;
         }
+        .table-responsive table thead tr{color: #ffffff;
+            font-family: 'Nunito', sans-serif;
+            font-weight: inherit}
     </style>
     <div class="container">
    <!-- <div class="row mb-2"><h6><span class="countEleve mr-2">{{$elevePreInscrit->count()}}</span>Eleve Pré-Inscrits </h6></div>-->
@@ -18,8 +21,8 @@
        </nav>
     <div class=" card shadow listEleve mb-4 mt-5">
         <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
+            <table class="table table-striped">
+                <thead class="bg-primary">
                 <tr>
                     <th classe="col-4"> Elève</th>
                     <th classe="col-3">Niveau </th>

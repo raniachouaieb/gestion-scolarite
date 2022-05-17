@@ -90,7 +90,7 @@ class StudentController extends Controller
             $eleveID->update([
                 'nomEleve'=>$request->nomEleve,
                 'prenomEleve'=>$request->prenomEleve,
-                "gender"=>($request->gender == 'garcon')? 0:1,
+                "gender"=>$request->gender ,
                 "niveau"=>$request->niveau,
                 "class_id"=>$request->classe,
                 'classe'=>$request->classe,
@@ -102,6 +102,7 @@ class StudentController extends Controller
 
             return redirect()->route('student.index')->with(['success'=>'Modification avec succés']);
         }catch(\Exception $exception){
+            return $exception;
             return redirect()->route('student.index')->with(['error'=>'There is a error :(']);
         }
 

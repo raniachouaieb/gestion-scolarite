@@ -25,7 +25,9 @@ class MatiereRequest extends FormRequest
     {
         return [
             'nom' => 'required| max:25',
-            'coefficient'=>'require|numeric',
+            'coeff'=>'required|numeric',
+            'niveau'=>'required',
+            'module'=>'required'
 
 
         ];
@@ -36,8 +38,10 @@ class MatiereRequest extends FormRequest
         return [
             'nom.required' => 'ce champ est obligatoiore',
             'nom.max' => 'ce chanmp doit etre au maximum 25 characteres',
-            'coefficient.required' => 'ce champ est obligatoiore',
-            'coefficient.numeric'=>' la coefficient doit etre seulement des chiffres',
+            'coeff.required' => 'ce champ est obligatoiore',
+            'coeff.numeric'=>' la coefficient doit etre seulement des chiffres',
+            'niveau.required'=>'ce champ est obligatoire',
+            'module.required'=>'ce champ est obligatoire'
 
         ];
     }

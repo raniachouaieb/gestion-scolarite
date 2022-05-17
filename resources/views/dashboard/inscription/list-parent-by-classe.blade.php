@@ -38,11 +38,7 @@
 
 
     <div class="card shadow mb-4" id="tabHide">
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-            <div class="bg-gradient-primary shadow-primary  pt-4 pb-3 box">
-                <h6 class="text-white text-capitalize ps-3">Parents Inscrit</h6>
-            </div>
-        </div>
+
         <div class="table-responsive">
         <div id="parent_filter">
 

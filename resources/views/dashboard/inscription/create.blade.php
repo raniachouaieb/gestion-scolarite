@@ -56,11 +56,21 @@
                                                 <div class="col-4">
                                                     <div class="mb-3">
                                                         <label for="nomPere">Nom  Père</label>
-                                                        <input type="text" class="form-control" name="nomPere"  />
+                                                        <input type="text" class="form-control  @error('nomPere') is-invalid @enderror" name="nomPere" value="{{old('nomPere')}}" />
+                                                        @error('nomPere')
+                                                        <span class="invalid-feedback" role="alert">
+                                                           <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-4"><label for="" >Nom  Mère</label>
-                                                    <input type="text" class="form-control" name="nomMere"   />
+                                                    <input type="text" class="form-control @error('nomMere') is-invalid @enderror" name="nomMere"  value="{{old('nomMere')}}" />
+                                                    @error('nomMere')
+                                                    <span class="invalid-feedback" role="alert">
+                                                           <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -70,7 +80,12 @@
                                             <hr />
                                             <div class="mb-3">
                                                 <label for="adresse">Adresse </label>
-                                                <input type="text" class="form-control" name="adresse"  />
+                                                <input type="text" class="form-control @error('adresse') is-invalid @enderror" name="adresse" value="{{old('adresse')}}" />
+                                                @error('adresse')
+                                                <span class="invalid-feedback" role="alert">
+                                                           <strong>{{ $message }}</strong>
+                                                        </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <!--/span-->
@@ -82,11 +97,21 @@
                                                 <div class="col-4">
                                                     <div class="mb-3">
                                                         <label for="nomPere">Prénom Père</label>
-                                                        <input type="text" class="form-control" name="prenomPere"  />
+                                                        <input type="text" class="form-control @error('prenomPere') is-invalid @enderror" name="prenomPere"  value="{{old('prenomPere')}}" />
+                                                        @error('prenomPere')
+                                                        <span class="invalid-feedback" role="alert">
+                                                           <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-4"><label for="" >Prénom Mère</label>
-                                                    <input type="text" class="form-control" name="prenomMere"  />
+                                                    <input type="text" class="form-control @error('prenomMere') is-invalid @enderror" name="prenomMere"  value="{{old('prenomMere')}}" />
+                                                    @error('prenomMere')
+                                                    <span class="invalid-feedback" role="alert">
+                                                           <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -95,7 +120,12 @@
 
                                             <div class="mb-3">
                                                 <label for="email">Email </label>
-                                                <input type="text" class="form-control" name="email"  />
+                                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" />
+                                                @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                           <strong>{{ $message }}</strong>
+                                                        </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <!--/span-->
@@ -107,11 +137,21 @@
                                                 <div class="col-4">
                                                     <div class="mb-3">
                                                         <label for="nomPere">Professio Père</label>
-                                                        <input type="text" class="form-control" name="professionPere"  />
+                                                        <input type="text" class="form-control @error('professionPere') is-invalid @enderror" name="professionPere" value="{{old('professionPere')}}"  />
+                                                        @error('email')
+                                                        <span class="invalid-feedback" role="alert">
+                                                           <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-4"><label for="" >Profession Mère</label>
-                                                    <input type="text" class="form-control" name="professionMere"  />
+                                                    <input type="text" class="form-control @error('professionMere') is-invalid @enderror" name="professionMere" value="{{old('professionMere')}}"  />
+                                                    @error('email')
+                                                    <span class="invalid-feedback" role="alert">
+                                                           <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -120,7 +160,12 @@
 
                                             <div class="mb-3">
                                                 <label for="nbEnfants">Mot de passe</label>
-                                                <input type="password" class="form-control" name="password" />
+                                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{old('password')}}" />
+                                                @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                           <strong>{{ $message }}</strong>
+                                                        </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <!--/span-->
@@ -133,11 +178,21 @@
                                                 <div class="col-4">
                                                     <div class="mb-3">
                                                         <label for="">Téléphone Père</label>
-                                                        <input type="text" class="form-control" name="telPere"  />
+                                                        <input type="text" class="form-control @error('telPere') is-invalid @enderror" name="telPere" value="{{old('telPere')}}"  />
+                                                        @error('telPere')
+                                                        <span class="invalid-feedback" role="alert">
+                                                           <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-4"><label for="" >Téléphone Mère</label>
-                                                    <input type="text" class="form-control" name="telMere" />
+                                                    <input type="text" class="form-control @error('telMere') is-invalid @enderror" name="telMere"  value="{{old('telMere')}}"/>
+                                                    @error('telMere')
+                                                    <span class="invalid-feedback" role="alert">
+                                                           <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -146,7 +201,12 @@
 
                                             <div class="mb-3">
                                                 <label for="nbEnfants">Nombre enfants</label>
-                                                <input type="text" class="form-control" name="nbEnfants" />
+                                                <input type="text" class="form-control @error('nbEnfants') is-invalid @enderror" name="nbEnfants" value="{{old('nbEnfants')}}" />
+                                                @error('nbEnfants')
+                                                <span class="invalid-feedback" role="alert">
+                                                           <strong>{{ $message }}</strong>
+                                                        </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <!--/span-->
@@ -162,7 +222,12 @@
                                                             <img src="{{asset('assets/uploads/parents/placeholderImage.png')}}"  onclick="clickImage()" id="profileDisplay" alt="fgh"/>
 
                                                         <label>Choisir une photo</label>
-                                                        <input type="file" name="image_profile" id="imageProfile" onchange="loadFile(event)" style="display: none;">
+                                                        <input type="file" name="image_profile" id="imageProfile" onchange="loadFile(event)" style="display: none;" value="{{old('image_profile')}}">
+                                                        @error('image_profile')
+                                                        <span class="invalid-feedback" role="alert">
+                                                           <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
 
                                                     </div>
                                                 </div>
@@ -191,18 +256,18 @@
                                                     <div class="col-4">
                                                         <div class="mb-3">
                                                             <label for="">Nom  </label>
-                                                            <input type="text" class="form-control" name="nomEleve[1]"  />
+                                                            <input type="text" class="form-control" name="nomEleve" value="{{old('nomEleve')}}" />
                                                         </div>
                                                     </div>
                                                     <div class="col-4"><label for="" >Prénom  </label>
-                                                        <input type="text" class="form-control" name="prenomEleve[1]"   />
+                                                        <input type="text" class="form-control" name="prenomEleve" value="{{old('prenomEleve')}}"  />
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-4">
                                                         <div class="mb-3">
                                                             <label for="">Gender</label>
-                                                            <select  id="month" name="gender[1]" class="form-control @error('gender') is-invalid @enderror list-dt"  >
+                                                            <select  id="month" name="gender" class="form-control @error('gender') is-invalid @enderror list-dt" value="{{old('gender')}}"  >
                                                                 <option selected>Gender</option>
                                                                 <option value="garcon" > Garcon </option>
                                                                 <option value="fille" > Fille </option>
@@ -211,7 +276,7 @@
                                                     </div>
                                                     <div class="col-4">
                                                         <label for="" >Niveau</label>
-                                                        <select id="niv" name="niveau[1]" class="form-control @error('niveau') is-invalid @enderror list-dt">
+                                                        <select id="niv" name="niveau" class="form-control @error('niveau') is-invalid @enderror list-dt" value="{{old('niveau')}}">
                                                             <option value="" selected> Niveau </option>
                                                             @foreach($niveaux as $niv)
                                                                 <option value="{{$niv->id}}" > {{$niv->level}}</option>
@@ -228,7 +293,7 @@
 
                                                     <div class="col-8">
                                                         <label>Date naissance</label>
-                                                        <input type="date" name="birth[1]" placeholder="Date naissance" class="form-control @error('birth') is-invalid @enderror" />
+                                                        <input type="date" name="birth" placeholder="Date naissance" class="form-control @error('birth') is-invalid @enderror" value="{{old('birth')}}"/>
                                                         @error('birth')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>

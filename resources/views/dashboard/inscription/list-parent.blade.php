@@ -18,6 +18,9 @@
         border: 1px ;
         margin-bottom: 15px;
     }
+    .table-responsive table thead tr{color: #ffffff;
+        font-family: 'Nunito', sans-serif;
+        font-weight: inherit}
 </style>
 
 <div class="container">
@@ -29,14 +32,10 @@
         </ol>
     </nav>
 <div class="card shadow mb-4 mt-5">
-    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-        <div class="bg-gradient-primary shadow-primary  pt-4 pb-3 box">
-            <h6 class="text-white text-capitalize ps-3"> Parents pré-Inscrit</h6>
-        </div>
-    </div>
+
                             <div class="table-responsive">
-                            <table class="table table-striped">
-                                    <thead>
+                                <table class="table table-striped">
+                                    <thead class="bg-primary">
                                         <tr>
                                             <th> Père</th>
                                             <th>Télephhone </th>

@@ -29,6 +29,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @if($classByLevel && $classByLevel->count()> 0)
                                 @foreach($classByLevel as $classroom)
                                 <tr>
 
@@ -43,6 +44,11 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                                @else
+                                    <tr>
+                                   <td style="text-align:center; color: #a71d2a"> <h6>Il n'existe pas encore des classes pour ce niveau</h6></td>
+                                    </tr>
+                                @endif
                                 </tbody>
                     </table>
          </div>

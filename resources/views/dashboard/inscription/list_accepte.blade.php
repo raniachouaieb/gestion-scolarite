@@ -20,6 +20,9 @@
         border: 1px ;
         margin-bottom: 15px;
     }
+    .table-responsive table thead tr{color: #ffffff;
+        font-family: 'Nunito', sans-serif;
+        font-weight: inherit}
 
 </style>
 <div class="container">
@@ -29,7 +32,7 @@
 
             <div class="table-responsive">
                 <table class="table table-striped">
-                    <thead>
+                    <thead class="bg-primary">
 
                     <tr>
                         <th> Père</th>

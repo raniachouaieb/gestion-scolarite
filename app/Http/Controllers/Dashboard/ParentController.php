@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Requests\ParentRequest;
+use App\Http\Requests\StudentRequest;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Parente;
@@ -148,7 +149,7 @@ public function add(){
         return view('dashboard.inscription.create', compact('niveaux'))->withTitle('Ajouter parent');
 }
 
-public function store(Request $request)
+public function store(ParentRequest $request, StudentRequest $req)
 {
     try{
         $parent = Parente::create([
@@ -169,20 +170,20 @@ public function store(Request $request)
         ]);
         $parent->sendEmailVerificationNotification();
         $students = [];
-       dd($request);
-        foreach ($students as $std) {
-            $std = Student::create([
-                "nomEleve" => $students->nomEleve[$std],
-                "prenomEleve" => $request->prenomEleve,
-                "niveau" => $request->niveau,
-                "gender" => ($request->gender == 'garcon') ? 0 : 1,
-                "birth" => $request->birth,
+       //dd($request);
+
+            Student::create([
+                "nomEleve" => $req->nomEleve,
+                "prenomEleve" => $req->prenomEleve,
+                "niveau" => $req->niveau,
+                "gender" => ($req->gender == 'garcon') ? 0 : 1,
+                "birth" => $req->birth,
                 "parent_id" => $parent->id,
 
 
             ]);
 
-        }
+
         return redirect()->route('inscri.index')->with('success', ' You are now registred successfully! Please check your email to verification link!');
 
     }catch(\Exception $ex){

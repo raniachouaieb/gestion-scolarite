@@ -47,10 +47,10 @@
                         <label for="gender">gender </label>
                         <select class="form-control" name="gender">
                             <option value="{{ $student->gender }}" selected>
-                                {{ $student->gender==0 ? 'Garcon' : 'Fille' }}</option>
+                                {{ $student->gender==0 ? 'Garçon' : 'Fille' }}</option>
 
-                            <option value="garcon"> Garçon </option>
-                            <option value="fille"> Fille </option>
+                            <option value="0"> Garçon </option>
+                            <option value="1"> Fille </option>
                         </select>
                     </div>
 

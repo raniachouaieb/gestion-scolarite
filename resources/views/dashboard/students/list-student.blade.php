@@ -14,6 +14,9 @@
     .pencil{
         margin-left: 18px;
     }
+    .table-responsive table thead tr{color: #ffffff;
+        font-family: 'Nunito', sans-serif;
+        font-weight: inherit}
 </style>
 <form  method="get" action="{{route('student.search')}}">
     @csrf
@@ -37,8 +40,8 @@
 
 <div class=" listEleve mb-4">
     <div class="table-responsive">
-        <table class="table table-hover">
-                                    <thead>
+        <table class="table table-striped">
+            <thead class="bg-primary">
                                         <tr>
                                             <th> Elève</th>
                                             <th>Classe</th>
