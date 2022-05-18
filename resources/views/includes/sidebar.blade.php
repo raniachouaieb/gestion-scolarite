@@ -100,9 +100,12 @@
 
                 @can('leve-inscrit-list')<a class="collapse-item" href="{{ route('student.index')}}">Elève Inscrits <span class="countList">{{\App\Models\Student::whereNotNull('class_id')->count()}}</span></a>@endcan
                 @can('eleve-preinscrit-list')<a class="collapse-item" href="{{ route('student.elevePreInscrit')}}">Elève Pré-Inscrits <span class="countList">{{\App\Models\Student::whereNull('class_id')->count()}}</span></a>@endcan
+                            <a class="collapse-item" href="{{route('note.add')}}">note</a>
 
 
-            </div>
+
+
+                        </div>
         </div>
     </li>
 

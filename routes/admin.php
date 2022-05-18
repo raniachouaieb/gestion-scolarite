@@ -238,6 +238,11 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'seance/'], function(){
 
 });
 
+Route::group(['namespace'=>'Dashboard', 'prefix'=>'note/'], function() {
+    Route::get('add', 'NoteController@add')->name('note.add');
+
+});
+
 Route::get('notification','Dashboard\NotificationController@notification')->name('notification');
 Route::get('listSuggestion','Dashboard\SuggestionController@index')->name('listSuggestion');
 

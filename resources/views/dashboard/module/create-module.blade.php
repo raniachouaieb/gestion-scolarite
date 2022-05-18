@@ -8,9 +8,14 @@
         }
     </style>
     <div class="container">
-        <div class="card-header">
-            Ajouter un module
-        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Accueil</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{route('modules.index')}}">Modules</a></li>
+                <li class="breadcrumb-item active" aria-current="page">création module</li>
+
+            </ol>
+        </nav>
         <div class="card-body">
 
             <div class="row">
