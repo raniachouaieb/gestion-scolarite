@@ -40,6 +40,10 @@ class Classroom extends Model
         return $this->hasMany(Emploi::class, 'class_id', 'id');
     }
 
+    public function schedules(){
+        return $this->hasMany(Schedule::class, 'class_id', 'id');
+    }
+
     public function infos(){
         return $this->belongsToMany(Info::class);
     }

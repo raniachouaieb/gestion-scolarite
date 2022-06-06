@@ -26,14 +26,16 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin-template/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
-
+    <script src="{{ asset('assets/js/jquery.min.js') }}" type="text/javascript"></script>
     <script src="https://cdn.tiny.cloud/1/ij35uvmrlisnjld8g1eo0lhdj9dg1j3m6kcjplp7dobxxhk0/tinymce/5/tinymce.min.js" ></script>
     <script>
         tinymce.init({
             selector: '#myarea'
         });
     </script>
-
+    <script src="{{ asset('assets/js/jquery-1.11.1.js')}}"></script>
+    <script src="{{ asset('assets/js/jquery.repeater.js') }}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" rel="stylesheet">

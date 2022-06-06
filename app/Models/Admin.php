@@ -48,14 +48,14 @@ class Admin extends Authenticatable
         if(!empty($password))
             //return  $this->attributes['password'] = bcrypt($password);
 
-        return  $this->attributes['password'] = bcrypt($password);
+        return  $this->attributes['password'] = Crypt::encryptString($password);
     }
 
     public function getPasswordAttribute($password){
         try{
-            return Hash::check($password, Auth::user()->password, []);
+            //return Hash::check($password, Auth::user()->password, []);
 
-            //return  Crypt::decryptString($password);
+            return  Crypt::decryptString($password);
         }catch(\Exception $ex){
             return $password;
         }

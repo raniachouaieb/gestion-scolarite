@@ -104,7 +104,7 @@
                         <div class="row">
                             <div class="col-4">
                                 <div class="mb-3">
-                                    <label for="nomPere">Professio Père</label>
+                                    <label for="nomPere">Profession Père</label>
                                     <input type="text" class="form-control" name="professionPere" value="{{ $parent->professionPere }}" />
                                 </div>
                             </div>
@@ -149,7 +149,7 @@
                                     En attente</option>
                                 <option value="accepter"  {{$parent->is_active ? 'selected' : ''}}>
                                     Accepter</option>
-                                <option value="rejeter" >
+                                <option value="rejeter" {{$parent->is_active ? 'selected' : ''}} >
                                     Refuser</option>
                             </select>
                         </div>

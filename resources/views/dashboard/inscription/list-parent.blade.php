@@ -27,7 +27,7 @@
 @include('includes.alerts.flash')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">Liste Parents préinscrits</li>
         </ol>
     </nav>
@@ -63,7 +63,10 @@
                                             <td>{{$par->email}}</td>
                                             <td> @foreach($par->students as $elev)
                                               <ul>
-                                               <li>{{$elev->nomEleve }} {{$elev->prenomEleve }}</li>
+                                               <li> @if($elev->gender == 1) <span class="badge badge-danger">{{$elev->nomEleve }} {{$elev->prenomEleve }}</span>
+                                                   @else <span class="badge badge-info">{{$elev->nomEleve }} {{$elev->prenomEleve }}</span>
+                                                   @endif
+                                               </li>
 
                                               </ul>
                                               @endforeach

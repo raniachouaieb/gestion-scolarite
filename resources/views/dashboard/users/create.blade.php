@@ -69,7 +69,7 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Accueil</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a href="{{route('admins')}}">Utilisateurs</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Créer un utilisateur</li>
 
@@ -89,7 +89,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-9">
-                                        <h5 class="card-title">User information</h5>
+                                        <h5 class="card-title"> information utilisateur</h5>
                                     </div>
                                     <div class="col-3">
                                         <div class="custom-control custom-switch">
@@ -215,6 +215,7 @@
 
             </form>
         </div>
+    </div>
 
     <script>
 

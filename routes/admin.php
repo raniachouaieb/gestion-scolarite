@@ -185,6 +185,7 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'Travails/'], function(){
 Route::group(['namespace'=>'Dashboard','prefix' => 'inscri/'],function(){
     Route::get('/', 'ParentController@index')->name('inscri.index');
     Route::get('/list_accepted', 'ParentController@listAccepted')->name('inscri.list_accepted');
+    Route::get('/list_reject', 'ParentController@listReject')->name('inscri.list_reject');
 
     Route::get('edit/{id}', 'ParentController@edit')->name('isncri.edit');
     Route::post('update/{id}', 'ParentController@update')->name('inscri.update');
@@ -241,6 +242,24 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'seance/'], function(){
 Route::group(['namespace'=>'Dashboard', 'prefix'=>'note/'], function() {
     Route::get('add', 'NoteController@add')->name('note.add');
 
+});
+
+Route::group(['namespace'=>'Dashboard','prefix' => 'Schedule'], function () {
+    Route::get('/', 'schedulecontroller@index')->name('schedule.admin.index');
+    Route::get('/create/{classroom_id}/{niveau}', 'schedulecontroller@create')->name('schedule.admin.create');
+   Route::get('/show/{id}', 'schedulecontroller@show')->name('schedule.admin.show');
+   Route::get('/edit/{id}', 'schedulecontroller@edit')->name('schedule.admin.edit');
+    Route::Post('/store/{id}', 'schedulecontroller@store')->name('schedule.admin.store');
+   Route::get('/list/{class}/{niveau}', 'schedulecontroller@list')->name('schedule.admin.list');
+   Route::get('/test', 'schedulecontroller@create1');
+//    Route::Post('/bulkEdit', 'schedulecontroller@bulkedit')->name('schedule.admin.bulkedit');
+   Route::post('/delete/{id}', 'schedulecontroller@delete')->name('schedule.admin.delete');
+});
+
+Route::group(['namespace'=>'Dashboard','prefix' => 'attendance'], function () {
+    Route::get('/', 'AttendanceController@index')->name('attendance');
+    Route::get('loadSchedule/{classroom_id?}', 'Attendancecontroller@loadattendance')->name('attendance.absence');
+   Route::post('store', 'attendancecontroller@store')->name('attendance.store');
 });
 
 Route::get('notification','Dashboard\NotificationController@notification')->name('notification');

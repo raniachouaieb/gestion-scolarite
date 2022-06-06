@@ -36,6 +36,12 @@ class ParentController extends Controller
         return view('dashboard.inscription.list-parent-by-classe',compact('niveaux'));
 
     }
+    public function listReject(Request $req){
+        $parent = Parente::with('students')->where('is_active' , 2)->get();
+
+        return view('dashboard.inscription.list-reject',compact('parent'));
+
+    }
     public function parentByClass(Request $req)
     {
         $niveaux = Level::orderBy('created_at', 'ASC')->get();
@@ -94,7 +100,17 @@ class ParentController extends Controller
         $parent->adresse=$request->adresse;
         $parent->email=$request->email;
         $parent->email=$request->email;
-        $parent->is_active=$request->is_active == 'rejeter' ? 0:1;
+//        $parent->is_active=$request->is_active == 'accepter' ? 1:0;
+
+        if($request->status === 'rejeter'){
+            $parent->is_active=2;
+        } elseif($request->status === 'accepter'){
+            $parent->is_active=1;
+        }else{
+            $parent->is_active=0;
+        }
+
+
         if($request->hasfile('image_profile')){
 
             $path = uploadImage('parents',$request->file('image_profile'));

@@ -49,16 +49,19 @@ class AbsenceController extends Controller
     public function store(Request $request){
         try{
             $dateAbs= date('Y-m-d');
-            foreach ($request->status as $studentId=> $etatabs) {
-                if($etatabs == 'Active'){
+//dd($request->etat);
+          foreach ($request->etat as $studentId=> $etatabs) {
+                $etat=1;
+                if($etatabs == 1){
                     $etat = 1;
-                }elseif($etatabs == 'Absent'){
+                }elseif($etatabs == 0){
                     $etat = 0;
                 }
+
                 $abs = new Absence();
                 $abs->eleve_id = $studentId;
                 $abs->date_absence = $dateAbs;
-                $abs->etat = $etat;
+                  $abs->etat = $etat;
 
                 $abs->save();
             }

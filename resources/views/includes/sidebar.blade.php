@@ -39,10 +39,10 @@
                @can('menu-list') <a class="collapse-item" href="{{route('menu.index')}}">Cantine</a>@endcan
                 @can('convocation-list') <a class="collapse-item" href="{{ route('convocations.index')}}">Convocations<span class="countList">{{\App\Models\Convocation::count()}}</span></a>@endcan
                     @can('travail-list') <a class="collapse-item" href="{{ route('travails.index')}}">Travaux à faire<span class="countList">{{\App\Models\Travail::count()}}</span></a>@endcan
-                    @can('emploi-list')  <a class="collapse-item" href="{{ route('emploi.index')}}">Emplois<span class="countList">{{\App\Models\Emploi::count()}}</span></a>@endcan
+                    @can('emploi-list')  <a class="collapse-item" href="{{ route('schedule.admin.index')}}">Emplois<span class="countList">{{\App\Models\Emploi::count()}}</span></a>@endcan
                @can('senace_list') <a class="collapse-item" href="{{ route('seance.index')}}">Séance<span class="countList">{{\App\Models\Seance::count()}}</span></a>@endcan
                @can('information-list') <a class="collapse-item" href="{{ route('info.index')}}">Note d'info<span class="countList">{{\App\Models\Info::count()}}</span></a>@endcan
-                <a class="collapse-item" href="{{ route('absence.index')}}">Absence</a>
+                <a class="collapse-item" href="{{ route('attendance')}}">Absence</a>
 
 
             </div>
@@ -75,7 +75,9 @@
             <a class="collapse-item" href="{{route('inscri.add')}}">Ajouter Parent</a>
             @can('parent-preinscrit-list')<a class="collapse-item" href="{{route('inscri.index')}}">En attente<span class="countList">{{\App\Models\Parente::where('is_active' , 0)->count()}}</span></a>@endcan
             @can('parent-inscrit-list')<a class="collapse-item" href="{{route('inscri.list_accepted')}}">Inscrits<span class="countList">{{\App\Models\Parente::where('is_active' , 1)->count()}}</span></a>@endcan
-         <a class="collapse-item" href="{{route('listSuggestion')}}">Boite suggestions<span style="float: right; border: 1px ridge; box-shadow: 1px 1px 7px 0px indianred; border-radius: 1px 15px 14px;padding: 1px 7px;">{{\App\Models\Suggestion::count()}}</span></a>
+            <a class="collapse-item" href="{{route('inscri.list_reject')}}">Rejetés<span class="countList">{{\App\Models\Parente::where('is_active' , 2)->count()}}</span></a>
+
+            <a class="collapse-item" href="{{route('listSuggestion')}}">Boite suggestions<span style="float: right; border: 1px ridge; box-shadow: 1px 1px 7px 0px indianred; border-radius: 1px 15px 14px;padding: 1px 7px;">{{\App\Models\Suggestion::count()}}</span></a>
 
         </div>
     </div>

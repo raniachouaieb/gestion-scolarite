@@ -195,11 +195,11 @@
                                 <label>File</label>
 
                                 @if($travail->extension == 'pdf')
-                                    <img src="{{asset('assets/uploads/travaux/pdf1.png')}}" style="width: 135px;margin-left: 124px;" alt="" onClick="printDiv('iframepdf')" />
-                                    <a href="{{route('download', $travail->file)}}">Download</a>
-                                    <br>
-                                    <a href="{{route('view', $travail->id)}}"> show pdf</a>
-                                    <br>
+{{--                                    <img src="{{asset('assets/uploads/travaux/pdf1.png')}}" style="width: 135px;margin-left: 124px;" alt="" onClick="printDiv('iframepdf')" />--}}
+{{--                                    <a href="{{route('download', $travail->file)}}">Download</a>--}}
+{{--                                    <br>--}}
+{{--                                    <a href="{{route('view', $travail->id)}}"> show pdf</a>--}}
+{{--                                    <br>--}}
                                     <div id="iframepdf">
                                         <iframe src="{{asset('assets/'.$travail->file)}}" ></iframe>
                                     </div>
