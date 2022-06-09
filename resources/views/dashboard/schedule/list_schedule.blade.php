@@ -26,14 +26,14 @@
 
 </style>
 <div class="container">
-    <div class="text-right">
+    <div class="text-right" style="margin-top: 10px;">
         <a href="{{route('schedule.admin.create',[$class,$niveau])}}" type="button"
            class="btn btn-outline-primary waves-effect waves-light" data-bs-toggle="tooltip"
            data-bs-placement="top" title="{{__('you don\'t have permission for the action')}}">
-            <i class="fa fa-plus"></i> {{ __('Add new time table')}}
+            <i class="fa fa-plus"></i> {{ __('Ajouter nouveau emploi')}}
         </a>
 
-        <p><i>{{__('Found :total items',['total'=>count($schedules)])}}</i></p>
+        <p><i>{{__('Total :total emploi',['total'=>count($schedules)])}}</i></p>
     </div>
 
     <div class="parentTab mb-4" id="list">
@@ -90,7 +90,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5">No data found</td>
+                                <td colspan="5">Il n'exite aucun emploi pur le moment</td>
                             </tr>
                         @endforelse
                     @endif

@@ -50,6 +50,29 @@
     </li>
 
     <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBulletin"
+           aria-expanded="true" aria-controls="collapseBulletin">
+            <i class="fa fa-book"></i>
+            <span>Bulletin</span>
+        </a>
+        <div id="collapseBulletin" class="collapse" aria-labelledby="headingBulletin" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+
+                <a class="collapse-item" href="{{route('note.admin.index')}}">Notes</a>
+                <a class="collapse-item" href="{{route('remarqueModule.admin.index')}}">Remarques</a>
+                <a class="collapse-item" href="{{route('teacherRemarks.admin.index')}}">Remarques Enseignant</a>
+
+                <a class="collapse-item" href="{{route('calculMoyenne.admin.index')}}">Calcul Moyenne</a>
+                 <a class="collapse-item" href="{{route('bulletin.admin.index')}}">Bulletin</a>
+                <a class="collapse-item" href="{{route('observation.admin.index')}}">Evaluation</a>
+
+
+
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('notification')}}" >
             <i class="fa fa-bell"></i>
             <span>Push notification</span>
@@ -102,7 +125,7 @@
 
                 @can('leve-inscrit-list')<a class="collapse-item" href="{{ route('student.index')}}">Elève Inscrits <span class="countList">{{\App\Models\Student::whereNotNull('class_id')->count()}}</span></a>@endcan
                 @can('eleve-preinscrit-list')<a class="collapse-item" href="{{ route('student.elevePreInscrit')}}">Elève Pré-Inscrits <span class="countList">{{\App\Models\Student::whereNull('class_id')->count()}}</span></a>@endcan
-                            <a class="collapse-item" href="{{route('note.add')}}">note</a>
+
 
 
 

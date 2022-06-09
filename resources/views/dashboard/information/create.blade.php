@@ -12,7 +12,7 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Accueil</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a href="{{route('info.index')}}">Informations</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Créer une information</li>
 
@@ -26,7 +26,8 @@
                     <div class="col-md-12 ">
                         <div class="card tt">
                             <div class="card-body">
-
+                                <div class="headers-line mt-md" style="color: #ef6f6c;"><i class="fas fa-plus"></i> {{__(' nouveau information')}}</div>
+                                <hr>
                                 <div class="row">
                                     <div class="col-12">
                                         @csrf

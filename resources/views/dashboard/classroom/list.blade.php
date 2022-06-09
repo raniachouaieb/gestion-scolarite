@@ -46,7 +46,7 @@
                                 @endforeach
                                 @else
                                     <tr>
-                                   <td style="text-align:center; color: #a71d2a"> <h6>Il n'existe pas encore des classes pour ce niveau</h6></td>
+                                   <td colspan="2" style="text-align:center; color: #a71d2a"> <h6>Il n'existe pas encore des classes pour ce niveau</h6></td>
                                     </tr>
                                 @endif
                                 </tbody>

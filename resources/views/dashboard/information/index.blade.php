@@ -35,7 +35,7 @@
     <!--@include('includes.alerts.flash')  -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Accueil</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Informations</li>
             </ol>
         </nav>
@@ -46,11 +46,7 @@
 
 
         <div class="card shadow tableNotInfo">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                <div class="bg-gradient-primary shadow-primary  pt-4 pb-3 box">
-                    <h6 class="text-white text-capitalize ps-3"> Informations</h6>
-                </div>
-            </div>
+
             <div class="table-responsive">
 
                 <table class="table table-striped">

@@ -25,7 +25,7 @@ class Student extends Model
     }
 
     public function class(){
-        return $this->hasOne(Classroom::class, 'class_id', 'id');
+        return $this->belongsTo(Classroom::class, 'class_id', 'id');
     }
 
     public function matiere(){
@@ -38,5 +38,12 @@ class Student extends Model
 
     public function absences(){
         return $this->belongsToMany(Absence::class, 'eleve_id','id');
+    }
+    public function observations()
+    {
+        return $this->belongsTo('App\Models\Observation','student_id','id');
+    }
+    public function notes(){
+        return $this->hasMany('App\Models\Note', 'student_id','id');
     }
 }

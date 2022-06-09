@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Requests\UserRequest;
 use App\Models\Admin;
+use App\Models\Classroom;
 use App\Models\Convocation;
 use App\Models\Info;
+use App\Models\Matiere;
 use App\Models\Parente;
 use App\Models\Student;
+use App\Models\Travail;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -39,11 +42,15 @@ class AdminController extends Controller
         $elevePréinscrit = Student::whereNull('class_id')->get();
         $eleveInscrit = Student::whereNotNull('class_id')->get();
         $convocations = Convocation::get();
-        $informations = Info::get();
+        //$informations = Info::get();
+        $matieres = Matiere::get();
+        $tasks  = Travail::orderBy('created_at', 'desc')->take(5)->get();
+        $classes = Classroom::get();
+        $informations = Info::orderBy('created_at', 'desc')->take(5)->get();
         $fille_records = Student::whereNotNull('class_id')->where('gender', 1)->count();
         $garcon_records = Student::whereNotNull('class_id')->where('gender', 0)->count();
        // dd($fille_records, $garcon_records );
-        return view('dashboard.admin.home', compact('parentPréinscrit', 'elevePréinscrit', 'parentInscrit', 'eleveInscrit', 'convocations','informations', 'garcon_records', 'fille_records'));
+        return view('dashboard.admin.home', compact('matieres','tasks','classes','parentPréinscrit', 'elevePréinscrit', 'parentInscrit', 'eleveInscrit', 'convocations','informations', 'garcon_records', 'fille_records'));
     }
 
     public function list(Request $request)

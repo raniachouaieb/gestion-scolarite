@@ -22,14 +22,14 @@
 
     }
     .cardpie{
-        padding: 6rem 6rem;
+        padding: 12rem -9rem;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
         background: #fff;
         border-radius: 10px;
-        height: 220px;
+        height: 420px;
     }
     .pie{
         width: 50%;
@@ -155,46 +155,98 @@
     </div>
 
 
-       <div class="row">
-        <div class="col-sm-6">
+
 
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="cardDetail">
-                                <div class="card-content">
+                        <div class="col-md-4">
+                            <div class="">
+                                <div class="card">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">titre</th>
+                                            <th scope="col">information</th>
+                                            <th scope="col">classe</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($informations as $info)
+                                        <tr>
+                                            <th scope="row">#{{$loop->index+1}} </th>
+                                            <td>{{$info->titre}}</td>
+                                            <td>{!! $info->info !!}</td>
+                                            <td>@foreach($classes as $clas) @if($info->class_id == $clas->id){{$clas->name}}@endif @endforeach</td>
+                                        </tr>
+                                        @endforeach
 
-                                    <div class="number">{{$informations->count()}}</div>
-                                    <div class="card-name"> Information envoyées</div>
+
+                                        </tbody>
+                                    </table>
+{{--                                    <div class="number">{{$informations->count()}}</div>--}}
+{{--                                    <div class="card-name"> Information envoyées</div>--}}
                                 </div>
-                                <div class="icon-box">
-                                    <i class="fa fa-paper-plane"></i>
+{{--                                <div class="icon-box">--}}
+{{--                                    <i class="fa fa-paper-plane"></i>--}}
+{{--                                </div>--}}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="">
+                                <div class="card">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">titre</th>
+                                            <th scope="col">travail</th>
+                                            <th scope="col">matière</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($tasks as $task)
+                                            <tr>
+                                                <th scope="row">#{{$loop->index+1}} </th>
+                                                <td>{{$task->titre_travail}}</td>
+                                                <td>{!! $task->detail_travail !!}</td>
+                                                <td>@foreach($matieres as $mat) @if($task->matiere_id == $mat->id){{$mat->nom}}@endif @endforeach</td>
+                                            </tr>
+                                        @endforeach
+
+
+                                        </tbody>
+                                    </table>
+                                    {{--                                    <div class="number">{{$informations->count()}}</div>--}}
+                                    {{--                                    <div class="card-name"> Information envoyées</div>--}}
                                 </div>
+                                {{--                                <div class="icon-box">--}}
+                                {{--                                    <i class="fa fa-paper-plane"></i>--}}
+                                {{--                                </div>--}}
                             </div>
                         </div>
 
 
-                        <div class="col-md-6">
+{{--                        <div class="col-md-6">--}}
 
-                                <div class="cardDetail">
-                                    <div class="card-content">
-                                            <div class="number">{{$convocations->count()}}</div>
-                                        <div class="card-name">Convocations envoyées</div>
-                                    </div>
-                                    <div class="icon-box">
-                                        <i class="fa fa-paper-plane"></i>
-                                    </div>
+{{--                                <div class="cardDetail">--}}
+{{--                                    <div class="card-content">--}}
+{{--                                            <div class="number">{{$convocations->count()}}</div>--}}
+{{--                                        <div class="card-name">Convocations envoyées</div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="icon-box">--}}
+{{--                                        <i class="fa fa-paper-plane"></i>--}}
+{{--                                    </div>--}}
 
-                                </div>
+{{--                                </div>--}}
 
-                        </div>
-
-                     </div>
-
-         </div>
+{{--                        </div>--}}
 
 
-       <div class="col-md-6">
+
+
+
+       <div class="col-md-4">
            <div class="cardpie shadow mb-4">
                <div class="card-body pie">
                    <div class="chart">
@@ -206,8 +258,8 @@
        </div>
    </div>
 
-    <div class="row">
-        <div class="col-xl-6">
+    <div class="">
+        <div class="col-xl-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Bar chart</h6>
@@ -219,20 +271,23 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-6">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Line chart</h6>
+
+    </div>
+    <div class="">
+    <div class="col-xl-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Line chart</h6>
+            </div>
+            <div class="card-body">
+                <div class="chart">
+                    <canvas id="linechart"></canvas>
                 </div>
-                <div class="card-body">
-                    <div class="chart">
-                        <canvas id="linechart"></canvas>
-                    </div>
 
 
-                </div>
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -254,7 +309,7 @@
         });
     }
     const data ={
-            labels: ['1ere année', '2eme année', '3eme année', '4eme année', '5eme année', '6eme année'],
+            labels: ['Septembre', 'Octobre', 'Novembre', 'Decembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin'],
             datasets: [{
                 label: '',
                 data: [0.2, 0.1, 0.3, 0.8, 1.5, 1],

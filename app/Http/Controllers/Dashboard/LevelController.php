@@ -7,7 +7,7 @@ use App\Models\Classroom;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Level;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class LevelController extends Controller
 {
@@ -86,17 +86,19 @@ class LevelController extends Controller
     }
 
     public function destroy($id){
+        $level = Level::find($id);
+        $level->delete();
         //$levelName = Level::find($id);
         /*$id= Level::wherehas('classes', function($query) use($id){
             $query->where('id_level', '!=', $id);
         })->get();*/
-        $id =Level::with('classes')->whereNotExists(function($query) use($id)
-        {
-            $query->select('id_level')
-            ->from('Classerooms')
-                ->where('id_level' ,'!=', $id)->orWhereNull('id_level');
-        })->get();
-        return $id;
+//        $id =Level::with('classes')->whereNotExists(function($query) use($id)
+//        {
+//            $query->select('id_level')
+//            ->from('Classerooms')
+//                ->where('id_level' ,'!=', $id)->orWhereNull('id_level');
+//        })->get();
+//        return $id;
        // $levelName->doesntHave('classes')->delete();
         //return ($levelName);
         Session::flash('statuscode', 'error');

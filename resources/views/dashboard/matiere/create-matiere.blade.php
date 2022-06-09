@@ -16,16 +16,16 @@
 
             </ol>
         </nav>
-        <div class="card-body">
-
-                <div class="row">
-                    <div class="col-md-4 offset-md-4">
+        <div class="card page-body">
+            <div class="card-body">
                         <form method="post" action="{{ route('matieres.storeMatiere') }}">
-                            <div class="card">
-                                <div class="card-body">
-                                   <div class="form-group">
-                                        <div class="col">
-                                            @csrf
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="headers-line mt-md" style="color: #ef6f6c;"><i class="fas fa-plus"></i> {{__(' nouveau matière')}}</div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
                                             <label for="nom"> Nom Matière:</label>
                                             <input type="text" class="form-control @error('nom') is-invalid @enderror" name="nom" value="{{old('nom')}}"/>
                                             @error('nom')
@@ -34,7 +34,7 @@
                                             </span>
                                             @enderror
                                         </div>
-                                        <div class="col">
+                                        <div class="form-group col-md-6">
                                             <label for="coeff">Coefficient </label>
                                             <input type="text" class="form-control @error('coeff') is-invalid @enderror" name="coeff" value="{{old('coeff')}}"/>
                                             @error('coeff')
@@ -43,43 +43,45 @@
                                             </span>
                                             @enderror
                                         </div>
-                                       <div class="col">
-                                           <label for="module">Niveau </label>
-                                           <select class="form-control @error('niveau') is-invalid @enderror" id="niveau" name="niveau" value="{{old('niveau')}}">
-                                               <option value="" selected> Selectionner niveau </option>
-                                               @foreach( $niveaux as $niveau)
-                                                   <option value="{{$niveau->id}}" > {{$niveau->level}} </option>
-                                               @endforeach
-
-                                           </select>
-                                           @error('niveau')
-                                           <span class="invalid-feedback" role="alert">
-                                               <strong>{{ $message }}</strong>
-                                            </span>
-                                           @enderror
-                                       </div>
-
-
-                                       <div class="col">
-                                           <label for="module">Module </label>
-                                           <select class="form-control @error('module') is-invalid @enderror" id="modul" name="modul" value="{{old('modul')}}">
-                                               <option value="" selected> Choisir module </option>
-                                                   <option value="" > </option>
-                                           </select>
-                                           @error('module')
-                                           <span class="invalid-feedback" role="alert">
-                                               <strong>{{ $message }}</strong>
-                                            </span>
-                                           @enderror
-                                       </div>
-                                        <br>
-                                        <button type="submit" class="btn btn-primary">Ajouter</button>
                                     </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="module">Niveau </label>
+                                            <select class="form-control @error('niveau') is-invalid @enderror" id="niveau" name="niveau" value="{{old('niveau')}}">
+                                                <option value="" selected> Selectionner niveau </option>
+                                                @foreach( $niveaux as $niveau)
+                                                    <option value="{{$niveau->id}}" > {{$niveau->level}} </option>
+                                                @endforeach
 
-                                 </div>
-                             </div>
+                                            </select>
+                                            @error('niveau')
+                                            <span class="invalid-feedback" role="alert">
+                                               <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="module">Module </label>
+                                            <select class="form-control @error('module') is-invalid @enderror" id="modul" name="modul" value="{{old('modul')}}">
+                                                <option value="" selected> Choisir module </option>
+                                                <option value="" > </option>
+                                            </select>
+                                            @error('module')
+                                            <span class="invalid-feedback" role="alert">
+                                               <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>  </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span></span>
+                                <button class="btn btn-primary" type="submit">{{ __('Ajouter')}}</button>
+                            </div>
+
+
                         </form>
-                     </div>
                  </div>
         </div>
     </div>
@@ -103,11 +105,11 @@
                         });
                         if(count==0){
                             $('#modul').empty();
-                            $('#modul').append('<option value="">Aucun emploi disponible</option>')
+                            $('#modul').append('<option value="">Aucun moudle disponible</option>')
                         }
                     },
                     error:function(data){
-                        $('#modul').append('<option value="">Aucun emploi affecter</option>')
+                        $('#modul').append('<option value="">Aucun module affecter</option>')
                     }
                 });
             });

@@ -1,30 +1,39 @@
 @extends('layouts.app-admin')
 
 @section('content')
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('accueil')}}">Accueil</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{route('schedule.admin.index')}}">Liste Emplois</a></li>
+                <li class="breadcrumb-item active" aria-current="page">créer un Emploi</li>
+            </ol>
+        </nav>
     <div class="card page-body">
         <div class="card-body">
-            <div class="headers-line mt-md" style="color: #ef6f6c;"><i class="fas fa-user-check"></i>  {{$row->id ? 'Edit: '.$row->title : 'Ajouter un nouveau'}} {{__("emploi ")}} :  {{$classroom->name}} /  {{$level->level}}</div>
+            <div class="headers-line mt-md" style="color: #ef6f6c;"><i class="fas fa-user-check"></i>  {{$row->id ? 'Edit '.$row->title : 'Ajouter un nouveau'}} {{__("emploi ")}} :  {{$classroom->name}} /  {{$level->level}}</div>
             <hr width="50%">
             <form action="{{route('schedule.admin.store', ['id'=>($row->id) ? $row->id : '-1']) }}" method="post"
-                  class=" form-horizontal notSendAjax" novalidate>
+                  class=" form-horizontal notSendAjax" >
                 @csrf
 
                 @include('includes.alerts.flash')
-
+                <input name="level_id" type="hidden" value="{{$level->id}}">
                 <input name="classroom_id" type="hidden" value="{{$classroom->id}}">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="name">{{__("Name")}}</label>
+                            <label for="name">{{__("Nom")}}</label>
                             <input type="text" value="{{old('name',$row->name)}}" name="name"
-                                   placeholder="{{__("Name")}}" class="form-control">
+                                   placeholder="{{__("Nom")}}" class="form-control">
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="status">{{__("Status")}} </label>
                             <select  name="status" class="form-control" required="" style="display: block;">
-                                <option value="">{{ __(' Please Select ')}} </option>
+                                <option value="">{{ __(' Choisir ')}} </option>
                                 @foreach ($status as $key => $item)
                                     <option value='{{$key}}' {{isset( $row) && $key == $row->status  ? 'selected' : ''}} >{{$item}}</option>
                                 @endforeach
@@ -38,7 +47,7 @@
                              style=" padding: 5px; border-color: #3b3f51; border-style: double; margin-bottom: 20px; ">
                             <h3 class="mt-repeater-title"
                                 style=" text-align: center; margin-top: 10px; margin-bottom: 20px; font-size: 30px; ">
-                                {{ __('Monday')}}</h3>
+                                {{ __('Lundi')}}</h3>
                             <div class="repeater clearfix">
                                 <div data-repeater-list="outer-list-lundi" style=" padding: 0px 50px; ">
                                     @if (isset($row->monday))
@@ -47,13 +56,19 @@
                                                  style=" border-top: 2px dotted #101010; ">
                                                 <div class=" " style=" margin-top: 10px; ">
                                                     <div class="mt-repeater-input ">
-                                                        <label for="group-a[0][from]" class="control-label">{{ __('Start at')}}</label>
+                                                        <label for="group-a[0][date]" class="control-label">{{ __('Date')}}</label>
+                                                        <br>
+                                                        <input type="date" name="group-a[0][date]"
+                                                               class="form-control" value="{{ $member['date'] }}">
+                                                    </div>
+                                                    <div class="mt-repeater-input ">
+                                                        <label for="group-a[0][from]" class="control-label">{{ __('Commencer à')}}</label>
                                                         <br>
                                                         <input type="time" name="group-a[0][from]"
                                                                class="form-control" value="{{ $member['from'] }}">
                                                     </div>
                                                     <div class="mt-repeater-input ">
-                                                        <label for="group-a[0][to]" class="control-label">{{ __('End at')}}</label>
+                                                        <label for="group-a[0][to]" class="control-label">{{ __('Fin à')}}</label>
                                                         <br>
                                                         <input type="time" name="group-a[0][to]"
                                                                class="form-control" value="{{ $member['to'] }}">
@@ -61,7 +76,7 @@
                                                 </div>
                                                 <div class="">
                                                     <div class="mt-repeater-input ">
-                                                        <label for="group-a[0][name]" class="control-label">{{ __('Name of lesson')}}</label>
+                                                        <label for="group-a[0][name]" class="control-label">{{ __('Nom de matière')}}</label>
                                                         <br>
                                                         <input type="text" name="group-a[0][name]"
                                                                class="form-control" value="{{ $member['name'] }}">
@@ -73,7 +88,7 @@
                                                         <a data-repeater-delete
                                                            class="btn btn-danger mt-repeater-delete"
                                                            style="float: left;margin: 0 10px; ">
-                                                            <i class="fa fa-close"></i> {{ __('Delete')}}</a>
+                                                            <i class="fa fa-close"></i> {{ __('Supprimer')}}</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -84,13 +99,19 @@
                                          style=" border-top: 2px dotted #101010; ">
                                         <div class="" style=" margin-top: 10px; ">
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][from]" class="control-label">{{ __('Start at')}}</label>
+                                                <label for="group-a[0][date]" class="control-label">{{ __('Date')}}</label>
+                                                <br>
+                                                <input type="date" name="group-a[0][date]"
+                                                       class="form-control" value="">
+                                            </div>
+                                            <div class="mt-repeater-input">
+                                                <label for="group-a[0][from]" class="control-label">{{ __('Commencer à')}}</label>
                                                 <br>
                                                 <input type="time" name="group-a[0][from]"
                                                        class="form-control" value="">
                                             </div>
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][to]"  class="control-label">{{ __('End at')}}</label>
+                                                <label for="group-a[0][to]"  class="control-label">{{ __('Fin à')}}</label>
                                                 <br>
                                                 <input type="time" name="group-a[0][to]"
                                                        class="form-control" value="">
@@ -98,7 +119,7 @@
                                         </div>
                                         <div class="">
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][name]" class="control-label">{{ __('Name of lesson')}}</label>
+                                                <label for="group-a[0][name]" class="control-label">{{ __('Nom de matière')}}</label>
                                                 <br>
                                                 <input type="text" name="group-a[0][name]"
                                                        class="form-control" value="">
@@ -109,14 +130,14 @@
                                                 <a data-repeater-delete
                                                    class="btn btn-danger mt-repeater-delete"
                                                    style="float: left;margin: 0 10px; ">
-                                                    <i class="fa fa-close"></i> {{ __('Delete')}}</a>
+                                                    <i class="fa fa-close"></i> {{ __('Supprimer')}}</a>
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
                                 <input data-repeater-create type="button" style="float: right"
-                                       class="btn btn-info" value="Add"/>
+                                       class="btn btn-info" value="Ajouter"/>
                             </div>
                         </div>
 
@@ -124,7 +145,7 @@
                              style=" padding: 5px; border-color: #3b3f51; border-style: double; margin-bottom: 20px; ">
                             <h3 class="mt-repeater-title"
                                 style=" text-align: center; margin-top: 10px; margin-bottom: 20px; font-size: 30px; ">
-                                {{ __('Tuesday')}} </h3>
+                                {{ __('Mardi')}} </h3>
                             <div class="repeater clearfix">
 
                                 <div data-repeater-list="outer-list-mardi" style=" padding: 0px 50px; ">
@@ -134,13 +155,19 @@
                                                  style=" border-top: 2px dotted #101010; ">
                                                 <div class="" style=" margin-top: 10px; ">
                                                     <div class="mt-repeater-input">
-                                                        <label for="group-a[0][from]" class="control-label">{{ __('Start at')}}</label>
+                                                        <label for="group-a[0][date]" class="control-label">{{ __('Date')}}</label>
+                                                        <br>
+                                                        <input type="date" name="group-a[0][date]"
+                                                               class="form-control" value="{{ $member['date'] }}">
+                                                    </div>
+                                                    <div class="mt-repeater-input">
+                                                        <label for="group-a[0][from]" class="control-label">{{ __('Commencer à')}}</label>
                                                         <br>
                                                         <input type="time" name="group-a[0][from]"
                                                                class="form-control" value="{{ $member['from'] }}">
                                                     </div>
                                                     <div class="mt-repeater-input">
-                                                        <label for="group-a[0][to]" class="control-label">{{ __('End at')}}</label>
+                                                        <label for="group-a[0][to]" class="control-label">{{ __('Fin à')}}</label>
                                                         <br>
                                                         <input type="time" name="group-a[0][to]"
                                                                class="form-control" value="{{ $member['to'] }}">
@@ -148,7 +175,7 @@
                                                 </div>
                                                 <div class="">
                                                     <div class="mt-repeater-input">
-                                                        <label group-a[0][name] class="control-label">{{ __('Name of lesson ')}}</label>
+                                                        <label for="group-a[0][name]" class="control-label">{{ __('Nom de matière ')}}</label>
                                                         <br>
                                                         <input type="text" name="group-a[0][name]"
                                                                class="form-control" value="{{ $member['name'] }}">
@@ -160,7 +187,7 @@
                                                         <a data-repeater-delete
                                                            class="btn btn-danger mt-repeater-delete"
                                                            style="float: left;margin: 0 10px; ">
-                                                            <i class="fa fa-close"></i> {{ __('Delete')}}</a>
+                                                            <i class="fa fa-close"></i> {{ __('Supprimer')}}</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -171,13 +198,19 @@
                                          style=" border-top: 2px dotted #101010; ">
                                         <div class="" style=" margin-top: 10px; ">
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][from]" class="control-label">{{ __('Start at')}}</label>
+                                                <label for="group-a[0][date]" class="control-label">{{ __('Date')}}</label>
+                                                <br>
+                                                <input type="date" name="group-a[0][date]"
+                                                       class="form-control" value="">
+                                            </div>
+                                            <div class="mt-repeater-input">
+                                                <label for="group-a[0][from]" class="control-label">{{ __('Commencer à')}}</label>
                                                 <br>
                                                 <input type="time" name="group-a[0][from]"
                                                        class="form-control" value="">
                                             </div>
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][to]" class="control-label">{{ __('End at')}}</label>
+                                                <label for="group-a[0][to]" class="control-label">{{ __('Terminé à')}}</label>
                                                 <br>
                                                 <input type="time" name="group-a[0][to]"
                                                        class="form-control" value="">
@@ -185,7 +218,7 @@
                                         </div>
                                         <div class="">
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][name]" class="control-label">{{ __('Name of lesson')}}</label>
+                                                <label for="group-a[0][name]" class="control-label">{{ __('Nom de matière')}}</label>
                                                 <br>
                                                 <input type="text" name="group-a[0][name]"
                                                        class="form-control" value="">
@@ -196,14 +229,14 @@
                                                 <a data-repeater-delete
                                                    class="btn btn-danger mt-repeater-delete"
                                                    style="float: left;margin: 0 10px; ">
-                                                    <i class="fa fa-close"></i> {{ __('Delete')}}</a>
+                                                    <i class="fa fa-close"></i> {{ __('Supprimer')}}</a>
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
                                 <input data-repeater-create type="button" style="float: right"
-                                       class="btn btn-info" value="Add"/>
+                                       class="btn btn-info" value="Ajouter"/>
                             </div>
                         </div>
 
@@ -211,7 +244,7 @@
                              style=" padding: 5px; border-color: #3b3f51; border-style: double; margin-bottom: 20px; ">
                             <h3 class="mt-repeater-title"
                                 style=" text-align: center; margin-top: 10px; margin-bottom: 20px; font-size: 30px; ">
-                                {{ __('Wednesday')}} </h3>
+                                {{ __('Mercredi')}} </h3>
                             <div class="repeater clearfix">
 
                                 <div data-repeater-list="outer-list-mercredi" style=" padding: 0px 50px; ">
@@ -219,15 +252,21 @@
                                         @foreach(json_decode($row->wednesday, true) as $member)
                                             <div data-repeater-item class="mt-repeater-item"
                                                  style=" border-top: 2px dotted #101010; ">
+                                                <div class="mt-repeater-input">
+                                                    <label for="group-a[0][date]" class="control-label">{{ __('Date')}}</label>
+                                                    <br>
+                                                    <input type="date" name="group-a[0][date]"
+                                                           class="form-control" value="{{ $member['date'] }}">
+                                                </div>
                                                 <div class="" style=" margin-top: 10px; ">
                                                     <div class="mt-repeater-input">
-                                                        <label for="group-a[0][from]" class="control-label">{{ __('Start at')}}</label>
+                                                        <label for="group-a[0][from]" class="control-label">{{ __('Commencer à')}}</label>
                                                         <br>
                                                         <input type="time" name="group-a[0][from]"
                                                                class="form-control" value="{{ $member['from'] }}">
                                                     </div>
                                                     <div class="mt-repeater-input">
-                                                        <label for="group-a[0][to]" class="control-label">{{ __('End at')}}</label>
+                                                        <label for="group-a[0][to]" class="control-label">{{ __('Terminé à')}}</label>
                                                         <br>
                                                         <input type="time" name="group-a[0][to]"
                                                                class="form-control" value="{{ $member['to'] }}">
@@ -235,7 +274,7 @@
                                                 </div>
                                                 <div class="">
                                                     <div class="mt-repeater-input">
-                                                        <label for="group-a[0][name]" class="control-label">{{ __('Name of lesson')}}</label>
+                                                        <label for="group-a[0][name]" class="control-label">{{ __('Nom de matière')}}</label>
                                                         <br>
                                                         <input type="text" name="group-a[0][name]"
                                                                class="form-control" value="{{ $member['name'] }}">
@@ -247,7 +286,7 @@
                                                         <a data-repeater-delete
                                                            class="btn btn-danger mt-repeater-delete"
                                                            style="float: left;margin: 0 10px; ">
-                                                            <i class="fa fa-close"></i> {{ __('Delete')}}</a>
+                                                            <i class="fa fa-close"></i> {{ __('Supprimer')}}</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -258,13 +297,19 @@
                                          style=" border-top: 2px dotted #101010; ">
                                         <div class="" style=" margin-top: 10px; ">
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][from]" class="control-label">{{ __('Start at')}}</label>
+                                                <label for="group-a[0][date]" class="control-label">{{ __('Date')}}</label>
+                                                <br>
+                                                <input type="date" name="group-a[0][date]"
+                                                       class="form-control" value="">
+                                            </div>
+                                            <div class="mt-repeater-input">
+                                                <label for="group-a[0][from]" class="control-label">{{ __('Commencé à ')}}</label>
                                                 <br>
                                                 <input type="time" name="group-a[0][from]"
                                                        class="form-control" value="">
                                             </div>
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][to]" class="control-label">{{ __('End at')}}</label>
+                                                <label for="group-a[0][to]" class="control-label">{{ __('terminé à')}}</label>
                                                 <br>
                                                 <input type="time" name="group-a[0][to]"
                                                        class="form-control" value="">
@@ -272,7 +317,7 @@
                                         </div>
                                         <div class="">
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][name]" class="control-label">{{ __('Name of lesson')}}</label>
+                                                <label for="group-a[0][name]" class="control-label">{{ __('Nom de matière')}}</label>
                                                 <br>
                                                 <input type="text" name="group-a[0][name]"
                                                        class="form-control" value="">
@@ -283,14 +328,14 @@
                                                 <a data-repeater-delete
                                                    class="btn btn-danger mt-repeater-delete"
                                                    style="float: left;margin: 0 10px; ">
-                                                    <i class="fa fa-close"></i> {{ __('Delete ')}}</a>
+                                                    <i class="fa fa-close"></i> {{ __('Supprimer ')}}</a>
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
                                 <input data-repeater-create type="button" style="float: right"
-                                       class="btn btn-info" value="Add"/>
+                                       class="btn btn-info" value="Ajouter"/>
                             </div>
                         </div>
 
@@ -298,7 +343,7 @@
                              style=" padding: 5px; border-color: #3b3f51; border-style: double; margin-bottom: 20px; ">
                             <h3 class="mt-repeater-title"
                                 style=" text-align: center; margin-top: 10px; margin-bottom: 20px; font-size: 30px; ">
-                                {{ __('Thursday')}}</h3>
+                                {{ __('Jeudi')}}</h3>
                             <div class="repeater clearfix">
 
                                 <div data-repeater-list="outer-list-jeudi" style=" padding: 0px 50px; ">
@@ -306,15 +351,21 @@
                                         @foreach(json_decode($row->thursday, true) as $member)
                                             <div data-repeater-item class="mt-repeater-item"
                                                  style=" border-top: 2px dotted #101010; ">
+                                                <div class="mt-repeater-input">
+                                                    <label for="group-a[0][date]" class="control-label">{{ __('Date')}}</label>
+                                                    <br>
+                                                    <input type="date" name="group-a[0][date]"
+                                                           class="form-control" value="{{ $member['date'] }}">
+                                                </div>
                                                 <div class="" style=" margin-top: 10px; ">
                                                     <div class="mt-repeater-input">
-                                                        <label for="group-a[0][from]" class="control-label">{{ __('Start at')}}</label>
+                                                        <label for="group-a[0][from]" class="control-label">{{ __('Commencé à')}}</label>
                                                         <br>
                                                         <input type="time" name="group-a[0][from]"
                                                                class="form-control" value="{{ $member['from'] }}">
                                                     </div>
                                                     <div class="mt-repeater-input">
-                                                        <label for="group-a[0][to]" class="control-label">{{ __('End at')}}</label>
+                                                        <label for="group-a[0][to]" class="control-label">{{ __('Terminé à')}}</label>
                                                         <br>
                                                         <input type="time" name="group-a[0][to]"
                                                                class="form-control" value="{{ $member['to'] }}">
@@ -322,7 +373,7 @@
                                                 </div>
                                                 <div class="">
                                                     <div class="mt-repeater-input">
-                                                        <label for="group-a[0][name]" class="control-label">{{ __('Name of lesson')}}</label>
+                                                        <label for="group-a[0][name]" class="control-label">{{ __('Nom de matière')}}</label>
                                                         <br>
                                                         <input type="text" name="group-a[0][name]"
                                                                class="form-control" value="{{ $member['name'] }}">
@@ -334,7 +385,7 @@
                                                         <a data-repeater-delete
                                                            class="btn btn-danger mt-repeater-delete"
                                                            style="float: left;margin: 0 10px; ">
-                                                            <i class="fa fa-close"></i> {{ __('Delete')}}</a>
+                                                            <i class="fa fa-close"></i> {{ __('Supprimer')}}</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -345,13 +396,19 @@
                                          style=" border-top: 2px dotted #101010; ">
                                         <div class="" style=" margin-top: 10px; ">
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][from]" class="control-label">{{ __('Start at')}}</label>
+                                                <label for="group-a[0][date]" class="control-label">{{ __('Date')}}</label>
+                                                <br>
+                                                <input type="date" name="group-a[0][date]"
+                                                       class="form-control" value="">
+                                            </div>
+                                            <div class="mt-repeater-input">
+                                                <label for="group-a[0][from]" class="control-label">{{ __('Commencé à ')}}</label>
                                                 <br>
                                                 <input type="time" name="group-a[0][from]"
                                                        class="form-control" value="">
                                             </div>
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][to]" class="control-label">{{ __('End at')}}</label>
+                                                <label for="group-a[0][to]" class="control-label">{{ __('terminé à')}}</label>
                                                 <br>
                                                 <input type="time" name="group-a[0][to]"
                                                        class="form-control" value="">
@@ -359,7 +416,7 @@
                                         </div>
                                         <div class="">
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][name]" class="control-label">{{ __('Name of lesson')}}</label>
+                                                <label for="group-a[0][name]" class="control-label">{{ __('Nom de matière')}}</label>
                                                 <br>
                                                 <input type="text" name="group-a[0][name]"
                                                        class="form-control" value="">
@@ -370,7 +427,7 @@
                                                 <a data-repeater-delete
                                                    class="btn btn-danger mt-repeater-delete"
                                                    style="float: left;margin: 0 10px; ">
-                                                    <i class="fa fa-close"></i> {{ __('Delete')}}</a>
+                                                    <i class="fa fa-close"></i> {{ __('Supprimer ')}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -378,7 +435,7 @@
 
                                 </div>
                                 <input data-repeater-create type="button" style="float: right"
-                                       class="btn btn-info" value="Add"/>
+                                       class="btn btn-info" value="Ajouter"/>
                             </div>
                         </div>
 
@@ -387,7 +444,7 @@
                              style=" padding: 5px; border-color: #3b3f51; border-style: double; margin-bottom: 20px; ">
                             <h3 class="mt-repeater-title"
                                 style=" text-align: center; margin-top: 10px; margin-bottom: 20px; font-size: 30px; ">
-                                {{ __('Friday')}}</h3>
+                                {{ __('Vendredi')}}</h3>
                             <div class="repeater clearfix">
 
                                 <div data-repeater-list="outer-list-vendredi" style=" padding: 0px 50px; ">
@@ -397,13 +454,19 @@
                                                  style=" border-top: 2px dotted #101010; ">
                                                 <div class="" style=" margin-top: 10px; ">
                                                     <div class="mt-repeater-input">
-                                                        <label for="group-a[0][from]" class="control-label">{{ __('Start at')}}</label>
+                                                        <label for="group-a[0][date]" class="control-label">{{ __('Date')}}</label>
+                                                        <br>
+                                                        <input type="date" name="group-a[0][date]"
+                                                               class="form-control" value="{{ $member['date'] }}">
+                                                    </div>
+                                                    <div class="mt-repeater-input">
+                                                        <label for="group-a[0][from]" class="control-label">{{ __('Commencé à')}}</label>
                                                         <br>
                                                         <input type="time" name="group-a[0][from]"
                                                                class="form-control" value="{{ $member['from'] }}">
                                                     </div>
                                                     <div class="mt-repeater-input">
-                                                        <label for="group-a[0][to]" class="control-label">{{ __('End at')}}</label>
+                                                        <label for="group-a[0][to]" class="control-label">{{ __('Terminé à')}}</label>
                                                         <br>
                                                         <input type="time" name="group-a[0][to]"
                                                                class="form-control" value="{{ $member['to'] }}">
@@ -411,7 +474,7 @@
                                                 </div>
                                                 <div class="">
                                                     <div class="mt-repeater-input">
-                                                        <label for="group-a[0][name]" class="control-label">{{ __('Name of lesson')}}</label>
+                                                        <label for="group-a[0][name]" class="control-label">{{ __('Nom de matière')}}</label>
                                                         <br>
                                                         <input type="text" name="group-a[0][name]"
                                                                class="form-control" value="{{ $member['name'] }}">
@@ -423,7 +486,7 @@
                                                         <a data-repeater-delete
                                                            class="btn btn-danger mt-repeater-delete"
                                                            style="float: left;margin: 0 10px; ">
-                                                            <i class="fa fa-close"></i> {{ __('Delete')}}</a>
+                                                            <i class="fa fa-close"></i> {{ __('Supprimer')}}</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -434,13 +497,19 @@
                                          style=" border-top: 2px dotted #101010; ">
                                         <div class="" style=" margin-top: 10px; ">
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][from]" class="control-label">{{ __('Start at')}}</label>
+                                                <label for="group-a[0][date]" class="control-label">{{ __('Date')}}</label>
+                                                <br>
+                                                <input type="date" name="group-a[0][date]"
+                                                       class="form-control" value="">
+                                            </div>
+                                            <div class="mt-repeater-input">
+                                                <label for="group-a[0][from]" class="control-label">{{ __('Commencé à')}}</label>
                                                 <br>
                                                 <input type="time" name="group-a[0][from]"
                                                        class="form-control" value="">
                                             </div>
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][to]" class="control-label">{{ __('End at')}}</label>
+                                                <label for="group-a[0][to]" class="control-label">{{ __('Terminé à')}}</label>
                                                 <br>
                                                 <input type="time" name="group-a[0][to]"
                                                        class="form-control" value="">
@@ -448,7 +517,7 @@
                                         </div>
                                         <div class="">
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][name]" class="control-label">{{ __('Name of lesson')}}</label>
+                                                <label for="group-a[0][name]" class="control-label">{{ __('Nom de matière')}}</label>
                                                 <br>
                                                 <input type="text" name="group-a[0][name]"
                                                        class="form-control" value="">
@@ -459,7 +528,7 @@
                                                 <a data-repeater-delete
                                                    class="btn btn-danger mt-repeater-delete"
                                                    style="float: left;margin: 0 10px; ">
-                                                    <i class="fa fa-close"></i> {{ __('Delete')}}</a>
+                                                    <i class="fa fa-close"></i> {{ __('Supprimer')}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -467,7 +536,7 @@
 
                                 </div>
                                 <input data-repeater-create type="button" style="float: right"
-                                       class="btn btn-info" value="Add"/>
+                                       class="btn btn-info" value="Ajouter"/>
                             </div>
                         </div>
 
@@ -476,7 +545,7 @@
                              style=" padding: 5px; border-color: #3b3f51; border-style: double; margin-bottom: 20px; ">
                             <h3 class="mt-repeater-title"
                                 style=" text-align: center; margin-top: 10px; margin-bottom: 20px; font-size: 30px; ">
-                                {{ __('Saturday')}}</h3>
+                                {{ __('Samedi')}}</h3>
                             <div class="repeater clearfix">
 
                                 <div data-repeater-list="outer-list-samedi" style=" padding: 0px 50px; ">
@@ -484,15 +553,21 @@
                                         @foreach(json_decode($row->saturday, true) as $member)
                                             <div data-repeater-item class="mt-repeater-item"
                                                  style=" border-top: 2px dotted #101010; ">
+                                                <div class="mt-repeater-input">
+                                                    <label for="group-a[0][date]" class="control-label">{{ __('Date')}}</label>
+                                                    <br>
+                                                    <input type="date" name="group-a[0][date]"
+                                                           class="form-control" value="{{ $member['date'] }}">
+                                                </div>
                                                 <div class="" style=" margin-top: 10px; ">
                                                     <div class="mt-repeater-input">
-                                                        <label for="group-a[0][from]" class="control-label">{{ __('Start at')}}</label>
+                                                        <label for="group-a[0][from]" class="control-label">{{ __('Commencé à')}}</label>
                                                         <br>
                                                         <input type="time" name="group-a[0][from]"
                                                                class="form-control" value="{{ $member['from'] }}">
                                                     </div>
                                                     <div class="mt-repeater-input">
-                                                        <label  for="group-a[0][to]" class="control-label">{{ __('End at')}}</label>
+                                                        <label  for="group-a[0][to]" class="control-label">{{ __('Terminé à')}}</label>
                                                         <br>
                                                         <input type="time" name="group-a[0][to]"
                                                                class="form-control" value="{{ $member['to'] }}">
@@ -500,7 +575,7 @@
                                                 </div>
                                                 <div class="">
                                                     <div class="mt-repeater-input">
-                                                        <label for="group-a[0][name]" class="control-label">{{ __('Name of lesson')}}</label>
+                                                        <label for="group-a[0][name]" class="control-label">{{ __('Nom de matière')}}</label>
                                                         <br>
                                                         <input type="text" name="group-a[0][name]"
                                                                class="form-control" value="{{ $member['name'] }}">
@@ -512,7 +587,7 @@
                                                         <a data-repeater-delete
                                                            class="btn btn-danger mt-repeater-delete"
                                                            style="float: left;margin: 0 10px; ">
-                                                            <i class="fa fa-close"></i> {{ __('Delete')}}</a>
+                                                            <i class="fa fa-close"></i> {{ __('Supprimer')}}</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -523,13 +598,19 @@
                                          style=" border-top: 2px dotted #101010; ">
                                         <div class="" style=" margin-top: 10px; ">
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][from]" class="control-label">{{ __('Start at')}}</label>
+                                                <label for="group-a[0][date]" class="control-label">{{ __('Date')}}</label>
+                                                <br>
+                                                <input type="date" name="group-a[0][date]"
+                                                       class="form-control" value="">
+                                            </div>
+                                            <div class="mt-repeater-input">
+                                                <label for="group-a[0][from]" class="control-label">{{ __('Commencé à')}}</label>
                                                 <br>
                                                 <input type="time" name="group-a[0][from]"
                                                        class="form-control" value="">
                                             </div>
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][to]" class="control-label">{{ __('End at')}}</label>
+                                                <label for="group-a[0][to]" class="control-label">{{ __('Terminé à')}}</label>
                                                 <br>
                                                 <input type="time" name="group-a[0][to]"
                                                        class="form-control" value="">
@@ -537,7 +618,7 @@
                                         </div>
                                         <div class="">
                                             <div class="mt-repeater-input">
-                                                <label for="group-a[0][name]" class="control-label">{{ __('Name of lesson')}}</label>
+                                                <label for="group-a[0][name]" class="control-label">{{ __('Nom de matière')}}</label>
                                                 <br>
                                                 <input type="text" name="group-a[0][name]"
                                                        class="form-control" value="">
@@ -548,7 +629,7 @@
                                                 <a data-repeater-delete
                                                    class="btn btn-danger mt-repeater-delete"
                                                    style="float: left;margin: 0 10px; ">
-                                                    <i class="fa fa-close"></i> {{ __('Delete')}}</a>
+                                                    <i class="fa fa-close"></i> {{ __('Supprimer')}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -556,7 +637,7 @@
 
                                 </div>
                                 <input data-repeater-create type="button" style="float: right"
-                                       class="btn btn-info" value="Add"/>
+                                       class="btn btn-info" value="Ajouter"/>
                             </div>
                         </div>
 
@@ -573,12 +654,13 @@
             </form>
         </div>
     </div>
+    </div>
 
 
 @endsection
 @section ('scripts')
 
-    <script src="{{ URL::asset('js/jquery.repeater.js') }}" type="text/javascript"></script>
+{{--    <script src="{{ URL::asset('js/jquery.repeater.js') }}" type="text/javascript"></script>--}}
     <script src="{{URL::asset('assets/js/jquery-3.6.0.js')}}"></script>
     <script type="text/javascript">
         // jquery.repeater version 1.2.1
@@ -602,42 +684,42 @@
             })
         });
     </script>
-    <script>
-        $(document).ready(function () {
-            $('.repeater').repeater({
-                // (Optional)
-                // start with an empty list of repeaters. Set your first (and only)
-                // "data-repeater-item" with style="display:none;" and pass the
-                // following configuration flag
-                initEmpty: true,
+{{--    <script>--}}
+{{--        $(document).ready(function () {--}}
+{{--            $('.repeater').repeater({--}}
+{{--                // (Optional)--}}
+{{--                // start with an empty list of repeaters. Set your first (and only)--}}
+{{--                // "data-repeater-item" with style="display:none;" and pass the--}}
+{{--                // following configuration flag--}}
+{{--                initEmpty: true,--}}
 
-                // (Optional)
-                // "show" is called just after an item is added.  The item is hidden
-                // at this point.  If a show callback is not given the item will
-                // have $(this).show() called on it.
-                show: function () {
-                    $(this).slideDown();
-                },
-                // (Optional)
-                // "hide" is called when a user clicks on a data-repeater-delete
-                // element.  The item is still visible.  "hide" is passed a function
-                // as its first argument which will properly remove the item.
-                // "hide" allows for a confirmation step, to send a delete request
-                // to the server, etc.  If a hide callback is not given the item
-                // will be deleted.
-                hide: function (deleteElement) {
-                    if (confirm('Are you sure you want to delete this element?')) {
-                        $(this).slideUp(deleteElement);
-                    }
-                },
+{{--                // (Optional)--}}
+{{--                // "show" is called just after an item is added.  The item is hidden--}}
+{{--                // at this point.  If a show callback is not given the item will--}}
+{{--                // have $(this).show() called on it.--}}
+{{--                show: function () {--}}
+{{--                    $(this).slideDown();--}}
+{{--                },--}}
+{{--                // (Optional)--}}
+{{--                // "hide" is called when a user clicks on a data-repeater-delete--}}
+{{--                // element.  The item is still visible.  "hide" is passed a function--}}
+{{--                // as its first argument which will properly remove the item.--}}
+{{--                // "hide" allows for a confirmation step, to send a delete request--}}
+{{--                // to the server, etc.  If a hide callback is not given the item--}}
+{{--                // will be deleted.--}}
+{{--                hide: function (deleteElement) {--}}
+{{--                    if (confirm('Are you sure you want to delete this element?')) {--}}
+{{--                        $(this).slideUp(deleteElement);--}}
+{{--                    }--}}
+{{--                },--}}
 
-                // (Optional)
-                // Removes the delete button from the first list item,
-                // defaults to false.
-                isFirstItemUndeletable: true
-            })
-        });
+{{--                // (Optional)--}}
+{{--                // Removes the delete button from the first list item,--}}
+{{--                // defaults to false.--}}
+{{--                isFirstItemUndeletable: true--}}
+{{--            })--}}
+{{--        });--}}
 
-    </script>
+{{--    </script>--}}
 @endsection
 

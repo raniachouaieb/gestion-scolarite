@@ -44,8 +44,9 @@ class MatiereController extends Controller
 
 
 
-    public function store(MatiereRequest $request)
+    public function store(Request $request)
     {
+       // dd($request->modul);
         $matiere = new Matiere();
         $matiere->nom= $request->nom;
         $matiere->coefficient= $request->coeff;
@@ -72,7 +73,7 @@ class MatiereController extends Controller
         return view('dashboard.matiere.edit-matiere',compact('matiere', 'modules', 'niveaux'))->withTitle('Edition matiere');
     }
 
-    public function update(MatiereRequest $request, $id){
+    public function update(Request $request, $id){
         $matiereID = Matiere::find($id);
         try{
             if(!$matiereID){

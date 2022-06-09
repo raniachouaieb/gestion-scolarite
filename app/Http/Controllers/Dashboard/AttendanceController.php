@@ -9,6 +9,7 @@ use App\Models\Module;
 use App\Models\Schedule;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class AttendanceController extends Controller
 {
@@ -35,17 +36,45 @@ class AttendanceController extends Controller
 
         $rows = Schedule::where('classroom_id', $classroom_id)->where('status', 1)->get();
         $output = [];
+        $emploi_id=0;Log::info($rows);
         foreach ($rows as $row) {
+
             $emploi_id = $row['id'];
+
             foreach (json_decode($row['monday'], true) as $seance) {
                 if ($seance['date'] === $date) {
                     array_push($output, ["from" => $seance['from'], "to" => $seance['to']]);
                 }
             }
+            foreach (json_decode($row['tuesday'], true) as $tuesday) {
+                    if ($tuesday['date'] === $date) {
+                         array_push($output, ["from" => $tuesday['from'], "to" => $tuesday['to']]);                   }
+                }
+            }
+        foreach (json_decode($row['wednesday'], true) as $wednesday) {
+                     if ($wednesday['date'] === $date) {
+                         array_push($output, ["from" => $wednesday['from'], "to" => $wednesday['to']]);
+                     }
+                 }
+
+                 foreach (json_decode($row['thursday'], true) as $thursday) {
+                     if ($thursday['date'] === $date) {
+                         array_push($output, ["from" => $thursday['from'], "to" => $thursday['to']]);
+                     }
+                 }
+
+                 foreach (json_decode($row['friday'], true) as $friday) {
+                     if ($friday['date'] === $date) {
+                         array_push($output, ["from" => $friday['from'], "to" => $friday['to']]);
+                     }
+                 }
+                 foreach (json_decode($row['saturday'], true) as $saturday) {
+                     if ($saturday['date'] === $date) {
+                         array_push($output, ["from" => $saturday['from'], "to" => $saturday['to']]);
+                     }
+                 }
 
 
-
-        }
 
 
         return view("dashboard.attendance.loadSchedule", compact( 'date', 'output', 'classroom_id', 'students', 'rows', 'emploi_id'))->render();

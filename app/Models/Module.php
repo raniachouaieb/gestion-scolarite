@@ -22,7 +22,7 @@ class Module extends Model
     ];
 
     public function matieres(){
-        return $this->hasMany(Matiere::class, 'module_id', 'id');
+        return $this->hasMany('App\Models\Matiere', 'module_id', 'id');
     }
     public function enseignants()
     {

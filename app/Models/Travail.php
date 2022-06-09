@@ -32,7 +32,7 @@ class Travail extends Model
     ];
 
     public function matiere(){
-        return $this->hasMany(Matiere::class,'matiere_id', 'id');
+        return $this->hasMany('App\Models\Matiere','matiere_id', 'id');
     }
     public function class(){
         return $this->belongsTo(Classroom::class, 'class_id', 'id');

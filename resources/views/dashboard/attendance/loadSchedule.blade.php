@@ -8,7 +8,7 @@
             <div class="form-check mb-3">
                 <input class="form-check-input  " type="radio" name="trimestre" value="1" id="formRadios1" checked="">
                 <label class="form-check-label" for="formRadios1">
-                    {{__("1 st  trimestre")}}
+                    {{__("1 ere trimestre")}}
                 </label>
             </div>
         </div>
@@ -17,7 +17,7 @@
             <div class="form-check">
                 <input class="form-check-input  " type="radio" name="trimestre" value="2" id="formRadios2">
                 <label class="form-check-label" for="formRadios2">
-                    {{__("2 nd trimestre")}}
+                    {{__("2 ème trimestre")}}
                 </label>
             </div>
         </div>
@@ -25,7 +25,7 @@
             <div class="form-check">
                 <input class="form-check-input  " type="radio" name="trimestre" value="3" id="formRadios3">
                 <label class="form-check-label" for="formRadios3">
-                    {{__("3 nd trimestre")}}
+                    {{__("3 ème trimestre")}}
                 </label>
             </div>
         </div>
@@ -33,7 +33,7 @@
 
     </div>
 
-    <hr width="50%">
+{{--    <hr width="50%">--}}
     <input type="hidden" name="emploi_id" value="{{$emploi_id}}"/>
     <table class="table table-hover" id="dynamic-table">
         <thead>
@@ -126,7 +126,7 @@
 
     <div class="d-flex justify-content-between">
         <span></span>
-        <button id="send_form" class="btn btn-primary" type="submit">Save Change</button>
+        <button id="send_form" class="btn btn-primary" type="submit">Enregistrer</button>
     </div>
 </form>
 <script>
