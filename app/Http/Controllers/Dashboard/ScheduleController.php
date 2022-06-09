@@ -49,7 +49,6 @@ class ScheduleController extends Controller
     public function Show($id)
 
     {
-      //  $this->checkPermission('ecole_schedule_show');
         $row = Schedule::find($id);
 
         if (empty($row)) {
