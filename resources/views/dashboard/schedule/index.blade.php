@@ -1,4 +1,5 @@
 @extends('layouts.app-admin')
+@section('nameBreadcrumbs',$nameBreadcrumbs)
 
 @section('content')
     <style>
@@ -14,11 +15,15 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('accueil')}}">Accueil</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Liste Emplois</li>
+
             </ol>
         </nav>
         <div class=" card shadow mb-5 cardNiveClass">
             <div class="row">
                 @foreach($niveaux as $niv)
+
+
+
 
                     <div class="col-4">
                         <a type="" class=" col-5 ml-3 mt-2" id="niveau{{$loop->index}}" data-id="{{$niv->id}}" data-target="#classNiveau{{ $niv->id}}">{{$niv->level}}</a>

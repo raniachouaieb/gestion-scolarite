@@ -21,16 +21,16 @@ class ScheduleController extends Controller
     {
 
         $niveaux = Level::orderBy('created_at', 'ASC')->get();
-//      $breadcrumbs = [
-//                [
-//                    'url' => route('schedule.admin.index')
-//                ],
-//                [
-//                    'class' => 'active'
-//                ],
-//
-//        ];
-        return view('dashboard.schedule.index',compact('niveaux'))->withTitle(__('Schedules'))->withName(__('Time tables'));
+      $breadcrumbs = [
+                [
+                    'url' => route('schedule.admin.index')
+                ],
+                [
+                    'class' => 'active'
+                ],
+
+        ];
+        return view('dashboard.schedule.index',compact('niveaux','breadcrumbs'))->withTitle(__('Schedules'))->withName(__('Time tables'))->withNameBreadcrumbs( __("All"));
     }
 
     public function list($class = null, $level_id= null)
@@ -104,7 +104,6 @@ class ScheduleController extends Controller
 
     public function edit(Request $request, $id)
     {
-        $this->checkPermission('ecole_schedule_update');
 
 
         $row = Schedule::find($id);
@@ -114,16 +113,8 @@ class ScheduleController extends Controller
             $classroom = $row->classroom;
             $level = $row->level;
             $status = Schedule::doGetListStatus();
-        $breadcrumbs = [
-                [
-                    'url' => route('schedule.admin.index')
-                ],
-                [
-                    'class' => 'active'
-                ],
 
-        ];
-        return view('schedule.detail', compact('row','classroom','level','status','breadcrumbs'))->withTitle(__($row->id ? 'Edit: '.$row->name : 'Add new time table'))->withName(__('Time tables'))->withNameBreadcrumbs( __("Edit schedule: #:id".$row->id));
+        return view('dashboard.schedule.create', compact('row','classroom','level','status'))->withTitle(__($row->id ? 'Edit: '.$row->name : 'Add new time table'))->withName(__('Time tables'));
     }
 
     protected function getRules(){
@@ -152,28 +143,27 @@ class ScheduleController extends Controller
         $validation = $this->getRules();
         $message = $this->getMessages();
 
-        dd($request);
+       // dd($request);
         $check= $this->validate($request,$validation,$message);
 
         if ($id and $id > 0) {
-            $this->checkPermission('ecole_schedule_update');
             $row = Schedule::find($id);
             if (empty($row)) {
                 abort(404);
             }
 
         } else {
-            $this->checkPermission('ecole_schedule_create');
 
             if (!$check) {
                 return back()->withInput($request->input());
             }
             $row = new Schedule();
         }
+        //$row = new Schedule();
 
         $row->name = $request->get('name');
         $row->status = $request->get('status');
-       // $row->level_id = $request->get('level_id');
+        $row->level_id = $request->get('level_id');
         $row->classroom_id = $request->get('classroom_id');
         $lundi = $request->get('outer-list-lundi');
         if (isset($lundi)) {
@@ -185,6 +175,7 @@ class ScheduleController extends Controller
             }
 
             $row->monday = json_encode($out);
+
         } else {
             $row->monday = "[]";
         }
@@ -251,7 +242,6 @@ class ScheduleController extends Controller
             $row->saturday = "[]";
         }
 
-        $row->sunday = "[]";
 
         if ($row->save()) {
             return redirect()->back()->with('success', ($row->id and $row->id > 0) ? __('Schedule updated') : __("Schedule created"));

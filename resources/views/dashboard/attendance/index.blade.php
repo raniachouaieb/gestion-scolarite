@@ -42,11 +42,11 @@
             <div class="card-body " >
                 <div class="d-flex align-items-center justify-content-between">
                     <h4>
-                        {{__("List of attendances")}} - <span id="classe"></span>
+                        {{__("Liste d'absences")}} - <span id="classe"></span>
                     </h4>
-                    <h6>Current date : {{$date}}</h6>
+                    <h6>date d'aujourd'hui : {{$date}}</h6>
                 </div>
-                <hr>
+
                 <div id="student_filter">
 
 

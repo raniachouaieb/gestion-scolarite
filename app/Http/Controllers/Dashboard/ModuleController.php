@@ -50,6 +50,7 @@ class ModuleController extends Controller
         $module->nom_module= $request->nom_module;
         $module->coefficient_module= $request->coefficient_module;
         $module->niveau_id=$request->niveau_id;
+        $module->basicStudy=isset($request->status) ? 1 : 0;
 
         $module->save();
 
@@ -95,6 +96,7 @@ class ModuleController extends Controller
 
             return redirect()->route('modules.index')->with(['status'=>'Modification avec succés']);
         }catch(\Exception $exception){
+            return $exception;
             Session::flash('statuscode', 'error');
 
             return redirect()->route('modules.index')->with(['status'=>'There is an error :(']);

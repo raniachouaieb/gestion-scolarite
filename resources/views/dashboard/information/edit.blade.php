@@ -26,7 +26,8 @@
                 <div class="col-md-12 ">
                     <div class="card tt">
                         <div class="card-body">
-
+                            <div class="headers-line mt-md" style="color: #ef6f6c;"><i class="fa fa-marker"></i> {{__(' modifier information')}}</div>
+                            <hr>
                             <div class="row">
                                 <div class="col-12">
                                     @csrf

@@ -201,7 +201,7 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'inscri/'],function(){
 
 
 });
-Route::group(['namespace'=>'Dashboard','prefix' => 'student/'],function(){
+Route::group(['namespace'=>'Dashboard','prefix' => 'student'],function(){
     Route::get('/', 'StudentController@index')->name('student.index');
     Route::get('eleveByClass', 'StudentController@eleveByClass')->name('student.eleveByClass');
     Route::get('edit\{id}', 'StudentController@edit')->name('student.edit');
@@ -239,10 +239,7 @@ Route::group(['namespace'=>'Dashboard', 'prefix'=>'seance/'], function(){
 
 });
 
-Route::group(['namespace'=>'Dashboard', 'prefix'=>'note/'], function() {
-    Route::get('add', 'NoteController@add')->name('note.add');
 
-});
 
 Route::group(['namespace'=>'Dashboard','prefix' => 'Schedule'], function () {
     Route::get('/', 'schedulecontroller@index')->name('schedule.admin.index');
@@ -261,6 +258,58 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'attendance'], function () {
     Route::get('loadSchedule/{classroom_id?}', 'Attendancecontroller@loadattendance')->name('attendance.absence');
    Route::post('store', 'attendancecontroller@store')->name('attendance.store');
 });
+
+Route::group(['namespace'=>'Dashboard','prefix' => 'note'], function () {
+    Route::get('/', 'notecontroller@index')->name('note.admin.index');
+    Route::get('/edit/{id}', 'notecontroller@edit')->name('note.admin.edit');
+    Route::Post('/store/{id?}', 'notecontroller@store')->name('note.admin.store');
+    Route::get('/loadModules/{classroom_id?}/{niveau_id?}', 'notecontroller@loadmodules')->name('note.admin.loadmodules');
+    Route::get('/loadNotes/{classroom_id?}/{niveau_id?}/{trimestre?}/{matiere_id?}', 'notecontroller@loadnotes')->name('note.admin.loadnotes');
+});
+
+Route::group(['namespace'=>'Dashboard','prefix' => 'calculMoyenne'], function () {
+    Route::get('/', 'calculationaveragecontroller@index')->name('calculMoyenne.admin.index');
+    Route::Post('/store', 'calculationaveragecontroller@store')->name('calculMoyenne.admin.store');
+    Route::get('/gradebook', 'calculationaveragecontroller@gradebook')->name('calculMoyenne.admin.gradebook');
+    Route::get('getClasse/{id}', 'StudentController@getClasse')->name('calculMoyenne.admin.getClasse');
+
+});
+
+Route::group(['namespace'=>'Dashboard','prefix' => 'bulletin'], function () {
+    Route::get('/', 'bulletincontroller@index')->name('bulletin.admin.index');
+    Route::get('/create', 'bulletincontroller@create')->name('bulletin.admin.create');
+    Route::get('/edit/{id}/{trimester}', 'bulletincontroller@edit')->name('bulletin.admin.edit');
+    Route::Post('/store/{id}', 'bulletincontroller@store')->name('bulletin.admin.store');
+    Route::get('/list/{classroom_id}/{niveau_id}/{trimestre}', 'bulletincontroller@list')->name('bulletin.admin.list');
+
+});
+
+Route::group(['namespace'=>'Dashboard','prefix' => 'remarqueModule'], function () {
+    Route::get('/', 'RemarqueModuleController@index')->name('remarqueModule.admin.index');
+    Route::get('/create', 'RemarqueModuleController@create')->name('remarqueModule.admin.create');
+    Route::get('/edit/{id}', 'RemarqueModuleController@edit')->name('remarqueModule.admin.edit');
+    Route::Post('/store/{id}', 'RemarqueModuleController@store')->name('remarqueModule.admin.store');
+    Route::Post('/bulkEdit', 'RemarqueModuleController@bulkEdit')->name('remarqueModule.admin.bulkEdit');
+    Route::Post('/delete/{id}', 'RemarqueModuleController@delete')->name('remarqueModule.admin.delete');
+
+});
+
+Route::group(['namespace'=>'Dashboard','prefix' => 'teacherRemarks'], function () {
+    Route::get('/', 'TeacherRemarksController@index')->name('teacherRemarks.admin.index');
+    Route::get('/edit/{id}', 'TeacherRemarksController@edit')->name('teacherRemarks.admin.edit');
+    Route::Post('/store/{id}', 'TeacherRemarksController@store')->name('teacherRemarks.admin.store');
+    Route::get('/loadModules/{classroom_id?}/{niveau_id?}', 'TeacherRemarksController@loadModules')->name('teacherRemarks.admin.loadModules');
+    Route::get('/loadNotes/{classroom_id?}/{niveau_id?}/{trimestre?}/{matiere_id?}', 'TeacherRemarksController@loadNotes')->name('teacherRemarks.admin.loadNotes');
+});
+Route::group(['namespace'=>'Dashboard','prefix' => 'observation'], function () {
+    Route::get('/', 'observationcontroller@index')->name('observation.admin.index');
+    Route::get('/edit/{id}', 'observationcontroller@edit')->name('observation.admin.edit');
+    Route::Post('/store/{id?}', 'observationcontroller@store')->name('observation.admin.store');
+    Route::get('/loadModules/{classroom_id?}/{niveau_id?}', 'observationcontroller@loadmodules')->name('observation.admin.loadmodules');
+    Route::get('/loadobservation/{classroom_id?}/{niveau_id?}/{trimestre?}/{matiere_id?}/{schoolYear?}', 'observationcontroller@loadobservation')->name('observation.admin.loadnotes');
+});
+
+
 
 Route::get('notification','Dashboard\NotificationController@notification')->name('notification');
 Route::get('listSuggestion','Dashboard\SuggestionController@index')->name('listSuggestion');
