@@ -44,13 +44,15 @@ class Classroom extends Model
         return $this->hasMany(Schedule::class, 'class_id', 'id');
     }
 
+
+
     public function infos(){
-        return $this->belongsToMany(Info::class);
+        return $this->belongsToMany('\App\Models\Info');
     }
 
     public function informations()
     {
-        return $this->hasMany(\App\Models\ClassroomInfo::class,'class_id','id')->orderByDesc('Created_at');
+        return $this->hasMany('\App\Models\ClassroomInfo','class_id','id')->orderByDesc('Created_at');
 
     }
 }

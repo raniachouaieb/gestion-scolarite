@@ -43,8 +43,9 @@ class InfoController extends Controller
                 "info"=> $request->info,
                 "class_id"=>$request->class,
             ]);
-            //dd($infos);
-            $infos->classes()->attach($request->get('class'));
+            //dd($request->class);
+
+            $infos->classes()->attach($request->class);
 
 
 

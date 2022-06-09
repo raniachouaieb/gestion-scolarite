@@ -6,11 +6,11 @@ use App\Models\Info;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ClassroomInfo extends Model
+class Classroominfo extends Model
 {
     use SoftDeletes;
 
-    protected $table="classroominfo";
+    protected $table="classroominfos";
 
     protected $fillable = [
         'id','classroom_id','info_id'

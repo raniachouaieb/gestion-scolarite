@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\ClassroomInfo;
+use App\Models\Classroominfo;
 use Illuminate\Database\Eloquent\Model;
 
 class Info extends Model
@@ -27,12 +27,12 @@ class Info extends Model
 
     public function classes()
     {
-        return $this->belongsToMany(\App\Models\Classroom::class);
+        return $this->belongsToMany('\App\Models\Classroom','infos','info_id','id','')->using(Classroominfo::class);
     }
 
     public function classe()
     {
-        return $this->belongsToMany(ClassroomInfo::class,'info_id','id')->orderByDesc('Created_at');
+        return $this->belongsToMany('\App\Models\Classroominfo','info_id','id')->orderByDesc('Created_at');
 
     }
 

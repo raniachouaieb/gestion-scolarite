@@ -35,15 +35,16 @@ class ConvocationController extends Controller
             $query = $req->get('query');
             if($query !='')
             {
-                $convocations = Convocation::where('titre_conv', 'LIKE', '%'.$query.'%')
+                $convocationsS = Convocation::where('titre_conv', 'LIKE', '%'.$query.'%')
                     ->get();
             }
             else{
-                $convocations = Convocation::orderBy('date_envoie', 'DESC')->paginate(PAGINATION);
+                $convocationsS = Convocation::orderBy('date_envoie', 'DESC')->paginate(PAGINATION);
             }
-            $total_row = $convocations->count();
-            if($convocations && $total_row > 0){
-                foreach($convocations as $row)
+            $total_row = $convocationsS->count();
+
+            if($convocationsS && $total_row > 0){
+                foreach($convocationsS as $row)
                 {
                     $output .= '
                     <tr>
@@ -54,7 +55,11 @@ class ConvocationController extends Controller
                         <td>'.$row->student->parent['nomPere'].' '.$row->student->parent['prenomPere'].'</td>
                         <td>'.$row->student->parent['telPere'].'</td>
                         <td><form action="'.route('convocations.destroy', $row->id).'" method="post" class="d-inline" >
-                             <input type="submit" name="" id="" class="show_confirm" data-toggle="tooltip">
+                        <!-- WLD -->
+                             '.csrf_field().'
+                             <button type="submit" class=" show_confirm iconSupp" data-toggle="tooltip"  value="Submit" style="border: none;"><i class="fas fa-trash trashcolor"></i> Submit</button>
+
+                                        </form>
                     </form>
                     </td>
                      </tr>';
@@ -66,11 +71,11 @@ class ConvocationController extends Controller
                 <td class="nodata" colspan="5">No data</td>
                 </tr>';
             }
-            $convocations = array(
+            $convocationsS = array(
                 'table_data' => $output,
                 'total_data' => $total_data
             );
-            echo json_encode($convocations);
+            echo json_encode($convocationsS);
 
         }
 
@@ -143,6 +148,7 @@ class ConvocationController extends Controller
 
     public function destroy($id){
         $convocations = Convocation::find($id);
+
         $convocations->delete();
 
         Session::flash('statuscode', 'error');

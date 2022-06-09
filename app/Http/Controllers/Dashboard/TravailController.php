@@ -114,20 +114,31 @@ class TravailController extends Controller
             $travailId->date_limite=$request->date_limite;
             $travailId->matiere_id=$request->matiere;
             $travailId->class_id=$request->class;
+
+            $path = (!$request->file('image')) ? '' : $request->file('image')->getClientOriginalExtension();
+
+            $travailId->extension=$path;
+            if($request->hasfile('image')) {
+                $path = uploadImage('travaux', $request->file('image'));
+                $travailId->file = $path;
+
+            }
             if($request->hasfile('image')){
 
                 $path = uploadImage('travaux',$request->file('image'));
-                if(File::exists($path))
+                /*if(File::exists($path))
                 {
                     File::delete($path);
-                }
+                }*/
 
 
 
-                $travailId->image= $path;
+                $travailId->file = $path;
             }
+            //dd($travailId);
 
             $travailId->update();
+
             Session::flash('statuscode', 'success');
             return redirect()->route('travails.index')->with(['status'=>'Modification avec succés']);
         }catch(\Exception $exception){

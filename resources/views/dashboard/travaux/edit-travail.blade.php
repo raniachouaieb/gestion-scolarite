@@ -70,7 +70,7 @@
                 <div class="card material-card">
                     <div class="card-body">
 
-            <form method="post" action="{{ route('travails.updateTravail', $travail->id) }}">
+            <form method="post" action="{{ route('travails.updateTravail', $travail->id) }}"  enctype="multipart/form-data">
                 @csrf
                 <div class="form-body">
 
@@ -186,7 +186,7 @@
                                         <span class="header"> OR <span class="button">Browse file</span></span>
                                         <!--<button id="file">Browse file</button>-->
                                     </div>
-                                    <input type="file"  name="image" hidden>
+                                    <input type="file"  name="image" hidden >
                                 </div>
                             </div>
                         </div>
@@ -263,9 +263,9 @@
                     }
                     input.addEventListener('change',function(){
                         file = this.files[0];
+                        dropArea.classList.add('active');
                         let eleToRemove = document.getElementsByClassName('eleToRemove')[0];// to get only the first element
                         eleToRemove.style.display= 'none';
-                        dropArea.classList.add('active');
                         displayFiles();
                     })
 
@@ -294,6 +294,7 @@
                         displayFiles();
 
 
+
                     });
                     function displayFiles(){
                         let fileType = file.type;
@@ -304,6 +305,14 @@
                             fileReader.onload = ()=>{
                                 //remplace par le nom du fichier et non pas par le Base64
                                 // let fileURL = file.name;
+                                // let fileURL = fileReader.result;//passing user file source in fileURl variable
+                                //console.log(fileURL);
+                                //let imgTag = `<img name="image" src="${fileURL}" alt=""><input value="${fileURL}" type="hidden" name="image">`;
+                                //dropArea.innerHTML = imgTag; //add created img in dropArea
+
+                                /* const imgTag =`<img name="image" src="${URL.createObjectURL(file)}" alt=""><input value="${URL.createObjectURL(file)}" type="hidden" name="image">`;
+                                 dropArea.innerHTML = imgTag; //add created img in dropArea
+                                 console.log(imgTag);*/
 
                                 if(fileType =="application/pdf")
                                 {
@@ -313,14 +322,16 @@
                                     pdfTag.style.width= "50";
                                     dropArea.appendChild(pdfTag);
                                 }
-                                else{
-                                    const imgTag = new Image();
-                                    imgTag.src = URL.createObjectURL(file);
-                                    dropArea.appendChild(imgTag);
-                                    console.log(imgTag);
-                                }
 
+
+
+
+                                const imgTag = new Image();
+                                imgTag.src = URL.createObjectURL(file);
+                                dropArea.appendChild(imgTag);
+                                console.log(imgTag);
                             }
+
                             fileReader.readAsDataURL(file);
                         }else{
                             console.log("this is not image ");

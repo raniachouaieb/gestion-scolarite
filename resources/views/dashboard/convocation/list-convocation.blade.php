@@ -99,6 +99,7 @@
 
                                     <td>
                                         <form action="{{ route('convocations.destroy', $conv->id)}}" method="post" class="d-inline" >
+                                            <!-- WLD-->
                                             @csrf
                                             <a type="submit"  class=" show_confirm iconSupp" data-toggle="tooltip" title='Delete'><i class="fas fa-trash trashcolor"></i></a>
                                         </form>
