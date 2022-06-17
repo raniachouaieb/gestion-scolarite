@@ -37,10 +37,11 @@ class LoginController extends Controller
     public function getLogin(LoginRequest  $request){
 
         //return view('dashboard.admin.home');
-       // $remember = $request->has('remember_me')? true : false ;
+       // $remember = $request->has('status')? true : false ;
 
       if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password]))
        {
+           $request->session()->regenerate();
            Session::flash('statuscode', 'success');
         return redirect()->route('accueil')->with('status','Bienvenue! :)');
 

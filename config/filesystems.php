@@ -84,6 +84,11 @@ return [
             'url' => env('APP_URL').'/public',
             'visibility' => 'public',
         ],
+        'bulletins' => [
+            'driver' => 'local',
+            'root' => public_path() . '/bulletins',
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',

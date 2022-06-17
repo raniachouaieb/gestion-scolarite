@@ -50,7 +50,7 @@
 </div>
 <div class="row" style="display: -webkit-box;">
     <div class="col-md-5">
-        @foreach($modules->where('basicStudy',1) as $module)
+        @foreach($modules->where('basicStudy',0) as $module)
             <?php
             $tabMaxMin = array();
 
@@ -234,7 +234,7 @@
     <div class="col-md-2"></div>
     <div class="col-md-5">
 
-        @foreach($modules->where('basicStudy',0) as $module)
+        @foreach($modules->where('basicStudy',1) as $module)
             <?php
             $tabMaxMin = array();
 

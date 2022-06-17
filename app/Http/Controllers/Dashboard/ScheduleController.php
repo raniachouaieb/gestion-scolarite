@@ -65,16 +65,8 @@ class ScheduleController extends Controller
 
         $status = Schedule::doGetListStatus();
         $size = $output;
-      $breadcrumbs = [
-                [
-                    'url' => route('schedule.admin.index')
-                ],
-                [
-                    'class' => 'active'
-                ],
 
-        ];
-        return view('dashboard.schedule.show', compact('status','breadcrumbs','row','size'))->withTitle(__('Schedules'))->withName(__('Time tables'))->withNameBreadcrumbs( __("Show schedule: #:id". $row->id));
+        return view('dashboard.schedule.show', compact('status','row','size'))->withTitle(__('Schedules'))->withName(__('Time tables'));
 
     }
 

@@ -89,7 +89,7 @@
                     </thead>
                     <tbody>
 
-                    @foreach($builletins as $builletin)
+                    @forelse($builletins as $builletin)
                         <tr>
                             <th scope="row">#{{$loop->index+1}}</th>
                             <td>{{$builletin['student']}}</td>
@@ -98,11 +98,24 @@
 
                                 <td>{{number_format((float)$module['moyenne'], 2, '.', '')}}</td>
                             @endforeach
-                            <td>{{number_format((float)$builletin['moyenne'], 2, '.', '')}}</td>
+                            <td>{{number_format((float)$builletin['basicmoyenne'], 2, '.', '')}}</td>
                             <td>{{number_format((float)$builletin['moyenne'], 2, '.', '')}}</td>
                         </tr>
+                    @empty
 
-                    @endforeach
+                            <div class="row">
+                                <div class="col-md-4  text-center">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRgVp4HDtEzLPoatIt2fsvLeioLgrS6A2j6Fw&usqp=CAU" />
+
+                                </div>
+                                <div class="col-md-8">
+                                    <h3>{{__("No data available")}}</h3>
+                                    <hr>
+                                    <p>{{__("There doesn't seem to be any data to display in the level and class you selected")}} </p>
+                                </div>
+                            </div>
+
+                    @endforelse
                     </tbody>
                 </table>
             </div>

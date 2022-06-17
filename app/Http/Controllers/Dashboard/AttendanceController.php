@@ -29,7 +29,7 @@ class AttendanceController extends Controller
         return view('dashboard.attendance.index', compact('breadcrumbs', 'niveaux', 'date'))->withTitle(__('Attendance'))->withName(__('Attendance'))->withNameBreadcrumbs(__("All"));
     }
 
-    public function loadAttendance( $classroom_id = null)
+    public function loadAttendance( $classroom_id = null,$trimester = null)
     {
         $date = date('Y-m-d');
         $students = Student::where("class_id", "=", $classroom_id)->get();
@@ -37,6 +37,9 @@ class AttendanceController extends Controller
         $rows = Schedule::where('classroom_id', $classroom_id)->where('status', 1)->get();
         $output = [];
         $emploi_id=0;Log::info($rows);
+        if(count($rows)==0){
+            return ( "No Schedule for this level !");
+        }
         foreach ($rows as $row) {
 
             $emploi_id = $row['id'];
@@ -75,24 +78,34 @@ class AttendanceController extends Controller
                  }
 
 
+        $trimester = $trimester;
+        $count=count($output);
 
-
-        return view("dashboard.attendance.loadSchedule", compact( 'date', 'output', 'classroom_id', 'students', 'rows', 'emploi_id'))->render();
+        return view("dashboard.attendance.loadSchedule", compact( 'trimester','count','date', 'output', 'classroom_id', 'students', 'rows', 'emploi_id'))->render();
 
     }
 
     public function store(Request $request)
     {
-        $attendance = Attendance::create([
-            'status' => $request->status,
-            'date' => date('Y-m-d'),
-            'semester' => $request->trimestre,
-            'raison' => $request->raison,
-            'emploi_id' => $request->emploi_id,
-        ]);
+        foreach ($request->get('student') as $student) {
+            foreach ($student['status'] as $key => $status) {
+              //  dd($status['raison']);
+                $attendance = Attendance::create([
+                    'status' => $status['etat'],
+                    'date' => date('Y-m-d'),
+                    'semester' => $request->trimestre,
+                    'raison' => $status['raison'],
+                    'emploi_id' => $request->emploi_id,
+                    'heure_deb' => $status['from'],
+                    'heure_fin' => $status['to'],
+                    'student_id' => $student['student_id'],
+                ]);
+            }
+        }
+        return redirect()->back()->with('success', 'success');
 
-        $message = array('msg' => 'Successfully Form Submit', 'status' => true);
-        return response()->json($message);
+
+
     }
 
 

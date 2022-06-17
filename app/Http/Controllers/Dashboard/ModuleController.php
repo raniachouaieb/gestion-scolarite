@@ -50,7 +50,7 @@ class ModuleController extends Controller
         $module->nom_module= $request->nom_module;
         $module->coefficient_module= $request->coefficient_module;
         $module->niveau_id=$request->niveau_id;
-        $module->basicStudy=isset($request->status) ? 1 : 0;
+        $module->basicStudy=isset($request->status) ? 1 :0;
 
         $module->save();
 

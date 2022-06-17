@@ -384,7 +384,7 @@
 
             @include('includes.alerts.flash')
             <div class="row print-hide">
-                <div class="col-md-9">
+                <div class="col-md-12">
 
                         <div class="headers-line mt-md"><i class="fas fa-user-check"></i> {{__('Détail elève')}}</div>
 
@@ -411,71 +411,73 @@
                                 </div>
                             </div>
                         </div>
-                <div class="col-md-3">
-                    <div class="headers-line mt-md"><i class="fas fa-user-check"></i> {{__('Publier')}}</div>
+{{--                    <div class="headers-line mt-md"><i class="fas fa-user-check"></i> {{__('Publier')}}</div>--}}
 
-                    <div class="card-body">
-                        <div>
-                            <label for="status1"><input   {{ ($bulletin->status=="1")? "checked" : "" }}  type="radio" name="status" value="1"> Publish
-                            </label></div>
-                        <div>
-                            <label for="status0"><input {{ ($bulletin->status=="0")? "checked" : "" }}  type="radio" name="status" value="0"> Draft
-                            </label></div>
-                        <div class="text-right">
-                            <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Enregistrer</button>
-                        </div>
-                    </div>
-                </div>
-                    </div>
+{{--                    <div class="card-body">--}}
+{{--                        <div>--}}
+{{--                            <label for="status1"><input   {{ ($bulletin->status=="1")? "checked" : "" }}  type="radio" name="status" value="1"> Publish--}}
+{{--                            </label></div>--}}
+{{--                        <div>--}}
+{{--                            <label for="status0"><input {{ ($bulletin->status=="0")? "checked" : "" }}  type="radio" name="status" value="0"> Draft--}}
+{{--                            </label></div>--}}
+{{--                        <div class="text-right">--}}
+{{--                            <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Enregistrer</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
 
-                        <div class="headers-line mt-md print-hide"><i class="fas fa-user-check"></i> {{__('Gradebook details')}}</div>
-                        <div class="card-body print-hide">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <input type="hidden" name="idfile" value="ccc" id="idfile" class="idfile">
-                                    <input type="hidden" name="pathfile" value="{{isset($bulletin->bulletinFile)? $bulletin->bulletinFile->file_path:'' }}" id="pathfile" class="pathfile">
-                                    <div class="form-group">
+{{--                        <div class="headers-line mt-md print-hide"><i class="fas fa-user-check"></i> {{__('Gradebook details')}}</div>--}}
+{{--                        <div class="card-body print-hide">--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-md-5">--}}
+{{--                                    <input type="hidden" name="idfile" value="ccc" id="idfile" class="idfile">--}}
+{{--                                    <input type="hidden" name="pathfile" value="{{isset($bulletin->bulletinFile)? $bulletin->bulletinFile->file_path:'' }}" id="pathfile" class="pathfile">--}}
+{{--                                    <div class="form-group">--}}
 
 
 
-                                        <div class="form-group @error('path') is-invalid @enderror" >
-                                            {!! \App\Helpers\BulletinFileHelper::fieldUploads('path',old('path', isset($bulletin->bulletinFile)? $bulletin->bulletinFile->id:'')) !!}
+{{--                                        <div class="form-group @error('path') is-invalid @enderror" >--}}
+{{--                                            {!! \App\Helpers\BulletinFileHelper::fieldUploads('path',old('path', isset($bulletin->bulletinFile)? $bulletin->bulletinFile->id:'')) !!}--}}
 
-                                        </div>
+{{--                                        </div>--}}
 
-                                        @error('path')
-                                        <span class="invalid-feedback" style="border-color: #fbe1e3;color: #e73d4a;float: left;padding-bottom: 10px; " role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                        <br>
-                                        <input  class="btn btn-primary" type="button" value="Preview" onclick="PreviewImage();" style=" float: right; " />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
+{{--                                        @error('path')--}}
+{{--                                        <span class="invalid-feedback" style="border-color: #fbe1e3;color: #e73d4a;float: left;padding-bottom: 10px; " role="alert">--}}
+{{--                                            <strong>{{ $message }}</strong>--}}
+{{--                                        </span>--}}
+{{--                                        @enderror--}}
+{{--                                        <br>--}}
+{{--                                        <input  class="btn btn-primary" type="button" value="Preview" onclick="PreviewImage();" style=" float: right; " />--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-md-6">--}}
 
-                                    <div class="form-group">
+{{--                                    <div class="form-group">--}}
 
-                                        <iframe id="viewer" frameborder="0" scrolling="no" width="400" height="600"></iframe>                                    </div>
-                                </div>
-                            </div>
-                        </div>
+{{--                                        <iframe id="viewer" frameborder="0" scrolling="no" width="400" height="600"></iframe>                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
             </form>
+        </div>
+    </div>
 
             <div class="row">
                 <div class="col-md-8">
                     <div class="headers-line mt-md"><i class="fas fa-user-check"></i> {{__('Bulletin')}}</div>
                 </div>
-             <div class="col-4">   <a href="javascript:void(0)" style=" float: right; " class="btn btn-primary" onclick="printJS({ printable: 'bulletinTable', type: 'html', targetStyles: ['*']})"><i class="fa fa-print" aria-hidden="true"></i>  Impress</a>
-            </div></div>
+                 <div class="col-md-4">
+                     <a href="javascript:void(0)" style=" float: right; " class="btn btn-primary" onclick="printJS({ printable: 'bulletinTable', type: 'html', targetStyles: ['*']})"><i class="fa fa-print" aria-hidden="true"></i>  Impress</a>
+                </div>
+            </div>
+
          <div id="bulletinTable">
 
-       @include('dashboard.bulletin.gradebookNote')
-        </div>
-        </div>
-    </div>
+            @include('dashboard.bulletin.gradebookNote')
+         </div>
+
     <div id="cdn-browser-modal" class="modal fade">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">

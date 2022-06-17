@@ -17,7 +17,7 @@
     <div class="row" style=" text-align: center; ">
         <div class="col-4">
             <div class="form-check mb-3">
-                <input class="form-check-input  " type="radio" name="trimestre" value="1" id="formRadios1" checked="">
+                <input class="form-check-input btn-check2 " type="radio" name="trimestre" value="1" id="formRadios1" checked="">
                 <label class="form-check-label" for="formRadios1">
                     {{__("1 ere trimestre")}}
                 </label>
@@ -26,7 +26,7 @@
         <div class="col-4">
 
             <div class="form-check">
-                <input class="form-check-input  " type="radio" name="trimestre" value="2" id="formRadios2">
+                <input class="form-check-input btn-check2 " type="radio" name="trimestre" value="2" id="formRadios2">
                 <label class="form-check-label" for="formRadios2">
                     {{__("2 ème trimestre")}}
                 </label>
@@ -34,7 +34,7 @@
         </div>
         <div class="col-4">
             <div class="form-check">
-                <input class="form-check-input  " type="radio" name="trimestre" value="3" id="formRadios3">
+                <input class="form-check-input btn-check2 " type="radio" name="trimestre" value="3" id="formRadios3">
                 <label class="form-check-label" for="formRadios3">
                     {{__("3 ème trimestre")}}
                 </label>

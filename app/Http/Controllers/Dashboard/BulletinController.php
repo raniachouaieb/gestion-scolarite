@@ -46,7 +46,7 @@ class BulletinController extends Controller
 
         $pdf = PDF::loadView('bulletin.gradebookNote', compact('breadcrumbs', 'modules', 'eleve', 'trimester')); // <--- load your view into theDOM wrapper;
         $path = public_path('bulletins/'); // <--- folder to store the pdf documents into the server;
-        $fileName = $eleve->first_name . ' ' . $eleve->last_name . '.' . 'pdf'; // <--giving the random filename,
+        $fileName = $eleve->nomEleve . ' ' . $eleve->prenomEleve . '.' . 'pdf'; // <--giving the random filename,
         $pdf->save($path . '/' . $fileName);
         $generated_pdf_link = url('bulletins/' . $fileName);
 

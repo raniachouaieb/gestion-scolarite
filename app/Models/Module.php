@@ -17,7 +17,7 @@ class Module extends Model
     protected $fillable = [
         'nom_module',
         'coefficient_module',
-        'niveau_id',
+        'niveau_id','basicStudy',
         'created_at','deleted_at','updated_at',
     ];
 

@@ -255,7 +255,7 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'Schedule'], function () {
 
 Route::group(['namespace'=>'Dashboard','prefix' => 'attendance'], function () {
     Route::get('/', 'AttendanceController@index')->name('attendance');
-    Route::get('loadSchedule/{classroom_id?}', 'Attendancecontroller@loadattendance')->name('attendance.absence');
+    Route::get('loadSchedule/{classroom_id?}/{trimester?}', 'Attendancecontroller@loadattendance')->name('attendance.absence');
    Route::post('store', 'attendancecontroller@store')->name('attendance.store');
 });
 
@@ -284,6 +284,11 @@ Route::group(['namespace'=>'Dashboard','prefix' => 'bulletin'], function () {
 
 });
 
+Route::group(['namespace'=>'Dashboard','prefix' => 'media'], function () {
+    Route::match(['get', 'post'], '/store/{pathlink?}/{studentid?}/{semesterid?}', 'MediaController@store');
+    Route::match(['get', 'post'], '/getLists/{pathlink?}', 'MediaController@getLists');
+    Route::match(['get', 'post'], '/removeFiles', 'MediaController@removeFiles');
+});
 Route::group(['namespace'=>'Dashboard','prefix' => 'remarqueModule'], function () {
     Route::get('/', 'RemarqueModuleController@index')->name('remarqueModule.admin.index');
     Route::get('/create', 'RemarqueModuleController@create')->name('remarqueModule.admin.create');

@@ -5,6 +5,20 @@
         .cardNiveClass{
             padding: 18px;
         }
+        a.red:hover {
+            background-color: red;
+        }
+        a.red{
+            background: red;
+            border-color: red;
+        }
+        a.late:hover {
+            background: darkorange;
+        }
+        a.late{
+            background: darkorange;
+            border-color: darkorange;
+        }
 
     </style>
 

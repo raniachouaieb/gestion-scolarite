@@ -51,77 +51,142 @@
             <tr>
                 <td>
                     {{$student->nomEleve}} {{$student->prenomEleve}}
-                    <input type="hidden" name="student_id{{$student->id}}" value="{{$student->id}}">
+                    <input type="hidden" name="student[{{$student->id}}][student_id]" value="{{$student->id}}">
 
                 </td>
-                @foreach($output as $seance)
+                @foreach($output as $key=>$seance)
+                    <?php $rowAtt = App\Models\Attendance::where('student_id', $student->id)->where('semester', $trimester)->where('heure_deb', $seance['from'])->where('date', $date)->first();?>
+
                     <td>
-                        <center><a class="btn-clicked btn btn-success" id="status[{{$student->id}}]"
-                                   data-toggle="modal" data-target="#exampleModal{{$student->id}}"
-                                   data-id="{{$student->id}}" data-start="{{$seance['from']}}"
-                                   data-end="{{$seance['to']}}"
-                                   data-name="{{$student->nomEleve}} {{$student->prenomEleve}}"><p
-                                    style="margin-bottom: 0;" id="etat{{$student->id}}">status</p></a>
-                        </center>
+                        <?php $id = $key;?>
+                        @if(isset($rowAtt->status))
+                            @if($rowAtt->status==0)
+                                    <center><a class="btn-clicked btn btn-success"
+                                               id="status[{{$student->id}}][{{$seance['from']}}]"
+                                               data-toggle="modal" data-target="#exampleModal{{$student->id}}sc{{$key}}"
+                                               data-id="{{$student->id}}" data-start="{{$seance['from']}}"
+                                               data-end="{{$seance['to']}}"
+                                               data-ende="{{$key}}" data-key="sc{{$key}}" data-counter="{{$key}}"
+                                               data-name="{{$student->nomEleve}}  {{$student->prenomEleve}}"><p
+                                                style="margin-bottom: 0;" id="etat{{$student->id}}">
+                                                Present <i class="fa fa-check" aria-hidden="true"></i></p></a></center>
+                                @elseif($rowAtt->status==1)
+                                    <center><a class="btn-clicked btn btn-success red"
+                                               id="status[{{$student->id}}][{{$seance['from']}}]"
+                                               data-toggle="modal" data-target="#exampleModal{{$student->id}}sc{{$key}}"
+                                               data-id="{{$student->id}}" data-start="{{$seance['from']}}"
+                                               data-end="{{$seance['to']}}"
+                                               data-ende="{{$key}}" data-key="sc{{$key}}" data-counter="{{$key}}"
+                                               data-name="{{$student->nomEleve}}  {{$student->prenomEleve}}"><p
+                                                style="margin-bottom: 0;" id="etat{{$student->id}}">
+                                                Absent <i class="fa fa-times" aria-hidden="true"></i></p></a></center>
+                                @elseif($rowAtt->status==2)
+                                    <center><a class="btn-clicked btn btn-success late"
+                                               id="status[{{$student->id}}][{{$seance['from']}}]"
+                                               data-toggle="modal" data-target="#exampleModal{{$student->id}}sc{{$key}}"
+                                               data-id="{{$student->id}}" data-start="{{$seance['from']}}"
+                                               data-end="{{$seance['to']}}"
+                                               data-ende="{{$key}}" data-key="sc{{$key}}" data-counter="{{$key}}"
+                                               data-name="{{$student->nomEleve}}  {{$student->prenomEleve}}"><p
+                                                style="margin-bottom: 0;" id="etat{{$student->id}}">
+                                                Late <i class="fa fa-clock" aria-hidden="true"></i></p></a></center>
+                                @endif
+                            @else
+                                <center><a class="btn-clicked btn btn-success"
+                                           id="status[{{$student->id}}][{{$seance['from']}}]"
+                                           data-toggle="modal" data-target="#exampleModal{{$student->id}}sc{{$key}}"
+                                           data-id="{{$student->id}}" data-start="{{$seance['from']}}"
+                                           data-end="{{$seance['to']}}"
+                                           data-ende="{{$key}}" data-key="sc{{$key}}" data-counter="{{$key}}"
+                                           data-name="{{$student->nomEleve}}  {{$student->prenomEleve}}"><p
+                                            style="margin-bottom: 0;" id="etat{{$student->id}}">
+                                            Present <i class="fa fa-check" aria-hidden="true"></i></p></a></center>
+                            @endif
+                    </td>
                     </td>
 
                 @endforeach
             </tr>
 
+            <input type="hidden" name="count" value="">
 
         @endforeach
         </tbody>
     </table>
     @foreach($students as $student)
     <!-- Modal -->
-        <div class="modal fade" id="exampleModal{{$student->id}}" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel{{$student->id}}">Status</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <label id="time{{$student->id}}"> </label>
-                        </div>
-                        <table id="tableSpacing">
-                            <tr>
-                                <td><label for="present">Present</label></td>
-                                <td><input type="radio" name="status[{{$student->id}}]['s{{$loop->index}}']"
-                                           id="present" value="0"></td>
-                            </tr>
-                            <tr>
-                                <td><label for="absent">Absent</label></td>
-                                <td><input type="radio" name="status[{{$student->id}}]['s{{$loop->index}}']" id="absent"
-                                           value="1"></td>
-                            </tr>
-                            <tr>
-                                <td><label for="late">Late</label></td>
-                                <td><input type="radio" name="status[{{$student->id}}]['s{{$loop->index}}']" id="late"
-                                           value="2"></td>
-                            </tr>
-                        </table>
+        @for($i=0;$i<=$count-1;$i++)
+            <?php $rowAtt = App\Models\Attendance::where('student_id', $student->id)->where('semester', $trimester)->where('heure_deb', $output[$i]['from'])->where('date', $date)->first();?>
 
-                        <div>
-                            <label for="raison"> Raison : </label>
-                            <textarea class="form-control" id="raison" rows="3"></textarea>
-                        </div>
+                <div class="modal fade" id="exampleModal{{$student->id}}sc{{$i}}" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel{{$student->id}}sc{{$i}}">Status</h5>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" id="validate" data-dismiss="modal"
-                                class="btn-validate{{$student->id}} btn btn-primary">Validate
-                        </button>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" id="student[{{$student->id}}][from][sc{{$i}}]"
+                                       name="student[{{$student->id}}][status][{{$i}}][from]" value="{{$output[$i]['from']}}">
+                                <input type="hidden" id="student[{{$student->id}}][to][sc{{$i}}]"
+                                       name="student[{{$student->id}}][status][{{$i}}][to]" value="{{$output[$i]['to']}}">
+                                <div>
+                                    <label id="time{{$student->id}}sc{{$i}}"> </label>
+                                </div>
+                                <table id="tableSpacing">
+
+
+                                    <tr>
+
+                                        <td><label for="present">Present</label></td>
+                                        <td><input type="radio" name="student[{{$student->id}}][status][{{$i}}][etat]"
+                                                   class="student[{{$student->id}}][status]"
+                                                   id="present"
+                                                   value="0"
+                                                   {{isset($rowAtt->status)&& $rowAtt->status==0 ?? 'checked'}} checked></td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td><label for="absent">Absent</label></td>
+                                        <td><input type="radio" name="student[{{$student->id}}][status][{{$i}}][etat]"
+                                                   id="absent"
+                                                   class="student[{{$student->id}}][status]"
+                                                   value="1" {{isset($rowAtt->status)&& $rowAtt->status==1 ? 'checked':''}}>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="late">Late</label></td>
+                                        <td><input type="radio" name="student[{{$student->id}}][status][{{$i}}][etat]" id="late"
+                                                   class="student[{{$student->id}}][status]"
+                                                   value="2" {{isset($rowAtt->status)&& $rowAtt->status==2 ? 'checked':''}}>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <div>
+                                    <label for="raison"> Raison : </label>
+                                    <textarea class="form-control" name="student[{{$student->id}}][status][{{$i}}][raison]"
+                                              id="raison"
+                                              rows="3">{{isset($rowAtt->raison)?$rowAtt->raison:''}}</textarea>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" id="validate[{{$student->id}}]" data-dismiss="modal"
+                                        class="btn-validate{{$student->id}} btn btn-primary">Validate
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+        @endfor
     @endforeach
 
     <div class="d-flex justify-content-between">
@@ -156,45 +221,54 @@
         $student_id = $(this).data("id");
         $student_nameStudent = $(this).data("name");
         $h_deb = $(this).data("start");
+        $i = $(this).data("key");
         $h_fin = $(this).data("end");
+        $counter = $(this).data("counter");
+        $keye = $(this).data("ende");
 
         console.log('studentid', $student_nameStudent);
         console.log('h_deb', $h_deb);
         console.log('h_fin', $h_fin);
         console.log('trimestre', trimestre);
-        $position = document.getElementById('exampleModalLabel' + $student_id);
+
+        $position = document.getElementById('exampleModalLabel' + $student_id + $i);
 
         $position.innerHTML = $student_nameStudent;
-        document.getElementById('time' + $student_id).innerHTML = 'Séance de ' + $h_deb + ' à ' + $h_fin;
+        $posTime = document.getElementById('time' +$student_id+$i);
+        $posTime.innerHTML = 'Séance de ' + $h_deb + ' à ' + $h_fin;
+        console.log('byid', $posTime);
+        //document.getElementById('time' + $student_id).innerHTML = 'Séance de ' + $h_deb + ' à ' + $h_fin;
 
         $(".btn-validate" + $student_id).click(function () {
             let $statusAtt, $position;
 
-            $statusAtt = document.getElementById('validate');
+            $pos = document.getElementById('status[' + $student_id + '][' + $h_deb + ']');
+            $statusAtt = document.getElementById('validate[' + $student_id + ']');
+            console.log('rr', $pos);
 
             $position2 = document.getElementById('etat' + $student_id);
 
             console.log($position2);
-            var ele = document.getElementsByTagName('input');
+            $seance = $h_deb.substring(0, 2);
+            console.log($seance);
 
-            for (i = 0; i < ele.length; i++) {
+            var ele = $("input[name=" + $.escapeSelector('student[' + $student_id + '][status][' + $counter + '][etat]') + "]:checked").val()
+            console.log('val', $counter);
 
-                if (ele[i].type === "radio") {
+            if (ele == 0) {
+                $pos.innerHTML = 'Present ' + '<i class="fa fa-check" aria-hidden="true"></i>';
+                $pos.classList.remove("red");
+                $pos.classList.remove("late");
+            } else if (ele == 1) {
+                $pos.innerHTML = 'Absent ' + '<i class="fa fa-times" aria-hidden="true"></i>';
+                $pos.classList.remove("late");
+                $pos.classList.add("red");
 
-                    if (ele[i].checked)
-                        if (ele[i].value == 0) {
-                            $position2.innerHTML = "Present";
-                            //addclass
-                        } else if (ele[i].value == 1) {
-                            $position2.innerHTML = "Absent";
-                        } else {
-                            $position2.innerHTML = "Late";
-                        }
-
-                    // setAttribute("value", ele[i].value);
-                }
+            } else if (ele == 2) {
+                $pos.innerHTML = 'Late ' + '<i class="fa fa-clock" aria-hidden="true"></i>';
+                $pos.classList.remove("red");
+                $pos.classList.add("late");
             }
-
 
         });
 
@@ -276,30 +350,30 @@
 
     });
 
-    function getStatus(student_id) {
-
-        let $statusAtt, $position;
-
-        $statusAtt = document.getElementById('validate');
-
-        $position = document.getElementById('etat' + student_id);
-        console.log($position);
-        //$position.innerHTML='gg';
-        var ele = document.getElementsByTagName('input');
-
-        $statusAtt.addEventListener("click", function (e) {
-            for (i = 0; i < ele.length; i++) {
-
-                if (ele[i].type = "radio") {
-
-
-                    if (ele[i].checked)
-                        $position.innerHTML = ele[i].value;
-                    // setAttribute("value", ele[i].value);
-                }
-            }
-
-        });
-
-    }
+    // function getStatus(student_id) {
+    //
+    //     let $statusAtt, $position;
+    //
+    //     $statusAtt = document.getElementById('validate');
+    //
+    //     $position = document.getElementById('etat' + student_id);
+    //     console.log($position);
+    //     //$position.innerHTML='gg';
+    //     var ele = document.getElementsByTagName('input');
+    //
+    //     $statusAtt.addEventListener("click", function (e) {
+    //         for (i = 0; i < ele.length; i++) {
+    //
+    //             if (ele[i].type = "radio") {
+    //
+    //
+    //                 if (ele[i].checked)
+    //                     $position.innerHTML = ele[i].value;
+    //                 // setAttribute("value", ele[i].value);
+    //             }
+    //         }
+    //
+    //     });
+    //
+    // }
 </script>

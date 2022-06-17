@@ -28,9 +28,10 @@ class AdminController extends Controller
         $this->middleware('auth:admin')->except('logout');
     }
 
-    public function logout() {
+    public function logout(Request $req) {
 
         Auth::guard('admin')->logout();
+        $req->session()->regenerate(true);
         Session::flash('statuscode', 'success');
         return redirect()->route('admin.login')->with('status', 'Logout successfully');
     }
