@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Classroom;
 use App\Models\Level;
 use App\Models\Matiere;
+use App\Models\Student;
 use App\Models\Travail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -69,6 +70,70 @@ class TravailController extends Controller
 
             }
             $dataTravail =$travaux->save();
+            //////// for web
+
+            $TokenForWeb = $eleves=Student::where('class_id',$request->class)->join('parentes','parentes.id','students.parent_id')->whereNotNull('web_token')->pluck('web_token')->all();
+
+            $SERVER_API_KEY = 'AAAAvJ7-CHM:APA91bGbmOzhhiXi2S5MPHYqgEqktr-CahZlgK4YH0qQ_Oc7X1_B1RgIHlmLFBnnqUdEfayn2sXHDj38XPXiSxYmHSTQsPpkmLjcuPrbNPVeuFbRFvAEhdlhCTkbw2o5Rzq0aZZ21ExB';
+
+            $notification = [
+                "registration_ids" => $TokenForWeb,
+                "notification" => [
+                    "title" => "Vous-avez un nouveau travail à faire .",
+                    "body" => $request->titre_travail,
+                    'date'=>$request->created_at,
+
+                ]
+            ];
+            $notifString = json_encode($notification);
+
+            $headersWeb = [
+                'Authorization: key=' . $SERVER_API_KEY,
+                'Content-Type: application/json',
+            ];
+
+            $ch2 = curl_init();
+
+            curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+            curl_setopt($ch2, CURLOPT_POST, true);
+            curl_setopt($ch2, CURLOPT_HTTPHEADER, $headersWeb);
+            curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch2, CURLOPT_POSTFIELDS, $notifString);
+
+            $response = curl_exec($ch2);
+//////// end for web
+            ////// for device
+//
+//            $firebaseToken = $eleves=eleve::where('classe_id',$req->class)->join('parents','parents.id','eleves.parent_id')->whereNotNull('device_token')->pluck('device_token')->all();
+//            $data = [
+//
+//                "to" => $firebaseToken,
+//                "title" => "Vous-avez un nouveau information.",
+//                "body" =>$req->titre,
+//                "vibrate"=>[100,50,100],
+//            ];
+//
+//            $headers = [
+//
+//                'Content-Type: application/json',
+//                'accept: application/json',
+//
+//            ];
+//            $dataString = json_encode($data);
+//
+//            $ch = curl_init();
+//
+//            curl_setopt($ch, CURLOPT_URL, 'https://exp.host/--/api/v2/push/send');
+//            curl_setopt($ch, CURLOPT_POST, true);
+//            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+//            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+//            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+//
+//            $response = curl_exec($ch);
+//dd($response);
+////// end notif for device
             if($dataTravail){
                 Session::flash('statuscode', 'success');
                 return redirect()->route('travails.index')->with('status','Travail est envoyée avec succes');
