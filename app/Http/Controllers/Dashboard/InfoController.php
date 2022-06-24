@@ -7,6 +7,7 @@ use App\Models\Classroom;
 use App\Models\ClassroomInfo;
 use App\Models\Info;
 use App\Models\Level;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -46,6 +47,71 @@ class InfoController extends Controller
             //dd($request->class);
 
             $infos->classes()->attach($request->class);
+            //////// for web
+
+            $TokenForWeb =Student::where('class_id',$request->class)->join('parentes','parentes.id','students.parent_id')->whereNotNull('web_token')->pluck('web_token')->all();            $SERVER_API_KEY = 'AAAAbSlrGpc:APA91bGvt7wTQYZ5iKM7TsRaaKlzT4cUv-Ebz9MdBTkEnR1Dlk561ptGQtvzz8orNV2UqGzzUbSey0dLiFdGprZeZXI6E3Khq58JUTxTxVwC86H9AO-PG4KRxwsTkperWb1nFfODjI67';
+
+            $notification = [
+                "registration_ids" => $TokenForWeb,
+                "notification" => [
+                    "title" => "Vous-avez une nouveau convocation .",
+                    "body" => $request->titre,
+                    //  'date'=>$request->created_at,
+
+                ]
+            ];
+            $notifString = json_encode($notification);
+
+            $headersWeb = [
+                'Authorization: key=' . $SERVER_API_KEY,
+                'Content-Type: application/json',
+            ];
+
+            $ch2 = curl_init();
+
+            curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+            curl_setopt($ch2, CURLOPT_POST, true);
+            curl_setopt($ch2, CURLOPT_HTTPHEADER, $headersWeb);
+            curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch2, CURLOPT_POSTFIELDS, $notifString);
+
+
+            $response = curl_exec($ch2);
+
+//////// end for web
+            ////// for device
+//
+            $firebaseToken = Student::where('class_id',$request->class)->join('parentes','parentes.id','students.parent_id')->whereNotNull('device_token')->pluck('device_token')->all();
+            $SERVER_API_KEY = 'AAAAbSlrGpc:APA91bGvt7wTQYZ5iKM7TsRaaKlzT4cUv-Ebz9MdBTkEnR1Dlk561ptGQtvzz8orNV2UqGzzUbSey0dLiFdGprZeZXI6E3Khq58JUTxTxVwC86H9AO-PG4KRxwsTkperWb1nFfODjI67';
+            $data = [
+
+                "to" => $firebaseToken,
+                "title" => "Vous-avez un nouveau information.",
+                "body" =>$request->titre,
+                "vibrate"=>[100,50,100],
+            ];
+
+            $headers = [
+
+                'Content-Type: application/json',
+                'accept: application/json',
+
+            ];
+            $dataString = json_encode($data);
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, 'https://exp.host/--/api/v2/push/send');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+
+            $response = curl_exec($ch);
+//dd($response);
+////// end notif for device
 
 
 

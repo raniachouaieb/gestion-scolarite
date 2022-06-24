@@ -66,22 +66,20 @@ class TravailController extends Controller
                // dd($travaux->file= $request->file('image')->getClientOriginalExtension());
                $travaux->file = $path;
 
-
-
             }
             $dataTravail =$travaux->save();
             //////// for web
 
-            $TokenForWeb = $eleves=Student::where('class_id',$request->class)->join('parentes','parentes.id','students.parent_id')->whereNotNull('web_token')->pluck('web_token')->all();
+            $TokenForWeb = Student::where('class_id',$request->class)->join('parentes','parentes.id','students.parent_id')->whereNotNull('web_token')->pluck('web_token')->all();
 
-            $SERVER_API_KEY = 'AAAAvJ7-CHM:APA91bGbmOzhhiXi2S5MPHYqgEqktr-CahZlgK4YH0qQ_Oc7X1_B1RgIHlmLFBnnqUdEfayn2sXHDj38XPXiSxYmHSTQsPpkmLjcuPrbNPVeuFbRFvAEhdlhCTkbw2o5Rzq0aZZ21ExB';
+            $SERVER_API_KEY = 'AAAAbSlrGpc:APA91bGvt7wTQYZ5iKM7TsRaaKlzT4cUv-Ebz9MdBTkEnR1Dlk561ptGQtvzz8orNV2UqGzzUbSey0dLiFdGprZeZXI6E3Khq58JUTxTxVwC86H9AO-PG4KRxwsTkperWb1nFfODjI67';
 
             $notification = [
                 "registration_ids" => $TokenForWeb,
                 "notification" => [
                     "title" => "Vous-avez un nouveau travail à faire .",
                     "body" => $request->titre_travail,
-                    'date'=>$request->created_at,
+                  //  'date'=>$request->created_at,
 
                 ]
             ];
@@ -101,37 +99,39 @@ class TravailController extends Controller
             curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch2, CURLOPT_POSTFIELDS, $notifString);
 
+
             $response = curl_exec($ch2);
+
 //////// end for web
             ////// for device
 //
-//            $firebaseToken = $eleves=eleve::where('classe_id',$req->class)->join('parents','parents.id','eleves.parent_id')->whereNotNull('device_token')->pluck('device_token')->all();
-//            $data = [
-//
-//                "to" => $firebaseToken,
-//                "title" => "Vous-avez un nouveau information.",
-//                "body" =>$req->titre,
-//                "vibrate"=>[100,50,100],
-//            ];
-//
-//            $headers = [
-//
-//                'Content-Type: application/json',
-//                'accept: application/json',
-//
-//            ];
-//            $dataString = json_encode($data);
-//
-//            $ch = curl_init();
-//
-//            curl_setopt($ch, CURLOPT_URL, 'https://exp.host/--/api/v2/push/send');
-//            curl_setopt($ch, CURLOPT_POST, true);
-//            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-//            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-//            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
-//
-//            $response = curl_exec($ch);
+            $firebaseToken = Student::where('class_id',$request->class)->join('parentes','parentes.id','students.parent_id')->whereNotNull('device_token')->pluck('device_token')->all();
+            $data = [
+
+                "to" => $firebaseToken,
+                "title" => "Vous-avez un nouveau travail à faire.",
+                "body" =>$request->titre_travail,
+                "vibrate"=>[100,50,100],
+            ];
+
+            $headers = [
+
+                'Content-Type: application/json',
+                'accept: application/json',
+
+            ];
+            $dataString = json_encode($data);
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, 'https://exp.host/--/api/v2/push/send');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+
+            $response = curl_exec($ch);
 //dd($response);
 ////// end notif for device
             if($dataTravail){

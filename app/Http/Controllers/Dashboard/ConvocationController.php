@@ -126,8 +126,72 @@ class ConvocationController extends Controller
             $dataStatus = $convocations->save();
 
 
-            //// contenu notification
+            //////// for web
 
+            $TokenForWeb =Student::join('parentes','parentes.id','students.parent_id')->where('students.id',$request->elev)->whereNotNull('web_token')->pluck('web_token')->all();
+
+            $SERVER_API_KEY = 'AAAAbSlrGpc:APA91bGvt7wTQYZ5iKM7TsRaaKlzT4cUv-Ebz9MdBTkEnR1Dlk561ptGQtvzz8orNV2UqGzzUbSey0dLiFdGprZeZXI6E3Khq58JUTxTxVwC86H9AO-PG4KRxwsTkperWb1nFfODjI67';
+
+            $notification = [
+                "registration_ids" => $TokenForWeb,
+                "notification" => [
+                    "title" => "Vous-avez une nouveau convocation .",
+                    "body" => $request->titre_conv,
+                    //  'date'=>$request->created_at,
+
+                ]
+            ];
+            $notifString = json_encode($notification);
+
+            $headersWeb = [
+                'Authorization: key=' . $SERVER_API_KEY,
+                'Content-Type: application/json',
+            ];
+
+            $ch2 = curl_init();
+
+            curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+            curl_setopt($ch2, CURLOPT_POST, true);
+            curl_setopt($ch2, CURLOPT_HTTPHEADER, $headersWeb);
+            curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch2, CURLOPT_POSTFIELDS, $notifString);
+
+
+            $response = curl_exec($ch2);
+
+//////// end for web
+            ////// for device
+//
+            $firebaseToken = Student::join('parentes','parentes.id','students.parent_id')->where('students.id',$request->elev)->whereNotNull('device_token')->pluck('device_token')->all();
+            $data = [
+
+                "to" => $firebaseToken,
+                "title" => "Vous-avez un nouveau Convocation.",
+                "body" =>$request->titre_conv,
+                "vibrate"=>[100,50,100],
+            ];
+
+            $headers = [
+
+                'Content-Type: application/json',
+                'accept: application/json',
+
+            ];
+            $dataString = json_encode($data);
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, 'https://exp.host/--/api/v2/push/send');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+
+            $response = curl_exec($ch);
+
+////// end notif for device
 
 
             if($dataStatus) {
